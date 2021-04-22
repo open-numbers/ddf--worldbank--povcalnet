@@ -1,0 +1,14 @@
+{
+    "name": "ddf--worldbank--povcalnet",
+    "author": "Gapminder",
+    "description": "A brand new DDF repo",
+    "language": {
+        "name": "English",
+        "id": "en"
+    },
+    "translations": [],
+    "license": "CC-BY-4.0",
+    "title": "povcalnet",
+    "version": "0.0.1",
+    "resources": []
+}
