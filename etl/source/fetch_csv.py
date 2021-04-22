@@ -1,8 +1,11 @@
 import os
 
 all_brackets = [0.00781,0.00897,0.01031,0.01184,0.0136,0.01563,0.01795,0.02062,0.02368,0.0272,0.03125,0.0359,0.04123,0.04737,0.05441,0.0625,0.07179,0.08247,0.09473,0.10882,0.125,0.14359,0.16494,0.18946,0.21764,0.25,0.28717,0.32988,0.37893,0.43528,0.5,0.57435,0.65975,0.75786,0.87055,1,1.1487,1.31951,1.51572,1.7411,2,2.2974,2.63902,3.03143,3.4822,4,4.59479,5.27803,6.06287,6.9644,8,9.18959,10.55606,12.12573,13.92881,16,18.37917,21.11213,24.25147,27.85762,32,36.75835,42.22425,48.50293,55.71524,64,73.51669,84.44851,97.00586,111.43047,128,147.03339,168.89701,194.01172,222.86094,256,294.06678,337.79403,388.02344,445.72189,512,588.13356,675.58805,776.04688,891.44378,1024,1176.26712,1351.1761,1552.09376,1782.88755,2048,2352.53423,2702.3522,3104.18753,3565.77511,4096,4705.06846,5404.7044,6208.37506,7131.55022,8192]
-url = "http://iresearch.worldbank.org/PovcalNet/PovcalNetAPI.ashx?YearSelected=all&PovertyLine=%4.5f&Countries=all&display=C" % all_brackets[0]
-bracket_data = os.popen('curl -s "%s"' % url)
-file_csv = open("%s.csv" % str(all_brackets[0]).replace('.','_'), "w")
-file_csv.write(bracket_data.read())
-file_csv.close()
+i = 0
+for i in range(0,2):
+
+	url = "http://iresearch.worldbank.org/PovcalNet/PovcalNetAPI.ashx?YearSelected=all&PovertyLine=%4.5f&Countries=all&display=C" % all_brackets[i]
+	bracket_data = os.popen('curl -s "%s"' % url)
+	file_csv = open("%s.csv" % str(all_brackets[i]).replace('.','_'), "w")
+	file_csv.write(bracket_data.read())
+	file_csv.close()
