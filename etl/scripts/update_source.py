@@ -11,6 +11,6 @@ all_brackets.append(brackets_df['bracket_end'].iloc[-1])  # Append last value fr
 
 for i, bracket in enumerate(all_brackets):
         url = "http://iresearch.worldbank.org/PovcalNet/PovcalNetAPI.ashx?YearSelected=all&PovertyLine={}&Countries=all&display=C".format(bracket)
-        file_csv = "{:04d}.csv".format(i)
+        file_csv = "../source/{:04d}.csv".format(i)
         download(url, file_csv)
         time.sleep(2)
