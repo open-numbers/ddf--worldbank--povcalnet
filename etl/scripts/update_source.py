@@ -10,7 +10,7 @@ all_brackets = brackets_df['bracket_start'].to_list()
 all_brackets.append(brackets_df['bracket_end'].iloc[-1])  # Append last value from bracket end
 
 for i, bracket in enumerate(all_brackets):
-        url = "http://iresearch.worldbank.org/PovcalNet/PovcalNetAPI.ashx?YearSelected=all&PovertyLine={}&Countries=all&display=C".format(bracket)
-        file_csv = "../source/{:04d}.csv".format(i)
-        download(url, file_csv)
-        time.sleep(2)
+    url = "http://iresearch.worldbank.org/PovcalNet/PovcalNetAPI.ashx?YearSelected=all&PovertyLine={}&Countries=all&display=C".format(bracket)
+    file_csv = "../source/{:04d}.csv".format(i)
+    download(url, file_csv)
+    time.sleep(2)
