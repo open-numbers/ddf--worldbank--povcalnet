@@ -1,5 +1,9 @@
 # povcalnet
 
+Introduction to PovcalNet
+
+http://iresearch.worldbank.org/PovcalNet/docs/introduction_to_povcalnet.pdf
+
 A brand new DDF repo
 
 To get started with DDF and learn how to use the dataset, please read the
