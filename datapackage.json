@@ -1,14 +1,187 @@
 {
     "name": "ddf--worldbank--povcalnet",
-    "author": "Gapminder",
-    "description": "A brand new DDF repo",
     "language": {
-        "name": "English",
         "id": "en"
     },
-    "translations": [],
-    "license": "CC-BY-4.0",
-    "title": "povcalnet",
-    "version": "0.0.1",
-    "resources": []
+    "title": "ddf--worldbank--povcalnet",
+    "description": "",
+    "author": "",
+    "license": "",
+    "created": "2021-04-27T12:20:23.634753+00:00",
+    "resources": [
+        {
+            "name": "ddf--concepts",
+            "path": "ddf--concepts.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "concept"
+                    },
+                    {
+                        "name": "name"
+                    },
+                    {
+                        "name": "concept_type"
+                    }
+                ],
+                "primaryKey": "concept"
+            }
+        },
+        {
+            "name": "ddf--datapoints--population--by--geo--year",
+            "path": "ddf--datapoints--population--by--geo--year.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "geo"
+                    },
+                    {
+                        "name": "year"
+                    },
+                    {
+                        "name": "population"
+                    },
+                    {
+                        "name": "income_bracket"
+                    },
+                    {
+                        "name": "coverage_type"
+                    }
+                ],
+                "primaryKey": [
+                    "geo",
+                    "year"
+                ]
+            }
+        },
+        {
+            "name": "ddf--entities--coverage_type",
+            "path": "ddf--entities--coverage_type.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "coverage_type"
+                    },
+                    {
+                        "name": "name"
+                    }
+                ],
+                "primaryKey": "coverage_type"
+            }
+        },
+        {
+            "name": "ddf--entities--geo",
+            "path": "ddf--entities--geo.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "geo"
+                    },
+                    {
+                        "name": "name"
+                    }
+                ],
+                "primaryKey": "geo"
+            }
+        },
+        {
+            "name": "ddf--entities--income_bracket",
+            "path": "ddf--entities--income_bracket.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "income_bracket"
+                    },
+                    {
+                        "name": "name"
+                    }
+                ],
+                "primaryKey": "income_bracket"
+            }
+        }
+    ],
+    "ddfSchema": {
+        "concepts": [
+            {
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "concept_type",
+                "resources": [
+                    "ddf--concepts"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "name",
+                "resources": [
+                    "ddf--concepts"
+                ]
+            }
+        ],
+        "entities": [
+            {
+                "primaryKey": [
+                    "coverage_type"
+                ],
+                "value": "name",
+                "resources": [
+                    "ddf--entities--coverage_type"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo"
+                ],
+                "value": "name",
+                "resources": [
+                    "ddf--entities--geo"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "income_bracket"
+                ],
+                "value": "name",
+                "resources": [
+                    "ddf--entities--income_bracket"
+                ]
+            }
+        ],
+        "datapoints": [
+            {
+                "primaryKey": [
+                    "geo",
+                    "year"
+                ],
+                "value": "coverage_type",
+                "resources": [
+                    "ddf--datapoints--population--by--geo--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "year"
+                ],
+                "value": "income_bracket",
+                "resources": [
+                    "ddf--datapoints--population--by--geo--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "year"
+                ],
+                "value": "population",
+                "resources": [
+                    "ddf--datapoints--population--by--geo--year"
+                ]
+            }
+        ],
+        "synonyms": []
+    }
 }
