@@ -1,169 +1,169 @@
 geo,name
-albania,Albania
-algeria,Algeria
-angola,Angola
-argentina,Argentina
-armenia,Armenia
-australia,Australia
-austria,Austria
-azerbaijan,Azerbaijan
-bangladesh,Bangladesh
-belarus,Belarus
-belgium,Belgium
-belize,Belize
-benin,Benin
-bhutan,Bhutan
-bolivia,Bolivia
-bosnia_and_herzegovina,Bosnia and Herzegovina
-botswana,Botswana
-brazil,Brazil
-bulgaria,Bulgaria
-burkina_faso,Burkina Faso
-burundi,Burundi
-cabo_verde,Cabo Verde
-cameroon,Cameroon
-canada,Canada
-central_african_republic,Central African Republic
-chad,Chad
-chile,Chile
-china,China
-colombia,Colombia
-comoros,Comoros
-congo_democratic_republic_of,"Congo, Democratic Republic of"
-congo_republic_of,"Congo, Republic of"
-costa_rica,Costa Rica
-cote_d_ivoire,Cote d'Ivoire
-croatia,Croatia
-cyprus,Cyprus
-czech_republic,Czech Republic
-denmark,Denmark
-djibouti,Djibouti
-dominican_republic,Dominican Republic
-ecuador,Ecuador
-egypt_arab_republic_of,"Egypt, Arab Republic of"
-el_salvador,El Salvador
-estonia,Estonia
-eswatini,Eswatini
-ethiopia,Ethiopia
-fiji,Fiji
-finland,Finland
-france,France
-gabon,Gabon
-gambia_the,"Gambia, The"
-georgia,Georgia
-germany,Germany
-ghana,Ghana
-greece,Greece
-guatemala,Guatemala
-guinea,Guinea
-guinea_bissau,Guinea-Bissau
-guyana,Guyana
-haiti,Haiti
-honduras,Honduras
-hungary,Hungary
-iceland,Iceland
-india,India
-indonesia,Indonesia
-iran_islamic_republic_of,"Iran, Islamic Republic of"
-iraq,Iraq
-ireland,Ireland
-israel,Israel
-italy,Italy
-jamaica,Jamaica
-japan,Japan
-jordan,Jordan
-kazakhstan,Kazakhstan
-kenya,Kenya
-kiribati,Kiribati
-korea_republic_of,"Korea, Republic of"
-kyrgyz_republic,Kyrgyz Republic
-lao_people_s_democratic_republic,Lao People's Democratic Republic
-latvia,Latvia
-lebanon,Lebanon
-lesotho,Lesotho
-liberia,Liberia
-lithuania,Lithuania
-luxembourg,Luxembourg
-madagascar,Madagascar
-malawi,Malawi
-malaysia,Malaysia
-maldives,Maldives
-mali,Mali
-malta,Malta
-mauritania,Mauritania
-mauritius,Mauritius
-mexico,Mexico
-moldova,Moldova
-mongolia,Mongolia
-montenegro,Montenegro
-morocco,Morocco
-mozambique,Mozambique
-myanmar,Myanmar
-namibia,Namibia
-nepal,Nepal
-netherlands,Netherlands
-nicaragua,Nicaragua
-niger,Niger
-nigeria,Nigeria
-north_macedonia,North Macedonia
-norway,Norway
-pakistan,Pakistan
-panama,Panama
-papua_new_guinea,Papua New Guinea
-paraguay,Paraguay
-peru,Peru
-philippines,Philippines
-poland,Poland
-portugal,Portugal
-romania,Romania
-russian_federation,Russian Federation
-rwanda,Rwanda
-samoa,Samoa
-sao_tome_and_principe,Sao Tome and Principe
-senegal,Senegal
-serbia,Serbia
-seychelles,Seychelles
-sierra_leone,Sierra Leone
-slovenia,Slovenia
-solomon_islands,Solomon Islands
-south_africa,South Africa
-spain,Spain
-sri_lanka,Sri Lanka
-st_lucia,St. Lucia
-sudan,Sudan
-suriname,Suriname
-sweden,Sweden
-switzerland,Switzerland
-syrian_arab_republic,Syrian Arab Republic
-taiwan_china,"Taiwan, China"
-tajikistan,Tajikistan
-tanzania,Tanzania
-thailand,Thailand
-togo,Togo
-tonga,Tonga
-trinidad_and_tobago,Trinidad and Tobago
-tunisia,Tunisia
-turkey,Turkey
-turkmenistan,Turkmenistan
-uganda,Uganda
-ukraine,Ukraine
-united_arab_emirates,United Arab Emirates
-united_kingdom,United Kingdom
-united_states,United States
-uruguay,Uruguay
-uzbekistan,Uzbekistan
-vanuatu,Vanuatu
-venezuela_republica_bolivariana_de,"Venezuela, Republica Bolivariana de"
-vietnam,Vietnam
-west_bank_and_gaza,West Bank and Gaza
-yemen_republic_of,"Yemen, Republic of"
-zambia,Zambia
-zimbabwe,Zimbabwe
-slovak_republic,Slovak Republic
-micronesia_federated_states_of,"Micronesia, Federated States of"
-tuvalu,Tuvalu
-kosovo,Kosovo
-timor_leste,Timor-Leste
-nauru,Nauru
-south_sudan,South Sudan
-somalia,Somalia
+alb,Albania
+dza,Algeria
+ago,Angola
+arg,Argentina
+arm,Armenia
+aus,Australia
+aut,Austria
+aze,Azerbaijan
+bgd,Bangladesh
+blr,Belarus
+bel,Belgium
+blz,Belize
+ben,Benin
+btn,Bhutan
+bol,Bolivia
+bih,Bosnia and Herzegovina
+bwa,Botswana
+bra,Brazil
+bgr,Bulgaria
+bfa,Burkina Faso
+bdi,Burundi
+cpv,Cabo Verde
+cmr,Cameroon
+can,Canada
+caf,Central African Republic
+tcd,Chad
+chl,Chile
+chn,China
+col,Colombia
+com,Comoros
+cod,"Congo, Democratic Republic of"
+cog,"Congo, Republic of"
+cri,Costa Rica
+civ,Cote d'Ivoire
+hrv,Croatia
+cyp,Cyprus
+cze,Czech Republic
+dnk,Denmark
+dji,Djibouti
+dom,Dominican Republic
+ecu,Ecuador
+egy,"Egypt, Arab Republic of"
+slv,El Salvador
+est,Estonia
+swz,Eswatini
+eth,Ethiopia
+fji,Fiji
+fin,Finland
+fra,France
+gab,Gabon
+gmb,"Gambia, The"
+geo,Georgia
+deu,Germany
+gha,Ghana
+grc,Greece
+gtm,Guatemala
+gin,Guinea
+gnb,Guinea-Bissau
+guy,Guyana
+hti,Haiti
+hnd,Honduras
+hun,Hungary
+isl,Iceland
+ind,India
+idn,Indonesia
+irn,"Iran, Islamic Republic of"
+irq,Iraq
+irl,Ireland
+isr,Israel
+ita,Italy
+jam,Jamaica
+jpn,Japan
+jor,Jordan
+kaz,Kazakhstan
+ken,Kenya
+kir,Kiribati
+kor,"Korea, Republic of"
+kgz,Kyrgyz Republic
+lao,Lao People's Democratic Republic
+lva,Latvia
+lbn,Lebanon
+lso,Lesotho
+lbr,Liberia
+ltu,Lithuania
+lux,Luxembourg
+mdg,Madagascar
+mwi,Malawi
+mys,Malaysia
+mdv,Maldives
+mli,Mali
+mlt,Malta
+mrt,Mauritania
+mus,Mauritius
+mex,Mexico
+mda,Moldova
+mng,Mongolia
+mne,Montenegro
+mar,Morocco
+moz,Mozambique
+mmr,Myanmar
+nam,Namibia
+npl,Nepal
+nld,Netherlands
+nic,Nicaragua
+ner,Niger
+nga,Nigeria
+mkd,North Macedonia
+nor,Norway
+pak,Pakistan
+pan,Panama
+png,Papua New Guinea
+pry,Paraguay
+per,Peru
+phl,Philippines
+pol,Poland
+prt,Portugal
+rou,Romania
+rus,Russian Federation
+rwa,Rwanda
+wsm,Samoa
+stp,Sao Tome and Principe
+sen,Senegal
+srb,Serbia
+syc,Seychelles
+sle,Sierra Leone
+svn,Slovenia
+slb,Solomon Islands
+zaf,South Africa
+esp,Spain
+lka,Sri Lanka
+lca,St. Lucia
+sdn,Sudan
+sur,Suriname
+swe,Sweden
+che,Switzerland
+syr,Syrian Arab Republic
+twn,"Taiwan, China"
+tjk,Tajikistan
+tza,Tanzania
+tha,Thailand
+tgo,Togo
+ton,Tonga
+tto,Trinidad and Tobago
+tun,Tunisia
+tur,Turkey
+tkm,Turkmenistan
+uga,Uganda
+ukr,Ukraine
+are,United Arab Emirates
+gbr,United Kingdom
+usa,United States
+ury,Uruguay
+uzb,Uzbekistan
+vut,Vanuatu
+ven,"Venezuela, Republica Bolivariana de"
+vnm,Vietnam
+pse,West Bank and Gaza
+yem,"Yemen, Republic of"
+zmb,Zambia
+zwe,Zimbabwe
+svk,Slovak Republic
+fsm,"Micronesia, Federated States of"
+tuv,Tuvalu
+xkx,Kosovo
+tls,Timor-Leste
+nru,Nauru
+ssd,South Sudan
+som,Somalia

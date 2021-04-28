@@ -5,3 +5,4 @@ geo,Geo,entity_domain
 coverage_type,CoverageType,entity_domain
 income_bracket,IncomeBracket,entity_domain
 population,Population,measure
+population_percentage,Population Percentage,measure

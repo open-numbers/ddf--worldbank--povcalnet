@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2021-04-27T12:20:23.634753+00:00",
+    "created": "2021-04-28T15:10:51.202613+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -28,8 +28,8 @@
             }
         },
         {
-            "name": "ddf--datapoints--population--by--geo--year",
-            "path": "ddf--datapoints--population--by--geo--year.csv",
+            "name": "ddf--datapoints--population--by--geo--year--coverage_type--income_bracket",
+            "path": "ddf--datapoints--population--by--geo--year--coverage_type--income_bracket.csv",
             "schema": {
                 "fields": [
                     {
@@ -39,18 +39,49 @@
                         "name": "year"
                     },
                     {
-                        "name": "population"
+                        "name": "coverage_type"
                     },
                     {
                         "name": "income_bracket"
                     },
                     {
-                        "name": "coverage_type"
+                        "name": "population"
                     }
                 ],
                 "primaryKey": [
                     "geo",
-                    "year"
+                    "year",
+                    "coverage_type",
+                    "income_bracket"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--population_percentage--by--geo--year--coverage_type--income_bracket",
+            "path": "ddf--datapoints--population_percentage--by--geo--year--coverage_type--income_bracket.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "geo"
+                    },
+                    {
+                        "name": "year"
+                    },
+                    {
+                        "name": "coverage_type"
+                    },
+                    {
+                        "name": "income_bracket"
+                    },
+                    {
+                        "name": "population_percentage"
+                    }
+                ],
+                "primaryKey": [
+                    "geo",
+                    "year",
+                    "coverage_type",
+                    "income_bracket"
                 ]
             }
         },
@@ -153,32 +184,26 @@
         "datapoints": [
             {
                 "primaryKey": [
+                    "coverage_type",
                     "geo",
-                    "year"
-                ],
-                "value": "coverage_type",
-                "resources": [
-                    "ddf--datapoints--population--by--geo--year"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "geo",
-                    "year"
-                ],
-                "value": "income_bracket",
-                "resources": [
-                    "ddf--datapoints--population--by--geo--year"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "geo",
+                    "income_bracket",
                     "year"
                 ],
                 "value": "population",
                 "resources": [
-                    "ddf--datapoints--population--by--geo--year"
+                    "ddf--datapoints--population--by--geo--year--coverage_type--income_bracket"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "coverage_type",
+                    "geo",
+                    "income_bracket",
+                    "year"
+                ],
+                "value": "population_percentage",
+                "resources": [
+                    "ddf--datapoints--population_percentage--by--geo--year--coverage_type--income_bracket"
                 ]
             }
         ],
