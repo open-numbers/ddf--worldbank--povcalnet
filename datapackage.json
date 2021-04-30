@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2021-04-28T15:10:51.202613+00:00",
+    "created": "2021-04-30T07:50:48.119165+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -75,6 +75,64 @@
                     },
                     {
                         "name": "population_percentage"
+                    }
+                ],
+                "primaryKey": [
+                    "geo",
+                    "year",
+                    "coverage_type",
+                    "income_bracket"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--population_percentage_smooth--by--geo--year--coverage_type--income_bracket",
+            "path": "ddf--datapoints--population_percentage_smooth--by--geo--year--coverage_type--income_bracket.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "geo"
+                    },
+                    {
+                        "name": "year"
+                    },
+                    {
+                        "name": "coverage_type"
+                    },
+                    {
+                        "name": "income_bracket"
+                    },
+                    {
+                        "name": "population_percentage_smooth"
+                    }
+                ],
+                "primaryKey": [
+                    "geo",
+                    "year",
+                    "coverage_type",
+                    "income_bracket"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--population_smooth--by--geo--year--coverage_type--income_bracket",
+            "path": "ddf--datapoints--population_smooth--by--geo--year--coverage_type--income_bracket.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "geo"
+                    },
+                    {
+                        "name": "year"
+                    },
+                    {
+                        "name": "coverage_type"
+                    },
+                    {
+                        "name": "income_bracket"
+                    },
+                    {
+                        "name": "population_smooth"
                     }
                 ],
                 "primaryKey": [
@@ -204,6 +262,30 @@
                 "value": "population_percentage",
                 "resources": [
                     "ddf--datapoints--population_percentage--by--geo--year--coverage_type--income_bracket"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "coverage_type",
+                    "geo",
+                    "income_bracket",
+                    "year"
+                ],
+                "value": "population_percentage_smooth",
+                "resources": [
+                    "ddf--datapoints--population_percentage_smooth--by--geo--year--coverage_type--income_bracket"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "coverage_type",
+                    "geo",
+                    "income_bracket",
+                    "year"
+                ],
+                "value": "population_smooth",
+                "resources": [
+                    "ddf--datapoints--population_smooth--by--geo--year--coverage_type--income_bracket"
                 ]
             }
         ],
