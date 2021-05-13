@@ -120,7 +120,18 @@ def main():
     groups = df_pop_pct_smooth.groupby(level=['geo', 'year', 'coverage_type'])
     for idx, _ in groups.groups.items():
         print(idx)
+        ser = df_pop_pct_smooth[idx]
+        if ser.hasnans:
+            if ser.dropna().empty:
+                print("empty series")
+                continue
+            else:
+                print('NaNs detected, fill them with zeros')
+                df_pop_pct_smooth[idx] = df_pop_pct_smooth[idx].fillna(0)
+
         df_pop_pct_smooth[idx] = func(df_pop_pct_smooth[idx])
+
+    df_pop_pct_smooth = df_pop_pct_smooth.dropna(how='any')
 
     # computing population and population smoothed
     df_population = df_total_population * df_population_percentage * 1000000
