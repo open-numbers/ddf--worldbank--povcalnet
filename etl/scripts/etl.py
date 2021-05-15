@@ -3,10 +3,13 @@ import pandas as pd
 from functools import partial
 from ddf_utils.str import format_float_digits
 from smoothlib import run_smooth
+from multiprocessing import Pool
+
 
 source_dir = '../source'
 bracket_file = os.path.join(source_dir, 'brackets.csv')
 
+POOLSIZE = 3
 formattor = partial(format_float_digits, digits=6)
 
 
@@ -38,6 +41,45 @@ def serve_datapoint(df, col):
         f'../../ddf--datapoints--{col}--by--geo--year--coverage_type--income_bracket.csv',
         index=False)
     return
+
+
+def func(x):
+    """function to smooth a series"""
+    x = x.reset_index(drop=True)
+    # run smoothing
+    std = x.std()
+    res = run_smooth(x, 10, 1)
+    if std < 0.021:
+        res = run_smooth(res, 8, 1)
+        res = run_smooth(res, 8, 1)
+        res = run_smooth(res, 5, 0)
+        res = run_smooth(res, 5, 0)
+    else:
+        res = run_smooth(res, 8, 0)
+        res = run_smooth(res, 8, 0)
+        res = run_smooth(res, 5, 0)
+        res = run_smooth(res, 5, 0)
+    # also, make sure it will sum up to 100%
+    res = res / res.sum()
+    return res
+
+
+def process(idx, df):
+    """function for processing smoothing for each series"""
+    print(idx)
+    names = ['geo', 'year', 'coverage_type', 'income_bracket']
+    idx_new = pd.MultiIndex.from_product([(idx[0],), (idx[1],), (idx[2],), range(100)], names=names)
+    ser = df[idx]
+    if ser.hasnans:
+        if ser.dropna().empty:
+            print("empty series")
+            return pd.Series([])
+        else:
+            print('NaNs detected, fill them with zeros')
+            ser = ser.fillna(0)
+    res = func(ser)
+    res.index = idx_new
+    return res
 
 
 def main():
@@ -91,46 +133,13 @@ def main():
     df_population_percentage[df_population_percentage < 0] = 0
 
     # adding a smooth indicator for population percentage
-    def func(x):
-        # idx = x.index
-        # print(idx.get_level_values(0)[0], end=', ')
-        # print(idx.get_level_values(1)[0], end=', ')
-        # print(idx.get_level_values(2)[0])
-        x = x.reset_index(drop=True)
-        # run smoothing
-        std = x.std()
-        res = run_smooth(x, 10, 1)
-        if std < 0.021:
-            res = run_smooth(res, 8, 1)
-            res = run_smooth(res, 8, 1)
-            res = run_smooth(res, 5, 0)
-            res = run_smooth(res, 5, 0)
-        else:
-            res = run_smooth(res, 8, 0)
-            res = run_smooth(res, 8, 0)
-            res = run_smooth(res, 5, 0)
-            res = run_smooth(res, 5, 0)
-        # also, make sure it will sum up to 100%
-        res = res / res.sum()
-        return res
-
-    # df_pop_pct_smooth = (df_population_percentage.groupby(
-    #     level=['geo', 'year', 'coverage_type']).apply(func))
     df_pop_pct_smooth = df_population_percentage.copy()
     groups = df_pop_pct_smooth.groupby(level=['geo', 'year', 'coverage_type'])
-    for idx, _ in groups.groups.items():
-        print(idx)
-        ser = df_pop_pct_smooth[idx]
-        if ser.hasnans:
-            if ser.dropna().empty:
-                print("empty series")
-                continue
-            else:
-                print('NaNs detected, fill them with zeros')
-                df_pop_pct_smooth[idx] = df_pop_pct_smooth[idx].fillna(0)
-        res = func(df_pop_pct_smooth[idx])
-        df_pop_pct_smooth[idx] = res.values
+    process_func = partial(process, df=df_pop_pct_smooth)
+    with Pool(POOLSIZE) as p:
+        result = p.map(process_func, groups.groups.keys())
 
+    df_pop_pct_smooth = pd.concat(result)
     df_pop_pct_smooth = df_pop_pct_smooth.dropna(how='any')
 
     # computing population and population smoothed
