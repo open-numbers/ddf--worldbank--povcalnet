@@ -112,7 +112,7 @@ def main():
             res = run_smooth(res, 5, 0)
         # also, make sure it will sum up to 100%
         res = res / res.sum()
-        return pd.Series(res)
+        return res
 
     # df_pop_pct_smooth = (df_population_percentage.groupby(
     #     level=['geo', 'year', 'coverage_type']).apply(func))
@@ -128,8 +128,8 @@ def main():
             else:
                 print('NaNs detected, fill them with zeros')
                 df_pop_pct_smooth[idx] = df_pop_pct_smooth[idx].fillna(0)
-
-        df_pop_pct_smooth[idx] = func(df_pop_pct_smooth[idx])
+        res = func(df_pop_pct_smooth[idx])
+        df_pop_pct_smooth[idx] = res.values
 
     df_pop_pct_smooth = df_pop_pct_smooth.dropna(how='any')
 
