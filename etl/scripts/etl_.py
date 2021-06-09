@@ -11,6 +11,7 @@ bracket_file = os.path.join(source_dir, 'brackets.csv')
 
 POOLSIZE = 3
 formattor = partial(format_float_digits, digits=6)
+coverage_type_dtype = pd.CategoricalDtype(list('NAUR'), ordered=True)
 
 
 def load_file_preprocess(filename, income_bracket):
@@ -18,7 +19,8 @@ def load_file_preprocess(filename, income_bracket):
         'CountryCode', 'CountryName', 'CoverageType', 'RequestYear',
         'PovertyLine', 'HeadCount', 'ReqYearPopulation'
     ]
-    df = pd.read_csv(os.path.join(source_dir, filename), usecols=usecols)
+    df = pd.read_csv(os.path.join(source_dir, filename), usecols=usecols,
+                     dtype={'CoverageType': coverage_type_dtype})
     df = df.rename(
         columns={
             'CountryCode': 'geo',
@@ -31,14 +33,17 @@ def load_file_preprocess(filename, income_bracket):
     return df
 
 
-def serve_datapoint(df, col):
+def serve_datapoint(df, index_cols, data_col):
     df = df.reset_index()
-    df.columns = ['geo', 'year', 'coverage_type', 'income_bracket', col]
+    columns = index_cols.extend([data_col])
+    df.columns = columns
     df['geo'] = df['geo'].str.lower()
-    df['coverage_type'] = df['coverage_type'].str.lower()
-    df[col] = df[col].map(formattor)
+    if "coverage_type" in df.columns:
+        df['coverage_type'] = df['coverage_type'].str.lower()
+    df[data_col] = df[data_col].map(formattor)
+    by = '--'.join(index_cols)
     df.to_csv(
-        f'../../ddf--datapoints--{col}--by--geo--year--coverage_type--income_bracket.csv',
+        f'../../ddf--datapoints--{data_col}--by--{by}.csv',
         index=False)
     return
 
@@ -146,11 +151,28 @@ def main():
     df_population = df_total_population * df_population_percentage * 1000000
     df_population_smooth = df_total_population * df_pop_pct_smooth * 1000000
 
+    # create datapoints without the coverage_type dimension
+    df_population_nocov = df_population.groupby(
+        level=['geo', 'year', 'income_bracket']).first()
+    df_population_percentage_nocov = df_population_percentage.groupby(
+        level=['geo', 'year', 'income_bracket']).first()
+    df_population_smooth_nocov = df_population_smooth.groupby(
+        level=['geo', 'year', 'income_bracket']).first()
+    df_pop_pct_smooth_nocov = df_pop_pct_smooth.groupby(
+        level=['geo', 'year', 'income_bracket']).first()
+
     # serving datapoints
-    serve_datapoint(df_population, 'population')
-    serve_datapoint(df_population_smooth, 'population_smooth')
-    serve_datapoint(df_population_percentage, 'population_percentage')
-    serve_datapoint(df_pop_pct_smooth, 'population_percentage_smooth')
+    idx_cols = ['geo', 'year', 'coverage_type', 'income_bracket']
+    serve_datapoint(df_population, idx_cols, 'population')
+    serve_datapoint(df_population_smooth, idx_cols, 'population_smooth')
+    serve_datapoint(df_population_percentage, idx_cols, 'population_percentage')
+    serve_datapoint(df_pop_pct_smooth, idx_cols, 'population_percentage_smooth')
+
+    idx_cols = ['geo', 'year', 'income_bracket']
+    serve_datapoint(df_population_nocov, idx_cols, 'population')
+    serve_datapoint(df_population_smooth_nocov, idx_cols, 'population_smooth')
+    serve_datapoint(df_population_percentage_nocov, idx_cols, 'population_percentage')
+    serve_datapoint(df_pop_pct_smooth_nocov, idx_cols, 'population_percentage_smooth')
 
 
 if __name__ == '__main__':
