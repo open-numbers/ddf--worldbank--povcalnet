@@ -35,7 +35,8 @@ def load_file_preprocess(filename, income_bracket):
 
 def serve_datapoint(df, index_cols, data_col):
     df = df.reset_index()
-    columns = index_cols.extend([data_col])
+    columns = index_cols.copy()
+    columns.extend([data_col])
     df.columns = columns
     df['geo'] = df['geo'].str.lower()
     if "coverage_type" in df.columns:
@@ -69,21 +70,15 @@ def func(x):
     return res
 
 
-def process(idx, df):
+def process(idx, ser):
     """function for processing smoothing for each series"""
-    print(idx)
+    # print(idx)
     names = ['geo', 'year', 'coverage_type', 'income_bracket']
+    subser = ser[idx]
+    res = func(subser)
+    # ensure that the output has 100 records.
     idx_new = pd.MultiIndex.from_product([(idx[0],), (idx[1],), (idx[2],), range(100)], names=names)
-    ser = df[idx]
-    if ser.hasnans:
-        if ser.dropna().empty:
-            print("empty series")
-            return pd.Series([])
-        else:
-            print('NaNs detected, fill them with zeros')
-            ser = ser.fillna(0)
-    res = func(ser)
-    res.index = idx_new
+    res.index = idx_new  # raise error if length doesn't match
     return res
 
 
@@ -121,11 +116,13 @@ def main():
         country_list.append(geo1)
         country_list.append(geo2)
 
+        # FIX: drop all rows where Headcount is NaN
+        df_end = df_end.dropna(subset=['HeadCount'])
+        df_start = df_start.dropna(subset=['HeadCount'])
         # collect datapoints
         population_percentage = df_end['HeadCount'] - df_start['HeadCount']
-
-        total_population_list.append(df_start['ReqYearPopulation'])
         population_percentage_list.append(population_percentage)
+        total_population_list.append(df_start['ReqYearPopulation'])
 
     # concat
     df_total_population = pd.concat(total_population_list).sort_index(
@@ -134,22 +131,32 @@ def main():
         population_percentage_list).sort_index(
             level=['geo', 'year', 'coverage_type', 'income_bracket'])
 
-    # FIX negitave values
+    # FIX: negitave values
     df_population_percentage[df_population_percentage < 0] = 0
 
     # adding a smooth indicator for population percentage
     df_pop_pct_smooth = df_population_percentage.copy()
     groups = df_pop_pct_smooth.groupby(level=['geo', 'year', 'coverage_type'])
-    process_func = partial(process, df=df_pop_pct_smooth)
+
+    process_func = partial(process, ser=df_pop_pct_smooth)
     with Pool(POOLSIZE) as p:
         result = p.map(process_func, groups.groups.keys())
-
     df_pop_pct_smooth = pd.concat(result)
     df_pop_pct_smooth = df_pop_pct_smooth.dropna(how='any')
 
     # computing population and population smoothed
-    df_population = df_total_population * df_population_percentage * 1000000
-    df_population_smooth = df_total_population * df_pop_pct_smooth * 1000000
+    # it seems there is an interesting bug on pandas 1.2.4:  if I do
+    # multiplication as following commented out lines, CHN 2018/2019 data will
+    # be missing in df_population_smooth
+    # df_population = df_total_population * df_population_percentage * 1000000
+    # df_population_smooth = df_total_population * df_pop_pct_smooth * 1000000
+    # So I have to concat them first
+    df_combined = pd.concat([df_total_population,
+                             df_population_percentage,
+                             df_pop_pct_smooth], axis=1)
+    df_combined.columns = ['population', 'population_percentage', 'population_smooth']
+    df_population = df_combined.population * df_combined.population_percentage * 1000000
+    df_population_smooth = df_combined.population * df_combined.population_smooth * 1000000
 
     # create datapoints without the coverage_type dimension
     df_population_nocov = df_population.groupby(
