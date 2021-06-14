@@ -6,7 +6,7 @@ from smoothlib import run_smooth
 from multiprocessing import Pool
 
 
-source_dir = '../source'
+source_dir = '../source/'
 bracket_file = os.path.join(source_dir, 'brackets.csv')
 
 POOLSIZE = 3
@@ -154,9 +154,9 @@ def main():
     df_combined = pd.concat([df_total_population,
                              df_population_percentage,
                              df_pop_pct_smooth], axis=1)
-    df_combined.columns = ['population', 'population_percentage', 'population_smooth']
-    df_population = df_combined.population * df_combined.population_percentage * 1000000
-    df_population_smooth = df_combined.population * df_combined.population_smooth * 1000000
+    df_combined.columns = ['total_population', 'population_percentage', 'pop_pct_smooth']
+    df_population = df_combined.total_population * df_combined.population_percentage * 1000000
+    df_population_smooth = df_combined.total_population * df_combined.pop_pct_smooth * 1000000
 
     # create datapoints without the coverage_type dimension
     df_population_nocov = df_population.groupby(
