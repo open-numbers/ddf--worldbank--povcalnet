@@ -1,4 +1,4 @@
+!.gitignore
+!fixtures/
 *
 */
-!brackets.csv
-!.gitignore
