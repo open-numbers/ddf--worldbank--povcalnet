@@ -4,6 +4,8 @@ year,Year,time
 geo,Geo,entity_domain
 west_and_rest,West and Rest,entity_domain
 wb_income_group,World Bank income groups,entity_domain
+on_income_group,Open Numbers income groups,entity_domain
+world_4regions,World in 4 Regions,entity_domain
 coverage_type,CoverageType,entity_domain
 income_bracket,IncomeBracket,entity_domain
 population,Population,measure

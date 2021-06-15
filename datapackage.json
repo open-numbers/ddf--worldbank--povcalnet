@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2021-06-14T07:04:02.127605+00:00",
+    "created": "2021-06-15T05:00:23.131589+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -190,6 +190,31 @@
             }
         },
         {
+            "name": "ddf--datapoints--population_percentage_smooth--by--on_income_level--year--income_bracket",
+            "path": "ddf--datapoints--population_percentage_smooth--by--on_income_level--year--income_bracket.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "on_income_level"
+                    },
+                    {
+                        "name": "year"
+                    },
+                    {
+                        "name": "income_bracket"
+                    },
+                    {
+                        "name": "population_percentage_smooth"
+                    }
+                ],
+                "primaryKey": [
+                    "on_income_level",
+                    "year",
+                    "income_bracket"
+                ]
+            }
+        },
+        {
             "name": "ddf--datapoints--population_percentage_smooth--by--wb_income_group--year--income_bracket",
             "path": "ddf--datapoints--population_percentage_smooth--by--wb_income_group--year--income_bracket.csv",
             "schema": {
@@ -234,6 +259,31 @@
                 ],
                 "primaryKey": [
                     "west_and_rest",
+                    "year",
+                    "income_bracket"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--population_percentage_smooth--by--world_4regions--year--income_bracket",
+            "path": "ddf--datapoints--population_percentage_smooth--by--world_4regions--year--income_bracket.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "world_4regions"
+                    },
+                    {
+                        "name": "year"
+                    },
+                    {
+                        "name": "income_bracket"
+                    },
+                    {
+                        "name": "population_percentage_smooth"
+                    }
+                ],
+                "primaryKey": [
+                    "world_4regions",
                     "year",
                     "income_bracket"
                 ]
@@ -294,6 +344,31 @@
             }
         },
         {
+            "name": "ddf--datapoints--population_smooth--by--on_income_level--year--income_bracket",
+            "path": "ddf--datapoints--population_smooth--by--on_income_level--year--income_bracket.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "on_income_level"
+                    },
+                    {
+                        "name": "year"
+                    },
+                    {
+                        "name": "income_bracket"
+                    },
+                    {
+                        "name": "population_smooth"
+                    }
+                ],
+                "primaryKey": [
+                    "on_income_level",
+                    "year",
+                    "income_bracket"
+                ]
+            }
+        },
+        {
             "name": "ddf--datapoints--population_smooth--by--wb_income_group--year--income_bracket",
             "path": "ddf--datapoints--population_smooth--by--wb_income_group--year--income_bracket.csv",
             "schema": {
@@ -338,6 +413,31 @@
                 ],
                 "primaryKey": [
                     "west_and_rest",
+                    "year",
+                    "income_bracket"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--population_smooth--by--world_4regions--year--income_bracket",
+            "path": "ddf--datapoints--population_smooth--by--world_4regions--year--income_bracket.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "world_4regions"
+                    },
+                    {
+                        "name": "year"
+                    },
+                    {
+                        "name": "income_bracket"
+                    },
+                    {
+                        "name": "population_smooth"
+                    }
+                ],
+                "primaryKey": [
+                    "world_4regions",
                     "year",
                     "income_bracket"
                 ]
@@ -389,6 +489,21 @@
             }
         },
         {
+            "name": "ddf--entities--on_income_group",
+            "path": "ddf--entities--on_income_group.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "on_income_group"
+                    },
+                    {
+                        "name": "name"
+                    }
+                ],
+                "primaryKey": "on_income_group"
+            }
+        },
+        {
             "name": "ddf--entities--wb_income_group",
             "path": "ddf--entities--wb_income_group.csv",
             "schema": {
@@ -416,6 +531,21 @@
                     }
                 ],
                 "primaryKey": "west_and_rest"
+            }
+        },
+        {
+            "name": "ddf--entities--world_4regions",
+            "path": "ddf--entities--world_4regions.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "world_4regions"
+                    },
+                    {
+                        "name": "name"
+                    }
+                ],
+                "primaryKey": "world_4regions"
             }
         }
     ],
@@ -470,6 +600,15 @@
             },
             {
                 "primaryKey": [
+                    "on_income_group"
+                ],
+                "value": "name",
+                "resources": [
+                    "ddf--entities--on_income_group"
+                ]
+            },
+            {
+                "primaryKey": [
                     "wb_income_group"
                 ],
                 "value": "name",
@@ -484,6 +623,15 @@
                 "value": "name",
                 "resources": [
                     "ddf--entities--west_and_rest"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "world_4regions"
+                ],
+                "value": "name",
+                "resources": [
+                    "ddf--entities--world_4regions"
                 ]
             }
         ],
@@ -560,6 +708,17 @@
             {
                 "primaryKey": [
                     "income_bracket",
+                    "on_income_level",
+                    "year"
+                ],
+                "value": "population_percentage_smooth",
+                "resources": [
+                    "ddf--datapoints--population_percentage_smooth--by--on_income_level--year--income_bracket"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "income_bracket",
                     "wb_income_group",
                     "year"
                 ],
@@ -577,6 +736,17 @@
                 "value": "population_percentage_smooth",
                 "resources": [
                     "ddf--datapoints--population_percentage_smooth--by--west_and_rest--year--income_bracket"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "income_bracket",
+                    "world_4regions",
+                    "year"
+                ],
+                "value": "population_percentage_smooth",
+                "resources": [
+                    "ddf--datapoints--population_percentage_smooth--by--world_4regions--year--income_bracket"
                 ]
             },
             {
@@ -605,6 +775,17 @@
             {
                 "primaryKey": [
                     "income_bracket",
+                    "on_income_level",
+                    "year"
+                ],
+                "value": "population_smooth",
+                "resources": [
+                    "ddf--datapoints--population_smooth--by--on_income_level--year--income_bracket"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "income_bracket",
                     "wb_income_group",
                     "year"
                 ],
@@ -622,6 +803,17 @@
                 "value": "population_smooth",
                 "resources": [
                     "ddf--datapoints--population_smooth--by--west_and_rest--year--income_bracket"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "income_bracket",
+                    "world_4regions",
+                    "year"
+                ],
+                "value": "population_smooth",
+                "resources": [
+                    "ddf--datapoints--population_smooth--by--world_4regions--year--income_bracket"
                 ]
             }
         ],
