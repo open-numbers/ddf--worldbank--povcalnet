@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2021-06-16T16:47:54.700497+00:00",
+    "created": "2021-06-16T17:40:33.088513+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -648,33 +648,6 @@
             },
             {
                 "primaryKey": [
-                    "wb_income_group"
-                ],
-                "value": "is--on_income_level",
-                "resources": [
-                    "ddf--entities--geo--on_income_level"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "west_and_rest"
-                ],
-                "value": "is--on_income_level",
-                "resources": [
-                    "ddf--entities--geo--on_income_level"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "world_4regions"
-                ],
-                "value": "is--on_income_level",
-                "resources": [
-                    "ddf--entities--geo--on_income_level"
-                ]
-            },
-            {
-                "primaryKey": [
                     "geo"
                 ],
                 "value": "is--wb_income_group",
@@ -684,34 +657,7 @@
             },
             {
                 "primaryKey": [
-                    "on_income_level"
-                ],
-                "value": "is--wb_income_group",
-                "resources": [
-                    "ddf--entities--geo--wb_income_group"
-                ]
-            },
-            {
-                "primaryKey": [
                     "wb_income_group"
-                ],
-                "value": "is--wb_income_group",
-                "resources": [
-                    "ddf--entities--geo--wb_income_group"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "west_and_rest"
-                ],
-                "value": "is--wb_income_group",
-                "resources": [
-                    "ddf--entities--geo--wb_income_group"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "world_4regions"
                 ],
                 "value": "is--wb_income_group",
                 "resources": [
@@ -729,34 +675,7 @@
             },
             {
                 "primaryKey": [
-                    "on_income_level"
-                ],
-                "value": "is--west_and_rest",
-                "resources": [
-                    "ddf--entities--geo--west_and_rest"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "wb_income_group"
-                ],
-                "value": "is--west_and_rest",
-                "resources": [
-                    "ddf--entities--geo--west_and_rest"
-                ]
-            },
-            {
-                "primaryKey": [
                     "west_and_rest"
-                ],
-                "value": "is--west_and_rest",
-                "resources": [
-                    "ddf--entities--geo--west_and_rest"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "world_4regions"
                 ],
                 "value": "is--west_and_rest",
                 "resources": [
@@ -766,33 +685,6 @@
             {
                 "primaryKey": [
                     "geo"
-                ],
-                "value": "is--world_4regions",
-                "resources": [
-                    "ddf--entities--geo--world_4regions"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "on_income_level"
-                ],
-                "value": "is--world_4regions",
-                "resources": [
-                    "ddf--entities--geo--world_4regions"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "wb_income_group"
-                ],
-                "value": "is--world_4regions",
-                "resources": [
-                    "ddf--entities--geo--world_4regions"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "west_and_rest"
                 ],
                 "value": "is--world_4regions",
                 "resources": [
@@ -854,10 +746,7 @@
                 ],
                 "value": "name",
                 "resources": [
-                    "ddf--entities--geo--on_income_level",
-                    "ddf--entities--geo--wb_income_group",
-                    "ddf--entities--geo--west_and_rest",
-                    "ddf--entities--geo--world_4regions"
+                    "ddf--entities--geo--on_income_level"
                 ]
             },
             {
@@ -866,10 +755,7 @@
                 ],
                 "value": "name",
                 "resources": [
-                    "ddf--entities--geo--on_income_level",
-                    "ddf--entities--geo--wb_income_group",
-                    "ddf--entities--geo--west_and_rest",
-                    "ddf--entities--geo--world_4regions"
+                    "ddf--entities--geo--wb_income_group"
                 ]
             },
             {
@@ -878,10 +764,7 @@
                 ],
                 "value": "name",
                 "resources": [
-                    "ddf--entities--geo--on_income_level",
-                    "ddf--entities--geo--wb_income_group",
-                    "ddf--entities--geo--west_and_rest",
-                    "ddf--entities--geo--world_4regions"
+                    "ddf--entities--geo--west_and_rest"
                 ]
             },
             {
@@ -890,9 +773,6 @@
                 ],
                 "value": "name",
                 "resources": [
-                    "ddf--entities--geo--on_income_level",
-                    "ddf--entities--geo--wb_income_group",
-                    "ddf--entities--geo--west_and_rest",
                     "ddf--entities--geo--world_4regions"
                 ]
             },
@@ -1120,10 +1000,7 @@
                 ],
                 "value": "population_percentage_smooth",
                 "resources": [
-                    "ddf--datapoints--population_percentage_smooth--by--on_income_level--year--income_bracket",
-                    "ddf--datapoints--population_percentage_smooth--by--wb_income_group--year--income_bracket",
-                    "ddf--datapoints--population_percentage_smooth--by--west_and_rest--year--income_bracket",
-                    "ddf--datapoints--population_percentage_smooth--by--world_4regions--year--income_bracket"
+                    "ddf--datapoints--population_percentage_smooth--by--on_income_level--year--income_bracket"
                 ]
             },
             {
@@ -1134,10 +1011,7 @@
                 ],
                 "value": "population_percentage_smooth",
                 "resources": [
-                    "ddf--datapoints--population_percentage_smooth--by--on_income_level--year--income_bracket",
-                    "ddf--datapoints--population_percentage_smooth--by--wb_income_group--year--income_bracket",
-                    "ddf--datapoints--population_percentage_smooth--by--west_and_rest--year--income_bracket",
-                    "ddf--datapoints--population_percentage_smooth--by--world_4regions--year--income_bracket"
+                    "ddf--datapoints--population_percentage_smooth--by--wb_income_group--year--income_bracket"
                 ]
             },
             {
@@ -1148,10 +1022,7 @@
                 ],
                 "value": "population_percentage_smooth",
                 "resources": [
-                    "ddf--datapoints--population_percentage_smooth--by--on_income_level--year--income_bracket",
-                    "ddf--datapoints--population_percentage_smooth--by--wb_income_group--year--income_bracket",
-                    "ddf--datapoints--population_percentage_smooth--by--west_and_rest--year--income_bracket",
-                    "ddf--datapoints--population_percentage_smooth--by--world_4regions--year--income_bracket"
+                    "ddf--datapoints--population_percentage_smooth--by--west_and_rest--year--income_bracket"
                 ]
             },
             {
@@ -1162,9 +1033,6 @@
                 ],
                 "value": "population_percentage_smooth",
                 "resources": [
-                    "ddf--datapoints--population_percentage_smooth--by--on_income_level--year--income_bracket",
-                    "ddf--datapoints--population_percentage_smooth--by--wb_income_group--year--income_bracket",
-                    "ddf--datapoints--population_percentage_smooth--by--west_and_rest--year--income_bracket",
                     "ddf--datapoints--population_percentage_smooth--by--world_4regions--year--income_bracket"
                 ]
             },
@@ -1226,10 +1094,7 @@
                 ],
                 "value": "population_smooth",
                 "resources": [
-                    "ddf--datapoints--population_smooth--by--on_income_level--year--income_bracket",
-                    "ddf--datapoints--population_smooth--by--wb_income_group--year--income_bracket",
-                    "ddf--datapoints--population_smooth--by--west_and_rest--year--income_bracket",
-                    "ddf--datapoints--population_smooth--by--world_4regions--year--income_bracket"
+                    "ddf--datapoints--population_smooth--by--on_income_level--year--income_bracket"
                 ]
             },
             {
@@ -1240,10 +1105,7 @@
                 ],
                 "value": "population_smooth",
                 "resources": [
-                    "ddf--datapoints--population_smooth--by--on_income_level--year--income_bracket",
-                    "ddf--datapoints--population_smooth--by--wb_income_group--year--income_bracket",
-                    "ddf--datapoints--population_smooth--by--west_and_rest--year--income_bracket",
-                    "ddf--datapoints--population_smooth--by--world_4regions--year--income_bracket"
+                    "ddf--datapoints--population_smooth--by--wb_income_group--year--income_bracket"
                 ]
             },
             {
@@ -1254,10 +1116,7 @@
                 ],
                 "value": "population_smooth",
                 "resources": [
-                    "ddf--datapoints--population_smooth--by--on_income_level--year--income_bracket",
-                    "ddf--datapoints--population_smooth--by--wb_income_group--year--income_bracket",
-                    "ddf--datapoints--population_smooth--by--west_and_rest--year--income_bracket",
-                    "ddf--datapoints--population_smooth--by--world_4regions--year--income_bracket"
+                    "ddf--datapoints--population_smooth--by--west_and_rest--year--income_bracket"
                 ]
             },
             {
@@ -1268,9 +1127,6 @@
                 ],
                 "value": "population_smooth",
                 "resources": [
-                    "ddf--datapoints--population_smooth--by--on_income_level--year--income_bracket",
-                    "ddf--datapoints--population_smooth--by--wb_income_group--year--income_bracket",
-                    "ddf--datapoints--population_smooth--by--west_and_rest--year--income_bracket",
                     "ddf--datapoints--population_smooth--by--world_4regions--year--income_bracket"
                 ]
             }
