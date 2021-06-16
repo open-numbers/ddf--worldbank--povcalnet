@@ -1,14 +1,16 @@
-concept,name,concept_type
-name,Name,string
-year,Year,time
-geo,Geo,entity_domain
-west_and_rest,West and Rest,entity_domain
-wb_income_group,World Bank income groups,entity_domain
-on_income_group,Open Numbers income groups,entity_domain
-world_4regions,World in 4 Regions,entity_domain
-coverage_type,CoverageType,entity_domain
-income_bracket,IncomeBracket,entity_domain
-population,Population,measure
-population_percentage,Population Percentage,measure
-population_smooth,Population,measure
-population_percentage_smooth,Population Percentage,measure
+concept,name,concept_type,domain
+name,Name,string,
+year,Year,time,
+domain,Domain,string,
+geo,Geo,entity_domain,
+country,Country,entity_set,geo
+west_and_rest,West and Rest,entity_set,geo
+wb_income_group,World Bank income groups,entity_set,geo
+on_income_level,Open Numbers income groups,entity_set,geo
+world_4regions,World in 4 Regions,entity_set,geo
+coverage_type,CoverageType,entity_domain,
+income_bracket,IncomeBracket,entity_domain,
+population,Population,measure,
+population_percentage,Population Percentage,measure,
+population_smooth,Population,measure,
+population_percentage_smooth,Population Percentage,measure,
