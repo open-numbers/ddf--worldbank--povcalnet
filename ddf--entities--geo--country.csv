@@ -1,169 +1,169 @@
-country,name,is--country
-alb,Albania,TRUE
-dza,Algeria,TRUE
-ago,Angola,TRUE
-arg,Argentina,TRUE
-arm,Armenia,TRUE
-aus,Australia,TRUE
-aut,Austria,TRUE
-aze,Azerbaijan,TRUE
-bgd,Bangladesh,TRUE
-blr,Belarus,TRUE
-bel,Belgium,TRUE
-blz,Belize,TRUE
-ben,Benin,TRUE
-btn,Bhutan,TRUE
-bol,Bolivia,TRUE
-bih,Bosnia and Herzegovina,TRUE
-bwa,Botswana,TRUE
-bra,Brazil,TRUE
-bgr,Bulgaria,TRUE
-bfa,Burkina Faso,TRUE
-bdi,Burundi,TRUE
-cpv,Cabo Verde,TRUE
-cmr,Cameroon,TRUE
-can,Canada,TRUE
-caf,Central African Republic,TRUE
-tcd,Chad,TRUE
-chl,Chile,TRUE
-chn,China,TRUE
-col,Colombia,TRUE
-com,Comoros,TRUE
-cod,"Congo, Democratic Republic of",TRUE
-cog,"Congo, Republic of",TRUE
-cri,Costa Rica,TRUE
-civ,Cote d'Ivoire,TRUE
-hrv,Croatia,TRUE
-cyp,Cyprus,TRUE
-cze,Czech Republic,TRUE
-dnk,Denmark,TRUE
-dji,Djibouti,TRUE
-dom,Dominican Republic,TRUE
-ecu,Ecuador,TRUE
-egy,"Egypt, Arab Republic of",TRUE
-slv,El Salvador,TRUE
-est,Estonia,TRUE
-swz,Eswatini,TRUE
-eth,Ethiopia,TRUE
-fji,Fiji,TRUE
-fin,Finland,TRUE
-fra,France,TRUE
-gab,Gabon,TRUE
-gmb,"Gambia, The",TRUE
-geo,Georgia,TRUE
-deu,Germany,TRUE
-gha,Ghana,TRUE
-grc,Greece,TRUE
-gtm,Guatemala,TRUE
-gin,Guinea,TRUE
-gnb,Guinea-Bissau,TRUE
-guy,Guyana,TRUE
-hti,Haiti,TRUE
-hnd,Honduras,TRUE
-hun,Hungary,TRUE
-isl,Iceland,TRUE
-ind,India,TRUE
-idn,Indonesia,TRUE
-irn,"Iran, Islamic Republic of",TRUE
-irq,Iraq,TRUE
-irl,Ireland,TRUE
-isr,Israel,TRUE
-ita,Italy,TRUE
-jam,Jamaica,TRUE
-jpn,Japan,TRUE
-jor,Jordan,TRUE
-kaz,Kazakhstan,TRUE
-ken,Kenya,TRUE
-kir,Kiribati,TRUE
-kor,"Korea, Republic of",TRUE
-kgz,Kyrgyz Republic,TRUE
-lao,Lao People's Democratic Republic,TRUE
-lva,Latvia,TRUE
-lbn,Lebanon,TRUE
-lso,Lesotho,TRUE
-lbr,Liberia,TRUE
-ltu,Lithuania,TRUE
-lux,Luxembourg,TRUE
-mdg,Madagascar,TRUE
-mwi,Malawi,TRUE
-mys,Malaysia,TRUE
-mdv,Maldives,TRUE
-mli,Mali,TRUE
-mlt,Malta,TRUE
-mrt,Mauritania,TRUE
-mus,Mauritius,TRUE
-mex,Mexico,TRUE
-mda,Moldova,TRUE
-mng,Mongolia,TRUE
-mne,Montenegro,TRUE
-mar,Morocco,TRUE
-moz,Mozambique,TRUE
-mmr,Myanmar,TRUE
-nam,Namibia,TRUE
-npl,Nepal,TRUE
-nld,Netherlands,TRUE
-nic,Nicaragua,TRUE
-ner,Niger,TRUE
-nga,Nigeria,TRUE
-mkd,North Macedonia,TRUE
-nor,Norway,TRUE
-pak,Pakistan,TRUE
-pan,Panama,TRUE
-png,Papua New Guinea,TRUE
-pry,Paraguay,TRUE
-per,Peru,TRUE
-phl,Philippines,TRUE
-pol,Poland,TRUE
-prt,Portugal,TRUE
-rou,Romania,TRUE
-rus,Russian Federation,TRUE
-rwa,Rwanda,TRUE
-wsm,Samoa,TRUE
-stp,Sao Tome and Principe,TRUE
-sen,Senegal,TRUE
-srb,Serbia,TRUE
-syc,Seychelles,TRUE
-sle,Sierra Leone,TRUE
-svn,Slovenia,TRUE
-slb,Solomon Islands,TRUE
-zaf,South Africa,TRUE
-esp,Spain,TRUE
-lka,Sri Lanka,TRUE
-lca,St. Lucia,TRUE
-sdn,Sudan,TRUE
-sur,Suriname,TRUE
-swe,Sweden,TRUE
-che,Switzerland,TRUE
-syr,Syrian Arab Republic,TRUE
-twn,"Taiwan, China",TRUE
-tjk,Tajikistan,TRUE
-tza,Tanzania,TRUE
-tha,Thailand,TRUE
-tgo,Togo,TRUE
-ton,Tonga,TRUE
-tto,Trinidad and Tobago,TRUE
-tun,Tunisia,TRUE
-tur,Turkey,TRUE
-tkm,Turkmenistan,TRUE
-uga,Uganda,TRUE
-ukr,Ukraine,TRUE
-are,United Arab Emirates,TRUE
-gbr,United Kingdom,TRUE
-usa,United States,TRUE
-ury,Uruguay,TRUE
-uzb,Uzbekistan,TRUE
-vut,Vanuatu,TRUE
-ven,"Venezuela, Republica Bolivariana de",TRUE
-vnm,Vietnam,TRUE
-pse,West Bank and Gaza,TRUE
-yem,"Yemen, Republic of",TRUE
-zmb,Zambia,TRUE
-zwe,Zimbabwe,TRUE
-svk,Slovak Republic,TRUE
-fsm,"Micronesia, Federated States of",TRUE
-tuv,Tuvalu,TRUE
-xkx,Kosovo,TRUE
-tls,Timor-Leste,TRUE
-nru,Nauru,TRUE
-ssd,South Sudan,TRUE
-som,Somalia,TRUE
+geo,name,is--country,world_4regions,west_and_rest,on_income_level,wb_income_group
+alb,Albania,TRUE,4,2,4,2
+dza,Algeria,TRUE,1,2,3,3
+ago,Angola,TRUE,1,2,3,3
+arg,Argentina,TRUE,2,2,4,2
+arm,Armenia,TRUE,4,2,4,2
+aus,Australia,TRUE,3,1,4,1
+aut,Austria,TRUE,4,1,4,1
+aze,Azerbaijan,TRUE,4,2,3,2
+bgd,Bangladesh,TRUE,3,2,3,3
+blr,Belarus,TRUE,4,2,4,2
+bel,Belgium,TRUE,4,1,4,1
+blz,Belize,TRUE,2,2,3,2
+ben,Benin,TRUE,1,2,2,3
+btn,Bhutan,TRUE,3,2,4,3
+bol,Bolivia,TRUE,2,2,3,3
+bih,Bosnia and Herzegovina,TRUE,4,2,4,2
+bwa,Botswana,TRUE,1,2,4,2
+bra,Brazil,TRUE,2,2,4,2
+bgr,Bulgaria,TRUE,4,2,4,2
+bfa,Burkina Faso,TRUE,1,2,2,4
+bdi,Burundi,TRUE,1,2,1,4
+cpv,Cabo Verde,TRUE,1,2,3,3
+cmr,Cameroon,TRUE,1,2,2,3
+can,Canada,TRUE,2,1,4,1
+caf,Central African Republic,TRUE,1,2,1,4
+tcd,Chad,TRUE,1,2,1,4
+chl,Chile,TRUE,2,2,4,1
+chn,China,TRUE,3,2,4,2
+col,Colombia,TRUE,2,2,4,2
+com,Comoros,TRUE,1,2,2,3
+cod,"Congo, Democratic Republic of",TRUE,1,2,1,4
+cog,"Congo, Republic of",TRUE,1,2,2,3
+cri,Costa Rica,TRUE,2,2,4,2
+civ,Cote d'Ivoire,TRUE,1,2,3,3
+hrv,Croatia,TRUE,4,2,4,1
+cyp,Cyprus,TRUE,4,2,4,1
+cze,Czech Republic,TRUE,4,2,4,1
+dnk,Denmark,TRUE,4,1,4,1
+dji,Djibouti,TRUE,1,2,3,3
+dom,Dominican Republic,TRUE,2,2,4,2
+ecu,Ecuador,TRUE,2,2,3,2
+egy,"Egypt, Arab Republic of",TRUE,1,2,4,3
+slv,El Salvador,TRUE,2,2,3,3
+est,Estonia,TRUE,4,2,4,1
+swz,Eswatini,TRUE,1,2,3,3
+eth,Ethiopia,TRUE,1,2,2,4
+fji,Fiji,TRUE,3,2,4,2
+fin,Finland,TRUE,4,1,4,1
+fra,France,TRUE,4,1,4,1
+gab,Gabon,TRUE,1,2,4,2
+gmb,"Gambia, The",TRUE,1,2,2,4
+geo,Georgia,TRUE,4,2,4,2
+deu,Germany,TRUE,4,1,4,1
+gha,Ghana,TRUE,1,2,3,3
+grc,Greece,TRUE,4,1,4,1
+gtm,Guatemala,TRUE,2,2,3,2
+gin,Guinea,TRUE,1,2,2,4
+gnb,Guinea-Bissau,TRUE,1,2,2,4
+guy,Guyana,TRUE,2,2,4,2
+hti,Haiti,TRUE,2,2,2,4
+hnd,Honduras,TRUE,2,2,3,3
+hun,Hungary,TRUE,4,2,4,1
+isl,Iceland,TRUE,4,1,4,1
+ind,India,TRUE,3,2,3,3
+idn,Indonesia,TRUE,3,2,4,2
+irn,"Iran, Islamic Republic of",TRUE,3,2,3,2
+irq,Iraq,TRUE,3,2,3,2
+irl,Ireland,TRUE,4,1,4,1
+isr,Israel,TRUE,3,2,4,1
+ita,Italy,TRUE,4,1,4,1
+jam,Jamaica,TRUE,2,2,3,2
+jpn,Japan,TRUE,3,2,4,1
+jor,Jordan,TRUE,3,2,3,2
+kaz,Kazakhstan,TRUE,3,2,4,2
+ken,Kenya,TRUE,1,2,3,3
+kir,Kiribati,TRUE,3,2,2,3
+kor,"Korea, Republic of",TRUE,3,2,4,1
+kgz,Kyrgyz Republic,TRUE,3,2,3,3
+lao,Lao People's Democratic Republic,TRUE,3,2,3,3
+lva,Latvia,TRUE,4,2,4,1
+lbn,Lebanon,TRUE,3,2,3,2
+lso,Lesotho,TRUE,1,2,2,3
+lbr,Liberia,TRUE,1,2,2,4
+ltu,Lithuania,TRUE,4,2,4,1
+lux,Luxembourg,TRUE,4,1,4,1
+mdg,Madagascar,TRUE,1,2,2,4
+mwi,Malawi,TRUE,1,2,1,4
+mys,Malaysia,TRUE,3,2,4,2
+mdv,Maldives,TRUE,3,2,4,2
+mli,Mali,TRUE,1,2,2,4
+mlt,Malta,TRUE,4,1,4,1
+mrt,Mauritania,TRUE,1,2,3,3
+mus,Mauritius,TRUE,1,2,4,1
+mex,Mexico,TRUE,2,2,4,2
+mda,Moldova,TRUE,4,2,4,3
+mng,Mongolia,TRUE,3,2,4,3
+mne,Montenegro,TRUE,4,2,4,2
+mar,Morocco,TRUE,1,2,3,3
+moz,Mozambique,TRUE,1,2,2,4
+mmr,Myanmar,TRUE,3,2,3,3
+nam,Namibia,TRUE,1,2,3,2
+npl,Nepal,TRUE,3,2,2,3
+nld,Netherlands,TRUE,4,1,4,1
+nic,Nicaragua,TRUE,2,2,3,3
+ner,Niger,TRUE,1,2,1,4
+nga,Nigeria,TRUE,1,2,2,3
+mkd,North Macedonia,TRUE,4,2,4,2
+nor,Norway,TRUE,4,1,4,1
+pak,Pakistan,TRUE,3,2,3,3
+pan,Panama,TRUE,2,2,4,1
+png,Papua New Guinea,TRUE,3,2,2,3
+pry,Paraguay,TRUE,2,2,3,2
+per,Peru,TRUE,2,2,3,2
+phl,Philippines,TRUE,3,2,3,3
+pol,Poland,TRUE,4,2,4,1
+prt,Portugal,TRUE,4,1,4,1
+rou,Romania,TRUE,4,2,4,1
+rus,Russian Federation,TRUE,4,2,4,2
+rwa,Rwanda,TRUE,1,2,2,4
+wsm,Samoa,TRUE,3,2,3,2
+stp,Sao Tome and Principe,TRUE,1,2,2,3
+sen,Senegal,TRUE,1,2,2,3
+srb,Serbia,TRUE,4,2,4,2
+syc,Seychelles,TRUE,1,2,4,1
+sle,Sierra Leone,TRUE,1,2,2,4
+svn,Slovenia,TRUE,4,2,4,1
+slb,Solomon Islands,TRUE,3,2,2,3
+zaf,South Africa,TRUE,1,2,3,2
+esp,Spain,TRUE,4,2,4,1
+lka,Sri Lanka,TRUE,3,2,4,3
+lca,St. Lucia,TRUE,2,2,3,2
+sdn,Sudan,TRUE,1,2,2,4
+sur,Suriname,TRUE,2,2,3,2
+swe,Sweden,TRUE,4,1,4,1
+che,Switzerland,TRUE,4,1,4,1
+syr,Syrian Arab Republic,TRUE,3,2,2,4
+twn,"Taiwan, China",TRUE,,,4,1
+tjk,Tajikistan,TRUE,3,2,2,4
+tza,Tanzania,TRUE,1,2,2,3
+tha,Thailand,TRUE,3,2,4,2
+tgo,Togo,TRUE,1,2,2,4
+ton,Tonga,TRUE,3,2,3,2
+tto,Trinidad and Tobago,TRUE,2,2,4,1
+tun,Tunisia,TRUE,1,2,3,3
+tur,Turkey,TRUE,4,2,4,2
+tkm,Turkmenistan,TRUE,3,2,4,2
+uga,Uganda,TRUE,1,2,2,4
+ukr,Ukraine,TRUE,4,2,4,3
+are,United Arab Emirates,TRUE,3,2,4,1
+gbr,United Kingdom,TRUE,4,1,4,1
+usa,United States,TRUE,2,1,4,1
+ury,Uruguay,TRUE,2,2,4,1
+uzb,Uzbekistan,TRUE,3,2,3,3
+vut,Vanuatu,TRUE,3,2,2,3
+ven,"Venezuela, Republica Bolivariana de",TRUE,2,2,2,2
+vnm,Vietnam,TRUE,3,2,3,3
+pse,West Bank and Gaza,TRUE,3,2,3,3
+yem,"Yemen, Republic of",TRUE,3,2,2,4
+zmb,Zambia,TRUE,1,2,2,3
+zwe,Zimbabwe,TRUE,1,2,2,3
+svk,Slovak Republic,TRUE,4,2,4,1
+fsm,"Micronesia, Federated States of",TRUE,3,2,2,3
+tuv,Tuvalu,TRUE,3,2,3,2
+kos,Kosovo,TRUE,,,,
+tls,Timor-Leste,TRUE,3,2,2,3
+nru,Nauru,TRUE,3,2,3,1
+ssd,South Sudan,TRUE,1,2,2,4
+som,Somalia,TRUE,1,2,1,4
