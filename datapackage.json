@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2021-06-16T02:36:19.312069+00:00",
+    "created": "2021-06-16T16:43:01.617490+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -467,16 +467,28 @@
             "schema": {
                 "fields": [
                     {
-                        "name": "country"
+                        "name": "geo"
                     },
                     {
                         "name": "name"
                     },
                     {
                         "name": "is--country"
+                    },
+                    {
+                        "name": "world_4regions"
+                    },
+                    {
+                        "name": "west_and_rest"
+                    },
+                    {
+                        "name": "on_income_level"
+                    },
+                    {
+                        "name": "wb_income_group"
                     }
                 ],
-                "primaryKey": "country"
+                "primaryKey": "geo"
             }
         },
         {
@@ -882,6 +894,78 @@
                     "ddf--entities--geo--wb_income_group",
                     "ddf--entities--geo--west_and_rest",
                     "ddf--entities--geo--world_4regions"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "on_income_level",
+                "resources": [
+                    "ddf--entities--geo--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo"
+                ],
+                "value": "on_income_level",
+                "resources": [
+                    "ddf--entities--geo--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "wb_income_group",
+                "resources": [
+                    "ddf--entities--geo--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo"
+                ],
+                "value": "wb_income_group",
+                "resources": [
+                    "ddf--entities--geo--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "west_and_rest",
+                "resources": [
+                    "ddf--entities--geo--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo"
+                ],
+                "value": "west_and_rest",
+                "resources": [
+                    "ddf--entities--geo--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "world_4regions",
+                "resources": [
+                    "ddf--entities--geo--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo"
+                ],
+                "value": "world_4regions",
+                "resources": [
+                    "ddf--entities--geo--country"
                 ]
             }
         ],
