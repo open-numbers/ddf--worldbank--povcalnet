@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2021-06-16T16:43:01.617490+00:00",
+    "created": "2021-06-16T16:47:54.700497+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -467,7 +467,7 @@
             "schema": {
                 "fields": [
                     {
-                        "name": "geo"
+                        "name": "country"
                     },
                     {
                         "name": "name"
@@ -488,7 +488,7 @@
                         "name": "wb_income_group"
                     }
                 ],
-                "primaryKey": "geo"
+                "primaryKey": "country"
             }
         },
         {

@@ -1,4 +1,4 @@
-geo,name,is--country,world_4regions,west_and_rest,on_income_level,wb_income_group
+country,name,is--country,world_4regions,west_and_rest,on_income_level,wb_income_group
 alb,Albania,TRUE,4,2,4,2
 dza,Algeria,TRUE,1,2,3,3
 ago,Angola,TRUE,1,2,3,3
