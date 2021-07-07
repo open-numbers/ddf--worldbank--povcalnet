@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2021-06-21T04:25:23.366522+00:00",
+    "created": "2021-07-07T03:13:59.118022+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -236,6 +236,98 @@
                 ],
                 "primaryKey": [
                     "world_4regions",
+                    "year"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--mean_income--by--country--year--coverage_type",
+            "path": "ddf--datapoints--mean_income--by--country--year--coverage_type.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "country"
+                    },
+                    {
+                        "name": "year"
+                    },
+                    {
+                        "name": "coverage_type"
+                    },
+                    {
+                        "name": "mean_income"
+                    }
+                ],
+                "primaryKey": [
+                    "country",
+                    "year",
+                    "coverage_type"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--mean_income--by--country--year",
+            "path": "ddf--datapoints--mean_income--by--country--year.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "country"
+                    },
+                    {
+                        "name": "year"
+                    },
+                    {
+                        "name": "mean_income"
+                    }
+                ],
+                "primaryKey": [
+                    "country",
+                    "year"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--median_income--by--country--year--coverage_type",
+            "path": "ddf--datapoints--median_income--by--country--year--coverage_type.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "country"
+                    },
+                    {
+                        "name": "year"
+                    },
+                    {
+                        "name": "coverage_type"
+                    },
+                    {
+                        "name": "median_income"
+                    }
+                ],
+                "primaryKey": [
+                    "country",
+                    "year",
+                    "coverage_type"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--median_income--by--country--year",
+            "path": "ddf--datapoints--median_income--by--country--year.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "country"
+                    },
+                    {
+                        "name": "year"
+                    },
+                    {
+                        "name": "median_income"
+                    }
+                ],
+                "primaryKey": [
+                    "country",
                     "year"
                 ]
             }
@@ -1360,6 +1452,90 @@
                 "value": "income_mountain_50bracket_shape_for_log",
                 "resources": [
                     "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--world_4regions--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "coverage_type",
+                    "year"
+                ],
+                "value": "mean_income",
+                "resources": [
+                    "ddf--datapoints--mean_income--by--country--year--coverage_type"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "mean_income",
+                "resources": [
+                    "ddf--datapoints--mean_income--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "coverage_type",
+                    "geo",
+                    "year"
+                ],
+                "value": "mean_income",
+                "resources": [
+                    "ddf--datapoints--mean_income--by--country--year--coverage_type"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "year"
+                ],
+                "value": "mean_income",
+                "resources": [
+                    "ddf--datapoints--mean_income--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "coverage_type",
+                    "year"
+                ],
+                "value": "median_income",
+                "resources": [
+                    "ddf--datapoints--median_income--by--country--year--coverage_type"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "year"
+                ],
+                "value": "median_income",
+                "resources": [
+                    "ddf--datapoints--median_income--by--country--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "coverage_type",
+                    "geo",
+                    "year"
+                ],
+                "value": "median_income",
+                "resources": [
+                    "ddf--datapoints--median_income--by--country--year--coverage_type"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "year"
+                ],
+                "value": "median_income",
+                "resources": [
+                    "ddf--datapoints--median_income--by--country--year"
                 ]
             },
             {
