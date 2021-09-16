@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2021-07-12T06:05:29.770343+00:00",
+    "created": "2021-09-16T06:27:07.264064+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -136,6 +136,31 @@
             }
         },
         {
+            "name": "ddf--datapoints--income_mountain_200bracket_shape_for_log--by--country--year--income_bracket_200",
+            "path": "ddf--datapoints--income_mountain_200bracket_shape_for_log--by--country--year--income_bracket_200.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "country"
+                    },
+                    {
+                        "name": "year"
+                    },
+                    {
+                        "name": "income_bracket_200"
+                    },
+                    {
+                        "name": "income_mountain_200bracket_shape_for_log"
+                    }
+                ],
+                "primaryKey": [
+                    "country",
+                    "year",
+                    "income_bracket_200"
+                ]
+            }
+        },
+        {
             "name": "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--country--year",
             "path": "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--country--year.csv",
             "schema": {
@@ -237,6 +262,31 @@
                 "primaryKey": [
                     "world_4regions",
                     "year"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--income_mountain_relative_bracket_shape_for_log--by--country--year--relative_bracket",
+            "path": "ddf--datapoints--income_mountain_relative_bracket_shape_for_log--by--country--year--relative_bracket.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "country"
+                    },
+                    {
+                        "name": "year"
+                    },
+                    {
+                        "name": "relative_bracket"
+                    },
+                    {
+                        "name": "income_mountain_relative_bracket_shape_for_log"
+                    }
+                ],
+                "primaryKey": [
+                    "country",
+                    "year",
+                    "relative_bracket"
                 ]
             }
         },
@@ -1052,6 +1102,24 @@
             }
         },
         {
+            "name": "ddf--entities--income_bracket_200",
+            "path": "ddf--entities--income_bracket_200.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "income_bracket_200"
+                    },
+                    {
+                        "name": "bracket_start"
+                    },
+                    {
+                        "name": "bracket_end"
+                    }
+                ],
+                "primaryKey": "income_bracket_200"
+            }
+        },
+        {
             "name": "ddf--entities--income_bracket_50",
             "path": "ddf--entities--income_bracket_50.csv",
             "schema": {
@@ -1064,6 +1132,21 @@
                     }
                 ],
                 "primaryKey": "income_bracket_50"
+            }
+        },
+        {
+            "name": "ddf--entities--relative_bracket",
+            "path": "ddf--entities--relative_bracket.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "relative_bracket"
+                    },
+                    {
+                        "name": "name"
+                    }
+                ],
+                "primaryKey": "relative_bracket"
             }
         }
     ],
@@ -1098,6 +1181,24 @@
             }
         ],
         "entities": [
+            {
+                "primaryKey": [
+                    "income_bracket_200"
+                ],
+                "value": "bracket_end",
+                "resources": [
+                    "ddf--entities--income_bracket_200"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "income_bracket_200"
+                ],
+                "value": "bracket_start",
+                "resources": [
+                    "ddf--entities--income_bracket_200"
+                ]
+            },
             {
                 "primaryKey": [
                     "country"
@@ -1244,6 +1345,15 @@
                 "value": "name",
                 "resources": [
                     "ddf--entities--geo--on_income_level"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "relative_bracket"
+                ],
+                "value": "name",
+                "resources": [
+                    "ddf--entities--relative_bracket"
                 ]
             },
             {
@@ -1414,6 +1524,28 @@
             {
                 "primaryKey": [
                     "country",
+                    "income_bracket_200",
+                    "year"
+                ],
+                "value": "income_mountain_200bracket_shape_for_log",
+                "resources": [
+                    "ddf--datapoints--income_mountain_200bracket_shape_for_log--by--country--year--income_bracket_200"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "income_bracket_200",
+                    "year"
+                ],
+                "value": "income_mountain_200bracket_shape_for_log",
+                "resources": [
+                    "ddf--datapoints--income_mountain_200bracket_shape_for_log--by--country--year--income_bracket_200"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
                     "year"
                 ],
                 "value": "income_mountain_50bracket_shape_for_log",
@@ -1473,6 +1605,28 @@
                 "value": "income_mountain_50bracket_shape_for_log",
                 "resources": [
                     "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--world_4regions--year"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "relative_bracket",
+                    "year"
+                ],
+                "value": "income_mountain_relative_bracket_shape_for_log",
+                "resources": [
+                    "ddf--datapoints--income_mountain_relative_bracket_shape_for_log--by--country--year--relative_bracket"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "relative_bracket",
+                    "year"
+                ],
+                "value": "income_mountain_relative_bracket_shape_for_log",
+                "resources": [
+                    "ddf--datapoints--income_mountain_relative_bracket_shape_for_log--by--country--year--relative_bracket"
                 ]
             },
             {
