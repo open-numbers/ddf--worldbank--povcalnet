@@ -77,13 +77,13 @@ def estimate(sample, weights, xpos):
     return popt[0] * xpos + popt[1]
 
 
-def run_smooth(ser, maximum=10, minimum=1):
+def run_smooth(arr, maximum=10, minimum=1):
     res = []
-    for i in range(len(ser)):
+    for i in range(len(arr)):
         # print(i, end=',')
-        y = ser.values[i]
-        y_max = ser.max()
-        x_y_max = ser[ser == ser.max()].index[0]
+        y = arr[i]
+        y_max = arr.max()
+        x_y_max = np.where(arr == arr.max())[0][0]
         #     if x_y_max == i:
         #         res.append(ser.max())
         #         print()
@@ -98,7 +98,7 @@ def run_smooth(ser, maximum=10, minimum=1):
         if mval == 0:
             res.append(y)
             continue
-        sample = get_sample_at_point(i, ser, mval=mval)
+        sample = get_sample_at_point(i, arr, mval=mval)
         # print(sample)
         assert len(
             sample) == 2 * mval + 1, f"i={i}, size={len(sample)}, mval={mval}"
