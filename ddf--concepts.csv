@@ -26,3 +26,7 @@ income_mountain_relative_bracket_shape_for_log,Shape for relative brackets,measu
 mean_income,Mean income or consumption per month,measure,
 mean_income_extrapolated,Mean income or consumption per month (extrapolated),measure,
 median_income,Median income or consumption per month,measure,
+color,Color,string,
+description,Description,string,
+rank,rank,string,
+shape_lores_svg,shape lores svg,string,
