@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2021-10-05T03:21:03.366248+00:00",
+    "created": "2021-10-11T03:33:28.578903+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -1056,6 +1056,18 @@
                     },
                     {
                         "name": "is--world_4regions"
+                    },
+                    {
+                        "name": "color"
+                    },
+                    {
+                        "name": "description"
+                    },
+                    {
+                        "name": "rank"
+                    },
+                    {
+                        "name": "shape_lores_svg"
                     }
                 ],
                 "primaryKey": "world_4regions"
@@ -1157,6 +1169,42 @@
                 "value": "bracket_start",
                 "resources": [
                     "ddf--entities--income_bracket_200"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo"
+                ],
+                "value": "color",
+                "resources": [
+                    "ddf--entities--geo--world_4regions"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "world_4regions"
+                ],
+                "value": "color",
+                "resources": [
+                    "ddf--entities--geo--world_4regions"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo"
+                ],
+                "value": "description",
+                "resources": [
+                    "ddf--entities--geo--world_4regions"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "world_4regions"
+                ],
+                "value": "description",
+                "resources": [
+                    "ddf--entities--geo--world_4regions"
                 ]
             },
             {
@@ -1350,6 +1398,42 @@
                 "value": "on_income_level",
                 "resources": [
                     "ddf--entities--geo--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo"
+                ],
+                "value": "rank",
+                "resources": [
+                    "ddf--entities--geo--world_4regions"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "world_4regions"
+                ],
+                "value": "rank",
+                "resources": [
+                    "ddf--entities--geo--world_4regions"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo"
+                ],
+                "value": "shape_lores_svg",
+                "resources": [
+                    "ddf--entities--geo--world_4regions"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "world_4regions"
+                ],
+                "value": "shape_lores_svg",
+                "resources": [
+                    "ddf--entities--geo--world_4regions"
                 ]
             },
             {
