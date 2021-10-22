@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2021-10-21T14:06:39.285245+00:00",
+    "created": "2021-10-22T08:55:15.141772+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -226,18 +226,18 @@
             }
         },
         {
-            "name": "ddf--entities--owid_level",
-            "path": "ddf--entities--owid_level.csv",
+            "name": "ddf--entities--wb_level",
+            "path": "ddf--entities--wb_level.csv",
             "schema": {
                 "fields": [
                     {
-                        "name": "owid_level"
+                        "name": "wb_level"
                     },
                     {
                         "name": "name"
                     }
                 ],
-                "primaryKey": "owid_level"
+                "primaryKey": "wb_level"
             }
         },
         {
@@ -287,8 +287,8 @@
             }
         },
         {
-            "name": "ddf--datapoints--poverty_population--by--country--year--owid_level",
-            "path": "poverty_rates/ddf--datapoints--poverty_population--by--country--year--owid_level.csv",
+            "name": "ddf--datapoints--poverty_population--by--country--year--wb_level",
+            "path": "poverty_rates/ddf--datapoints--poverty_population--by--country--year--wb_level.csv",
             "schema": {
                 "fields": [
                     {
@@ -298,7 +298,7 @@
                         "name": "year"
                     },
                     {
-                        "name": "owid_level"
+                        "name": "wb_level"
                     },
                     {
                         "name": "poverty_population"
@@ -307,7 +307,7 @@
                 "primaryKey": [
                     "country",
                     "year",
-                    "owid_level"
+                    "wb_level"
                 ]
             }
         },
@@ -337,8 +337,8 @@
             }
         },
         {
-            "name": "ddf--datapoints--poverty_rate--by--country--year--owid_level",
-            "path": "poverty_rates/ddf--datapoints--poverty_rate--by--country--year--owid_level.csv",
+            "name": "ddf--datapoints--poverty_rate--by--country--year--wb_level",
+            "path": "poverty_rates/ddf--datapoints--poverty_rate--by--country--year--wb_level.csv",
             "schema": {
                 "fields": [
                     {
@@ -348,7 +348,7 @@
                         "name": "year"
                     },
                     {
-                        "name": "owid_level"
+                        "name": "wb_level"
                     },
                     {
                         "name": "poverty_rate"
@@ -357,7 +357,7 @@
                 "primaryKey": [
                     "country",
                     "year",
-                    "owid_level"
+                    "wb_level"
                 ]
             }
         }
@@ -615,20 +615,20 @@
             },
             {
                 "primaryKey": [
-                    "owid_level"
-                ],
-                "value": "name",
-                "resources": [
-                    "ddf--entities--owid_level"
-                ]
-            },
-            {
-                "primaryKey": [
                     "wb_income_group"
                 ],
                 "value": "name",
                 "resources": [
                     "ddf--entities--geo--wb_income_group"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "wb_level"
+                ],
+                "value": "name",
+                "resources": [
+                    "ddf--entities--wb_level"
                 ]
             },
             {
@@ -793,12 +793,12 @@
             {
                 "primaryKey": [
                     "country",
-                    "owid_level",
+                    "wb_level",
                     "year"
                 ],
                 "value": "poverty_population",
                 "resources": [
-                    "ddf--datapoints--poverty_population--by--country--year--owid_level"
+                    "ddf--datapoints--poverty_population--by--country--year--wb_level"
                 ]
             },
             {
@@ -815,12 +815,12 @@
             {
                 "primaryKey": [
                     "geo",
-                    "owid_level",
+                    "wb_level",
                     "year"
                 ],
                 "value": "poverty_population",
                 "resources": [
-                    "ddf--datapoints--poverty_population--by--country--year--owid_level"
+                    "ddf--datapoints--poverty_population--by--country--year--wb_level"
                 ]
             },
             {
@@ -837,12 +837,12 @@
             {
                 "primaryKey": [
                     "country",
-                    "owid_level",
+                    "wb_level",
                     "year"
                 ],
                 "value": "poverty_rate",
                 "resources": [
-                    "ddf--datapoints--poverty_rate--by--country--year--owid_level"
+                    "ddf--datapoints--poverty_rate--by--country--year--wb_level"
                 ]
             },
             {
@@ -859,12 +859,12 @@
             {
                 "primaryKey": [
                     "geo",
-                    "owid_level",
+                    "wb_level",
                     "year"
                 ],
                 "value": "poverty_rate",
                 "resources": [
-                    "ddf--datapoints--poverty_rate--by--country--year--owid_level"
+                    "ddf--datapoints--poverty_rate--by--country--year--wb_level"
                 ]
             }
         ],
