@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2021-10-22T08:55:15.141772+00:00",
+    "created": "2021-11-11T16:59:13.447490+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -73,6 +73,9 @@
                     },
                     {
                         "name": "wb_income_group"
+                    },
+                    {
+                        "name": "income_mountain_50bracket_max_height_for_log"
                     }
                 ],
                 "primaryKey": "country"
@@ -454,6 +457,24 @@
                 "value": "description",
                 "resources": [
                     "ddf--entities--geo--world_4regions"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "income_mountain_50bracket_max_height_for_log",
+                "resources": [
+                    "ddf--entities--geo--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo"
+                ],
+                "value": "income_mountain_50bracket_max_height_for_log",
+                "resources": [
+                    "ddf--entities--geo--country"
                 ]
             },
             {
