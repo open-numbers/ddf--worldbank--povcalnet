@@ -135,7 +135,7 @@ sur,Suriname,TRUE,americas,rest,TRUE,76721
 swe,Sweden,TRUE,europe,west,TRUE,2412616
 che,Switzerland,TRUE,europe,west,TRUE,1839002
 syr,Syrian Arab Republic,TRUE,asia,rest,TRUE,5670045
-twn,"Taiwan, China",TRUE,asia,,FALSE,4856847
+twn,"Taiwan, China",TRUE,asia,rest,FALSE,4856847
 tjk,Tajikistan,TRUE,asia,rest,TRUE,2854803
 tza,Tanzania,TRUE,africa,rest,TRUE,21722614
 tha,Thailand,TRUE,asia,rest,TRUE,11986558
@@ -162,7 +162,7 @@ zwe,Zimbabwe,TRUE,africa,rest,TRUE,3058283
 svk,Slovak Republic,TRUE,europe,rest,TRUE,1598424
 fsm,"Micronesia, Federated States of",TRUE,asia,rest,TRUE,20880
 tuv,Tuvalu,TRUE,asia,rest,TRUE,2618
-kos,Kosovo,TRUE,europe,,FALSE,
+kos,Kosovo,TRUE,europe,west,FALSE,
 tls,Timor-Leste,TRUE,asia,rest,TRUE,446627
 nru,Nauru,TRUE,asia,rest,TRUE,1985
 ssd,South Sudan,TRUE,africa,rest,TRUE,2591877
@@ -180,7 +180,7 @@ vct,St. Vincent and the Grenadines,TRUE,americas,rest,TRUE,18885
 lby,Libya,TRUE,africa,rest,TRUE,1406759
 atg,Antigua and Barbuda,TRUE,americas,rest,TRUE,18822
 plw,Palau,TRUE,asia,rest,TRUE,3308
-hkg,"Hong Kong, China",TRUE,asia,,FALSE,977361
+hkg,"Hong Kong, China",TRUE,asia,rest,FALSE,977361
 kna,St. Kitts and Nevis,TRUE,americas,rest,TRUE,9684
 nzl,New Zealand,TRUE,asia,west,TRUE,982818
 gnq,Equatorial Guinea,TRUE,africa,rest,TRUE,470264
