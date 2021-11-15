@@ -1,198 +1,197 @@
-country,name,is--country,world_4regions,west_and_rest,on_income_level,wb_income_group,income_mountain_50bracket_max_height_for_log
-alb,Albania,TRUE,14,42,24,32,687017
-dza,Algeria,TRUE,11,42,23,33,13059714
-ago,Angola,TRUE,11,42,23,33,8789395
-arg,Argentina,TRUE,12,42,24,32,6989932
-arm,Armenia,TRUE,14,42,24,32,674005
-aus,Australia,TRUE,13,41,24,31,6059131
-aut,Austria,TRUE,14,41,24,31,1899865
-aze,Azerbaijan,TRUE,14,42,23,32,3019667
-bgd,Bangladesh,TRUE,13,42,23,33,39989816
-blr,Belarus,TRUE,14,42,24,32,2898889
-bel,Belgium,TRUE,14,41,24,31,3001048
-blz,Belize,TRUE,12,42,23,32,68368
-ben,Benin,TRUE,11,42,22,33,3472043
-btn,Bhutan,TRUE,13,42,24,33,137846
-bol,Bolivia,TRUE,12,42,23,33,2296481
-bih,Bosnia and Herzegovina,TRUE,14,42,24,32,973779
-bwa,Botswana,TRUE,11,42,24,32,402461
-bra,Brazil,TRUE,12,42,24,32,26521230
-bgr,Bulgaria,TRUE,14,42,24,32,2269742
-bfa,Burkina Faso,TRUE,11,42,22,34,8785340
-bdi,Burundi,TRUE,11,42,21,34,4177078
-cpv,Cabo Verde,TRUE,11,42,23,33,95306
-cmr,Cameroon,TRUE,11,42,22,33,6037455
-can,Canada,TRUE,12,41,24,31,8103276
-caf,Central African Republic,TRUE,11,42,21,34,968465
-tcd,Chad,TRUE,11,42,21,34,4719043
-chl,Chile,TRUE,12,42,24,31,3168903
-chn,China,TRUE,13,42,24,32,226477649
-col,Colombia,TRUE,12,42,24,32,6719188
-com,Comoros,TRUE,11,42,22,33,180883
-cod,"Congo, Democratic Republic of",TRUE,11,42,21,34,27717211
-cog,"Congo, Republic of",TRUE,11,42,22,33,1291551
-cri,Costa Rica,TRUE,12,42,24,32,712939
-civ,Cote d'Ivoire,TRUE,11,42,23,33,7626126
-hrv,Croatia,TRUE,14,42,24,31,1254940
-cyp,Cyprus,TRUE,14,42,24,31,279704
-cze,Czech Republic,TRUE,14,42,24,31,3282518
-dnk,Denmark,TRUE,14,41,24,31,1448780
-dji,Djibouti,TRUE,11,42,23,33,194396
-dom,Dominican Republic,TRUE,12,42,24,32,1946714
-ecu,Ecuador,TRUE,12,42,23,32,2918652
-egy,"Egypt, Arab Republic of",TRUE,11,42,24,33,34647505
-slv,El Salvador,TRUE,12,42,23,33,1095178
-est,Estonia,TRUE,14,42,24,31,284521
-swz,Eswatini,TRUE,11,42,23,33,194058
-eth,Ethiopia,TRUE,11,42,22,34,41389398
-fji,Fiji,TRUE,13,42,24,32,190937
-fin,Finland,TRUE,14,41,24,31,1396412
-fra,France,TRUE,14,41,24,31,14263805
-gab,Gabon,TRUE,11,42,24,32,567413
-gmb,"Gambia, The",TRUE,11,42,22,34,862786
-geo,Georgia,TRUE,14,42,24,32,878637
-deu,Germany,TRUE,14,41,24,31,17123513
-gha,Ghana,TRUE,11,42,23,33,6785715
-grc,Greece,TRUE,14,41,24,31,2152386
-gtm,Guatemala,TRUE,12,42,23,32,3405592
-gin,Guinea,TRUE,11,42,22,34,4780164
-gnb,Guinea-Bissau,TRUE,11,42,22,34,495286
-guy,Guyana,TRUE,12,42,24,32,119530
-hti,Haiti,TRUE,12,42,22,34,2057903
-hnd,Honduras,TRUE,12,42,23,33,1524909
-hun,Hungary,TRUE,14,42,24,31,3068271
-isl,Iceland,TRUE,14,41,24,31,91913
-ind,India,TRUE,13,42,23,33,322930378
-idn,Indonesia,TRUE,13,42,24,32,52746237
-irn,"Iran, Islamic Republic of",TRUE,13,42,23,32,15499749
-irq,Iraq,TRUE,13,42,23,32,14312151
-irl,Ireland,TRUE,14,41,24,31,1653644
-isr,Israel,TRUE,13,42,24,31,1861674
-ita,Italy,TRUE,14,41,24,31,11068186
-jam,Jamaica,TRUE,12,42,23,32,442805
-jpn,Japan,TRUE,13,42,24,31,28012513
-jor,Jordan,TRUE,13,42,23,32,2541956
-kaz,Kazakhstan,TRUE,13,42,24,32,5409092
-ken,Kenya,TRUE,11,42,23,33,13980472
-kir,Kiribati,TRUE,13,42,22,33,30219
-kor,"Korea, Republic of",TRUE,13,42,24,31,10151397
-kgz,Kyrgyz Republic,TRUE,13,42,23,33,2008780
-lao,Lao People's Democratic Republic,TRUE,13,42,23,33,1561898
-lva,Latvia,TRUE,14,42,24,31,575173
-lbn,Lebanon,TRUE,13,42,23,32,1327926
-lso,Lesotho,TRUE,11,42,22,33,316730
-lbr,Liberia,TRUE,11,42,22,34,1547698
-ltu,Lithuania,TRUE,14,42,24,31,762131
-lux,Luxembourg,TRUE,14,41,24,31,132996
-mdg,Madagascar,TRUE,11,42,22,34,8112576
-mwi,Malawi,TRUE,11,42,21,34,6368654
-mys,Malaysia,TRUE,13,42,24,32,5933969
-mdv,Maldives,TRUE,13,42,24,32,119091
-mli,Mali,TRUE,11,42,22,34,7988791
-mlt,Malta,TRUE,14,41,24,31,99093
-mrt,Mauritania,TRUE,11,42,23,33,1611066
-mus,Mauritius,TRUE,11,42,24,31,233706
-mex,Mexico,TRUE,12,42,24,32,22780480
-mda,Moldova,TRUE,14,42,24,33,991221
-mng,Mongolia,TRUE,13,42,24,33,822661
-mne,Montenegro,TRUE,14,42,24,32,134677
-mar,Morocco,TRUE,11,42,23,33,7623804
-moz,Mozambique,TRUE,11,42,22,34,8405583
-mmr,Myanmar,TRUE,13,42,23,33,13163130
-nam,Namibia,TRUE,11,42,23,32,405523
-npl,Nepal,TRUE,13,42,22,33,6665772
-nld,Netherlands,TRUE,14,41,24,31,3941254
-nic,Nicaragua,TRUE,12,42,23,33,1220872
-ner,Niger,TRUE,11,42,21,34,11638661
-nga,Nigeria,TRUE,11,42,22,33,66698050
-mkd,North Macedonia,TRUE,14,42,24,32,451402
-nor,Norway,TRUE,14,41,24,31,1513496
-pak,Pakistan,TRUE,13,42,23,33,73384626
-pan,Panama,TRUE,12,42,24,31,693114
-png,Papua New Guinea,TRUE,13,42,22,33,1995637
-pry,Paraguay,TRUE,12,42,23,32,1261149
-per,Peru,TRUE,12,42,23,32,5816163
-phl,Philippines,TRUE,13,42,23,33,23246632
-pol,Poland,TRUE,14,42,24,31,9062487
-prt,Portugal,TRUE,14,41,24,31,2079356
-rou,Romania,TRUE,14,42,24,31,5942812
-rus,Russian Federation,TRUE,14,42,24,32,24954889
-rwa,Rwanda,TRUE,11,42,22,34,3657240
-wsm,Samoa,TRUE,13,42,23,32,46142
-stp,Sao Tome and Principe,TRUE,11,42,22,33,60242
-sen,Senegal,TRUE,11,42,22,33,5012201
-srb,Serbia,TRUE,14,42,24,32,1959538
-syc,Seychelles,TRUE,11,42,24,31,19306
-sle,Sierra Leone,TRUE,11,42,22,34,2411101
-svn,Slovenia,TRUE,14,42,24,31,538180
-slb,Solomon Islands,TRUE,13,42,22,33,220878
-zaf,South Africa,TRUE,11,42,23,32,7416747
-esp,Spain,TRUE,14,42,24,31,8366590
-lka,Sri Lanka,TRUE,13,42,24,33,3888813
-lca,St. Lucia,TRUE,12,42,23,32,22296
-sdn,Sudan,TRUE,11,42,22,34,15104898
-sur,Suriname,TRUE,12,42,23,32,76721
-swe,Sweden,TRUE,14,41,24,31,2412616
-che,Switzerland,TRUE,14,41,24,31,1839002
-syr,Syrian Arab Republic,TRUE,13,42,22,34,5670045
-twn,"Taiwan, China",TRUE,,,24,31,4856847
-tjk,Tajikistan,TRUE,13,42,22,34,2854803
-tza,Tanzania,TRUE,11,42,22,33,21722614
-tha,Thailand,TRUE,13,42,24,32,11986558
-tgo,Togo,TRUE,11,42,22,34,2034585
-ton,Tonga,TRUE,13,42,23,32,23568
-tto,Trinidad and Tobago,TRUE,12,42,24,31,206827
-tun,Tunisia,TRUE,11,42,23,33,2573238
-tur,Turkey,TRUE,14,42,24,32,14295373
-tkm,Turkmenistan,TRUE,13,42,24,32,1180898
-uga,Uganda,TRUE,11,42,22,34,13684043
-ukr,Ukraine,TRUE,14,42,24,33,11651874
-are,United Arab Emirates,TRUE,13,42,24,31,2103785
-gbr,United Kingdom,TRUE,14,41,24,31,12527130
-usa,United States,TRUE,12,41,24,31,54679704
-ury,Uruguay,TRUE,12,42,24,31,541157
-uzb,Uzbekistan,TRUE,13,42,23,33,8399414
-vut,Vanuatu,TRUE,13,42,22,33,92609
-ven,"Venezuela, Republica Bolivariana de",TRUE,12,42,22,32,4943408
-vnm,Vietnam,TRUE,13,42,23,33,19057807
-pse,West Bank and Gaza,TRUE,13,42,23,33,1469987
-yem,"Yemen, Republic of",TRUE,13,42,22,34,8503151
-zmb,Zambia,TRUE,11,42,22,33,3747980
-zwe,Zimbabwe,TRUE,11,42,22,33,3058283
-svk,Slovak Republic,TRUE,14,42,24,31,1598424
-fsm,"Micronesia, Federated States of",TRUE,13,42,22,33,20880
-tuv,Tuvalu,TRUE,13,42,23,32,2618
-kos,Kosovo,TRUE,,,,,
-xkx,Kosovo,TRUE,,,,,
-tls,Timor-Leste,TRUE,13,42,22,33,446627
-nru,Nauru,TRUE,13,42,23,31,1985
-ssd,South Sudan,TRUE,11,42,22,34,2591877
-som,Somalia,TRUE,11,42,21,34,5700041
-and,Andorra,TRUE,14,41,21,31,14850
-eri,Eritrea,TRUE,11,42,24,,847014
-brb,Barbados,TRUE,12,42,21,31,40343
-dma,Dominica,TRUE,12,42,22,32,12257
-smr,San Marino,TRUE,14,42,21,31,6099
-brn,Brunei,TRUE,13,42,21,31,87077
-khm,Cambodia,TRUE,13,42,23,33,3281200
-grd,Grenada,TRUE,12,42,22,32,19501
-afg,Afghanistan,TRUE,13,42,24,,10561865
-vct,St. Vincent and the Grenadines,TRUE,12,42,22,32,18885
-lby,Libya,TRUE,11,42,22,32,1406759
-atg,Antigua and Barbuda,TRUE,12,42,21,31,18822
-plw,Palau,TRUE,13,42,21,31,3308
-hkg,"Hong Kong, China",TRUE,13,,21,31,977361
-kna,St. Kitts and Nevis,TRUE,12,42,21,31,9684
-nzl,New Zealand,TRUE,13,41,21,31,982818
-gnq,Equatorial Guinea,TRUE,11,42,22,32,470264
-omn,Oman,TRUE,13,42,21,31,1173075
-bhs,Bahamas,TRUE,12,42,21,31,64002
-prk,North Korea,TRUE,13,42,24,,3801493
-cub,Cuba,TRUE,12,42,22,32,1622684
-qat,Qatar,TRUE,13,42,21,31,679528
-sgp,Singapore,TRUE,13,42,21,31,1030882
-kwt,Kuwait,TRUE,13,42,21,31,953864
-bhr,Bahrain,TRUE,13,42,21,31,405828
-sau,Saudi Arabia,TRUE,13,42,21,31,7675543
-mhl,Marshall Islands,TRUE,13,42,22,32,11430
-mco,Monaco,TRUE,14,41,21,31,8028
+country,name,is--country,world_4region,west_and_rest,un_state,income_mountain_50bracket_max_height_for_log
+alb,Albania,TRUE,europe,rest,TRUE,687017
+dza,Algeria,TRUE,africa,rest,TRUE,13059714
+ago,Angola,TRUE,africa,rest,TRUE,8789395
+arg,Argentina,TRUE,americas,rest,TRUE,6989932
+arm,Armenia,TRUE,europe,rest,TRUE,674005
+aus,Australia,TRUE,asia,west,TRUE,6059131
+aut,Austria,TRUE,europe,west,TRUE,1899865
+aze,Azerbaijan,TRUE,europe,rest,TRUE,3019667
+bgd,Bangladesh,TRUE,asia,rest,TRUE,39989816
+blr,Belarus,TRUE,europe,rest,TRUE,2898889
+bel,Belgium,TRUE,europe,west,TRUE,3001048
+blz,Belize,TRUE,americas,rest,TRUE,68368
+ben,Benin,TRUE,africa,rest,TRUE,3472043
+btn,Bhutan,TRUE,asia,rest,TRUE,137846
+bol,Bolivia,TRUE,americas,rest,TRUE,2296481
+bih,Bosnia and Herzegovina,TRUE,europe,rest,TRUE,973779
+bwa,Botswana,TRUE,africa,rest,TRUE,402461
+bra,Brazil,TRUE,americas,rest,TRUE,26521230
+bgr,Bulgaria,TRUE,europe,rest,TRUE,2269742
+bfa,Burkina Faso,TRUE,africa,rest,TRUE,8785340
+bdi,Burundi,TRUE,africa,rest,TRUE,4177078
+cpv,Cabo Verde,TRUE,africa,rest,TRUE,95306
+cmr,Cameroon,TRUE,africa,rest,TRUE,6037455
+can,Canada,TRUE,americas,west,TRUE,8103276
+caf,Central African Republic,TRUE,africa,rest,TRUE,968465
+tcd,Chad,TRUE,africa,rest,TRUE,4719043
+chl,Chile,TRUE,americas,rest,TRUE,3168903
+chn,China,TRUE,asia,rest,TRUE,226477649
+col,Colombia,TRUE,americas,rest,TRUE,6719188
+com,Comoros,TRUE,africa,rest,TRUE,180883
+cod,"Congo, Democratic Republic of",TRUE,africa,rest,TRUE,27717211
+cog,"Congo, Republic of",TRUE,africa,rest,TRUE,1291551
+cri,Costa Rica,TRUE,americas,rest,TRUE,712939
+civ,Cote d'Ivoire,TRUE,africa,rest,TRUE,7626126
+hrv,Croatia,TRUE,europe,rest,TRUE,1254940
+cyp,Cyprus,TRUE,europe,rest,TRUE,279704
+cze,Czech Republic,TRUE,europe,rest,TRUE,3282518
+dnk,Denmark,TRUE,europe,west,TRUE,1448780
+dji,Djibouti,TRUE,africa,rest,TRUE,194396
+dom,Dominican Republic,TRUE,americas,rest,TRUE,1946714
+ecu,Ecuador,TRUE,americas,rest,TRUE,2918652
+egy,"Egypt, Arab Republic of",TRUE,africa,rest,TRUE,34647505
+slv,El Salvador,TRUE,americas,rest,TRUE,1095178
+est,Estonia,TRUE,europe,rest,TRUE,284521
+swz,Eswatini,TRUE,africa,rest,TRUE,194058
+eth,Ethiopia,TRUE,africa,rest,TRUE,41389398
+fji,Fiji,TRUE,asia,rest,TRUE,190937
+fin,Finland,TRUE,europe,west,TRUE,1396412
+fra,France,TRUE,europe,west,TRUE,14263805
+gab,Gabon,TRUE,africa,rest,TRUE,567413
+gmb,"Gambia, The",TRUE,africa,rest,TRUE,862786
+geo,Georgia,TRUE,europe,rest,TRUE,878637
+deu,Germany,TRUE,europe,west,TRUE,17123513
+gha,Ghana,TRUE,africa,rest,TRUE,6785715
+grc,Greece,TRUE,europe,west,TRUE,2152386
+gtm,Guatemala,TRUE,americas,rest,TRUE,3405592
+gin,Guinea,TRUE,africa,rest,TRUE,4780164
+gnb,Guinea-Bissau,TRUE,africa,rest,TRUE,495286
+guy,Guyana,TRUE,americas,rest,TRUE,119530
+hti,Haiti,TRUE,americas,rest,TRUE,2057903
+hnd,Honduras,TRUE,americas,rest,TRUE,1524909
+hun,Hungary,TRUE,europe,rest,TRUE,3068271
+isl,Iceland,TRUE,europe,west,TRUE,91913
+ind,India,TRUE,asia,rest,TRUE,322930378
+idn,Indonesia,TRUE,asia,rest,TRUE,52746237
+irn,"Iran, Islamic Republic of",TRUE,asia,rest,TRUE,15499749
+irq,Iraq,TRUE,asia,rest,TRUE,14312151
+irl,Ireland,TRUE,europe,west,TRUE,1653644
+isr,Israel,TRUE,asia,rest,TRUE,1861674
+ita,Italy,TRUE,europe,west,TRUE,11068186
+jam,Jamaica,TRUE,americas,rest,TRUE,442805
+jpn,Japan,TRUE,asia,rest,TRUE,28012513
+jor,Jordan,TRUE,asia,rest,TRUE,2541956
+kaz,Kazakhstan,TRUE,asia,rest,TRUE,5409092
+ken,Kenya,TRUE,africa,rest,TRUE,13980472
+kir,Kiribati,TRUE,asia,rest,TRUE,30219
+kor,"Korea, Republic of",TRUE,asia,rest,TRUE,10151397
+kgz,Kyrgyz Republic,TRUE,asia,rest,TRUE,2008780
+lao,Lao People's Democratic Republic,TRUE,asia,rest,TRUE,1561898
+lva,Latvia,TRUE,europe,rest,TRUE,575173
+lbn,Lebanon,TRUE,asia,rest,TRUE,1327926
+lso,Lesotho,TRUE,africa,rest,TRUE,316730
+lbr,Liberia,TRUE,africa,rest,TRUE,1547698
+ltu,Lithuania,TRUE,europe,rest,TRUE,762131
+lux,Luxembourg,TRUE,europe,west,TRUE,132996
+mdg,Madagascar,TRUE,africa,rest,TRUE,8112576
+mwi,Malawi,TRUE,africa,rest,TRUE,6368654
+mys,Malaysia,TRUE,asia,rest,TRUE,5933969
+mdv,Maldives,TRUE,asia,rest,TRUE,119091
+mli,Mali,TRUE,africa,rest,TRUE,7988791
+mlt,Malta,TRUE,europe,west,TRUE,99093
+mrt,Mauritania,TRUE,africa,rest,TRUE,1611066
+mus,Mauritius,TRUE,africa,rest,TRUE,233706
+mex,Mexico,TRUE,americas,rest,TRUE,22780480
+mda,Moldova,TRUE,europe,rest,TRUE,991221
+mng,Mongolia,TRUE,asia,rest,TRUE,822661
+mne,Montenegro,TRUE,europe,rest,TRUE,134677
+mar,Morocco,TRUE,africa,rest,TRUE,7623804
+moz,Mozambique,TRUE,africa,rest,TRUE,8405583
+mmr,Myanmar,TRUE,asia,rest,TRUE,13163130
+nam,Namibia,TRUE,africa,rest,TRUE,405523
+npl,Nepal,TRUE,asia,rest,TRUE,6665772
+nld,Netherlands,TRUE,europe,west,TRUE,3941254
+nic,Nicaragua,TRUE,americas,rest,TRUE,1220872
+ner,Niger,TRUE,africa,rest,TRUE,11638661
+nga,Nigeria,TRUE,africa,rest,TRUE,66698050
+mkd,North Macedonia,TRUE,europe,rest,TRUE,451402
+nor,Norway,TRUE,europe,west,TRUE,1513496
+pak,Pakistan,TRUE,asia,rest,TRUE,73384626
+pan,Panama,TRUE,americas,rest,TRUE,693114
+png,Papua New Guinea,TRUE,asia,rest,TRUE,1995637
+pry,Paraguay,TRUE,americas,rest,TRUE,1261149
+per,Peru,TRUE,americas,rest,TRUE,5816163
+phl,Philippines,TRUE,asia,rest,TRUE,23246632
+pol,Poland,TRUE,europe,rest,TRUE,9062487
+prt,Portugal,TRUE,europe,west,TRUE,2079356
+rou,Romania,TRUE,europe,rest,TRUE,5942812
+rus,Russian Federation,TRUE,europe,rest,TRUE,24954889
+rwa,Rwanda,TRUE,africa,rest,TRUE,3657240
+wsm,Samoa,TRUE,asia,rest,TRUE,46142
+stp,Sao Tome and Principe,TRUE,africa,rest,TRUE,60242
+sen,Senegal,TRUE,africa,rest,TRUE,5012201
+srb,Serbia,TRUE,europe,rest,TRUE,1959538
+syc,Seychelles,TRUE,africa,rest,TRUE,19306
+sle,Sierra Leone,TRUE,africa,rest,TRUE,2411101
+svn,Slovenia,TRUE,europe,rest,TRUE,538180
+slb,Solomon Islands,TRUE,asia,rest,TRUE,220878
+zaf,South Africa,TRUE,africa,rest,TRUE,7416747
+esp,Spain,TRUE,europe,rest,TRUE,8366590
+lka,Sri Lanka,TRUE,asia,rest,TRUE,3888813
+lca,St. Lucia,TRUE,americas,rest,TRUE,22296
+sdn,Sudan,TRUE,africa,rest,TRUE,15104898
+sur,Suriname,TRUE,americas,rest,TRUE,76721
+swe,Sweden,TRUE,europe,west,TRUE,2412616
+che,Switzerland,TRUE,europe,west,TRUE,1839002
+syr,Syrian Arab Republic,TRUE,asia,rest,TRUE,5670045
+twn,"Taiwan, China",TRUE,asia,,FALSE,4856847
+tjk,Tajikistan,TRUE,asia,rest,TRUE,2854803
+tza,Tanzania,TRUE,africa,rest,TRUE,21722614
+tha,Thailand,TRUE,asia,rest,TRUE,11986558
+tgo,Togo,TRUE,africa,rest,TRUE,2034585
+ton,Tonga,TRUE,asia,rest,TRUE,23568
+tto,Trinidad and Tobago,TRUE,americas,rest,TRUE,206827
+tun,Tunisia,TRUE,africa,rest,TRUE,2573238
+tur,Turkey,TRUE,europe,rest,TRUE,14295373
+tkm,Turkmenistan,TRUE,asia,rest,TRUE,1180898
+uga,Uganda,TRUE,africa,rest,TRUE,13684043
+ukr,Ukraine,TRUE,europe,rest,TRUE,11651874
+are,United Arab Emirates,TRUE,asia,rest,TRUE,2103785
+gbr,United Kingdom,TRUE,europe,west,TRUE,12527130
+usa,United States,TRUE,americas,west,TRUE,54679704
+ury,Uruguay,TRUE,americas,rest,TRUE,541157
+uzb,Uzbekistan,TRUE,asia,rest,TRUE,8399414
+vut,Vanuatu,TRUE,asia,rest,TRUE,92609
+ven,"Venezuela, Republica Bolivariana de",TRUE,americas,rest,TRUE,4943408
+vnm,Vietnam,TRUE,asia,rest,TRUE,19057807
+pse,West Bank and Gaza,TRUE,asia,rest,TRUE,1469987
+yem,"Yemen, Republic of",TRUE,asia,rest,TRUE,8503151
+zmb,Zambia,TRUE,africa,rest,TRUE,3747980
+zwe,Zimbabwe,TRUE,africa,rest,TRUE,3058283
+svk,Slovak Republic,TRUE,europe,rest,TRUE,1598424
+fsm,"Micronesia, Federated States of",TRUE,asia,rest,TRUE,20880
+tuv,Tuvalu,TRUE,asia,rest,TRUE,2618
+kos,Kosovo,TRUE,europe,,FALSE,
+tls,Timor-Leste,TRUE,asia,rest,TRUE,446627
+nru,Nauru,TRUE,asia,rest,TRUE,1985
+ssd,South Sudan,TRUE,africa,rest,TRUE,2591877
+som,Somalia,TRUE,africa,rest,TRUE,5700041
+and,Andorra,TRUE,europe,west,TRUE,14850
+eri,Eritrea,TRUE,africa,rest,TRUE,847014
+brb,Barbados,TRUE,americas,rest,TRUE,40343
+dma,Dominica,TRUE,americas,rest,TRUE,12257
+smr,San Marino,TRUE,europe,rest,TRUE,6099
+brn,Brunei,TRUE,asia,rest,TRUE,87077
+khm,Cambodia,TRUE,asia,rest,TRUE,3281200
+grd,Grenada,TRUE,americas,rest,TRUE,19501
+afg,Afghanistan,TRUE,asia,rest,TRUE,10561865
+vct,St. Vincent and the Grenadines,TRUE,americas,rest,TRUE,18885
+lby,Libya,TRUE,africa,rest,TRUE,1406759
+atg,Antigua and Barbuda,TRUE,americas,rest,TRUE,18822
+plw,Palau,TRUE,asia,rest,TRUE,3308
+hkg,"Hong Kong, China",TRUE,asia,,FALSE,977361
+kna,St. Kitts and Nevis,TRUE,americas,rest,TRUE,9684
+nzl,New Zealand,TRUE,asia,west,TRUE,982818
+gnq,Equatorial Guinea,TRUE,africa,rest,TRUE,470264
+omn,Oman,TRUE,asia,rest,TRUE,1173075
+bhs,Bahamas,TRUE,americas,rest,TRUE,64002
+prk,North Korea,TRUE,asia,rest,TRUE,3801493
+cub,Cuba,TRUE,americas,rest,TRUE,1622684
+qat,Qatar,TRUE,asia,rest,TRUE,679528
+sgp,Singapore,TRUE,asia,rest,TRUE,1030882
+kwt,Kuwait,TRUE,asia,rest,TRUE,953864
+bhr,Bahrain,TRUE,asia,rest,TRUE,405828
+sau,Saudi Arabia,TRUE,asia,rest,TRUE,7675543
+mhl,Marshall Islands,TRUE,asia,rest,TRUE,11430
+mco,Monaco,TRUE,europe,west,TRUE,8028

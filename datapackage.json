@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2021-11-11T16:59:13.447490+00:00",
+    "created": "2021-11-15T03:35:39.575094+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -63,58 +63,16 @@
                         "name": "is--country"
                     },
                     {
-                        "name": "world_4regions"
+                        "name": "world_4region"
                     },
                     {
                         "name": "west_and_rest"
-                    },
-                    {
-                        "name": "on_income_level"
-                    },
-                    {
-                        "name": "wb_income_group"
                     },
                     {
                         "name": "income_mountain_50bracket_max_height_for_log"
                     }
                 ],
                 "primaryKey": "country"
-            }
-        },
-        {
-            "name": "ddf--entities--geo--on_income_level",
-            "path": "ddf--entities--geo--on_income_level.csv",
-            "schema": {
-                "fields": [
-                    {
-                        "name": "on_income_level"
-                    },
-                    {
-                        "name": "name"
-                    },
-                    {
-                        "name": "is--on_income_level"
-                    }
-                ],
-                "primaryKey": "on_income_level"
-            }
-        },
-        {
-            "name": "ddf--entities--geo--wb_income_group",
-            "path": "ddf--entities--geo--wb_income_group.csv",
-            "schema": {
-                "fields": [
-                    {
-                        "name": "wb_income_group"
-                    },
-                    {
-                        "name": "name"
-                    },
-                    {
-                        "name": "is--wb_income_group"
-                    }
-                ],
-                "primaryKey": "wb_income_group"
             }
         },
         {
@@ -136,18 +94,12 @@
             }
         },
         {
-            "name": "ddf--entities--geo--world_4regions",
-            "path": "ddf--entities--geo--world_4regions.csv",
+            "name": "ddf--entities--geo--world_4region",
+            "path": "ddf--entities--geo--world_4region.csv",
             "schema": {
                 "fields": [
                     {
-                        "name": "world_4regions"
-                    },
-                    {
-                        "name": "name"
-                    },
-                    {
-                        "name": "is--world_4regions"
+                        "name": "world_4region"
                     },
                     {
                         "name": "color"
@@ -156,13 +108,31 @@
                         "name": "description"
                     },
                     {
+                        "name": "is--world_4region"
+                    },
+                    {
+                        "name": "latitude"
+                    },
+                    {
+                        "name": "longitude"
+                    },
+                    {
+                        "name": "name"
+                    },
+                    {
+                        "name": "name_long"
+                    },
+                    {
+                        "name": "name_short"
+                    },
+                    {
                         "name": "rank"
                     },
                     {
                         "name": "shape_lores_svg"
                     }
                 ],
-                "primaryKey": "world_4regions"
+                "primaryKey": "world_4region"
             }
         },
         {
@@ -178,21 +148,6 @@
                     }
                 ],
                 "primaryKey": "gm_level"
-            }
-        },
-        {
-            "name": "ddf--entities--income_bracket",
-            "path": "ddf--entities--income_bracket.csv",
-            "schema": {
-                "fields": [
-                    {
-                        "name": "income_bracket"
-                    },
-                    {
-                        "name": "name"
-                    }
-                ],
-                "primaryKey": "income_bracket"
             }
         },
         {
@@ -429,16 +384,16 @@
                 ],
                 "value": "color",
                 "resources": [
-                    "ddf--entities--geo--world_4regions"
+                    "ddf--entities--geo--world_4region"
                 ]
             },
             {
                 "primaryKey": [
-                    "world_4regions"
+                    "world_4region"
                 ],
                 "value": "color",
                 "resources": [
-                    "ddf--entities--geo--world_4regions"
+                    "ddf--entities--geo--world_4region"
                 ]
             },
             {
@@ -447,16 +402,16 @@
                 ],
                 "value": "description",
                 "resources": [
-                    "ddf--entities--geo--world_4regions"
+                    "ddf--entities--geo--world_4region"
                 ]
             },
             {
                 "primaryKey": [
-                    "world_4regions"
+                    "world_4region"
                 ],
                 "value": "description",
                 "resources": [
-                    "ddf--entities--geo--world_4regions"
+                    "ddf--entities--geo--world_4region"
                 ]
             },
             {
@@ -493,42 +448,6 @@
                 "value": "is--country",
                 "resources": [
                     "ddf--entities--geo--country"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "geo"
-                ],
-                "value": "is--on_income_level",
-                "resources": [
-                    "ddf--entities--geo--on_income_level"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "on_income_level"
-                ],
-                "value": "is--on_income_level",
-                "resources": [
-                    "ddf--entities--geo--on_income_level"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "geo"
-                ],
-                "value": "is--wb_income_group",
-                "resources": [
-                    "ddf--entities--geo--wb_income_group"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "wb_income_group"
-                ],
-                "value": "is--wb_income_group",
-                "resources": [
-                    "ddf--entities--geo--wb_income_group"
                 ]
             },
             {
@@ -553,18 +472,54 @@
                 "primaryKey": [
                     "geo"
                 ],
-                "value": "is--world_4regions",
+                "value": "is--world_4region",
                 "resources": [
-                    "ddf--entities--geo--world_4regions"
+                    "ddf--entities--geo--world_4region"
                 ]
             },
             {
                 "primaryKey": [
-                    "world_4regions"
+                    "world_4region"
                 ],
-                "value": "is--world_4regions",
+                "value": "is--world_4region",
                 "resources": [
-                    "ddf--entities--geo--world_4regions"
+                    "ddf--entities--geo--world_4region"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo"
+                ],
+                "value": "latitude",
+                "resources": [
+                    "ddf--entities--geo--world_4region"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "world_4region"
+                ],
+                "value": "latitude",
+                "resources": [
+                    "ddf--entities--geo--world_4region"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo"
+                ],
+                "value": "longitude",
+                "resources": [
+                    "ddf--entities--geo--world_4region"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "world_4region"
+                ],
+                "value": "longitude",
+                "resources": [
+                    "ddf--entities--geo--world_4region"
                 ]
             },
             {
@@ -592,10 +547,8 @@
                 "value": "name",
                 "resources": [
                     "ddf--entities--geo--country",
-                    "ddf--entities--geo--on_income_level",
-                    "ddf--entities--geo--wb_income_group",
                     "ddf--entities--geo--west_and_rest",
-                    "ddf--entities--geo--world_4regions"
+                    "ddf--entities--geo--world_4region"
                 ]
             },
             {
@@ -609,38 +562,11 @@
             },
             {
                 "primaryKey": [
-                    "income_bracket"
-                ],
-                "value": "name",
-                "resources": [
-                    "ddf--entities--income_bracket"
-                ]
-            },
-            {
-                "primaryKey": [
                     "income_bracket_50"
                 ],
                 "value": "name",
                 "resources": [
                     "ddf--entities--income_bracket_50"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "on_income_level"
-                ],
-                "value": "name",
-                "resources": [
-                    "ddf--entities--geo--on_income_level"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "wb_income_group"
-                ],
-                "value": "name",
-                "resources": [
-                    "ddf--entities--geo--wb_income_group"
                 ]
             },
             {
@@ -663,29 +589,47 @@
             },
             {
                 "primaryKey": [
-                    "world_4regions"
+                    "world_4region"
                 ],
                 "value": "name",
                 "resources": [
-                    "ddf--entities--geo--world_4regions"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "country"
-                ],
-                "value": "on_income_level",
-                "resources": [
-                    "ddf--entities--geo--country"
+                    "ddf--entities--geo--world_4region"
                 ]
             },
             {
                 "primaryKey": [
                     "geo"
                 ],
-                "value": "on_income_level",
+                "value": "name_long",
                 "resources": [
-                    "ddf--entities--geo--country"
+                    "ddf--entities--geo--world_4region"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "world_4region"
+                ],
+                "value": "name_long",
+                "resources": [
+                    "ddf--entities--geo--world_4region"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo"
+                ],
+                "value": "name_short",
+                "resources": [
+                    "ddf--entities--geo--world_4region"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "world_4region"
+                ],
+                "value": "name_short",
+                "resources": [
+                    "ddf--entities--geo--world_4region"
                 ]
             },
             {
@@ -694,16 +638,16 @@
                 ],
                 "value": "rank",
                 "resources": [
-                    "ddf--entities--geo--world_4regions"
+                    "ddf--entities--geo--world_4region"
                 ]
             },
             {
                 "primaryKey": [
-                    "world_4regions"
+                    "world_4region"
                 ],
                 "value": "rank",
                 "resources": [
-                    "ddf--entities--geo--world_4regions"
+                    "ddf--entities--geo--world_4region"
                 ]
             },
             {
@@ -712,34 +656,16 @@
                 ],
                 "value": "shape_lores_svg",
                 "resources": [
-                    "ddf--entities--geo--world_4regions"
+                    "ddf--entities--geo--world_4region"
                 ]
             },
             {
                 "primaryKey": [
-                    "world_4regions"
+                    "world_4region"
                 ],
                 "value": "shape_lores_svg",
                 "resources": [
-                    "ddf--entities--geo--world_4regions"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "country"
-                ],
-                "value": "wb_income_group",
-                "resources": [
-                    "ddf--entities--geo--country"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "geo"
-                ],
-                "value": "wb_income_group",
-                "resources": [
-                    "ddf--entities--geo--country"
+                    "ddf--entities--geo--world_4region"
                 ]
             },
             {
@@ -764,7 +690,7 @@
                 "primaryKey": [
                     "country"
                 ],
-                "value": "world_4regions",
+                "value": "world_4region",
                 "resources": [
                     "ddf--entities--geo--country"
                 ]
@@ -773,7 +699,7 @@
                 "primaryKey": [
                     "geo"
                 ],
-                "value": "world_4regions",
+                "value": "world_4region",
                 "resources": [
                     "ddf--entities--geo--country"
                 ]
