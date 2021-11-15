@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2021-11-15T03:35:39.575094+00:00",
+    "created": "2021-11-15T04:01:04.648243+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -67,6 +67,9 @@
                     },
                     {
                         "name": "west_and_rest"
+                    },
+                    {
+                        "name": "un_state"
                     },
                     {
                         "name": "income_mountain_50bracket_max_height_for_log"
@@ -666,6 +669,24 @@
                 "value": "shape_lores_svg",
                 "resources": [
                     "ddf--entities--geo--world_4region"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country"
+                ],
+                "value": "un_state",
+                "resources": [
+                    "ddf--entities--geo--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo"
+                ],
+                "value": "un_state",
+                "resources": [
+                    "ddf--entities--geo--country"
                 ]
             },
             {
