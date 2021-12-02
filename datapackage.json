@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2021-12-01T07:40:44.995183+00:00",
+    "created": "2021-12-02T03:38:43.806463+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -578,7 +578,7 @@
         },
         {
             "name": "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--country--year",
-            "path": "income_mountain\\ddf--datapoints--income_mountain_50bracket_shape_for_log--by--country--year.csv",
+            "path": "income_mountain/ddf--datapoints--income_mountain_50bracket_shape_for_log--by--country--year.csv",
             "schema": {
                 "fields": [
                     {
@@ -599,7 +599,7 @@
         },
         {
             "name": "ddf--datapoints--poverty_population--by--country--year--gm_level",
-            "path": "poverty_rates\\ddf--datapoints--poverty_population--by--country--year--gm_level.csv",
+            "path": "poverty_rates/ddf--datapoints--poverty_population--by--country--year--gm_level.csv",
             "schema": {
                 "fields": [
                     {
@@ -624,7 +624,7 @@
         },
         {
             "name": "ddf--datapoints--poverty_population--by--country--year--wb_level",
-            "path": "poverty_rates\\ddf--datapoints--poverty_population--by--country--year--wb_level.csv",
+            "path": "poverty_rates/ddf--datapoints--poverty_population--by--country--year--wb_level.csv",
             "schema": {
                 "fields": [
                     {
@@ -649,7 +649,7 @@
         },
         {
             "name": "ddf--datapoints--poverty_rate--by--country--year--gm_level",
-            "path": "poverty_rates\\ddf--datapoints--poverty_rate--by--country--year--gm_level.csv",
+            "path": "poverty_rates/ddf--datapoints--poverty_rate--by--country--year--gm_level.csv",
             "schema": {
                 "fields": [
                     {
@@ -674,7 +674,7 @@
         },
         {
             "name": "ddf--datapoints--poverty_rate--by--country--year--wb_level",
-            "path": "poverty_rates\\ddf--datapoints--poverty_rate--by--country--year--wb_level.csv",
+            "path": "poverty_rates/ddf--datapoints--poverty_rate--by--country--year--wb_level.csv",
             "schema": {
                 "fields": [
                     {
