@@ -1,6 +1,6 @@
 concept,name,concept_type,domain,color
 name,Name,string,,
-year,Year,time,,
+time,Year,time,,
 domain,Domain,string,,
 geo,Geo,entity_domain,,
 country,Country,entity_set,geo,
