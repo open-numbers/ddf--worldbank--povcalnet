@@ -28,6 +28,9 @@
                     },
                     {
                         "name": "color"
+                    },
+                    {
+                        "name": "tags"
                     }
                 ],
                 "primaryKey": "concept"
@@ -742,6 +745,15 @@
     ],
     "ddfSchema": {
         "concepts": [
+            {
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "tags",
+                "resources": [
+                    "ddf--concepts"
+                ]
+            },
             {
                 "primaryKey": [
                     "concept"
