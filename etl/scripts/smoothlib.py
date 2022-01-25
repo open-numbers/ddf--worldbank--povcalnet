@@ -26,10 +26,10 @@ def mval_at_point(x, y, x_y_max, y_max, maximum=10, minimum=0):
         return d
 
 
-def get_sample_at_point(x, arr, mval=None):
+def get_sample_at_point(x, arr, y_max, x_y_max, mval=None):
     y = arr[x]
-    y_max = arr.max()
-    x_y_max = np.where(arr == y_max)[0][0]
+    # y_max = arr.max()
+    # x_y_max = np.where(arr == y_max)[0][0]
     if not mval:
         mval = mval_at_point(x, y, x_y_max, y_max)
 
@@ -79,11 +79,11 @@ def estimate(sample, weights, xpos):
 
 def run_smooth(arr, maximum=10, minimum=1):
     res = []
+    y_max = arr.max()
+    x_y_max = np.where(arr == arr.max())[0][0]
     for i in range(len(arr)):
         # print(i, end=',')
         y = arr[i]
-        y_max = arr.max()
-        x_y_max = np.where(arr == arr.max())[0][0]
         #     if x_y_max == i:
         #         res.append(ser.max())
         #         print()
@@ -98,10 +98,10 @@ def run_smooth(arr, maximum=10, minimum=1):
         if mval == 0:
             res.append(y)
             continue
-        sample = get_sample_at_point(i, arr, mval=mval)
+        sample = get_sample_at_point(i, arr, y_max, x_y_max, mval=mval)
         # print(sample)
-        assert len(
-            sample) == 2 * mval + 1, f"i={i}, size={len(sample)}, mval={mval}"
+        # assert len(
+        #     sample) == 2 * mval + 1, f"i={i}, size={len(sample)}, mval={mval}"
         weights = tricubic(sample)
         res.append(estimate(sample, weights, mval))
     return pd.Series(res)
