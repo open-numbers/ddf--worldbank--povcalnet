@@ -1,51 +1,50 @@
-concept,name,concept_type,domain,color,tags
-name,Name,string,,,_none
-time,Year,time,,,_none
-domain,Domain,string,,,_none
-geo,Geo,entity_domain,,,_none
-country,Country,entity_set,geo,,
-west_and_rest,West and Rest,entity_set,geo,,
-world_4region,World in 4 Regions,entity_set,geo,"{""shades"": {""fill3"": 2, ""print_stroke"": 5, ""print_fill"": 4, ""fill2"": 1, ""shade"": 3, ""fill1"": 0}, ""palette"": {""americas"": [""#7feb00"", ""#5de200"", ""#81f201"", ""#00b900"", ""#b5ea32"", ""#008d36""], ""europe"": [""#ffe700"", ""#fbdd00"", ""#fff400"", ""#fbaf09"", ""#ffe700"", ""#b17f4a""], ""africa"": [""#00d5e9"", ""#00c8ec"", ""#00e1ec"", ""#0098df"", ""#77dff7"", ""#0586c6""], ""asia"": [""#ff5872"", ""#ff5178"", ""#ff658a"", ""#da0025"", ""#fa4e73"", ""#b2043a""], ""_default"": [""#ffb600"", ""#ffaa14"", ""#ffc500"", ""#fb6d19"", ""#ffb600"", ""#9b4838""]}, ""selectable"": false}",
-coverage_type,CoverageType,entity_domain,,,_none
-income_bracket_50,50 income brackets,entity_domain,,,_none
-income_bracket_200,200 income brackets,entity_domain,,,_none
-relative_bracket,relative income brackets,entity_domain,,,_none
-bracket_start,Bracket Start,string,,,_none
-bracket_end,Bracket End,string,,,_none
-population,Population,measure,,,_none
-population_percentage,Population Percentage,measure,,,_none
-income_mountain_50bracket_shape_for_log,Shape for 50 brackets,measure,,,_none
-mean_income,Mean income or consumption per month,measure,,,_none
-median_income,Median income or consumption per month,measure,,,_none
-color,Color,string,,,_none
-description,Description,string,,,_none
-rank,rank,string,,,_none
-shape_lores_svg,shape lores svg,string,,,_none
-poverty_population,Poverty population count,measure,,,_none
-poverty_rate,Poverty rate,measure,,,_none
-gm_level,Gapminder income level,entity_domain,,,_none
-wb_level,World Bank income level,entity_domain,,,_none
-income_mountain_50bracket_max_height_for_log,Max Height for income mountain,string,,,_none
-latitude,Latitude,string,,,_none
-longitude,Longitude,string,,,_none
-name_long,Name Long,string,,,_none
-name_short,Name Short,string,,,_none
-un_state,,boolean,,,_none
-g77_and_oecd_countries,G77 and OECD countries,entity_set,geo,,
-global,Global,entity_set,geo,,
-income_3groups,Income 3 Groups,entity_set,geo,,
-income_groups,Income groups,entity_set,geo,,
-landlocked,Landlocked,entity_set,geo,,
-main_religion_2008,Main religion 2008,entity_set,geo,,
-un_sdg_ldc,UN SDG Least Developed Countries,entity_set,geo,,
-un_sdg_region,UN SDG Regions,entity_set,geo,,
-unhcr_region,UNHCR Regions,entity_set,geo,,
-unicef_region,UNICEF regions,entity_set,geo,,
-world_6region,World regions (6 colors),entity_set,geo,,
-iso3166_1_alpha2,ISO 3166-1 alpha-2,string,,,_none
-unicode_region_subtag,Unicode CLDR Region subtag,string,,,_none
-iso3166_1_alpha3,ISO 3166-1 alpha-3,string,,,_none
-iso3166_1_numeric,ISO 3166-1 mumeric,string,,,_none
-iso3166_2,ISO 3166-2,string,,,_none
-topojson,Topojson,string,,,_none
-tags,Tags,string,,,_none
+concept,name,concept_type,domain,color
+name,Name,string,,
+year,Year,time,,
+domain,Domain,string,,
+geo,Geo,entity_domain,,
+country,Country,entity_set,geo,
+west_and_rest,West and Rest,entity_set,geo,
+world_4region,World in 4 Regions,entity_set,geo,"{""shades"": {""fill3"": 2, ""print_stroke"": 5, ""print_fill"": 4, ""fill2"": 1, ""shade"": 3, ""fill1"": 0}, ""palette"": {""americas"": [""#7feb00"", ""#5de200"", ""#81f201"", ""#00b900"", ""#b5ea32"", ""#008d36""], ""europe"": [""#ffe700"", ""#fbdd00"", ""#fff400"", ""#fbaf09"", ""#ffe700"", ""#b17f4a""], ""africa"": [""#00d5e9"", ""#00c8ec"", ""#00e1ec"", ""#0098df"", ""#77dff7"", ""#0586c6""], ""asia"": [""#ff5872"", ""#ff5178"", ""#ff658a"", ""#da0025"", ""#fa4e73"", ""#b2043a""], ""_default"": [""#ffb600"", ""#ffaa14"", ""#ffc500"", ""#fb6d19"", ""#ffb600"", ""#9b4838""]}, ""selectable"": false}"
+coverage_type,CoverageType,entity_domain,,
+income_bracket_50,50 income brackets,entity_domain,,
+income_bracket_200,200 income brackets,entity_domain,,
+relative_bracket,relative income brackets,entity_domain,,
+bracket_start,Bracket Start,string,,
+bracket_end,Bracket End,string,,
+population,Population,measure,,
+population_percentage,Population Percentage,measure,,
+income_mountain_50bracket_shape_for_log,Shape for 50 brackets,measure,,
+mean_income,Mean income or consumption per month,measure,,
+median_income,Median income or consumption per month,measure,,
+color,Color,string,,
+description,Description,string,,
+rank,rank,string,,
+shape_lores_svg,shape lores svg,string,,
+poverty_population,Poverty population count,measure,,
+poverty_rate,Poverty rate,measure,,
+gm_level,Gapminder income level,entity_domain,,
+wb_level,World Bank income level,entity_domain,,
+income_mountain_50bracket_max_height_for_log,Max Height for income mountain,string,,
+latitude,Latitude,string,,
+longitude,Longitude,string,,
+name_long,Name Long,string,,
+name_short,Name Short,string,,
+un_state,,boolean,,
+g77_and_oecd_countries,G77 and OECD countries,entity_set,geo,
+global,Global,entity_set,geo,
+income_3groups,Income 3 Groups,entity_set,geo,
+income_groups,Income groups,entity_set,geo,
+landlocked,Landlocked,entity_set,geo,
+main_religion_2008,Main religion 2008,entity_set,geo,
+un_sdg_ldc,UN SDG Least Developed Countries,entity_set,geo,
+un_sdg_region,UN SDG Regions,entity_set,geo,
+unhcr_region,UNHCR Regions,entity_set,geo,
+unicef_region,UNICEF regions,entity_set,geo,
+world_6region,World regions (6 colors),entity_set,geo,
+iso3166_1_alpha2,ISO 3166-1 alpha-2,string,,
+unicode_region_subtag,Unicode CLDR Region subtag,string,,
+iso3166_1_alpha3,ISO 3166-1 alpha-3,string,,
+iso3166_1_numeric,ISO 3166-1 mumeric,string,,
+iso3166_2,ISO 3166-2,string,,
+topojson,Topojson,string,,

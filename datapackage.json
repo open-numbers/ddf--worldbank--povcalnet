@@ -28,9 +28,6 @@
                     },
                     {
                         "name": "color"
-                    },
-                    {
-                        "name": "tags"
                     }
                 ],
                 "primaryKey": "concept"
@@ -580,15 +577,15 @@
             }
         },
         {
-            "name": "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--country--time",
-            "path": "income_mountain/ddf--datapoints--income_mountain_50bracket_shape_for_log--by--country--time.csv",
+            "name": "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--country--year",
+            "path": "income_mountain/ddf--datapoints--income_mountain_50bracket_shape_for_log--by--country--year.csv",
             "schema": {
                 "fields": [
                     {
                         "name": "country"
                     },
                     {
-                        "name": "time"
+                        "name": "year"
                     },
                     {
                         "name": "income_mountain_50bracket_shape_for_log"
@@ -596,20 +593,20 @@
                 ],
                 "primaryKey": [
                     "country",
-                    "time"
+                    "year"
                 ]
             }
         },
         {
-            "name": "ddf--datapoints--poverty_population--by--country--time--gm_level",
-            "path": "poverty_rates/ddf--datapoints--poverty_population--by--country--time--gm_level.csv",
+            "name": "ddf--datapoints--poverty_population--by--country--year--gm_level",
+            "path": "poverty_rates/ddf--datapoints--poverty_population--by--country--year--gm_level.csv",
             "schema": {
                 "fields": [
                     {
                         "name": "country"
                     },
                     {
-                        "name": "time"
+                        "name": "year"
                     },
                     {
                         "name": "gm_level"
@@ -620,21 +617,21 @@
                 ],
                 "primaryKey": [
                     "country",
-                    "time",
+                    "year",
                     "gm_level"
                 ]
             }
         },
         {
-            "name": "ddf--datapoints--poverty_population--by--country--time--wb_level",
-            "path": "poverty_rates/ddf--datapoints--poverty_population--by--country--time--wb_level.csv",
+            "name": "ddf--datapoints--poverty_population--by--country--year--wb_level",
+            "path": "poverty_rates/ddf--datapoints--poverty_population--by--country--year--wb_level.csv",
             "schema": {
                 "fields": [
                     {
                         "name": "country"
                     },
                     {
-                        "name": "time"
+                        "name": "year"
                     },
                     {
                         "name": "wb_level"
@@ -645,21 +642,21 @@
                 ],
                 "primaryKey": [
                     "country",
-                    "time",
+                    "year",
                     "wb_level"
                 ]
             }
         },
         {
-            "name": "ddf--datapoints--poverty_population--by--gm_level--time",
-            "path": "poverty_rates/ddf--datapoints--poverty_population--by--gm_level--time.csv",
+            "name": "ddf--datapoints--poverty_population--by--gm_level--year",
+            "path": "poverty_rates/ddf--datapoints--poverty_population--by--gm_level--year.csv",
             "schema": {
                 "fields": [
                     {
                         "name": "gm_level"
                     },
                     {
-                        "name": "time"
+                        "name": "year"
                     },
                     {
                         "name": "poverty_population"
@@ -667,20 +664,20 @@
                 ],
                 "primaryKey": [
                     "gm_level",
-                    "time"
+                    "year"
                 ]
             }
         },
         {
-            "name": "ddf--datapoints--poverty_population--by--wb_level--time",
-            "path": "poverty_rates/ddf--datapoints--poverty_population--by--wb_level--time.csv",
+            "name": "ddf--datapoints--poverty_population--by--wb_level--year",
+            "path": "poverty_rates/ddf--datapoints--poverty_population--by--wb_level--year.csv",
             "schema": {
                 "fields": [
                     {
                         "name": "wb_level"
                     },
                     {
-                        "name": "time"
+                        "name": "year"
                     },
                     {
                         "name": "poverty_population"
@@ -688,20 +685,20 @@
                 ],
                 "primaryKey": [
                     "wb_level",
-                    "time"
+                    "year"
                 ]
             }
         },
         {
-            "name": "ddf--datapoints--poverty_rate--by--country--time--gm_level",
-            "path": "poverty_rates/ddf--datapoints--poverty_rate--by--country--time--gm_level.csv",
+            "name": "ddf--datapoints--poverty_rate--by--country--year--gm_level",
+            "path": "poverty_rates/ddf--datapoints--poverty_rate--by--country--year--gm_level.csv",
             "schema": {
                 "fields": [
                     {
                         "name": "country"
                     },
                     {
-                        "name": "time"
+                        "name": "year"
                     },
                     {
                         "name": "gm_level"
@@ -712,21 +709,21 @@
                 ],
                 "primaryKey": [
                     "country",
-                    "time",
+                    "year",
                     "gm_level"
                 ]
             }
         },
         {
-            "name": "ddf--datapoints--poverty_rate--by--country--time--wb_level",
-            "path": "poverty_rates/ddf--datapoints--poverty_rate--by--country--time--wb_level.csv",
+            "name": "ddf--datapoints--poverty_rate--by--country--year--wb_level",
+            "path": "poverty_rates/ddf--datapoints--poverty_rate--by--country--year--wb_level.csv",
             "schema": {
                 "fields": [
                     {
                         "name": "country"
                     },
                     {
-                        "name": "time"
+                        "name": "year"
                     },
                     {
                         "name": "wb_level"
@@ -737,7 +734,7 @@
                 ],
                 "primaryKey": [
                     "country",
-                    "time",
+                    "year",
                     "wb_level"
                 ]
             }
@@ -745,15 +742,6 @@
     ],
     "ddfSchema": {
         "concepts": [
-            {
-                "primaryKey": [
-                    "concept"
-                ],
-                "value": "tags",
-                "resources": [
-                    "ddf--concepts"
-                ]
-            },
             {
                 "primaryKey": [
                     "concept"
@@ -2043,129 +2031,129 @@
             {
                 "primaryKey": [
                     "country",
-                    "time"
+                    "year"
                 ],
                 "value": "income_mountain_50bracket_shape_for_log",
                 "resources": [
-                    "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--country--time"
+                    "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--country--year"
                 ]
             },
             {
                 "primaryKey": [
                     "geo",
-                    "time"
+                    "year"
                 ],
                 "value": "income_mountain_50bracket_shape_for_log",
                 "resources": [
-                    "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--country--time"
+                    "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--country--year"
                 ]
             },
             {
                 "primaryKey": [
                     "country",
                     "gm_level",
-                    "time"
+                    "year"
                 ],
                 "value": "poverty_population",
                 "resources": [
-                    "ddf--datapoints--poverty_population--by--country--time--gm_level"
+                    "ddf--datapoints--poverty_population--by--country--year--gm_level"
                 ]
             },
             {
                 "primaryKey": [
                     "country",
                     "wb_level",
-                    "time"
+                    "year"
                 ],
                 "value": "poverty_population",
                 "resources": [
-                    "ddf--datapoints--poverty_population--by--country--time--wb_level"
+                    "ddf--datapoints--poverty_population--by--country--year--wb_level"
                 ]
             },
             {
                 "primaryKey": [
                     "geo",
                     "gm_level",
-                    "time"
+                    "year"
                 ],
                 "value": "poverty_population",
                 "resources": [
-                    "ddf--datapoints--poverty_population--by--country--time--gm_level"
+                    "ddf--datapoints--poverty_population--by--country--year--gm_level"
                 ]
             },
             {
                 "primaryKey": [
                     "geo",
                     "wb_level",
-                    "time"
+                    "year"
                 ],
                 "value": "poverty_population",
                 "resources": [
-                    "ddf--datapoints--poverty_population--by--country--time--wb_level"
+                    "ddf--datapoints--poverty_population--by--country--year--wb_level"
                 ]
             },
             {
                 "primaryKey": [
                     "gm_level",
-                    "time"
+                    "year"
                 ],
                 "value": "poverty_population",
                 "resources": [
-                    "ddf--datapoints--poverty_population--by--gm_level--time"
+                    "ddf--datapoints--poverty_population--by--gm_level--year"
                 ]
             },
             {
                 "primaryKey": [
                     "wb_level",
-                    "time"
+                    "year"
                 ],
                 "value": "poverty_population",
                 "resources": [
-                    "ddf--datapoints--poverty_population--by--wb_level--time"
+                    "ddf--datapoints--poverty_population--by--wb_level--year"
                 ]
             },
             {
                 "primaryKey": [
                     "country",
                     "gm_level",
-                    "time"
+                    "year"
                 ],
                 "value": "poverty_rate",
                 "resources": [
-                    "ddf--datapoints--poverty_rate--by--country--time--gm_level"
+                    "ddf--datapoints--poverty_rate--by--country--year--gm_level"
                 ]
             },
             {
                 "primaryKey": [
                     "country",
                     "wb_level",
-                    "time"
+                    "year"
                 ],
                 "value": "poverty_rate",
                 "resources": [
-                    "ddf--datapoints--poverty_rate--by--country--time--wb_level"
+                    "ddf--datapoints--poverty_rate--by--country--year--wb_level"
                 ]
             },
             {
                 "primaryKey": [
                     "geo",
                     "gm_level",
-                    "time"
+                    "year"
                 ],
                 "value": "poverty_rate",
                 "resources": [
-                    "ddf--datapoints--poverty_rate--by--country--time--gm_level"
+                    "ddf--datapoints--poverty_rate--by--country--year--gm_level"
                 ]
             },
             {
                 "primaryKey": [
                     "geo",
                     "wb_level",
-                    "time"
+                    "year"
                 ],
                 "value": "poverty_rate",
                 "resources": [
-                    "ddf--datapoints--poverty_rate--by--country--time--wb_level"
+                    "ddf--datapoints--poverty_rate--by--country--year--wb_level"
                 ]
             }
         ],
