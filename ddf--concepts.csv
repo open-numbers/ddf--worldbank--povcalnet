@@ -15,6 +15,7 @@ bracket_end,Bracket End,string,,,_none
 population,Population,measure,,,_none
 population_percentage,Population Percentage,measure,,,_none
 income_mountain_50bracket_shape_for_log,Shape for 50 brackets,measure,,,_none
+poverty_population_under_1_9_per_day,Poverty Population under 1.9$/day,measure,,,_none
 mean_income,Mean income or consumption per month,measure,,,_none
 median_income,Median income or consumption per month,measure,,,_none
 color,Color,string,,,_none
