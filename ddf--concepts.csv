@@ -24,6 +24,7 @@ rank,rank,string,,,_none
 shape_lores_svg,shape lores svg,string,,,_none
 poverty_population,Poverty population count,measure,,,_none
 poverty_rate,Poverty rate,measure,,,_none
+poverty_line,Poverty line,measure,,,_none
 gm_level,Gapminder income level,entity_domain,,,_none
 wb_level,World Bank income level,entity_domain,,,_none
 income_mountain_50bracket_max_height_for_log,Max Height for income mountain,string,,,_none

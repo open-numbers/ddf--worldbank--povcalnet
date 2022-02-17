@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2022-01-25T03:46:21.497972+00:00",
+    "created": "2022-02-17T11:11:22.394347+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -592,6 +592,27 @@
                     },
                     {
                         "name": "income_mountain_50bracket_shape_for_log"
+                    }
+                ],
+                "primaryKey": [
+                    "country",
+                    "time"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--poverty_line--by--country--time",
+            "path": "poverty_rates/ddf--datapoints--poverty_line--by--country--time.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "country"
+                    },
+                    {
+                        "name": "time"
+                    },
+                    {
+                        "name": "poverty_line"
                     }
                 ],
                 "primaryKey": [
@@ -2079,6 +2100,26 @@
                 "value": "income_mountain_50bracket_shape_for_log",
                 "resources": [
                     "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--country--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "time"
+                ],
+                "value": "poverty_line",
+                "resources": [
+                    "ddf--datapoints--poverty_line--by--country--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ],
+                "value": "poverty_line",
+                "resources": [
+                    "ddf--datapoints--poverty_line--by--country--time"
                 ]
             },
             {
