@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2022-02-19T06:36:02.055592+00:00",
+    "created": "2022-02-21T13:24:05.559637+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -1131,6 +1131,15 @@
             },
             {
                 "primaryKey": [
+                    "global"
+                ],
+                "value": "income_mountain_50bracket_max_height_for_log",
+                "resources": [
+                    "ddf--entities--geo--global"
+                ]
+            },
+            {
+                "primaryKey": [
                     "income_3groups"
                 ],
                 "value": "income_mountain_50bracket_max_height_for_log",
@@ -1147,6 +1156,15 @@
                 "resources": [
                     "ddf--entities--geo--income_3groups",
                     "ddf--entities--geo--income_groups"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "income_groups_wb"
+                ],
+                "value": "income_mountain_50bracket_max_height_for_log",
+                "resources": [
+                    "ddf--entities--geo--income_groups_wb"
                 ]
             },
             {
@@ -1201,6 +1219,24 @@
                 "value": "income_mountain_50bracket_max_height_for_log",
                 "resources": [
                     "ddf--entities--geo--unicef_region"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "west_and_rest"
+                ],
+                "value": "income_mountain_50bracket_max_height_for_log",
+                "resources": [
+                    "ddf--entities--geo--west_and_rest"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "world_4region"
+                ],
+                "value": "income_mountain_50bracket_max_height_for_log",
+                "resources": [
+                    "ddf--entities--geo--world_4region"
                 ]
             },
             {
@@ -1792,6 +1828,15 @@
             },
             {
                 "primaryKey": [
+                    "income_groups_wb"
+                ],
+                "value": "name",
+                "resources": [
+                    "ddf--entities--geo--income_groups_wb"
+                ]
+            },
+            {
+                "primaryKey": [
                     "landlocked"
                 ],
                 "value": "name",
@@ -2267,6 +2312,16 @@
             },
             {
                 "primaryKey": [
+                    "global",
+                    "time"
+                ],
+                "value": "income_mountain_50bracket_shape_for_log",
+                "resources": [
+                    "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--global--time"
+                ]
+            },
+            {
+                "primaryKey": [
                     "income_3groups",
                     "time"
                 ],
@@ -2283,6 +2338,36 @@
                 "value": "income_mountain_50bracket_shape_for_log",
                 "resources": [
                     "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--income_groups--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "income_groups_wb",
+                    "time"
+                ],
+                "value": "income_mountain_50bracket_shape_for_log",
+                "resources": [
+                    "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--income_groups_wb--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "time",
+                    "west_and_rest"
+                ],
+                "value": "income_mountain_50bracket_shape_for_log",
+                "resources": [
+                    "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--west_and_rest--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "time",
+                    "world_4region"
+                ],
+                "value": "income_mountain_50bracket_shape_for_log",
+                "resources": [
+                    "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--world_4region--time"
                 ]
             },
             {
