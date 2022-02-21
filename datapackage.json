@@ -966,6 +966,15 @@
                 "resources": [
                     "ddf--concepts"
                 ]
+            },
+            {
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "set",
+                "resources": [
+                    "ddf--concepts"
+                ]
             }
         ],
         "entities": [
@@ -1259,6 +1268,24 @@
             },
             {
                 "primaryKey": [
+                    "country"
+                ],
+                "value": "set",
+                "resources": [
+                    "ddf--entities--geo--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo"
+                ],
+                "value": "set",
+                "resources": [
+                    "ddf--entities--geo--country"
+                ]
+            },
+            {
+                "primaryKey": [
                     "geo"
                 ],
                 "value": "is--country",
@@ -1511,9 +1538,27 @@
             },
             {
                 "primaryKey": [
+                    "geo"
+                ],
+                "value": "set",
+                "resources": [
+                    "ddf--entities--geo--world_4region"
+                ]
+            },
+            {
+                "primaryKey": [
                     "world_4region"
                 ],
                 "value": "is--world_4region",
+                "resources": [
+                    "ddf--entities--geo--world_4region"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "world_4region"
+                ],
+                "value": "set",
                 "resources": [
                     "ddf--entities--geo--world_4region"
                 ]

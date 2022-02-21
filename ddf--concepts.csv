@@ -52,3 +52,4 @@ iso3166_1_numeric,ISO 3166-1 mumeric,string,,,_none
 iso3166_2,ISO 3166-2,string,,,_none
 topojson,Topojson,string,,,_none
 tags,Tags,string,,,_none
+set,Entity set,string,,,_none
