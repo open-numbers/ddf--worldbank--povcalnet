@@ -1331,6 +1331,15 @@
             },
             {
                 "primaryKey": [
+                    "income_groups_wb"
+                ],
+                "value": "is--income_groups_wb",
+                "resources": [
+                    "ddf--entities--geo--income_groups_wb"
+                ]
+            },
+            {
+                "primaryKey": [
                     "geo"
                 ],
                 "value": "is--landlocked",
