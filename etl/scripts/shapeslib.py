@@ -110,14 +110,17 @@ def get_nearest_known_shape(country, year, known_shapes):
 
 
 def shape_to_mountain(shape, income):
-    bracket = etllib.bracket_number_from_income(income)
+    bracket = etllib.bracket_number_from_income(income, integer=False)
     shape.index = shape.index + bracket
-    res = shape.loc[0:199]
-    if len(res) != 200:
+    # if 0 in shape.index.values:
+    #     res = shape.loc[0:199]
+    # else:
+    #     res = shape.loc[:199]
+    # if len(res) != 200:
         # print(f'not enough points in mixed shape: {idx}')
-        new_idx = pd.Index(range(200))
-        res = shape.reindex(new_idx, fill_value=0)
-
+        # new_idx = pd.Index(range(200))
+        # res = shape.reindex(new_idx, fill_value=0)
+    res = shape.copy()
     return res
 
 

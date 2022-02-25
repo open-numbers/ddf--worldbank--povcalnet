@@ -18,6 +18,9 @@ def load_file_preprocess(filename):
             'CoverageType': 'coverage_type',
             'RequestYear': 'year'
         })
+    if np.any(df.duplicated(subset=['country', 'coverage_type', 'year'])):
+        print(f"{filename} has duplicated entries")
+        # df = df.drop_duplicates(subset=['country', 'coverage_type', 'year'])
     df = df.set_index(['country', 'year', 'coverage_type'])
     return df
 

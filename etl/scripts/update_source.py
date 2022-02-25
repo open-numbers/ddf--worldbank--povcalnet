@@ -19,7 +19,7 @@ POOLSIZE = 5
 def process(i):
     bracket = all_brackets[i]
     url = url_tmpl.format(bracket)
-    file_csv = "../source/{:04d}.csv".format(i)
+    file_csv = "../source/income_mountain/{:04d}.csv".format(i)
     print(file_csv)
     download(url, file_csv, resume=True, progress_bar=False, backoff=5, timeout=60)
     time.sleep(5)
