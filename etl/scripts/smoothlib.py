@@ -104,4 +104,6 @@ def run_smooth(arr, maximum=10, minimum=1):
         #     sample) == 2 * mval + 1, f"i={i}, size={len(sample)}, mval={mval}"
         weights = tricubic(sample)
         res.append(estimate(sample, weights, mval))
-    return pd.Series(res)
+    res = pd.Series(res)
+    res[res < 10**(-20)] = 0  # remove if numbers are too small
+    return res
