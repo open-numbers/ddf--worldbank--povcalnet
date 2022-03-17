@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2022-03-17T02:30:33.513768+00:00",
+    "created": "2022-03-17T03:13:07.113181+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -742,12 +742,12 @@
             }
         },
         {
-            "name": "ddf--datapoints--population--by--geo--time--income_bracket_50",
-            "path": "income_mountain/ddf--datapoints--population--by--geo--time--income_bracket_50.csv",
+            "name": "ddf--datapoints--population--by--country--time--income_bracket_50",
+            "path": "income_mountain/ddf--datapoints--population--by--country--time--income_bracket_50.csv",
             "schema": {
                 "fields": [
                     {
-                        "name": "geo"
+                        "name": "country"
                     },
                     {
                         "name": "time"
@@ -760,7 +760,7 @@
                     }
                 ],
                 "primaryKey": [
-                    "geo",
+                    "country",
                     "time",
                     "income_bracket_50"
                 ]
@@ -2462,7 +2462,7 @@
                 ],
                 "value": "population",
                 "resources": [
-                    "ddf--datapoints--population--by--geo--time--income_bracket_50"
+                    "ddf--datapoints--population--by--country--time--income_bracket_50"
                 ]
             },
             {
@@ -2473,7 +2473,7 @@
                 ],
                 "value": "population",
                 "resources": [
-                    "ddf--datapoints--population--by--geo--time--income_bracket_50"
+                    "ddf--datapoints--population--by--country--time--income_bracket_50"
                 ]
             },
             {
