@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2022-03-17T03:13:07.113181+00:00",
+    "created": "2022-03-17T03:29:25.995966+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -738,31 +738,6 @@
                 "primaryKey": [
                     "world_4region",
                     "time"
-                ]
-            }
-        },
-        {
-            "name": "ddf--datapoints--population--by--country--time--income_bracket_50",
-            "path": "income_mountain/ddf--datapoints--population--by--country--time--income_bracket_50.csv",
-            "schema": {
-                "fields": [
-                    {
-                        "name": "country"
-                    },
-                    {
-                        "name": "time"
-                    },
-                    {
-                        "name": "income_bracket_50"
-                    },
-                    {
-                        "name": "population"
-                    }
-                ],
-                "primaryKey": [
-                    "country",
-                    "time",
-                    "income_bracket_50"
                 ]
             }
         },
@@ -2452,28 +2427,6 @@
                 "value": "income_mountain_50bracket_shape_for_log",
                 "resources": [
                     "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--world_4region--time"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "country",
-                    "income_bracket_50",
-                    "time"
-                ],
-                "value": "population",
-                "resources": [
-                    "ddf--datapoints--population--by--country--time--income_bracket_50"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "geo",
-                    "income_bracket_50",
-                    "time"
-                ],
-                "value": "population",
-                "resources": [
-                    "ddf--datapoints--population--by--country--time--income_bracket_50"
                 ]
             },
             {
