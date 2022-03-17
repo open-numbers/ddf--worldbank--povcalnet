@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2022-02-21T13:24:05.559637+00:00",
+    "created": "2022-03-17T02:30:33.513768+00:00",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -58,6 +58,9 @@
                 "fields": [
                     {
                         "name": "country"
+                    },
+                    {
+                        "name": "set"
                     },
                     {
                         "name": "g77_and_oecd_countries"
@@ -423,6 +426,9 @@
                         "name": "world_4region"
                     },
                     {
+                        "name": "set"
+                    },
+                    {
                         "name": "color"
                     },
                     {
@@ -736,6 +742,56 @@
             }
         },
         {
+            "name": "ddf--datapoints--population--by--geo--time--income_bracket_50",
+            "path": "income_mountain/ddf--datapoints--population--by--geo--time--income_bracket_50.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "geo"
+                    },
+                    {
+                        "name": "time"
+                    },
+                    {
+                        "name": "income_bracket_50"
+                    },
+                    {
+                        "name": "population"
+                    }
+                ],
+                "primaryKey": [
+                    "geo",
+                    "time",
+                    "income_bracket_50"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--population_percentage--by--geo--time--income_bracket_50",
+            "path": "income_mountain/ddf--datapoints--population_percentage--by--geo--time--income_bracket_50.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "geo"
+                    },
+                    {
+                        "name": "time"
+                    },
+                    {
+                        "name": "income_bracket_50"
+                    },
+                    {
+                        "name": "population_percentage"
+                    }
+                ],
+                "primaryKey": [
+                    "geo",
+                    "time",
+                    "income_bracket_50"
+                ]
+            }
+        },
+        {
             "name": "ddf--datapoints--poverty_line--by--country--time",
             "path": "poverty_rates/ddf--datapoints--poverty_line--by--country--time.csv",
             "schema": {
@@ -963,15 +1019,6 @@
                     "concept"
                 ],
                 "value": "tags",
-                "resources": [
-                    "ddf--concepts"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "concept"
-                ],
-                "value": "set",
                 "resources": [
                     "ddf--concepts"
                 ]
@@ -1268,24 +1315,6 @@
             },
             {
                 "primaryKey": [
-                    "country"
-                ],
-                "value": "set",
-                "resources": [
-                    "ddf--entities--geo--country"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "geo"
-                ],
-                "value": "set",
-                "resources": [
-                    "ddf--entities--geo--country"
-                ]
-            },
-            {
-                "primaryKey": [
                     "geo"
                 ],
                 "value": "is--country",
@@ -1538,27 +1567,9 @@
             },
             {
                 "primaryKey": [
-                    "geo"
-                ],
-                "value": "set",
-                "resources": [
-                    "ddf--entities--geo--world_4region"
-                ]
-            },
-            {
-                "primaryKey": [
                     "world_4region"
                 ],
                 "value": "is--world_4region",
-                "resources": [
-                    "ddf--entities--geo--world_4region"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "world_4region"
-                ],
-                "value": "set",
                 "resources": [
                     "ddf--entities--geo--world_4region"
                 ]
@@ -2108,6 +2119,34 @@
             },
             {
                 "primaryKey": [
+                    "country"
+                ],
+                "value": "set",
+                "resources": [
+                    "ddf--entities--geo--country"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo"
+                ],
+                "value": "set",
+                "resources": [
+                    "ddf--entities--geo--country",
+                    "ddf--entities--geo--world_4region"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "world_4region"
+                ],
+                "value": "set",
+                "resources": [
+                    "ddf--entities--geo--world_4region"
+                ]
+            },
+            {
+                "primaryKey": [
                     "geo"
                 ],
                 "value": "shape_lores_svg",
@@ -2413,6 +2452,50 @@
                 "value": "income_mountain_50bracket_shape_for_log",
                 "resources": [
                     "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--world_4region--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "income_bracket_50",
+                    "time"
+                ],
+                "value": "population",
+                "resources": [
+                    "ddf--datapoints--population--by--geo--time--income_bracket_50"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "income_bracket_50",
+                    "time"
+                ],
+                "value": "population",
+                "resources": [
+                    "ddf--datapoints--population--by--geo--time--income_bracket_50"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "income_bracket_50",
+                    "time"
+                ],
+                "value": "population_percentage",
+                "resources": [
+                    "ddf--datapoints--population_percentage--by--geo--time--income_bracket_50"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "income_bracket_50",
+                    "time"
+                ],
+                "value": "population_percentage",
+                "resources": [
+                    "ddf--datapoints--population_percentage--by--geo--time--income_bracket_50"
                 ]
             },
             {
