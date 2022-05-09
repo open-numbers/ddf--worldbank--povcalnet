@@ -1,4 +1,4 @@
-geo,name,time,WB's 4 income levels,WB's 3 income levels
+geo,name,time,4 income groups (WB),3 income groups (WB)
 afg,Afghanistan,1987,Low income,Low income
 afg,Afghanistan,1988,Low income,Low income
 afg,Afghanistan,1989,Low income,Low income
@@ -32,6 +32,7 @@ afg,Afghanistan,2016,Low income,Low income
 afg,Afghanistan,2017,Low income,Low income
 afg,Afghanistan,2018,Low income,Low income
 afg,Afghanistan,2019,Low income,Low income
+afg,Afghanistan,2020,Low income,Low income
 alb,Albania,1987,Lower middle income,Middle income
 alb,Albania,1988,Lower middle income,Middle income
 alb,Albania,1989,Lower middle income,Middle income
@@ -65,6 +66,7 @@ alb,Albania,2016,Upper middle income,Middle income
 alb,Albania,2017,Upper middle income,Middle income
 alb,Albania,2018,Upper middle income,Middle income
 alb,Albania,2019,Upper middle income,Middle income
+alb,Albania,2020,Upper middle income,Middle income
 dza,Algeria,1987,Upper middle income,Middle income
 dza,Algeria,1988,Upper middle income,Middle income
 dza,Algeria,1989,Lower middle income,Middle income
@@ -98,6 +100,7 @@ dza,Algeria,2016,Upper middle income,Middle income
 dza,Algeria,2017,Upper middle income,Middle income
 dza,Algeria,2018,Upper middle income,Middle income
 dza,Algeria,2019,Lower middle income,Middle income
+dza,Algeria,2020,Lower middle income,Middle income
 and,Andorra,1987,High income,High income
 and,Andorra,1988,High income,High income
 and,Andorra,1989,High income,High income
@@ -131,6 +134,7 @@ and,Andorra,2016,High income,High income
 and,Andorra,2017,High income,High income
 and,Andorra,2018,High income,High income
 and,Andorra,2019,High income,High income
+and,Andorra,2020,High income,High income
 ago,Angola,1987,Lower middle income,Middle income
 ago,Angola,1988,Lower middle income,Middle income
 ago,Angola,1989,Lower middle income,Middle income
@@ -164,6 +168,7 @@ ago,Angola,2016,Lower middle income,Middle income
 ago,Angola,2017,Lower middle income,Middle income
 ago,Angola,2018,Lower middle income,Middle income
 ago,Angola,2019,Lower middle income,Middle income
+ago,Angola,2020,Lower middle income,Middle income
 atg,Antigua and Barbuda,1987,Upper middle income,Middle income
 atg,Antigua and Barbuda,1988,Upper middle income,Middle income
 atg,Antigua and Barbuda,1989,Upper middle income,Middle income
@@ -197,6 +202,7 @@ atg,Antigua and Barbuda,2016,High income,High income
 atg,Antigua and Barbuda,2017,High income,High income
 atg,Antigua and Barbuda,2018,High income,High income
 atg,Antigua and Barbuda,2019,High income,High income
+atg,Antigua and Barbuda,2020,High income,High income
 arg,Argentina,1987,Upper middle income,Middle income
 arg,Argentina,1988,Upper middle income,Middle income
 arg,Argentina,1989,Lower middle income,Middle income
@@ -230,6 +236,7 @@ arg,Argentina,2016,Upper middle income,Middle income
 arg,Argentina,2017,High income,High income
 arg,Argentina,2018,Upper middle income,Middle income
 arg,Argentina,2019,Upper middle income,Middle income
+arg,Argentina,2020,Upper middle income,Middle income
 arm,Armenia,1987,Lower middle income,Middle income
 arm,Armenia,1988,Lower middle income,Middle income
 arm,Armenia,1989,Lower middle income,Middle income
@@ -263,6 +270,7 @@ arm,Armenia,2016,Lower middle income,Middle income
 arm,Armenia,2017,Upper middle income,Middle income
 arm,Armenia,2018,Upper middle income,Middle income
 arm,Armenia,2019,Upper middle income,Middle income
+arm,Armenia,2020,Upper middle income,Middle income
 aus,Australia,1987,High income,High income
 aus,Australia,1988,High income,High income
 aus,Australia,1989,High income,High income
@@ -296,6 +304,7 @@ aus,Australia,2016,High income,High income
 aus,Australia,2017,High income,High income
 aus,Australia,2018,High income,High income
 aus,Australia,2019,High income,High income
+aus,Australia,2020,High income,High income
 aut,Austria,1987,High income,High income
 aut,Austria,1988,High income,High income
 aut,Austria,1989,High income,High income
@@ -329,6 +338,7 @@ aut,Austria,2016,High income,High income
 aut,Austria,2017,High income,High income
 aut,Austria,2018,High income,High income
 aut,Austria,2019,High income,High income
+aut,Austria,2020,High income,High income
 aze,Azerbaijan,1987,Lower middle income,Middle income
 aze,Azerbaijan,1988,Lower middle income,Middle income
 aze,Azerbaijan,1989,Lower middle income,Middle income
@@ -362,6 +372,7 @@ aze,Azerbaijan,2016,Upper middle income,Middle income
 aze,Azerbaijan,2017,Upper middle income,Middle income
 aze,Azerbaijan,2018,Upper middle income,Middle income
 aze,Azerbaijan,2019,Upper middle income,Middle income
+aze,Azerbaijan,2020,Upper middle income,Middle income
 bhs,Bahamas,1987,High income,High income
 bhs,Bahamas,1988,High income,High income
 bhs,Bahamas,1989,High income,High income
@@ -395,6 +406,7 @@ bhs,Bahamas,2016,High income,High income
 bhs,Bahamas,2017,High income,High income
 bhs,Bahamas,2018,High income,High income
 bhs,Bahamas,2019,High income,High income
+bhs,Bahamas,2020,High income,High income
 bhr,Bahrain,1987,High income,High income
 bhr,Bahrain,1988,High income,High income
 bhr,Bahrain,1989,High income,High income
@@ -428,6 +440,7 @@ bhr,Bahrain,2016,High income,High income
 bhr,Bahrain,2017,High income,High income
 bhr,Bahrain,2018,High income,High income
 bhr,Bahrain,2019,High income,High income
+bhr,Bahrain,2020,High income,High income
 bgd,Bangladesh,1987,Low income,Low income
 bgd,Bangladesh,1988,Low income,Low income
 bgd,Bangladesh,1989,Low income,Low income
@@ -461,6 +474,7 @@ bgd,Bangladesh,2016,Lower middle income,Middle income
 bgd,Bangladesh,2017,Lower middle income,Middle income
 bgd,Bangladesh,2018,Lower middle income,Middle income
 bgd,Bangladesh,2019,Lower middle income,Middle income
+bgd,Bangladesh,2020,Lower middle income,Middle income
 brb,Barbados,1987,Upper middle income,Middle income
 brb,Barbados,1988,Upper middle income,Middle income
 brb,Barbados,1989,High income,High income
@@ -494,6 +508,7 @@ brb,Barbados,2016,High income,High income
 brb,Barbados,2017,High income,High income
 brb,Barbados,2018,High income,High income
 brb,Barbados,2019,High income,High income
+brb,Barbados,2020,High income,High income
 blr,Belarus,1987,Upper middle income,Middle income
 blr,Belarus,1988,Upper middle income,Middle income
 blr,Belarus,1989,Upper middle income,Middle income
@@ -527,6 +542,7 @@ blr,Belarus,2016,Upper middle income,Middle income
 blr,Belarus,2017,Upper middle income,Middle income
 blr,Belarus,2018,Upper middle income,Middle income
 blr,Belarus,2019,Upper middle income,Middle income
+blr,Belarus,2020,Upper middle income,Middle income
 bel,Belgium,1987,High income,High income
 bel,Belgium,1988,High income,High income
 bel,Belgium,1989,High income,High income
@@ -560,6 +576,7 @@ bel,Belgium,2016,High income,High income
 bel,Belgium,2017,High income,High income
 bel,Belgium,2018,High income,High income
 bel,Belgium,2019,High income,High income
+bel,Belgium,2020,High income,High income
 blz,Belize,1987,Lower middle income,Middle income
 blz,Belize,1988,Lower middle income,Middle income
 blz,Belize,1989,Lower middle income,Middle income
@@ -593,6 +610,7 @@ blz,Belize,2016,Upper middle income,Middle income
 blz,Belize,2017,Upper middle income,Middle income
 blz,Belize,2018,Upper middle income,Middle income
 blz,Belize,2019,Upper middle income,Middle income
+blz,Belize,2020,Lower middle income,Middle income
 ben,Benin,1987,Low income,Low income
 ben,Benin,1988,Low income,Low income
 ben,Benin,1989,Low income,Low income
@@ -626,6 +644,7 @@ ben,Benin,2016,Low income,Low income
 ben,Benin,2017,Low income,Low income
 ben,Benin,2018,Low income,Low income
 ben,Benin,2019,Lower middle income,Middle income
+ben,Benin,2020,Lower middle income,Middle income
 btn,Bhutan,1987,Low income,Low income
 btn,Bhutan,1988,Low income,Low income
 btn,Bhutan,1989,Low income,Low income
@@ -659,6 +678,7 @@ btn,Bhutan,2016,Lower middle income,Middle income
 btn,Bhutan,2017,Lower middle income,Middle income
 btn,Bhutan,2018,Lower middle income,Middle income
 btn,Bhutan,2019,Lower middle income,Middle income
+btn,Bhutan,2020,Lower middle income,Middle income
 bol,Bolivia,1987,Lower middle income,Middle income
 bol,Bolivia,1988,Lower middle income,Middle income
 bol,Bolivia,1989,Lower middle income,Middle income
@@ -692,6 +712,7 @@ bol,Bolivia,2016,Lower middle income,Middle income
 bol,Bolivia,2017,Lower middle income,Middle income
 bol,Bolivia,2018,Lower middle income,Middle income
 bol,Bolivia,2019,Lower middle income,Middle income
+bol,Bolivia,2020,Lower middle income,Middle income
 bih,Bosnia and Herzegovina,1987,Lower middle income,Middle income
 bih,Bosnia and Herzegovina,1988,Lower middle income,Middle income
 bih,Bosnia and Herzegovina,1989,Lower middle income,Middle income
@@ -725,6 +746,7 @@ bih,Bosnia and Herzegovina,2016,Upper middle income,Middle income
 bih,Bosnia and Herzegovina,2017,Upper middle income,Middle income
 bih,Bosnia and Herzegovina,2018,Upper middle income,Middle income
 bih,Bosnia and Herzegovina,2019,Upper middle income,Middle income
+bih,Bosnia and Herzegovina,2020,Upper middle income,Middle income
 bwa,Botswana,1987,Lower middle income,Middle income
 bwa,Botswana,1988,Lower middle income,Middle income
 bwa,Botswana,1989,Lower middle income,Middle income
@@ -758,6 +780,7 @@ bwa,Botswana,2016,Upper middle income,Middle income
 bwa,Botswana,2017,Upper middle income,Middle income
 bwa,Botswana,2018,Upper middle income,Middle income
 bwa,Botswana,2019,Upper middle income,Middle income
+bwa,Botswana,2020,Upper middle income,Middle income
 bra,Brazil,1987,Upper middle income,Middle income
 bra,Brazil,1988,Lower middle income,Middle income
 bra,Brazil,1989,Upper middle income,Middle income
@@ -791,6 +814,7 @@ bra,Brazil,2016,Upper middle income,Middle income
 bra,Brazil,2017,Upper middle income,Middle income
 bra,Brazil,2018,Upper middle income,Middle income
 bra,Brazil,2019,Upper middle income,Middle income
+bra,Brazil,2020,Upper middle income,Middle income
 brn,Brunei,1987,High income,High income
 brn,Brunei,1988,High income,High income
 brn,Brunei,1989,High income,High income
@@ -824,6 +848,7 @@ brn,Brunei,2016,High income,High income
 brn,Brunei,2017,High income,High income
 brn,Brunei,2018,High income,High income
 brn,Brunei,2019,High income,High income
+brn,Brunei,2020,High income,High income
 bgr,Bulgaria,1987,Lower middle income,Middle income
 bgr,Bulgaria,1988,Lower middle income,Middle income
 bgr,Bulgaria,1989,Lower middle income,Middle income
@@ -857,6 +882,7 @@ bgr,Bulgaria,2016,Upper middle income,Middle income
 bgr,Bulgaria,2017,Upper middle income,Middle income
 bgr,Bulgaria,2018,Upper middle income,Middle income
 bgr,Bulgaria,2019,Upper middle income,Middle income
+bgr,Bulgaria,2020,Upper middle income,Middle income
 bfa,Burkina Faso,1987,Low income,Low income
 bfa,Burkina Faso,1988,Low income,Low income
 bfa,Burkina Faso,1989,Low income,Low income
@@ -890,6 +916,7 @@ bfa,Burkina Faso,2016,Low income,Low income
 bfa,Burkina Faso,2017,Low income,Low income
 bfa,Burkina Faso,2018,Low income,Low income
 bfa,Burkina Faso,2019,Low income,Low income
+bfa,Burkina Faso,2020,Low income,Low income
 bdi,Burundi,1987,Low income,Low income
 bdi,Burundi,1988,Low income,Low income
 bdi,Burundi,1989,Low income,Low income
@@ -923,6 +950,7 @@ bdi,Burundi,2016,Low income,Low income
 bdi,Burundi,2017,Low income,Low income
 bdi,Burundi,2018,Low income,Low income
 bdi,Burundi,2019,Low income,Low income
+bdi,Burundi,2020,Low income,Low income
 cpv,Cape Verde,1987,Lower middle income,Middle income
 cpv,Cape Verde,1988,Lower middle income,Middle income
 cpv,Cape Verde,1989,Lower middle income,Middle income
@@ -956,6 +984,7 @@ cpv,Cape Verde,2016,Lower middle income,Middle income
 cpv,Cape Verde,2017,Lower middle income,Middle income
 cpv,Cape Verde,2018,Lower middle income,Middle income
 cpv,Cape Verde,2019,Lower middle income,Middle income
+cpv,Cape Verde,2020,Lower middle income,Middle income
 khm,Cambodia,1987,Low income,Low income
 khm,Cambodia,1988,Low income,Low income
 khm,Cambodia,1989,Low income,Low income
@@ -989,6 +1018,7 @@ khm,Cambodia,2016,Lower middle income,Middle income
 khm,Cambodia,2017,Lower middle income,Middle income
 khm,Cambodia,2018,Lower middle income,Middle income
 khm,Cambodia,2019,Lower middle income,Middle income
+khm,Cambodia,2020,Lower middle income,Middle income
 cmr,Cameroon,1987,Lower middle income,Middle income
 cmr,Cameroon,1988,Lower middle income,Middle income
 cmr,Cameroon,1989,Lower middle income,Middle income
@@ -1022,6 +1052,7 @@ cmr,Cameroon,2016,Lower middle income,Middle income
 cmr,Cameroon,2017,Lower middle income,Middle income
 cmr,Cameroon,2018,Lower middle income,Middle income
 cmr,Cameroon,2019,Lower middle income,Middle income
+cmr,Cameroon,2020,Lower middle income,Middle income
 can,Canada,1987,High income,High income
 can,Canada,1988,High income,High income
 can,Canada,1989,High income,High income
@@ -1055,6 +1086,7 @@ can,Canada,2016,High income,High income
 can,Canada,2017,High income,High income
 can,Canada,2018,High income,High income
 can,Canada,2019,High income,High income
+can,Canada,2020,High income,High income
 caf,Central African Republic,1987,Low income,Low income
 caf,Central African Republic,1988,Low income,Low income
 caf,Central African Republic,1989,Low income,Low income
@@ -1088,6 +1120,7 @@ caf,Central African Republic,2016,Low income,Low income
 caf,Central African Republic,2017,Low income,Low income
 caf,Central African Republic,2018,Low income,Low income
 caf,Central African Republic,2019,Low income,Low income
+caf,Central African Republic,2020,Low income,Low income
 tcd,Chad,1987,Low income,Low income
 tcd,Chad,1988,Low income,Low income
 tcd,Chad,1989,Low income,Low income
@@ -1121,6 +1154,7 @@ tcd,Chad,2016,Low income,Low income
 tcd,Chad,2017,Low income,Low income
 tcd,Chad,2018,Low income,Low income
 tcd,Chad,2019,Low income,Low income
+tcd,Chad,2020,Low income,Low income
 chl,Chile,1987,Lower middle income,Middle income
 chl,Chile,1988,Lower middle income,Middle income
 chl,Chile,1989,Lower middle income,Middle income
@@ -1154,6 +1188,7 @@ chl,Chile,2016,High income,High income
 chl,Chile,2017,High income,High income
 chl,Chile,2018,High income,High income
 chl,Chile,2019,High income,High income
+chl,Chile,2020,High income,High income
 chn,China,1987,Low income,Low income
 chn,China,1988,Low income,Low income
 chn,China,1989,Low income,Low income
@@ -1187,6 +1222,7 @@ chn,China,2016,Upper middle income,Middle income
 chn,China,2017,Upper middle income,Middle income
 chn,China,2018,Upper middle income,Middle income
 chn,China,2019,Upper middle income,Middle income
+chn,China,2020,Upper middle income,Middle income
 col,Colombia,1987,Lower middle income,Middle income
 col,Colombia,1988,Lower middle income,Middle income
 col,Colombia,1989,Lower middle income,Middle income
@@ -1220,6 +1256,7 @@ col,Colombia,2016,Upper middle income,Middle income
 col,Colombia,2017,Upper middle income,Middle income
 col,Colombia,2018,Upper middle income,Middle income
 col,Colombia,2019,Upper middle income,Middle income
+col,Colombia,2020,Upper middle income,Middle income
 com,Comoros,1987,Low income,Low income
 com,Comoros,1988,Low income,Low income
 com,Comoros,1989,Low income,Low income
@@ -1253,6 +1290,7 @@ com,Comoros,2016,Low income,Low income
 com,Comoros,2017,Low income,Low income
 com,Comoros,2018,Lower middle income,Middle income
 com,Comoros,2019,Lower middle income,Middle income
+com,Comoros,2020,Lower middle income,Middle income
 cod,"Congo, Dem. Rep.",1987,Low income,Low income
 cod,"Congo, Dem. Rep.",1988,Low income,Low income
 cod,"Congo, Dem. Rep.",1989,Low income,Low income
@@ -1286,6 +1324,7 @@ cod,"Congo, Dem. Rep.",2016,Low income,Low income
 cod,"Congo, Dem. Rep.",2017,Low income,Low income
 cod,"Congo, Dem. Rep.",2018,Low income,Low income
 cod,"Congo, Dem. Rep.",2019,Low income,Low income
+cod,"Congo, Dem. Rep.",2020,Low income,Low income
 cog,"Congo, Rep.",1987,Lower middle income,Middle income
 cog,"Congo, Rep.",1988,Lower middle income,Middle income
 cog,"Congo, Rep.",1989,Lower middle income,Middle income
@@ -1319,6 +1358,7 @@ cog,"Congo, Rep.",2016,Lower middle income,Middle income
 cog,"Congo, Rep.",2017,Lower middle income,Middle income
 cog,"Congo, Rep.",2018,Lower middle income,Middle income
 cog,"Congo, Rep.",2019,Lower middle income,Middle income
+cog,"Congo, Rep.",2020,Lower middle income,Middle income
 cri,Costa Rica,1987,Lower middle income,Middle income
 cri,Costa Rica,1988,Lower middle income,Middle income
 cri,Costa Rica,1989,Lower middle income,Middle income
@@ -1352,6 +1392,7 @@ cri,Costa Rica,2016,Upper middle income,Middle income
 cri,Costa Rica,2017,Upper middle income,Middle income
 cri,Costa Rica,2018,Upper middle income,Middle income
 cri,Costa Rica,2019,Upper middle income,Middle income
+cri,Costa Rica,2020,Upper middle income,Middle income
 civ,Cote d'Ivoire,1987,Lower middle income,Middle income
 civ,Cote d'Ivoire,1988,Lower middle income,Middle income
 civ,Cote d'Ivoire,1989,Lower middle income,Middle income
@@ -1385,6 +1426,7 @@ civ,Cote d'Ivoire,2016,Lower middle income,Middle income
 civ,Cote d'Ivoire,2017,Lower middle income,Middle income
 civ,Cote d'Ivoire,2018,Lower middle income,Middle income
 civ,Cote d'Ivoire,2019,Lower middle income,Middle income
+civ,Cote d'Ivoire,2020,Lower middle income,Middle income
 hrv,Croatia,1987,Lower middle income,Middle income
 hrv,Croatia,1988,Lower middle income,Middle income
 hrv,Croatia,1989,Lower middle income,Middle income
@@ -1418,6 +1460,7 @@ hrv,Croatia,2016,Upper middle income,Middle income
 hrv,Croatia,2017,High income,High income
 hrv,Croatia,2018,High income,High income
 hrv,Croatia,2019,High income,High income
+hrv,Croatia,2020,High income,High income
 cub,Cuba,1987,Lower middle income,Middle income
 cub,Cuba,1988,Lower middle income,Middle income
 cub,Cuba,1989,Lower middle income,Middle income
@@ -1451,6 +1494,7 @@ cub,Cuba,2016,Upper middle income,Middle income
 cub,Cuba,2017,Upper middle income,Middle income
 cub,Cuba,2018,Upper middle income,Middle income
 cub,Cuba,2019,Upper middle income,Middle income
+cub,Cuba,2020,Upper middle income,Middle income
 cyp,Cyprus,1987,Upper middle income,Middle income
 cyp,Cyprus,1988,High income,High income
 cyp,Cyprus,1989,High income,High income
@@ -1484,6 +1528,7 @@ cyp,Cyprus,2016,High income,High income
 cyp,Cyprus,2017,High income,High income
 cyp,Cyprus,2018,High income,High income
 cyp,Cyprus,2019,High income,High income
+cyp,Cyprus,2020,High income,High income
 cze,Czech Republic,1987,Lower middle income,Middle income
 cze,Czech Republic,1988,Lower middle income,Middle income
 cze,Czech Republic,1989,Lower middle income,Middle income
@@ -1517,6 +1562,7 @@ cze,Czech Republic,2016,High income,High income
 cze,Czech Republic,2017,High income,High income
 cze,Czech Republic,2018,High income,High income
 cze,Czech Republic,2019,High income,High income
+cze,Czech Republic,2020,High income,High income
 dnk,Denmark,1987,High income,High income
 dnk,Denmark,1988,High income,High income
 dnk,Denmark,1989,High income,High income
@@ -1550,6 +1596,7 @@ dnk,Denmark,2016,High income,High income
 dnk,Denmark,2017,High income,High income
 dnk,Denmark,2018,High income,High income
 dnk,Denmark,2019,High income,High income
+dnk,Denmark,2020,High income,High income
 dji,Djibouti,1987,Lower middle income,Middle income
 dji,Djibouti,1988,Lower middle income,Middle income
 dji,Djibouti,1989,Lower middle income,Middle income
@@ -1583,6 +1630,7 @@ dji,Djibouti,2016,Lower middle income,Middle income
 dji,Djibouti,2017,Lower middle income,Middle income
 dji,Djibouti,2018,Lower middle income,Middle income
 dji,Djibouti,2019,Lower middle income,Middle income
+dji,Djibouti,2020,Lower middle income,Middle income
 dma,Dominica,1987,Lower middle income,Middle income
 dma,Dominica,1988,Lower middle income,Middle income
 dma,Dominica,1989,Lower middle income,Middle income
@@ -1616,6 +1664,7 @@ dma,Dominica,2016,Upper middle income,Middle income
 dma,Dominica,2017,Upper middle income,Middle income
 dma,Dominica,2018,Upper middle income,Middle income
 dma,Dominica,2019,Upper middle income,Middle income
+dma,Dominica,2020,Upper middle income,Middle income
 dom,Dominican Republic,1987,Lower middle income,Middle income
 dom,Dominican Republic,1988,Lower middle income,Middle income
 dom,Dominican Republic,1989,Lower middle income,Middle income
@@ -1649,6 +1698,7 @@ dom,Dominican Republic,2016,Upper middle income,Middle income
 dom,Dominican Republic,2017,Upper middle income,Middle income
 dom,Dominican Republic,2018,Upper middle income,Middle income
 dom,Dominican Republic,2019,Upper middle income,Middle income
+dom,Dominican Republic,2020,Upper middle income,Middle income
 ecu,Ecuador,1987,Lower middle income,Middle income
 ecu,Ecuador,1988,Lower middle income,Middle income
 ecu,Ecuador,1989,Lower middle income,Middle income
@@ -1682,6 +1732,7 @@ ecu,Ecuador,2016,Upper middle income,Middle income
 ecu,Ecuador,2017,Upper middle income,Middle income
 ecu,Ecuador,2018,Upper middle income,Middle income
 ecu,Ecuador,2019,Upper middle income,Middle income
+ecu,Ecuador,2020,Upper middle income,Middle income
 egy,Egypt,1987,Lower middle income,Middle income
 egy,Egypt,1988,Lower middle income,Middle income
 egy,Egypt,1989,Lower middle income,Middle income
@@ -1715,6 +1766,7 @@ egy,Egypt,2016,Lower middle income,Middle income
 egy,Egypt,2017,Lower middle income,Middle income
 egy,Egypt,2018,Lower middle income,Middle income
 egy,Egypt,2019,Lower middle income,Middle income
+egy,Egypt,2020,Lower middle income,Middle income
 slv,El Salvador,1987,Lower middle income,Middle income
 slv,El Salvador,1988,Lower middle income,Middle income
 slv,El Salvador,1989,Lower middle income,Middle income
@@ -1748,6 +1800,7 @@ slv,El Salvador,2016,Lower middle income,Middle income
 slv,El Salvador,2017,Lower middle income,Middle income
 slv,El Salvador,2018,Lower middle income,Middle income
 slv,El Salvador,2019,Lower middle income,Middle income
+slv,El Salvador,2020,Lower middle income,Middle income
 gnq,Equatorial Guinea,1987,Low income,Low income
 gnq,Equatorial Guinea,1988,Low income,Low income
 gnq,Equatorial Guinea,1989,Low income,Low income
@@ -1781,6 +1834,7 @@ gnq,Equatorial Guinea,2016,Upper middle income,Middle income
 gnq,Equatorial Guinea,2017,Upper middle income,Middle income
 gnq,Equatorial Guinea,2018,Upper middle income,Middle income
 gnq,Equatorial Guinea,2019,Upper middle income,Middle income
+gnq,Equatorial Guinea,2020,Upper middle income,Middle income
 eri,Eritrea,1987,Low income,Low income
 eri,Eritrea,1988,Low income,Low income
 eri,Eritrea,1989,Low income,Low income
@@ -1814,6 +1868,7 @@ eri,Eritrea,2016,Low income,Low income
 eri,Eritrea,2017,Low income,Low income
 eri,Eritrea,2018,Low income,Low income
 eri,Eritrea,2019,Low income,Low income
+eri,Eritrea,2020,Low income,Low income
 est,Estonia,1987,Upper middle income,Middle income
 est,Estonia,1988,Upper middle income,Middle income
 est,Estonia,1989,Upper middle income,Middle income
@@ -1847,6 +1902,7 @@ est,Estonia,2016,High income,High income
 est,Estonia,2017,High income,High income
 est,Estonia,2018,High income,High income
 est,Estonia,2019,High income,High income
+est,Estonia,2020,High income,High income
 swz,Swaziland,1987,Lower middle income,Middle income
 swz,Swaziland,1988,Lower middle income,Middle income
 swz,Swaziland,1989,Lower middle income,Middle income
@@ -1880,6 +1936,7 @@ swz,Swaziland,2016,Lower middle income,Middle income
 swz,Swaziland,2017,Lower middle income,Middle income
 swz,Swaziland,2018,Lower middle income,Middle income
 swz,Swaziland,2019,Lower middle income,Middle income
+swz,Swaziland,2020,Lower middle income,Middle income
 eth,Ethiopia,1987,Low income,Low income
 eth,Ethiopia,1988,Low income,Low income
 eth,Ethiopia,1989,Low income,Low income
@@ -1913,6 +1970,7 @@ eth,Ethiopia,2016,Low income,Low income
 eth,Ethiopia,2017,Low income,Low income
 eth,Ethiopia,2018,Low income,Low income
 eth,Ethiopia,2019,Low income,Low income
+eth,Ethiopia,2020,Low income,Low income
 fji,Fiji,1987,Lower middle income,Middle income
 fji,Fiji,1988,Lower middle income,Middle income
 fji,Fiji,1989,Lower middle income,Middle income
@@ -1946,6 +2004,7 @@ fji,Fiji,2016,Upper middle income,Middle income
 fji,Fiji,2017,Upper middle income,Middle income
 fji,Fiji,2018,Upper middle income,Middle income
 fji,Fiji,2019,Upper middle income,Middle income
+fji,Fiji,2020,Upper middle income,Middle income
 fin,Finland,1987,High income,High income
 fin,Finland,1988,High income,High income
 fin,Finland,1989,High income,High income
@@ -1979,6 +2038,7 @@ fin,Finland,2016,High income,High income
 fin,Finland,2017,High income,High income
 fin,Finland,2018,High income,High income
 fin,Finland,2019,High income,High income
+fin,Finland,2020,High income,High income
 fra,France,1987,High income,High income
 fra,France,1988,High income,High income
 fra,France,1989,High income,High income
@@ -2012,6 +2072,7 @@ fra,France,2016,High income,High income
 fra,France,2017,High income,High income
 fra,France,2018,High income,High income
 fra,France,2019,High income,High income
+fra,France,2020,High income,High income
 gab,Gabon,1987,Upper middle income,Middle income
 gab,Gabon,1988,Upper middle income,Middle income
 gab,Gabon,1989,Upper middle income,Middle income
@@ -2045,6 +2106,7 @@ gab,Gabon,2016,Upper middle income,Middle income
 gab,Gabon,2017,Upper middle income,Middle income
 gab,Gabon,2018,Upper middle income,Middle income
 gab,Gabon,2019,Upper middle income,Middle income
+gab,Gabon,2020,Upper middle income,Middle income
 gmb,Gambia,1987,Low income,Low income
 gmb,Gambia,1988,Low income,Low income
 gmb,Gambia,1989,Low income,Low income
@@ -2078,6 +2140,7 @@ gmb,Gambia,2016,Low income,Low income
 gmb,Gambia,2017,Low income,Low income
 gmb,Gambia,2018,Low income,Low income
 gmb,Gambia,2019,Low income,Low income
+gmb,Gambia,2020,Low income,Low income
 geo,Georgia,1987,Lower middle income,Middle income
 geo,Georgia,1988,Lower middle income,Middle income
 geo,Georgia,1989,Lower middle income,Middle income
@@ -2111,6 +2174,7 @@ geo,Georgia,2016,Lower middle income,Middle income
 geo,Georgia,2017,Lower middle income,Middle income
 geo,Georgia,2018,Upper middle income,Middle income
 geo,Georgia,2019,Upper middle income,Middle income
+geo,Georgia,2020,Upper middle income,Middle income
 deu,Germany,1987,High income,High income
 deu,Germany,1988,High income,High income
 deu,Germany,1989,High income,High income
@@ -2144,6 +2208,7 @@ deu,Germany,2016,High income,High income
 deu,Germany,2017,High income,High income
 deu,Germany,2018,High income,High income
 deu,Germany,2019,High income,High income
+deu,Germany,2020,High income,High income
 gha,Ghana,1987,Low income,Low income
 gha,Ghana,1988,Low income,Low income
 gha,Ghana,1989,Low income,Low income
@@ -2177,6 +2242,7 @@ gha,Ghana,2016,Lower middle income,Middle income
 gha,Ghana,2017,Lower middle income,Middle income
 gha,Ghana,2018,Lower middle income,Middle income
 gha,Ghana,2019,Lower middle income,Middle income
+gha,Ghana,2020,Lower middle income,Middle income
 grc,Greece,1987,Upper middle income,Middle income
 grc,Greece,1988,Upper middle income,Middle income
 grc,Greece,1989,Upper middle income,Middle income
@@ -2210,6 +2276,7 @@ grc,Greece,2016,High income,High income
 grc,Greece,2017,High income,High income
 grc,Greece,2018,High income,High income
 grc,Greece,2019,High income,High income
+grc,Greece,2020,High income,High income
 grd,Grenada,1987,Lower middle income,Middle income
 grd,Grenada,1988,Lower middle income,Middle income
 grd,Grenada,1989,Lower middle income,Middle income
@@ -2243,6 +2310,7 @@ grd,Grenada,2016,Upper middle income,Middle income
 grd,Grenada,2017,Upper middle income,Middle income
 grd,Grenada,2018,Upper middle income,Middle income
 grd,Grenada,2019,Upper middle income,Middle income
+grd,Grenada,2020,Upper middle income,Middle income
 gtm,Guatemala,1987,Lower middle income,Middle income
 gtm,Guatemala,1988,Lower middle income,Middle income
 gtm,Guatemala,1989,Lower middle income,Middle income
@@ -2276,6 +2344,7 @@ gtm,Guatemala,2016,Lower middle income,Middle income
 gtm,Guatemala,2017,Upper middle income,Middle income
 gtm,Guatemala,2018,Upper middle income,Middle income
 gtm,Guatemala,2019,Upper middle income,Middle income
+gtm,Guatemala,2020,Upper middle income,Middle income
 gin,Guinea,1987,Low income,Low income
 gin,Guinea,1988,Low income,Low income
 gin,Guinea,1989,Low income,Low income
@@ -2309,6 +2378,7 @@ gin,Guinea,2016,Low income,Low income
 gin,Guinea,2017,Low income,Low income
 gin,Guinea,2018,Low income,Low income
 gin,Guinea,2019,Low income,Low income
+gin,Guinea,2020,Low income,Low income
 gnb,Guinea-Bissau,1987,Low income,Low income
 gnb,Guinea-Bissau,1988,Low income,Low income
 gnb,Guinea-Bissau,1989,Low income,Low income
@@ -2342,6 +2412,7 @@ gnb,Guinea-Bissau,2016,Low income,Low income
 gnb,Guinea-Bissau,2017,Low income,Low income
 gnb,Guinea-Bissau,2018,Low income,Low income
 gnb,Guinea-Bissau,2019,Low income,Low income
+gnb,Guinea-Bissau,2020,Low income,Low income
 guy,Guyana,1987,Low income,Low income
 guy,Guyana,1988,Low income,Low income
 guy,Guyana,1989,Low income,Low income
@@ -2375,6 +2446,7 @@ guy,Guyana,2016,Upper middle income,Middle income
 guy,Guyana,2017,Upper middle income,Middle income
 guy,Guyana,2018,Upper middle income,Middle income
 guy,Guyana,2019,Upper middle income,Middle income
+guy,Guyana,2020,Upper middle income,Middle income
 hti,Haiti,1987,Low income,Low income
 hti,Haiti,1988,Low income,Low income
 hti,Haiti,1989,Low income,Low income
@@ -2408,6 +2480,7 @@ hti,Haiti,2016,Low income,Low income
 hti,Haiti,2017,Low income,Low income
 hti,Haiti,2018,Low income,Low income
 hti,Haiti,2019,Low income,Low income
+hti,Haiti,2020,Lower middle income,Middle income
 hnd,Honduras,1987,Lower middle income,Middle income
 hnd,Honduras,1988,Lower middle income,Middle income
 hnd,Honduras,1989,Lower middle income,Middle income
@@ -2441,6 +2514,7 @@ hnd,Honduras,2016,Lower middle income,Middle income
 hnd,Honduras,2017,Lower middle income,Middle income
 hnd,Honduras,2018,Lower middle income,Middle income
 hnd,Honduras,2019,Lower middle income,Middle income
+hnd,Honduras,2020,Lower middle income,Middle income
 hkg,"Hong Kong, China",1987,High income,High income
 hkg,"Hong Kong, China",1988,High income,High income
 hkg,"Hong Kong, China",1989,High income,High income
@@ -2474,6 +2548,7 @@ hkg,"Hong Kong, China",2016,High income,High income
 hkg,"Hong Kong, China",2017,High income,High income
 hkg,"Hong Kong, China",2018,High income,High income
 hkg,"Hong Kong, China",2019,High income,High income
+hkg,"Hong Kong, China",2020,High income,High income
 hun,Hungary,1987,Upper middle income,Middle income
 hun,Hungary,1988,Upper middle income,Middle income
 hun,Hungary,1989,Upper middle income,Middle income
@@ -2507,6 +2582,7 @@ hun,Hungary,2016,High income,High income
 hun,Hungary,2017,High income,High income
 hun,Hungary,2018,High income,High income
 hun,Hungary,2019,High income,High income
+hun,Hungary,2020,High income,High income
 isl,Iceland,1987,High income,High income
 isl,Iceland,1988,High income,High income
 isl,Iceland,1989,High income,High income
@@ -2540,6 +2616,7 @@ isl,Iceland,2016,High income,High income
 isl,Iceland,2017,High income,High income
 isl,Iceland,2018,High income,High income
 isl,Iceland,2019,High income,High income
+isl,Iceland,2020,High income,High income
 ind,India,1987,Low income,Low income
 ind,India,1988,Low income,Low income
 ind,India,1989,Low income,Low income
@@ -2573,6 +2650,7 @@ ind,India,2016,Lower middle income,Middle income
 ind,India,2017,Lower middle income,Middle income
 ind,India,2018,Lower middle income,Middle income
 ind,India,2019,Lower middle income,Middle income
+ind,India,2020,Lower middle income,Middle income
 idn,Indonesia,1987,Low income,Low income
 idn,Indonesia,1988,Low income,Low income
 idn,Indonesia,1989,Low income,Low income
@@ -2606,6 +2684,7 @@ idn,Indonesia,2016,Lower middle income,Middle income
 idn,Indonesia,2017,Lower middle income,Middle income
 idn,Indonesia,2018,Lower middle income,Middle income
 idn,Indonesia,2019,Upper middle income,Middle income
+idn,Indonesia,2020,Lower middle income,Middle income
 irn,Iran,1987,Upper middle income,Middle income
 irn,Iran,1988,Upper middle income,Middle income
 irn,Iran,1989,Upper middle income,Middle income
@@ -2639,6 +2718,7 @@ irn,Iran,2016,Upper middle income,Middle income
 irn,Iran,2017,Upper middle income,Middle income
 irn,Iran,2018,Upper middle income,Middle income
 irn,Iran,2019,Upper middle income,Middle income
+irn,Iran,2020,Lower middle income,Middle income
 irq,Iraq,1987,Upper middle income,Middle income
 irq,Iraq,1988,Upper middle income,Middle income
 irq,Iraq,1989,Upper middle income,Middle income
@@ -2672,6 +2752,7 @@ irq,Iraq,2016,Upper middle income,Middle income
 irq,Iraq,2017,Upper middle income,Middle income
 irq,Iraq,2018,Upper middle income,Middle income
 irq,Iraq,2019,Upper middle income,Middle income
+irq,Iraq,2020,Upper middle income,Middle income
 irl,Ireland,1987,High income,High income
 irl,Ireland,1988,High income,High income
 irl,Ireland,1989,High income,High income
@@ -2705,6 +2786,7 @@ irl,Ireland,2016,High income,High income
 irl,Ireland,2017,High income,High income
 irl,Ireland,2018,High income,High income
 irl,Ireland,2019,High income,High income
+irl,Ireland,2020,High income,High income
 isr,Israel,1987,High income,High income
 isr,Israel,1988,High income,High income
 isr,Israel,1989,High income,High income
@@ -2738,6 +2820,7 @@ isr,Israel,2016,High income,High income
 isr,Israel,2017,High income,High income
 isr,Israel,2018,High income,High income
 isr,Israel,2019,High income,High income
+isr,Israel,2020,High income,High income
 ita,Italy,1987,High income,High income
 ita,Italy,1988,High income,High income
 ita,Italy,1989,High income,High income
@@ -2771,6 +2854,7 @@ ita,Italy,2016,High income,High income
 ita,Italy,2017,High income,High income
 ita,Italy,2018,High income,High income
 ita,Italy,2019,High income,High income
+ita,Italy,2020,High income,High income
 jam,Jamaica,1987,Lower middle income,Middle income
 jam,Jamaica,1988,Lower middle income,Middle income
 jam,Jamaica,1989,Lower middle income,Middle income
@@ -2804,6 +2888,7 @@ jam,Jamaica,2016,Upper middle income,Middle income
 jam,Jamaica,2017,Upper middle income,Middle income
 jam,Jamaica,2018,Upper middle income,Middle income
 jam,Jamaica,2019,Upper middle income,Middle income
+jam,Jamaica,2020,Upper middle income,Middle income
 jpn,Japan,1987,High income,High income
 jpn,Japan,1988,High income,High income
 jpn,Japan,1989,High income,High income
@@ -2837,6 +2922,7 @@ jpn,Japan,2016,High income,High income
 jpn,Japan,2017,High income,High income
 jpn,Japan,2018,High income,High income
 jpn,Japan,2019,High income,High income
+jpn,Japan,2020,High income,High income
 jor,Jordan,1987,Lower middle income,Middle income
 jor,Jordan,1988,Lower middle income,Middle income
 jor,Jordan,1989,Lower middle income,Middle income
@@ -2870,6 +2956,7 @@ jor,Jordan,2016,Lower middle income,Middle income
 jor,Jordan,2017,Upper middle income,Middle income
 jor,Jordan,2018,Upper middle income,Middle income
 jor,Jordan,2019,Upper middle income,Middle income
+jor,Jordan,2020,Upper middle income,Middle income
 kaz,Kazakhstan,1987,Lower middle income,Middle income
 kaz,Kazakhstan,1988,Lower middle income,Middle income
 kaz,Kazakhstan,1989,Lower middle income,Middle income
@@ -2903,6 +2990,7 @@ kaz,Kazakhstan,2016,Upper middle income,Middle income
 kaz,Kazakhstan,2017,Upper middle income,Middle income
 kaz,Kazakhstan,2018,Upper middle income,Middle income
 kaz,Kazakhstan,2019,Upper middle income,Middle income
+kaz,Kazakhstan,2020,Upper middle income,Middle income
 ken,Kenya,1987,Low income,Low income
 ken,Kenya,1988,Low income,Low income
 ken,Kenya,1989,Low income,Low income
@@ -2936,6 +3024,7 @@ ken,Kenya,2016,Lower middle income,Middle income
 ken,Kenya,2017,Lower middle income,Middle income
 ken,Kenya,2018,Lower middle income,Middle income
 ken,Kenya,2019,Lower middle income,Middle income
+ken,Kenya,2020,Lower middle income,Middle income
 kir,Kiribati,1987,Lower middle income,Middle income
 kir,Kiribati,1988,Lower middle income,Middle income
 kir,Kiribati,1989,Lower middle income,Middle income
@@ -2969,6 +3058,7 @@ kir,Kiribati,2016,Lower middle income,Middle income
 kir,Kiribati,2017,Lower middle income,Middle income
 kir,Kiribati,2018,Lower middle income,Middle income
 kir,Kiribati,2019,Lower middle income,Middle income
+kir,Kiribati,2020,Lower middle income,Middle income
 prk,North Korea,1987,Lower middle income,Middle income
 prk,North Korea,1988,Lower middle income,Middle income
 prk,North Korea,1989,Lower middle income,Middle income
@@ -3002,6 +3092,7 @@ prk,North Korea,2016,Low income,Low income
 prk,North Korea,2017,Low income,Low income
 prk,North Korea,2018,Low income,Low income
 prk,North Korea,2019,Low income,Low income
+prk,North Korea,2020,Low income,Low income
 kor,South Korea,1987,Upper middle income,Middle income
 kor,South Korea,1988,Upper middle income,Middle income
 kor,South Korea,1989,Upper middle income,Middle income
@@ -3035,6 +3126,7 @@ kor,South Korea,2016,High income,High income
 kor,South Korea,2017,High income,High income
 kor,South Korea,2018,High income,High income
 kor,South Korea,2019,High income,High income
+kor,South Korea,2020,High income,High income
 kwt,Kuwait,1987,High income,High income
 kwt,Kuwait,1988,High income,High income
 kwt,Kuwait,1989,High income,High income
@@ -3068,6 +3160,7 @@ kwt,Kuwait,2016,High income,High income
 kwt,Kuwait,2017,High income,High income
 kwt,Kuwait,2018,High income,High income
 kwt,Kuwait,2019,High income,High income
+kwt,Kuwait,2020,High income,High income
 kgz,Kyrgyz Republic,1987,Lower middle income,Middle income
 kgz,Kyrgyz Republic,1988,Lower middle income,Middle income
 kgz,Kyrgyz Republic,1989,Lower middle income,Middle income
@@ -3101,6 +3194,7 @@ kgz,Kyrgyz Republic,2016,Lower middle income,Middle income
 kgz,Kyrgyz Republic,2017,Lower middle income,Middle income
 kgz,Kyrgyz Republic,2018,Lower middle income,Middle income
 kgz,Kyrgyz Republic,2019,Lower middle income,Middle income
+kgz,Kyrgyz Republic,2020,Lower middle income,Middle income
 lao,Lao,1987,Low income,Low income
 lao,Lao,1988,Low income,Low income
 lao,Lao,1989,Low income,Low income
@@ -3134,6 +3228,7 @@ lao,Lao,2016,Lower middle income,Middle income
 lao,Lao,2017,Lower middle income,Middle income
 lao,Lao,2018,Lower middle income,Middle income
 lao,Lao,2019,Lower middle income,Middle income
+lao,Lao,2020,Lower middle income,Middle income
 lva,Latvia,1987,Upper middle income,Middle income
 lva,Latvia,1988,Upper middle income,Middle income
 lva,Latvia,1989,Upper middle income,Middle income
@@ -3167,6 +3262,7 @@ lva,Latvia,2016,High income,High income
 lva,Latvia,2017,High income,High income
 lva,Latvia,2018,High income,High income
 lva,Latvia,2019,High income,High income
+lva,Latvia,2020,High income,High income
 lbn,Lebanon,1987,Lower middle income,Middle income
 lbn,Lebanon,1988,Lower middle income,Middle income
 lbn,Lebanon,1989,Lower middle income,Middle income
@@ -3200,6 +3296,7 @@ lbn,Lebanon,2016,Upper middle income,Middle income
 lbn,Lebanon,2017,Upper middle income,Middle income
 lbn,Lebanon,2018,Upper middle income,Middle income
 lbn,Lebanon,2019,Upper middle income,Middle income
+lbn,Lebanon,2020,Upper middle income,Middle income
 lso,Lesotho,1987,Low income,Low income
 lso,Lesotho,1988,Low income,Low income
 lso,Lesotho,1989,Low income,Low income
@@ -3233,6 +3330,7 @@ lso,Lesotho,2016,Lower middle income,Middle income
 lso,Lesotho,2017,Lower middle income,Middle income
 lso,Lesotho,2018,Lower middle income,Middle income
 lso,Lesotho,2019,Lower middle income,Middle income
+lso,Lesotho,2020,Lower middle income,Middle income
 lbr,Liberia,1987,Low income,Low income
 lbr,Liberia,1988,Low income,Low income
 lbr,Liberia,1989,Low income,Low income
@@ -3266,6 +3364,7 @@ lbr,Liberia,2016,Low income,Low income
 lbr,Liberia,2017,Low income,Low income
 lbr,Liberia,2018,Low income,Low income
 lbr,Liberia,2019,Low income,Low income
+lbr,Liberia,2020,Low income,Low income
 lby,Libya,1987,Upper middle income,Middle income
 lby,Libya,1988,Upper middle income,Middle income
 lby,Libya,1989,Upper middle income,Middle income
@@ -3299,6 +3398,7 @@ lby,Libya,2016,Upper middle income,Middle income
 lby,Libya,2017,Upper middle income,Middle income
 lby,Libya,2018,Upper middle income,Middle income
 lby,Libya,2019,Upper middle income,Middle income
+lby,Libya,2020,Upper middle income,Middle income
 lie,Liechtenstein,1987,High income,High income
 lie,Liechtenstein,1988,High income,High income
 lie,Liechtenstein,1989,High income,High income
@@ -3332,6 +3432,7 @@ lie,Liechtenstein,2016,High income,High income
 lie,Liechtenstein,2017,High income,High income
 lie,Liechtenstein,2018,High income,High income
 lie,Liechtenstein,2019,High income,High income
+lie,Liechtenstein,2020,High income,High income
 ltu,Lithuania,1987,Upper middle income,Middle income
 ltu,Lithuania,1988,Upper middle income,Middle income
 ltu,Lithuania,1989,Upper middle income,Middle income
@@ -3365,6 +3466,7 @@ ltu,Lithuania,2016,High income,High income
 ltu,Lithuania,2017,High income,High income
 ltu,Lithuania,2018,High income,High income
 ltu,Lithuania,2019,High income,High income
+ltu,Lithuania,2020,High income,High income
 lux,Luxembourg,1987,High income,High income
 lux,Luxembourg,1988,High income,High income
 lux,Luxembourg,1989,High income,High income
@@ -3398,6 +3500,7 @@ lux,Luxembourg,2016,High income,High income
 lux,Luxembourg,2017,High income,High income
 lux,Luxembourg,2018,High income,High income
 lux,Luxembourg,2019,High income,High income
+lux,Luxembourg,2020,High income,High income
 mdg,Madagascar,1987,Low income,Low income
 mdg,Madagascar,1988,Low income,Low income
 mdg,Madagascar,1989,Low income,Low income
@@ -3431,6 +3534,7 @@ mdg,Madagascar,2016,Low income,Low income
 mdg,Madagascar,2017,Low income,Low income
 mdg,Madagascar,2018,Low income,Low income
 mdg,Madagascar,2019,Low income,Low income
+mdg,Madagascar,2020,Low income,Low income
 mwi,Malawi,1987,Low income,Low income
 mwi,Malawi,1988,Low income,Low income
 mwi,Malawi,1989,Low income,Low income
@@ -3464,6 +3568,7 @@ mwi,Malawi,2016,Low income,Low income
 mwi,Malawi,2017,Low income,Low income
 mwi,Malawi,2018,Low income,Low income
 mwi,Malawi,2019,Low income,Low income
+mwi,Malawi,2020,Low income,Low income
 mys,Malaysia,1987,Lower middle income,Middle income
 mys,Malaysia,1988,Lower middle income,Middle income
 mys,Malaysia,1989,Lower middle income,Middle income
@@ -3497,6 +3602,7 @@ mys,Malaysia,2016,Upper middle income,Middle income
 mys,Malaysia,2017,Upper middle income,Middle income
 mys,Malaysia,2018,Upper middle income,Middle income
 mys,Malaysia,2019,Upper middle income,Middle income
+mys,Malaysia,2020,Upper middle income,Middle income
 mdv,Maldives,1987,Low income,Low income
 mdv,Maldives,1988,Low income,Low income
 mdv,Maldives,1989,Low income,Low income
@@ -3530,6 +3636,7 @@ mdv,Maldives,2016,Upper middle income,Middle income
 mdv,Maldives,2017,Upper middle income,Middle income
 mdv,Maldives,2018,Upper middle income,Middle income
 mdv,Maldives,2019,Upper middle income,Middle income
+mdv,Maldives,2020,Upper middle income,Middle income
 mli,Mali,1987,Low income,Low income
 mli,Mali,1988,Low income,Low income
 mli,Mali,1989,Low income,Low income
@@ -3563,6 +3670,7 @@ mli,Mali,2016,Low income,Low income
 mli,Mali,2017,Low income,Low income
 mli,Mali,2018,Low income,Low income
 mli,Mali,2019,Low income,Low income
+mli,Mali,2020,Low income,Low income
 mlt,Malta,1987,Upper middle income,Middle income
 mlt,Malta,1988,Upper middle income,Middle income
 mlt,Malta,1989,High income,High income
@@ -3596,6 +3704,7 @@ mlt,Malta,2016,High income,High income
 mlt,Malta,2017,High income,High income
 mlt,Malta,2018,High income,High income
 mlt,Malta,2019,High income,High income
+mlt,Malta,2020,High income,High income
 mhl,Marshall Islands,1987,Lower middle income,Middle income
 mhl,Marshall Islands,1988,Lower middle income,Middle income
 mhl,Marshall Islands,1989,Lower middle income,Middle income
@@ -3629,6 +3738,7 @@ mhl,Marshall Islands,2016,Upper middle income,Middle income
 mhl,Marshall Islands,2017,Upper middle income,Middle income
 mhl,Marshall Islands,2018,Upper middle income,Middle income
 mhl,Marshall Islands,2019,Upper middle income,Middle income
+mhl,Marshall Islands,2020,Upper middle income,Middle income
 mrt,Mauritania,1987,Low income,Low income
 mrt,Mauritania,1988,Low income,Low income
 mrt,Mauritania,1989,Low income,Low income
@@ -3662,6 +3772,7 @@ mrt,Mauritania,2016,Lower middle income,Middle income
 mrt,Mauritania,2017,Lower middle income,Middle income
 mrt,Mauritania,2018,Lower middle income,Middle income
 mrt,Mauritania,2019,Lower middle income,Middle income
+mrt,Mauritania,2020,Lower middle income,Middle income
 mus,Mauritius,1987,Lower middle income,Middle income
 mus,Mauritius,1988,Lower middle income,Middle income
 mus,Mauritius,1989,Lower middle income,Middle income
@@ -3695,6 +3806,7 @@ mus,Mauritius,2016,Upper middle income,Middle income
 mus,Mauritius,2017,Upper middle income,Middle income
 mus,Mauritius,2018,Upper middle income,Middle income
 mus,Mauritius,2019,High income,High income
+mus,Mauritius,2020,Upper middle income,Middle income
 mex,Mexico,1987,Lower middle income,Middle income
 mex,Mexico,1988,Lower middle income,Middle income
 mex,Mexico,1989,Lower middle income,Middle income
@@ -3728,6 +3840,7 @@ mex,Mexico,2016,Upper middle income,Middle income
 mex,Mexico,2017,Upper middle income,Middle income
 mex,Mexico,2018,Upper middle income,Middle income
 mex,Mexico,2019,Upper middle income,Middle income
+mex,Mexico,2020,Upper middle income,Middle income
 fsm,"Micronesia, Fed. Sts.",1987,Lower middle income,Middle income
 fsm,"Micronesia, Fed. Sts.",1988,Lower middle income,Middle income
 fsm,"Micronesia, Fed. Sts.",1989,Lower middle income,Middle income
@@ -3761,6 +3874,7 @@ fsm,"Micronesia, Fed. Sts.",2016,Lower middle income,Middle income
 fsm,"Micronesia, Fed. Sts.",2017,Lower middle income,Middle income
 fsm,"Micronesia, Fed. Sts.",2018,Lower middle income,Middle income
 fsm,"Micronesia, Fed. Sts.",2019,Lower middle income,Middle income
+fsm,"Micronesia, Fed. Sts.",2020,Lower middle income,Middle income
 mda,Moldova,1987,Lower middle income,Middle income
 mda,Moldova,1988,Lower middle income,Middle income
 mda,Moldova,1989,Lower middle income,Middle income
@@ -3794,6 +3908,7 @@ mda,Moldova,2016,Lower middle income,Middle income
 mda,Moldova,2017,Lower middle income,Middle income
 mda,Moldova,2018,Lower middle income,Middle income
 mda,Moldova,2019,Lower middle income,Middle income
+mda,Moldova,2020,Upper middle income,Middle income
 mco,Monaco,1987,High income,High income
 mco,Monaco,1988,High income,High income
 mco,Monaco,1989,High income,High income
@@ -3827,6 +3942,7 @@ mco,Monaco,2016,High income,High income
 mco,Monaco,2017,High income,High income
 mco,Monaco,2018,High income,High income
 mco,Monaco,2019,High income,High income
+mco,Monaco,2020,High income,High income
 mng,Mongolia,1987,Lower middle income,Middle income
 mng,Mongolia,1988,Lower middle income,Middle income
 mng,Mongolia,1989,Lower middle income,Middle income
@@ -3860,6 +3976,7 @@ mng,Mongolia,2016,Lower middle income,Middle income
 mng,Mongolia,2017,Lower middle income,Middle income
 mng,Mongolia,2018,Lower middle income,Middle income
 mng,Mongolia,2019,Lower middle income,Middle income
+mng,Mongolia,2020,Lower middle income,Middle income
 mne,Montenegro,1987,Upper middle income,Middle income
 mne,Montenegro,1988,Upper middle income,Middle income
 mne,Montenegro,1989,Upper middle income,Middle income
@@ -3893,6 +4010,7 @@ mne,Montenegro,2016,Upper middle income,Middle income
 mne,Montenegro,2017,Upper middle income,Middle income
 mne,Montenegro,2018,Upper middle income,Middle income
 mne,Montenegro,2019,Upper middle income,Middle income
+mne,Montenegro,2020,Upper middle income,Middle income
 mar,Morocco,1987,Lower middle income,Middle income
 mar,Morocco,1988,Lower middle income,Middle income
 mar,Morocco,1989,Lower middle income,Middle income
@@ -3926,6 +4044,7 @@ mar,Morocco,2016,Lower middle income,Middle income
 mar,Morocco,2017,Lower middle income,Middle income
 mar,Morocco,2018,Lower middle income,Middle income
 mar,Morocco,2019,Lower middle income,Middle income
+mar,Morocco,2020,Lower middle income,Middle income
 moz,Mozambique,1987,Low income,Low income
 moz,Mozambique,1988,Low income,Low income
 moz,Mozambique,1989,Low income,Low income
@@ -3959,6 +4078,7 @@ moz,Mozambique,2016,Low income,Low income
 moz,Mozambique,2017,Low income,Low income
 moz,Mozambique,2018,Low income,Low income
 moz,Mozambique,2019,Low income,Low income
+moz,Mozambique,2020,Low income,Low income
 mmr,Myanmar,1987,Low income,Low income
 mmr,Myanmar,1988,Low income,Low income
 mmr,Myanmar,1989,Low income,Low income
@@ -3992,6 +4112,7 @@ mmr,Myanmar,2016,Lower middle income,Middle income
 mmr,Myanmar,2017,Lower middle income,Middle income
 mmr,Myanmar,2018,Lower middle income,Middle income
 mmr,Myanmar,2019,Lower middle income,Middle income
+mmr,Myanmar,2020,Lower middle income,Middle income
 nam,Namibia,1987,Lower middle income,Middle income
 nam,Namibia,1988,Lower middle income,Middle income
 nam,Namibia,1989,Lower middle income,Middle income
@@ -4025,6 +4146,7 @@ nam,Namibia,2016,Upper middle income,Middle income
 nam,Namibia,2017,Upper middle income,Middle income
 nam,Namibia,2018,Upper middle income,Middle income
 nam,Namibia,2019,Upper middle income,Middle income
+nam,Namibia,2020,Upper middle income,Middle income
 nru,Nauru,1987,High income,High income
 nru,Nauru,1988,High income,High income
 nru,Nauru,1989,High income,High income
@@ -4058,6 +4180,7 @@ nru,Nauru,2016,Upper middle income,Middle income
 nru,Nauru,2017,Upper middle income,Middle income
 nru,Nauru,2018,Upper middle income,Middle income
 nru,Nauru,2019,High income,High income
+nru,Nauru,2020,High income,High income
 npl,Nepal,1987,Low income,Low income
 npl,Nepal,1988,Low income,Low income
 npl,Nepal,1989,Low income,Low income
@@ -4091,6 +4214,7 @@ npl,Nepal,2016,Low income,Low income
 npl,Nepal,2017,Low income,Low income
 npl,Nepal,2018,Low income,Low income
 npl,Nepal,2019,Lower middle income,Middle income
+npl,Nepal,2020,Lower middle income,Middle income
 nld,Netherlands,1987,High income,High income
 nld,Netherlands,1988,High income,High income
 nld,Netherlands,1989,High income,High income
@@ -4124,6 +4248,7 @@ nld,Netherlands,2016,High income,High income
 nld,Netherlands,2017,High income,High income
 nld,Netherlands,2018,High income,High income
 nld,Netherlands,2019,High income,High income
+nld,Netherlands,2020,High income,High income
 nzl,New Zealand,1987,High income,High income
 nzl,New Zealand,1988,High income,High income
 nzl,New Zealand,1989,High income,High income
@@ -4157,6 +4282,7 @@ nzl,New Zealand,2016,High income,High income
 nzl,New Zealand,2017,High income,High income
 nzl,New Zealand,2018,High income,High income
 nzl,New Zealand,2019,High income,High income
+nzl,New Zealand,2020,High income,High income
 nic,Nicaragua,1987,Lower middle income,Middle income
 nic,Nicaragua,1988,Lower middle income,Middle income
 nic,Nicaragua,1989,Lower middle income,Middle income
@@ -4190,6 +4316,7 @@ nic,Nicaragua,2016,Lower middle income,Middle income
 nic,Nicaragua,2017,Lower middle income,Middle income
 nic,Nicaragua,2018,Lower middle income,Middle income
 nic,Nicaragua,2019,Lower middle income,Middle income
+nic,Nicaragua,2020,Lower middle income,Middle income
 ner,Niger,1987,Low income,Low income
 ner,Niger,1988,Low income,Low income
 ner,Niger,1989,Low income,Low income
@@ -4223,6 +4350,7 @@ ner,Niger,2016,Low income,Low income
 ner,Niger,2017,Low income,Low income
 ner,Niger,2018,Low income,Low income
 ner,Niger,2019,Low income,Low income
+ner,Niger,2020,Low income,Low income
 nga,Nigeria,1987,Low income,Low income
 nga,Nigeria,1988,Low income,Low income
 nga,Nigeria,1989,Low income,Low income
@@ -4256,6 +4384,7 @@ nga,Nigeria,2016,Lower middle income,Middle income
 nga,Nigeria,2017,Lower middle income,Middle income
 nga,Nigeria,2018,Lower middle income,Middle income
 nga,Nigeria,2019,Lower middle income,Middle income
+nga,Nigeria,2020,Lower middle income,Middle income
 mkd,"Macedonia, FYR",1987,Lower middle income,Middle income
 mkd,"Macedonia, FYR",1988,Lower middle income,Middle income
 mkd,"Macedonia, FYR",1989,Lower middle income,Middle income
@@ -4289,6 +4418,7 @@ mkd,"Macedonia, FYR",2016,Upper middle income,Middle income
 mkd,"Macedonia, FYR",2017,Upper middle income,Middle income
 mkd,"Macedonia, FYR",2018,Upper middle income,Middle income
 mkd,"Macedonia, FYR",2019,Upper middle income,Middle income
+mkd,"Macedonia, FYR",2020,Upper middle income,Middle income
 nor,Norway,1987,High income,High income
 nor,Norway,1988,High income,High income
 nor,Norway,1989,High income,High income
@@ -4322,6 +4452,7 @@ nor,Norway,2016,High income,High income
 nor,Norway,2017,High income,High income
 nor,Norway,2018,High income,High income
 nor,Norway,2019,High income,High income
+nor,Norway,2020,High income,High income
 omn,Oman,1987,Upper middle income,Middle income
 omn,Oman,1988,Upper middle income,Middle income
 omn,Oman,1989,Upper middle income,Middle income
@@ -4355,6 +4486,7 @@ omn,Oman,2016,High income,High income
 omn,Oman,2017,High income,High income
 omn,Oman,2018,High income,High income
 omn,Oman,2019,High income,High income
+omn,Oman,2020,High income,High income
 pak,Pakistan,1987,Low income,Low income
 pak,Pakistan,1988,Low income,Low income
 pak,Pakistan,1989,Low income,Low income
@@ -4388,6 +4520,7 @@ pak,Pakistan,2016,Lower middle income,Middle income
 pak,Pakistan,2017,Lower middle income,Middle income
 pak,Pakistan,2018,Lower middle income,Middle income
 pak,Pakistan,2019,Lower middle income,Middle income
+pak,Pakistan,2020,Lower middle income,Middle income
 plw,Palau,1987,Upper middle income,Middle income
 plw,Palau,1988,Upper middle income,Middle income
 plw,Palau,1989,Upper middle income,Middle income
@@ -4421,6 +4554,7 @@ plw,Palau,2016,High income,High income
 plw,Palau,2017,High income,High income
 plw,Palau,2018,High income,High income
 plw,Palau,2019,High income,High income
+plw,Palau,2020,High income,High income
 pan,Panama,1987,Upper middle income,Middle income
 pan,Panama,1988,Lower middle income,Middle income
 pan,Panama,1989,Lower middle income,Middle income
@@ -4454,6 +4588,7 @@ pan,Panama,2016,Upper middle income,Middle income
 pan,Panama,2017,High income,High income
 pan,Panama,2018,High income,High income
 pan,Panama,2019,High income,High income
+pan,Panama,2020,Upper middle income,Middle income
 png,Papua New Guinea,1987,Lower middle income,Middle income
 png,Papua New Guinea,1988,Lower middle income,Middle income
 png,Papua New Guinea,1989,Lower middle income,Middle income
@@ -4487,6 +4622,7 @@ png,Papua New Guinea,2016,Lower middle income,Middle income
 png,Papua New Guinea,2017,Lower middle income,Middle income
 png,Papua New Guinea,2018,Lower middle income,Middle income
 png,Papua New Guinea,2019,Lower middle income,Middle income
+png,Papua New Guinea,2020,Lower middle income,Middle income
 pry,Paraguay,1987,Lower middle income,Middle income
 pry,Paraguay,1988,Lower middle income,Middle income
 pry,Paraguay,1989,Lower middle income,Middle income
@@ -4520,6 +4656,7 @@ pry,Paraguay,2016,Upper middle income,Middle income
 pry,Paraguay,2017,Upper middle income,Middle income
 pry,Paraguay,2018,Upper middle income,Middle income
 pry,Paraguay,2019,Upper middle income,Middle income
+pry,Paraguay,2020,Upper middle income,Middle income
 per,Peru,1987,Lower middle income,Middle income
 per,Peru,1988,Lower middle income,Middle income
 per,Peru,1989,Lower middle income,Middle income
@@ -4553,6 +4690,7 @@ per,Peru,2016,Upper middle income,Middle income
 per,Peru,2017,Upper middle income,Middle income
 per,Peru,2018,Upper middle income,Middle income
 per,Peru,2019,Upper middle income,Middle income
+per,Peru,2020,Upper middle income,Middle income
 phl,Philippines,1987,Lower middle income,Middle income
 phl,Philippines,1988,Lower middle income,Middle income
 phl,Philippines,1989,Lower middle income,Middle income
@@ -4586,6 +4724,7 @@ phl,Philippines,2016,Lower middle income,Middle income
 phl,Philippines,2017,Lower middle income,Middle income
 phl,Philippines,2018,Lower middle income,Middle income
 phl,Philippines,2019,Lower middle income,Middle income
+phl,Philippines,2020,Lower middle income,Middle income
 pol,Poland,1987,Lower middle income,Middle income
 pol,Poland,1988,Lower middle income,Middle income
 pol,Poland,1989,Lower middle income,Middle income
@@ -4619,6 +4758,7 @@ pol,Poland,2016,High income,High income
 pol,Poland,2017,High income,High income
 pol,Poland,2018,High income,High income
 pol,Poland,2019,High income,High income
+pol,Poland,2020,High income,High income
 prt,Portugal,1987,Upper middle income,Middle income
 prt,Portugal,1988,Upper middle income,Middle income
 prt,Portugal,1989,Upper middle income,Middle income
@@ -4652,6 +4792,7 @@ prt,Portugal,2016,High income,High income
 prt,Portugal,2017,High income,High income
 prt,Portugal,2018,High income,High income
 prt,Portugal,2019,High income,High income
+prt,Portugal,2020,High income,High income
 qat,Qatar,1987,High income,High income
 qat,Qatar,1988,High income,High income
 qat,Qatar,1989,High income,High income
@@ -4685,6 +4826,7 @@ qat,Qatar,2016,High income,High income
 qat,Qatar,2017,High income,High income
 qat,Qatar,2018,High income,High income
 qat,Qatar,2019,High income,High income
+qat,Qatar,2020,High income,High income
 rou,Romania,1987,Upper middle income,Middle income
 rou,Romania,1988,Upper middle income,Middle income
 rou,Romania,1989,Upper middle income,Middle income
@@ -4718,6 +4860,7 @@ rou,Romania,2016,Upper middle income,Middle income
 rou,Romania,2017,Upper middle income,Middle income
 rou,Romania,2018,Upper middle income,Middle income
 rou,Romania,2019,High income,High income
+rou,Romania,2020,Upper middle income,Middle income
 rus,Russia,1987,Upper middle income,Middle income
 rus,Russia,1988,Upper middle income,Middle income
 rus,Russia,1989,Upper middle income,Middle income
@@ -4751,6 +4894,7 @@ rus,Russia,2016,Upper middle income,Middle income
 rus,Russia,2017,Upper middle income,Middle income
 rus,Russia,2018,Upper middle income,Middle income
 rus,Russia,2019,Upper middle income,Middle income
+rus,Russia,2020,Upper middle income,Middle income
 rwa,Rwanda,1987,Low income,Low income
 rwa,Rwanda,1988,Low income,Low income
 rwa,Rwanda,1989,Low income,Low income
@@ -4784,6 +4928,7 @@ rwa,Rwanda,2016,Low income,Low income
 rwa,Rwanda,2017,Low income,Low income
 rwa,Rwanda,2018,Low income,Low income
 rwa,Rwanda,2019,Low income,Low income
+rwa,Rwanda,2020,Low income,Low income
 wsm,Samoa,1987,Lower middle income,Middle income
 wsm,Samoa,1988,Lower middle income,Middle income
 wsm,Samoa,1989,Lower middle income,Middle income
@@ -4817,6 +4962,7 @@ wsm,Samoa,2016,Upper middle income,Middle income
 wsm,Samoa,2017,Upper middle income,Middle income
 wsm,Samoa,2018,Upper middle income,Middle income
 wsm,Samoa,2019,Upper middle income,Middle income
+wsm,Samoa,2020,Lower middle income,Middle income
 smr,San Marino,1987,High income,High income
 smr,San Marino,1988,High income,High income
 smr,San Marino,1989,High income,High income
@@ -4850,6 +4996,7 @@ smr,San Marino,2016,High income,High income
 smr,San Marino,2017,High income,High income
 smr,San Marino,2018,High income,High income
 smr,San Marino,2019,High income,High income
+smr,San Marino,2020,High income,High income
 stp,Sao Tome and Principe,1987,Low income,Low income
 stp,Sao Tome and Principe,1988,Low income,Low income
 stp,Sao Tome and Principe,1989,Low income,Low income
@@ -4883,6 +5030,7 @@ stp,Sao Tome and Principe,2016,Lower middle income,Middle income
 stp,Sao Tome and Principe,2017,Lower middle income,Middle income
 stp,Sao Tome and Principe,2018,Lower middle income,Middle income
 stp,Sao Tome and Principe,2019,Lower middle income,Middle income
+stp,Sao Tome and Principe,2020,Lower middle income,Middle income
 sau,Saudi Arabia,1987,High income,High income
 sau,Saudi Arabia,1988,High income,High income
 sau,Saudi Arabia,1989,High income,High income
@@ -4916,6 +5064,7 @@ sau,Saudi Arabia,2016,High income,High income
 sau,Saudi Arabia,2017,High income,High income
 sau,Saudi Arabia,2018,High income,High income
 sau,Saudi Arabia,2019,High income,High income
+sau,Saudi Arabia,2020,High income,High income
 sen,Senegal,1987,Lower middle income,Middle income
 sen,Senegal,1988,Lower middle income,Middle income
 sen,Senegal,1989,Lower middle income,Middle income
@@ -4949,6 +5098,7 @@ sen,Senegal,2016,Low income,Low income
 sen,Senegal,2017,Low income,Low income
 sen,Senegal,2018,Lower middle income,Middle income
 sen,Senegal,2019,Lower middle income,Middle income
+sen,Senegal,2020,Lower middle income,Middle income
 srb,Serbia,1987,Upper middle income,Middle income
 srb,Serbia,1988,Upper middle income,Middle income
 srb,Serbia,1989,Upper middle income,Middle income
@@ -4982,6 +5132,7 @@ srb,Serbia,2016,Upper middle income,Middle income
 srb,Serbia,2017,Upper middle income,Middle income
 srb,Serbia,2018,Upper middle income,Middle income
 srb,Serbia,2019,Upper middle income,Middle income
+srb,Serbia,2020,Upper middle income,Middle income
 syc,Seychelles,1987,Upper middle income,Middle income
 syc,Seychelles,1988,Upper middle income,Middle income
 syc,Seychelles,1989,Upper middle income,Middle income
@@ -5015,6 +5166,7 @@ syc,Seychelles,2016,High income,High income
 syc,Seychelles,2017,High income,High income
 syc,Seychelles,2018,High income,High income
 syc,Seychelles,2019,High income,High income
+syc,Seychelles,2020,High income,High income
 sle,Sierra Leone,1987,Low income,Low income
 sle,Sierra Leone,1988,Low income,Low income
 sle,Sierra Leone,1989,Low income,Low income
@@ -5048,6 +5200,7 @@ sle,Sierra Leone,2016,Low income,Low income
 sle,Sierra Leone,2017,Low income,Low income
 sle,Sierra Leone,2018,Low income,Low income
 sle,Sierra Leone,2019,Low income,Low income
+sle,Sierra Leone,2020,Low income,Low income
 sgp,Singapore,1987,High income,High income
 sgp,Singapore,1988,High income,High income
 sgp,Singapore,1989,High income,High income
@@ -5081,6 +5234,7 @@ sgp,Singapore,2016,High income,High income
 sgp,Singapore,2017,High income,High income
 sgp,Singapore,2018,High income,High income
 sgp,Singapore,2019,High income,High income
+sgp,Singapore,2020,High income,High income
 svk,Slovak Republic,1987,Lower middle income,Middle income
 svk,Slovak Republic,1988,Lower middle income,Middle income
 svk,Slovak Republic,1989,Lower middle income,Middle income
@@ -5114,6 +5268,7 @@ svk,Slovak Republic,2016,High income,High income
 svk,Slovak Republic,2017,High income,High income
 svk,Slovak Republic,2018,High income,High income
 svk,Slovak Republic,2019,High income,High income
+svk,Slovak Republic,2020,High income,High income
 svn,Slovenia,1987,Upper middle income,Middle income
 svn,Slovenia,1988,Upper middle income,Middle income
 svn,Slovenia,1989,Upper middle income,Middle income
@@ -5147,6 +5302,7 @@ svn,Slovenia,2016,High income,High income
 svn,Slovenia,2017,High income,High income
 svn,Slovenia,2018,High income,High income
 svn,Slovenia,2019,High income,High income
+svn,Slovenia,2020,High income,High income
 slb,Solomon Islands,1987,Low income,Low income
 slb,Solomon Islands,1988,Lower middle income,Middle income
 slb,Solomon Islands,1989,Low income,Low income
@@ -5180,6 +5336,7 @@ slb,Solomon Islands,2016,Lower middle income,Middle income
 slb,Solomon Islands,2017,Lower middle income,Middle income
 slb,Solomon Islands,2018,Lower middle income,Middle income
 slb,Solomon Islands,2019,Lower middle income,Middle income
+slb,Solomon Islands,2020,Lower middle income,Middle income
 som,Somalia,1987,Low income,Low income
 som,Somalia,1988,Low income,Low income
 som,Somalia,1989,Low income,Low income
@@ -5213,6 +5370,7 @@ som,Somalia,2016,Low income,Low income
 som,Somalia,2017,Low income,Low income
 som,Somalia,2018,Low income,Low income
 som,Somalia,2019,Low income,Low income
+som,Somalia,2020,Low income,Low income
 zaf,South Africa,1987,Lower middle income,Middle income
 zaf,South Africa,1988,Upper middle income,Middle income
 zaf,South Africa,1989,Upper middle income,Middle income
@@ -5246,26 +5404,27 @@ zaf,South Africa,2016,Upper middle income,Middle income
 zaf,South Africa,2017,Upper middle income,Middle income
 zaf,South Africa,2018,Upper middle income,Middle income
 zaf,South Africa,2019,Upper middle income,Middle income
-ssd,South Sudan,1987,Low income,Low income
-ssd,South Sudan,1988,Low income,Low income
-ssd,South Sudan,1989,Low income,Low income
-ssd,South Sudan,1990,Low income,Low income
-ssd,South Sudan,1991,Low income,Low income
-ssd,South Sudan,1992,Low income,Low income
-ssd,South Sudan,1993,Low income,Low income
-ssd,South Sudan,1994,Low income,Low income
-ssd,South Sudan,1995,Low income,Low income
-ssd,South Sudan,1996,Low income,Low income
-ssd,South Sudan,1997,Low income,Low income
-ssd,South Sudan,1998,Low income,Low income
-ssd,South Sudan,1999,Low income,Low income
-ssd,South Sudan,2000,Low income,Low income
-ssd,South Sudan,2001,Low income,Low income
-ssd,South Sudan,2002,Low income,Low income
-ssd,South Sudan,2003,Low income,Low income
-ssd,South Sudan,2004,Low income,Low income
-ssd,South Sudan,2005,Low income,Low income
-ssd,South Sudan,2006,Low income,Low income
+zaf,South Africa,2020,Upper middle income,Middle income
+ssd,South Sudan,1987,Lower middle income,Middle income
+ssd,South Sudan,1988,Lower middle income,Middle income
+ssd,South Sudan,1989,Lower middle income,Middle income
+ssd,South Sudan,1990,Lower middle income,Middle income
+ssd,South Sudan,1991,Lower middle income,Middle income
+ssd,South Sudan,1992,Lower middle income,Middle income
+ssd,South Sudan,1993,Lower middle income,Middle income
+ssd,South Sudan,1994,Lower middle income,Middle income
+ssd,South Sudan,1995,Lower middle income,Middle income
+ssd,South Sudan,1996,Lower middle income,Middle income
+ssd,South Sudan,1997,Lower middle income,Middle income
+ssd,South Sudan,1998,Lower middle income,Middle income
+ssd,South Sudan,1999,Lower middle income,Middle income
+ssd,South Sudan,2000,Lower middle income,Middle income
+ssd,South Sudan,2001,Lower middle income,Middle income
+ssd,South Sudan,2002,Lower middle income,Middle income
+ssd,South Sudan,2003,Lower middle income,Middle income
+ssd,South Sudan,2004,Lower middle income,Middle income
+ssd,South Sudan,2005,Lower middle income,Middle income
+ssd,South Sudan,2006,Lower middle income,Middle income
 ssd,South Sudan,2007,Lower middle income,Middle income
 ssd,South Sudan,2008,Lower middle income,Middle income
 ssd,South Sudan,2009,Lower middle income,Middle income
@@ -5279,6 +5438,7 @@ ssd,South Sudan,2016,Low income,Low income
 ssd,South Sudan,2017,Low income,Low income
 ssd,South Sudan,2018,Low income,Low income
 ssd,South Sudan,2019,Low income,Low income
+ssd,South Sudan,2020,Low income,Low income
 esp,Spain,1987,High income,High income
 esp,Spain,1988,High income,High income
 esp,Spain,1989,High income,High income
@@ -5312,6 +5472,7 @@ esp,Spain,2016,High income,High income
 esp,Spain,2017,High income,High income
 esp,Spain,2018,High income,High income
 esp,Spain,2019,High income,High income
+esp,Spain,2020,High income,High income
 lka,Sri Lanka,1987,Low income,Low income
 lka,Sri Lanka,1988,Low income,Low income
 lka,Sri Lanka,1989,Low income,Low income
@@ -5345,6 +5506,7 @@ lka,Sri Lanka,2016,Lower middle income,Middle income
 lka,Sri Lanka,2017,Lower middle income,Middle income
 lka,Sri Lanka,2018,Upper middle income,Middle income
 lka,Sri Lanka,2019,Lower middle income,Middle income
+lka,Sri Lanka,2020,Lower middle income,Middle income
 kna,St. Kitts and Nevis,1987,Upper middle income,Middle income
 kna,St. Kitts and Nevis,1988,Upper middle income,Middle income
 kna,St. Kitts and Nevis,1989,Upper middle income,Middle income
@@ -5378,6 +5540,7 @@ kna,St. Kitts and Nevis,2016,High income,High income
 kna,St. Kitts and Nevis,2017,High income,High income
 kna,St. Kitts and Nevis,2018,High income,High income
 kna,St. Kitts and Nevis,2019,High income,High income
+kna,St. Kitts and Nevis,2020,High income,High income
 lca,St. Lucia,1987,Lower middle income,Middle income
 lca,St. Lucia,1988,Lower middle income,Middle income
 lca,St. Lucia,1989,Lower middle income,Middle income
@@ -5411,6 +5574,7 @@ lca,St. Lucia,2016,Upper middle income,Middle income
 lca,St. Lucia,2017,Upper middle income,Middle income
 lca,St. Lucia,2018,Upper middle income,Middle income
 lca,St. Lucia,2019,Upper middle income,Middle income
+lca,St. Lucia,2020,Upper middle income,Middle income
 vct,St. Vincent and the Grenadines,1987,Lower middle income,Middle income
 vct,St. Vincent and the Grenadines,1988,Lower middle income,Middle income
 vct,St. Vincent and the Grenadines,1989,Lower middle income,Middle income
@@ -5444,6 +5608,7 @@ vct,St. Vincent and the Grenadines,2016,Upper middle income,Middle income
 vct,St. Vincent and the Grenadines,2017,Upper middle income,Middle income
 vct,St. Vincent and the Grenadines,2018,Upper middle income,Middle income
 vct,St. Vincent and the Grenadines,2019,Upper middle income,Middle income
+vct,St. Vincent and the Grenadines,2020,Upper middle income,Middle income
 sdn,Sudan,1987,Low income,Low income
 sdn,Sudan,1988,Low income,Low income
 sdn,Sudan,1989,Low income,Low income
@@ -5477,6 +5642,7 @@ sdn,Sudan,2016,Lower middle income,Middle income
 sdn,Sudan,2017,Lower middle income,Middle income
 sdn,Sudan,2018,Lower middle income,Middle income
 sdn,Sudan,2019,Low income,Low income
+sdn,Sudan,2020,Low income,Low income
 sur,Suriname,1987,Upper middle income,Middle income
 sur,Suriname,1988,Upper middle income,Middle income
 sur,Suriname,1989,Upper middle income,Middle income
@@ -5510,6 +5676,7 @@ sur,Suriname,2016,Upper middle income,Middle income
 sur,Suriname,2017,Upper middle income,Middle income
 sur,Suriname,2018,Upper middle income,Middle income
 sur,Suriname,2019,Upper middle income,Middle income
+sur,Suriname,2020,Upper middle income,Middle income
 swe,Sweden,1987,High income,High income
 swe,Sweden,1988,High income,High income
 swe,Sweden,1989,High income,High income
@@ -5543,6 +5710,7 @@ swe,Sweden,2016,High income,High income
 swe,Sweden,2017,High income,High income
 swe,Sweden,2018,High income,High income
 swe,Sweden,2019,High income,High income
+swe,Sweden,2020,High income,High income
 che,Switzerland,1987,High income,High income
 che,Switzerland,1988,High income,High income
 che,Switzerland,1989,High income,High income
@@ -5576,6 +5744,7 @@ che,Switzerland,2016,High income,High income
 che,Switzerland,2017,High income,High income
 che,Switzerland,2018,High income,High income
 che,Switzerland,2019,High income,High income
+che,Switzerland,2020,High income,High income
 syr,Syria,1987,Lower middle income,Middle income
 syr,Syria,1988,Lower middle income,Middle income
 syr,Syria,1989,Lower middle income,Middle income
@@ -5609,6 +5778,7 @@ syr,Syria,2016,Lower middle income,Middle income
 syr,Syria,2017,Low income,Low income
 syr,Syria,2018,Low income,Low income
 syr,Syria,2019,Low income,Low income
+syr,Syria,2020,Low income,Low income
 twn,Taiwan,1987,High income,High income
 twn,Taiwan,1988,High income,High income
 twn,Taiwan,1989,High income,High income
@@ -5642,6 +5812,7 @@ twn,Taiwan,2016,High income,High income
 twn,Taiwan,2017,High income,High income
 twn,Taiwan,2018,High income,High income
 twn,Taiwan,2019,High income,High income
+twn,Taiwan,2020,High income,High income
 tjk,Tajikistan,1987,Lower middle income,Middle income
 tjk,Tajikistan,1988,Lower middle income,Middle income
 tjk,Tajikistan,1989,Lower middle income,Middle income
@@ -5675,6 +5846,7 @@ tjk,Tajikistan,2016,Lower middle income,Middle income
 tjk,Tajikistan,2017,Low income,Low income
 tjk,Tajikistan,2018,Low income,Low income
 tjk,Tajikistan,2019,Low income,Low income
+tjk,Tajikistan,2020,Lower middle income,Middle income
 tza,Tanzania,1987,Low income,Low income
 tza,Tanzania,1988,Low income,Low income
 tza,Tanzania,1989,Low income,Low income
@@ -5708,6 +5880,7 @@ tza,Tanzania,2016,Low income,Low income
 tza,Tanzania,2017,Low income,Low income
 tza,Tanzania,2018,Low income,Low income
 tza,Tanzania,2019,Lower middle income,Middle income
+tza,Tanzania,2020,Lower middle income,Middle income
 tha,Thailand,1987,Lower middle income,Middle income
 tha,Thailand,1988,Lower middle income,Middle income
 tha,Thailand,1989,Lower middle income,Middle income
@@ -5741,6 +5914,7 @@ tha,Thailand,2016,Upper middle income,Middle income
 tha,Thailand,2017,Upper middle income,Middle income
 tha,Thailand,2018,Upper middle income,Middle income
 tha,Thailand,2019,Upper middle income,Middle income
+tha,Thailand,2020,Upper middle income,Middle income
 tls,Timor-Leste,1987,Low income,Low income
 tls,Timor-Leste,1988,Low income,Low income
 tls,Timor-Leste,1989,Low income,Low income
@@ -5774,6 +5948,7 @@ tls,Timor-Leste,2016,Lower middle income,Middle income
 tls,Timor-Leste,2017,Lower middle income,Middle income
 tls,Timor-Leste,2018,Lower middle income,Middle income
 tls,Timor-Leste,2019,Lower middle income,Middle income
+tls,Timor-Leste,2020,Lower middle income,Middle income
 tgo,Togo,1987,Low income,Low income
 tgo,Togo,1988,Low income,Low income
 tgo,Togo,1989,Low income,Low income
@@ -5807,6 +5982,7 @@ tgo,Togo,2016,Low income,Low income
 tgo,Togo,2017,Low income,Low income
 tgo,Togo,2018,Low income,Low income
 tgo,Togo,2019,Low income,Low income
+tgo,Togo,2020,Low income,Low income
 ton,Tonga,1987,Lower middle income,Middle income
 ton,Tonga,1988,Lower middle income,Middle income
 ton,Tonga,1989,Lower middle income,Middle income
@@ -5840,6 +6016,7 @@ ton,Tonga,2016,Upper middle income,Middle income
 ton,Tonga,2017,Upper middle income,Middle income
 ton,Tonga,2018,Upper middle income,Middle income
 ton,Tonga,2019,Upper middle income,Middle income
+ton,Tonga,2020,Upper middle income,Middle income
 tto,Trinidad and Tobago,1987,Upper middle income,Middle income
 tto,Trinidad and Tobago,1988,Upper middle income,Middle income
 tto,Trinidad and Tobago,1989,Upper middle income,Middle income
@@ -5873,6 +6050,7 @@ tto,Trinidad and Tobago,2016,High income,High income
 tto,Trinidad and Tobago,2017,High income,High income
 tto,Trinidad and Tobago,2018,High income,High income
 tto,Trinidad and Tobago,2019,High income,High income
+tto,Trinidad and Tobago,2020,High income,High income
 tun,Tunisia,1987,Lower middle income,Middle income
 tun,Tunisia,1988,Lower middle income,Middle income
 tun,Tunisia,1989,Lower middle income,Middle income
@@ -5906,6 +6084,7 @@ tun,Tunisia,2016,Lower middle income,Middle income
 tun,Tunisia,2017,Lower middle income,Middle income
 tun,Tunisia,2018,Lower middle income,Middle income
 tun,Tunisia,2019,Lower middle income,Middle income
+tun,Tunisia,2020,Lower middle income,Middle income
 tur,Turkey,1987,Lower middle income,Middle income
 tur,Turkey,1988,Lower middle income,Middle income
 tur,Turkey,1989,Lower middle income,Middle income
@@ -5939,6 +6118,7 @@ tur,Turkey,2016,Upper middle income,Middle income
 tur,Turkey,2017,Upper middle income,Middle income
 tur,Turkey,2018,Upper middle income,Middle income
 tur,Turkey,2019,Upper middle income,Middle income
+tur,Turkey,2020,Upper middle income,Middle income
 tkm,Turkmenistan,1987,Lower middle income,Middle income
 tkm,Turkmenistan,1988,Lower middle income,Middle income
 tkm,Turkmenistan,1989,Lower middle income,Middle income
@@ -5972,6 +6152,7 @@ tkm,Turkmenistan,2016,Upper middle income,Middle income
 tkm,Turkmenistan,2017,Upper middle income,Middle income
 tkm,Turkmenistan,2018,Upper middle income,Middle income
 tkm,Turkmenistan,2019,Upper middle income,Middle income
+tkm,Turkmenistan,2020,Upper middle income,Middle income
 tuv,Tuvalu,1987,Lower middle income,Middle income
 tuv,Tuvalu,1988,Lower middle income,Middle income
 tuv,Tuvalu,1989,Lower middle income,Middle income
@@ -6005,6 +6186,7 @@ tuv,Tuvalu,2016,Upper middle income,Middle income
 tuv,Tuvalu,2017,Upper middle income,Middle income
 tuv,Tuvalu,2018,Upper middle income,Middle income
 tuv,Tuvalu,2019,Upper middle income,Middle income
+tuv,Tuvalu,2020,Upper middle income,Middle income
 uga,Uganda,1987,Low income,Low income
 uga,Uganda,1988,Low income,Low income
 uga,Uganda,1989,Low income,Low income
@@ -6038,6 +6220,7 @@ uga,Uganda,2016,Low income,Low income
 uga,Uganda,2017,Low income,Low income
 uga,Uganda,2018,Low income,Low income
 uga,Uganda,2019,Low income,Low income
+uga,Uganda,2020,Low income,Low income
 ukr,Ukraine,1987,Lower middle income,Middle income
 ukr,Ukraine,1988,Lower middle income,Middle income
 ukr,Ukraine,1989,Lower middle income,Middle income
@@ -6071,6 +6254,7 @@ ukr,Ukraine,2016,Lower middle income,Middle income
 ukr,Ukraine,2017,Lower middle income,Middle income
 ukr,Ukraine,2018,Lower middle income,Middle income
 ukr,Ukraine,2019,Lower middle income,Middle income
+ukr,Ukraine,2020,Lower middle income,Middle income
 are,United Arab Emirates,1987,High income,High income
 are,United Arab Emirates,1988,High income,High income
 are,United Arab Emirates,1989,High income,High income
@@ -6104,6 +6288,7 @@ are,United Arab Emirates,2016,High income,High income
 are,United Arab Emirates,2017,High income,High income
 are,United Arab Emirates,2018,High income,High income
 are,United Arab Emirates,2019,High income,High income
+are,United Arab Emirates,2020,High income,High income
 gbr,United Kingdom,1987,High income,High income
 gbr,United Kingdom,1988,High income,High income
 gbr,United Kingdom,1989,High income,High income
@@ -6137,6 +6322,7 @@ gbr,United Kingdom,2016,High income,High income
 gbr,United Kingdom,2017,High income,High income
 gbr,United Kingdom,2018,High income,High income
 gbr,United Kingdom,2019,High income,High income
+gbr,United Kingdom,2020,High income,High income
 usa,United States,1987,High income,High income
 usa,United States,1988,High income,High income
 usa,United States,1989,High income,High income
@@ -6170,6 +6356,7 @@ usa,United States,2016,High income,High income
 usa,United States,2017,High income,High income
 usa,United States,2018,High income,High income
 usa,United States,2019,High income,High income
+usa,United States,2020,High income,High income
 ury,Uruguay,1987,Upper middle income,Middle income
 ury,Uruguay,1988,Upper middle income,Middle income
 ury,Uruguay,1989,Upper middle income,Middle income
@@ -6203,6 +6390,7 @@ ury,Uruguay,2016,High income,High income
 ury,Uruguay,2017,High income,High income
 ury,Uruguay,2018,High income,High income
 ury,Uruguay,2019,High income,High income
+ury,Uruguay,2020,High income,High income
 uzb,Uzbekistan,1987,Lower middle income,Middle income
 uzb,Uzbekistan,1988,Lower middle income,Middle income
 uzb,Uzbekistan,1989,Lower middle income,Middle income
@@ -6236,6 +6424,7 @@ uzb,Uzbekistan,2016,Lower middle income,Middle income
 uzb,Uzbekistan,2017,Lower middle income,Middle income
 uzb,Uzbekistan,2018,Lower middle income,Middle income
 uzb,Uzbekistan,2019,Lower middle income,Middle income
+uzb,Uzbekistan,2020,Lower middle income,Middle income
 vut,Vanuatu,1987,Lower middle income,Middle income
 vut,Vanuatu,1988,Lower middle income,Middle income
 vut,Vanuatu,1989,Lower middle income,Middle income
@@ -6269,6 +6458,7 @@ vut,Vanuatu,2016,Lower middle income,Middle income
 vut,Vanuatu,2017,Lower middle income,Middle income
 vut,Vanuatu,2018,Lower middle income,Middle income
 vut,Vanuatu,2019,Lower middle income,Middle income
+vut,Vanuatu,2020,Lower middle income,Middle income
 ven,Venezuela,1987,Upper middle income,Middle income
 ven,Venezuela,1988,Upper middle income,Middle income
 ven,Venezuela,1989,Upper middle income,Middle income
@@ -6302,6 +6492,7 @@ ven,Venezuela,2016,Upper middle income,Middle income
 ven,Venezuela,2017,Upper middle income,Middle income
 ven,Venezuela,2018,Upper middle income,Middle income
 ven,Venezuela,2019,Upper middle income,Middle income
+ven,Venezuela,2020,Lower middle income,Middle income
 vnm,Vietnam,1987,Low income,Low income
 vnm,Vietnam,1988,Low income,Low income
 vnm,Vietnam,1989,Low income,Low income
@@ -6335,6 +6526,7 @@ vnm,Vietnam,2016,Lower middle income,Middle income
 vnm,Vietnam,2017,Lower middle income,Middle income
 vnm,Vietnam,2018,Lower middle income,Middle income
 vnm,Vietnam,2019,Lower middle income,Middle income
+vnm,Vietnam,2020,Lower middle income,Middle income
 pse,Palestine,1987,Lower middle income,Middle income
 pse,Palestine,1988,Lower middle income,Middle income
 pse,Palestine,1989,Lower middle income,Middle income
@@ -6368,6 +6560,7 @@ pse,Palestine,2016,Lower middle income,Middle income
 pse,Palestine,2017,Lower middle income,Middle income
 pse,Palestine,2018,Lower middle income,Middle income
 pse,Palestine,2019,Lower middle income,Middle income
+pse,Palestine,2020,Lower middle income,Middle income
 yem,Yemen,1987,Lower middle income,Middle income
 yem,Yemen,1988,Lower middle income,Middle income
 yem,Yemen,1989,Lower middle income,Middle income
@@ -6401,6 +6594,7 @@ yem,Yemen,2016,Lower middle income,Middle income
 yem,Yemen,2017,Low income,Low income
 yem,Yemen,2018,Low income,Low income
 yem,Yemen,2019,Low income,Low income
+yem,Yemen,2020,Low income,Low income
 zmb,Zambia,1987,Low income,Low income
 zmb,Zambia,1988,Low income,Low income
 zmb,Zambia,1989,Low income,Low income
@@ -6434,6 +6628,7 @@ zmb,Zambia,2016,Lower middle income,Middle income
 zmb,Zambia,2017,Lower middle income,Middle income
 zmb,Zambia,2018,Lower middle income,Middle income
 zmb,Zambia,2019,Lower middle income,Middle income
+zmb,Zambia,2020,Lower middle income,Middle income
 zwe,Zimbabwe,1987,Lower middle income,Middle income
 zwe,Zimbabwe,1988,Lower middle income,Middle income
 zwe,Zimbabwe,1989,Lower middle income,Middle income
@@ -6467,3 +6662,4 @@ zwe,Zimbabwe,2016,Low income,Low income
 zwe,Zimbabwe,2017,Low income,Low income
 zwe,Zimbabwe,2018,Lower middle income,Middle income
 zwe,Zimbabwe,2019,Lower middle income,Middle income
+zwe,Zimbabwe,2020,Lower middle income,Middle income
