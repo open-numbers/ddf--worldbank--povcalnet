@@ -35,17 +35,17 @@ longitude,Longitude,string,,,_none
 name_long,Name Long,string,,,_none
 name_short,Name Short,string,,,_none
 un_state,,boolean,,,_none
-g77_and_oecd_countries,G77 and OECD countries,entity_set,geo,,
+g77_and_oecd_countries,G77 and OECD countries,entity_set,geo,"{""palette"": {""others"": ""#f05656"", ""oecd"": ""#71c44c"", ""g77"": ""#7487ef""}}",
 global,Global,entity_set,geo,,
 income_3groups,Income 3 Groups,entity_set,geo,,
-income_groups,Income groups,entity_set,geo,,
-landlocked,Landlocked,entity_set,geo,,
-main_religion_2008,Main religion 2008,entity_set,geo,,
-un_sdg_ldc,UN SDG Least Developed Countries,entity_set,geo,,
-un_sdg_region,UN SDG Regions,entity_set,geo,,
+income_groups,Income groups,entity_set,geo,"{""palette"": {""upper_middle_income"": ""#a7cb7d"", ""lower_middle_income"": ""#7ea1d1"", ""high_income"": ""#7bc135"", ""low_income"": ""#4366f4""}}",
+landlocked,Landlocked,entity_set,geo,"{""palette"": {""landlocked"": ""#f05656"", ""coastline"": ""#7487ef""}}",
+main_religion_2008,Main religion 2008,entity_set,geo,"{""palette"": {""muslim"": ""#71c44c"", ""christian"": ""#7487ef"", ""eastern_religions"": ""#f05656""}, ""selectable"": false}",
+un_sdg_ldc,UN SDG Least Developed Countries,entity_set,geo,"{""palette"": {""un_least_developed"": ""#dc2339"", ""un_not_least_developed"": ""#23DCC6""}}",
+un_sdg_region,UN SDG Regions,entity_set,geo,"{""palette"": {""un_sub_saharan_africa"":""#e11484"",""un_northern_africa_and_western_asia"":""#f99d26"",""un_central_and_southern_asia"":""#f36d25"",""un_eastern_and_south_eastern_asia"":""#279b48"",""un_oceania_exc_australia_and_new_zealand"":""#8f1838"",""un_latin_america_and_the_caribbean"":""#00aed9"",""un_australia_and_new_zealand"":""#eb1c2d"",""un_europe_and_northern_america"":""#02558b""}, ""selectable"": true}",
 unhcr_region,UNHCR Regions,entity_set,geo,,
-unicef_region,UNICEF regions,entity_set,geo,,
-world_6region,World regions (6 colors),entity_set,geo,,
+unicef_region,UNICEF regions,entity_set,geo,"{""palette"": {""sa"": ""#961a49"", ""eca"": ""#ffc20e"", ""mena"": ""#374ea2"", ""ssa"": ""#6a1e74"", ""lac"": ""#f26a21"", ""eap"": ""#e2231a"", ""na"": ""#00833d""}}",
+world_6region,World regions (6 colors),entity_set,geo,"{""palette"": {""east_asia_pacific"": ""#f03838"", ""sub_saharan_africa"": ""#4e7af0"", ""south_asia"": ""#35d1d1"", ""europe_central_asia"": ""#f49d37"", ""middle_east_north_africa"": ""#5be56b"", ""america"": ""#ebcc21""}, ""selectable"": false}",
 iso3166_1_alpha2,ISO 3166-1 alpha-2,string,,,_none
 unicode_region_subtag,Unicode CLDR Region subtag,string,,,_none
 iso3166_1_alpha3,ISO 3166-1 alpha-3,string,,,_none
