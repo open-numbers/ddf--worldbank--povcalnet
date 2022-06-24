@@ -31,6 +31,9 @@
                     },
                     {
                         "name": "tags"
+                    },
+                    {
+                        "name": "drill_up"
                     }
                 ],
                 "primaryKey": "concept"
@@ -1158,6 +1161,15 @@
                     "concept"
                 ],
                 "value": "tags",
+                "resources": [
+                    "ddf--concepts"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "concept"
+                ],
+                "value": "drill_up",
                 "resources": [
                     "ddf--concepts"
                 ]
