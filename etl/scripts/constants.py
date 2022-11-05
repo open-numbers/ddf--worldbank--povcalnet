@@ -1,8 +1,13 @@
 import numpy as np
 import pandas as pd
 
+# 200 brackets
 all_brackets = np.logspace(-7, 13, 201, endpoint=True, base=2)
 brackets_delta = 0.1  # it's (13 - (-7)) / 200
+
+# 750 brackets
+robin_brackets = np.logspace(-2, 13, 751, base=2, endpoint=True)
+brackets_delta_robin = (13 - (-2)) / 750
 
 coverage_type_dtype = pd.CategoricalDtype(list('NAUR'), ordered=True)
 
@@ -24,12 +29,10 @@ def get_weights(y):
     if y > 1980 and y <= 2019:  # with in povcal period.
         return (0.995, 0.005)
     if y > 2019:
-        if y > 2050:
-            raise ValueError("year > 2050 not supportted")
         step = 0.005
         w = 0.005 + (y - 2019) * step
         return (1-w, w)
 
 
-all_years = set(range(1800, 2051))
+all_years = list(range(1800, 2101))
 all_weights = dict([(x, get_weights(x)) for x in all_years])

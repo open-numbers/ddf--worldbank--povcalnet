@@ -34,3 +34,14 @@ def bracket_number_from_income(s, mountly=False, integer=True):
     if integer:
         return res.astype(int)
     return res
+
+def bracket_number_from_income_robin(s, mountly=False, integer=True):
+    # FIXME: double check if it should +1 to the result
+    # because int(x) will drop the decimal part.
+    if mountly:  # calculate daily income
+        res = ((np.log2(s / 30) + 2) / constants.brackets_delta_robin)
+    else:
+        res = ((np.log2(s) + 2) / constants.brackets_delta_robin)
+    if integer:
+        return res.astype(int)
+    return res
