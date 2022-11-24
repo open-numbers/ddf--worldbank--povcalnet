@@ -78,6 +78,11 @@ def estimate(sample, weights, xpos):
 
 
 def run_smooth(arr, maximum=10, minimum=1):
+    """smooth a curve
+    
+    maximum: controls the smoothness of the tails
+    minimum: controls the smoothness near the peak
+    """
     res = []
     y_max = arr.max()
     x_y_max = np.where(arr == arr.max())[0][0]
