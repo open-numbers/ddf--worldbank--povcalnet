@@ -1,6 +1,5 @@
 {
     "name": "ddf--worldbank--povcalnet",
-    "version": "2.0.0",
     "language": {
         "id": "en"
     },
@@ -8,7 +7,8 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2022-05-06T03:00:37.617566+00:00",
+    "created": "2022-11-28T03:14:30.926906+00:00",
+    "version": "2.0.0",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -605,6 +605,21 @@
             }
         },
         {
+            "name": "ddf--entities--income_bracket_80",
+            "path": "ddf--entities--income_bracket_80.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "income_bracket_80"
+                    },
+                    {
+                        "name": "name"
+                    }
+                ],
+                "primaryKey": "income_bracket_80"
+            }
+        },
+        {
             "name": "ddf--entities--wb_level",
             "path": "ddf--entities--wb_level.csv",
             "schema": {
@@ -1152,6 +1167,15 @@
                 "primaryKey": [
                     "concept"
                 ],
+                "value": "drill_up",
+                "resources": [
+                    "ddf--concepts"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "concept"
+                ],
                 "value": "name",
                 "resources": [
                     "ddf--concepts"
@@ -1162,15 +1186,6 @@
                     "concept"
                 ],
                 "value": "tags",
-                "resources": [
-                    "ddf--concepts"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "concept"
-                ],
-                "value": "drill_up",
                 "resources": [
                     "ddf--concepts"
                 ]
@@ -2022,6 +2037,15 @@
                 "value": "name",
                 "resources": [
                     "ddf--entities--income_bracket_50"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "income_bracket_80"
+                ],
+                "value": "name",
+                "resources": [
+                    "ddf--entities--income_bracket_80"
                 ]
             },
             {
