@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2022-11-28T03:14:30.926906+00:00",
+    "created": "2022-12-12T10:45:39.249955+00:00",
     "version": "2.0.0",
     "resources": [
         {
@@ -945,6 +945,27 @@
                 ],
                 "primaryKey": [
                     "country",
+                    "time"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--median_income--by--geo--time",
+            "path": "indicators/ddf--datapoints--median_income--by--geo--time.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "geo"
+                    },
+                    {
+                        "name": "time"
+                    },
+                    {
+                        "name": "median_income"
+                    }
+                ],
+                "primaryKey": [
+                    "geo",
                     "time"
                 ]
             }
@@ -2728,6 +2749,26 @@
                 "value": "income_mountain_79bracket_shape_for_log",
                 "resources": [
                     "ddf--datapoints--income_mountain_79bracket_shape_for_log--by--country--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "time"
+                ],
+                "value": "median_income",
+                "resources": [
+                    "ddf--datapoints--median_income--by--geo--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ],
+                "value": "median_income",
+                "resources": [
+                    "ddf--datapoints--median_income--by--geo--time"
                 ]
             },
             {
