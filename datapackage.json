@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2022-12-12T10:45:39.249955+00:00",
+    "created": "2023-02-23T02:05:48.515449+00:00",
     "version": "2.1.0",
     "resources": [
         {
@@ -620,6 +620,24 @@
             }
         },
         {
+            "name": "ddf--entities--income_bracket_800",
+            "path": "ddf--entities--income_bracket_800.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "income_bracket_800"
+                    },
+                    {
+                        "name": "bracket_start"
+                    },
+                    {
+                        "name": "bracket_end"
+                    }
+                ],
+                "primaryKey": "income_bracket_800"
+            }
+        },
+        {
             "name": "ddf--entities--wb_level",
             "path": "ddf--entities--wb_level.csv",
             "schema": {
@@ -950,6 +968,48 @@
             }
         },
         {
+            "name": "ddf--datapoints--income_mountain_800bracket_shape_for_log--by--global--time",
+            "path": "income_mountain/ddf--datapoints--income_mountain_800bracket_shape_for_log--by--global--time.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "global"
+                    },
+                    {
+                        "name": "time"
+                    },
+                    {
+                        "name": "income_mountain_800bracket_shape_for_log"
+                    }
+                ],
+                "primaryKey": [
+                    "global",
+                    "time"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--median_gdppc--by--geo--time",
+            "path": "indicators/ddf--datapoints--median_gdppc--by--geo--time.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "geo"
+                    },
+                    {
+                        "name": "time"
+                    },
+                    {
+                        "name": "median_gdppc"
+                    }
+                ],
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ]
+            }
+        },
+        {
             "name": "ddf--datapoints--median_income--by--geo--time",
             "path": "indicators/ddf--datapoints--median_income--by--geo--time.csv",
             "schema": {
@@ -1224,11 +1284,29 @@
             },
             {
                 "primaryKey": [
+                    "income_bracket_800"
+                ],
+                "value": "bracket_end",
+                "resources": [
+                    "ddf--entities--income_bracket_800"
+                ]
+            },
+            {
+                "primaryKey": [
                     "income_bracket_200"
                 ],
                 "value": "bracket_start",
                 "resources": [
                     "ddf--entities--income_bracket_200"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "income_bracket_800"
+                ],
+                "value": "bracket_start",
+                "resources": [
+                    "ddf--entities--income_bracket_800"
                 ]
             },
             {
@@ -2749,6 +2827,46 @@
                 "value": "income_mountain_79bracket_shape_for_log",
                 "resources": [
                     "ddf--datapoints--income_mountain_79bracket_shape_for_log--by--country--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ],
+                "value": "income_mountain_800bracket_shape_for_log",
+                "resources": [
+                    "ddf--datapoints--income_mountain_800bracket_shape_for_log--by--global--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "global",
+                    "time"
+                ],
+                "value": "income_mountain_800bracket_shape_for_log",
+                "resources": [
+                    "ddf--datapoints--income_mountain_800bracket_shape_for_log--by--global--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
+                    "time"
+                ],
+                "value": "median_gdppc",
+                "resources": [
+                    "ddf--datapoints--median_gdppc--by--geo--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ],
+                "value": "median_gdppc",
+                "resources": [
+                    "ddf--datapoints--median_gdppc--by--geo--time"
                 ]
             },
             {
