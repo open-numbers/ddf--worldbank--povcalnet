@@ -1,4 +1,13 @@
 # -*- coding: utf-8 -*-
+
+"""Load and clean up the povcalnet shapes
+
+1. load all source files
+2. merge all files into one dataframe and add an `i` column
+3. check and fill null values
+"""
+
+
 # %%
 import os
 import sys
@@ -23,6 +32,7 @@ usecols = [
     'country_code', 'country_name', 'reporting_level', 'reporting_year',
     'headcount', 'reporting_pop', 'mean'
 ]
+MAX_BRACKET = 460
 # %%
 # I have run the following to determine the data types
 # df = pl.read_csv(os.path.join(source_dir, "0000.csv"),
@@ -71,6 +81,7 @@ dtypes = {'region_name': pl.Utf8,
           'distribution_type': pl.Utf8,
           'estimation_type': pl.Utf8}
 
+
 # %%
 def load_file_preprocess(filename):
     df = pl.read_csv(filename,
@@ -88,6 +99,7 @@ def load_file_preprocess(filename):
         print(dups)
     return df
 
+
 # %%
 def step1():
     # read all source file into a dictionary
@@ -100,8 +112,10 @@ def step1():
                 bracket = 0
             else:
                 bracket = int(bracket)
-            res[bracket] = load_file_preprocess(os.path.join(source_dir, f))
+            if bracket <= MAX_BRACKET:
+                res[bracket] = load_file_preprocess(os.path.join(source_dir, f))
     return res
+
 
 # %%
 def step2(res1):
@@ -123,6 +137,8 @@ def run_fill(df: pl.Series, fill_until: int):
     ser = ser.interpolate(method='cubic', order=2)
     ser[ser>1] = 1
     return pl.from_pandas(ser)
+
+
 # %%
 def run_fill_df(df_input: pl.DataFrame, fillna_til):
     df = df_input.clone()
@@ -135,6 +151,7 @@ def run_fill_df(df_input: pl.DataFrame, fillna_til):
         ])
     else:
         return df
+
 
 def step3(res2):
     print("fixing missing values...")
@@ -193,25 +210,6 @@ def step3(res2):
             .sort(['country', 'year', 'reporting_level', 'i']))
     return res3
 
-
-def step4(res3):
-    # because povcalnet shape is a CDF, it should be monotonically increasing.
-    # let's use a noise reducing function here.
-    # 1. remove those points where the diff() is smaller than 0
-    # NOTE: if group 0 is not zero, then the sum of diffs will not add up to 1.
-    # But we will ensure they will add up to 1 in the smoothing process.
-    # which means that we assume group 0 is zero in all cases.
-    # for now, if we interpolate the beginning, then there will be humps at the beginning
-    # so we will not fix the beginning here.
-    res3_1 = res3.with_columns([
-        pl.when((pl.col('headcount').diff() <= 0) & (pl.col('headcount') != 0))
-        .then(pl.lit(None))
-        .otherwise(pl.col('headcount')).interpolate().fill_null(pl.col('headcount'))
-        .over(['country', 'year', 'reporting_level'])
-    ])
-    # 2.
-    res4 = res3_1.groupby(['country', 'year', 'reporting_level']).apply(_group_fun)
-    return res4
 
 # %%
 if __name__ == "__main__":

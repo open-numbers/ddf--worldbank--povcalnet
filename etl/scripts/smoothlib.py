@@ -68,16 +68,15 @@ def tricubic(x):
 def func(x, a, b):
     return a * x + b
 
-
 def estimate(sample, weights, xpos):
     x = list(range(len(sample)))
     y = sample
-    popt, pcov = curve_fit(func, x, y, sigma=weights)
+    popt, pcov = curve_fit(func, x, y, p0=[1/1000, 1/1000], sigma=weights)
     # print(popt)
     return popt[0] * xpos + popt[1]
 
 
-def run_smooth(arr, maximum=10, minimum=1):
+def run_smooth(arr: np.array, maximum=10, minimum=1):
     """smooth a curve
     
     maximum: controls the smoothness of the tails
