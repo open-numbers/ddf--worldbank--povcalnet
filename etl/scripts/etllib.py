@@ -22,26 +22,3 @@ def load_file_preprocess(filename):
         # df = df.drop_duplicates(subset=['country', 'reporting_level', 'year'])
     df = df.set_index(['country', 'year', 'reporting_level'])
     return df
-
-
-def bracket_number_from_income(s, mountly=False, integer=True):
-    # FIXME: double check if it should +1 to the result
-    # because int(x) will drop the decimal part.
-    if mountly:  # calculate daily income
-        res = ((np.log2(s / 30) + 7) / constants.brackets_delta)
-    else:
-        res = ((np.log2(s) + 7) / constants.brackets_delta)
-    if integer:
-        return res.astype(int)
-    return res
-
-def bracket_number_from_income_robin(s, mountly=False, integer=True):
-    # FIXME: double check if it should +1 to the result
-    # because int(x) will drop the decimal part.
-    if mountly:  # calculate daily income
-        res = ((np.log2(s / 30) + 2) / constants.brackets_delta_robin)
-    else:
-        res = ((np.log2(s) + 2) / constants.brackets_delta_robin)
-    if integer:
-        return res.astype(int)
-    return res

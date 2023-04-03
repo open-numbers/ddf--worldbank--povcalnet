@@ -1,15 +1,28 @@
 import numpy as np
 import pandas as pd
 
-# 200 brackets
-all_brackets = np.logspace(-7, 13, 201, endpoint=True, base=2)
-brackets_delta = 0.1  # it's (13 - (-7)) / 200
-
-# 750 brackets
-robin_brackets = np.logspace(-2, 13, 751, base=2, endpoint=True)
-brackets_delta_robin = (13 - (-2)) / 750
 
 coverage_type_dtype = pd.CategoricalDtype(list('NAUR'), ordered=True)
+
+
+# the slope and bias for interest rate calculation
+a, b = (-0.022919607843137433, 47.1155565826334)
+
+# the inflation rate 2011 = 1
+rs = [1.548, 1.565, 1.553, 1.517, 1.464,
+      1.445, 1.417, 1.369, 1.347, 1.346, 1.357,
+      1.337, 1.289, 1.262, 1.252, 1.198, 1.126,
+      1.088, 1.070, 1.065, 1.041, 1.032, 1.022,
+      1.000, 0.974, 0.963, 0.948, 0.954, 0.955,
+      0.937, 0.895, 0.876, 0.859, 0.82, 0.77]
+rates = pd.Series(rs, index=range(1988, 2023))
+
+
+def get_inflation_rate(y):
+    if y in rates.index:
+        return rates.loc[y]
+    else:
+        return a * y + b
 
 
 # the linear version of weight function
