@@ -1,0 +1,66 @@
+#! /usr/bin/env python
+# encoding: utf-8
+
+import os
+from waflib import Context
+from waflib.Build import BuildContext
+
+top = '.'
+out = './build'
+prefix = '../'
+
+
+def configure(ctx):
+    # TODO: move prefix checking to waf tools
+    if ctx.options.prefix == '/usr/local':  # default option. Assumed user didn't provide the prefix.
+        ctx.env.PREFIX = os.path.abspath(prefix)
+    ctx.find_program("python", var="PYTHON")
+    # ctx.find_program("ddf", var="DDF")
+
+
+# update source
+def update_source(ctx):
+    """download source from povcalnet"""
+
+    # limit the jobs, don't DDoS upstream
+    ctx.jobs = 4
+
+    for i in range(461):
+        ctx(
+            rule="${PYTHON} ${SRC} " + str(i),
+            source="scripts/update_source.py",
+            target=ctx.path.find_or_declare(
+                "source/povcalnet/" + "{:04d}.csv".format(i))
+            )
+
+
+class UpdateSource(BuildContext):
+    cmd = "update_source"
+    fun = "update_source"
+
+
+# smooth povcalnet shapes
+class SmoothPovcalnet(BuildContext):
+    cmd = "smooth_povcalnet"
+    fun = "smooth_povcalnet"
+
+
+def smooth_povcalnet(ctx):
+    pass
+
+# - compute neighbours
+# - get
+
+
+def build(bld):
+    bld(
+        rule="${PYTHON} ${SRC}",
+        source="scripts/testetl.py",
+        target=bld.path.find_or_declare("brackets_tmp.csv")
+    )
+    # build_dir = bld.path.find_dir("build")
+    # bld.install_files("${PREFIX}/etl/source/povcalnet",
+    #                   build_dir.ant_glob("etl/source/povcalnet/*.csv")
+    #                   )
+
+# next: looks good, now I should download all source files and create etl script.
