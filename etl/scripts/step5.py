@@ -17,7 +17,6 @@ import json
 from multiprocessing import get_context
 from functools import partial
 
-import etllib
 import constants
 import step3
 
@@ -30,6 +29,9 @@ sns.set_context('notebook')
 sns.set_style('whitegrid')
 plt.rcParams['figure.figsize'] = (7, 4)
 plt.rcParams['figure.dpi'] = 144
+
+
+pop_file = 'source/gapminder/population.csv'
 
 
 def _f(df, **kwargs):
@@ -76,7 +78,7 @@ def resample_to_int(df, cut=True):
 
 if __name__ == '__main__':
     # load data
-    povcalnet = pickle.load(open('./povcalnet_smoothed_2.pkl', 'rb'))
+    povcalnet = pickle.load(open('./povcalnet_smoothed.pkl', 'rb'))
     estimated = pickle.load(open('./estimated_mountains.pkl', 'rb'))
 
     # only keep one reporting level. They are mostly `national` but there are
@@ -103,12 +105,13 @@ if __name__ == '__main__':
     pickle.dump(povcal_and_est, open('./population_percentage_500plus.pkl', 'wb'))
 
     # then load population data and create population numbers datapoint
-    # FIXME: keep one copy in source folder, or download from url?
-    pop_file = '../../../ddf--gapminder--systema_globalis/countries-etc-datapoints/ddf--datapoints--population_total--by--geo--time.csv'
     pop = pl.read_csv(pop_file)
 
-    pop.columns = ['country', 'year', 'population_total']
-    pop = pop.with_columns(pl.col('year').cast(pl.Int32))
+    pop = pop.select(
+        pl.col('geo').alias('country'),
+        pl.col('time').cast(pl.Int32).alias('year'),
+        pl.col('Population').alias('population_total')
+    )
 
     res = povcal_and_est.join(pop, on=['country', 'year'], how='inner').with_columns(
         (pl.col('headcount') * pl.col('population_total')).alias('population')
@@ -161,6 +164,7 @@ if __name__ == '__main__':
 # ax.set_yscale('log')
 # plt.show()
 
+# NEXT: findout which output files are required
 # TODO: missing steps
 # 1. create the flattened datapoint
 # 2. create datapoint by regions

@@ -19,6 +19,8 @@ POOLSIZE = 4
 
 def process(i, resume=True):
     bracket = all_brackets[i]
+    if bracket > 2700:  # there is a limit in API
+        bracket = 2700
     url = url_tmpl.format(bracket)
     file_csv = osp.join(source_dir, "{:04d}.csv".format(i))
     print(file_csv)

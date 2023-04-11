@@ -23,7 +23,7 @@ import json
 from multiprocessing import get_context
 from functools import partial
 
-import etllib
+import bracketlib
 import constants
 import step3
 
@@ -36,6 +36,10 @@ sns.set_context('notebook')
 sns.set_style('whitegrid')
 plt.rcParams['figure.figsize'] = (7, 4)
 plt.rcParams['figure.dpi'] = 144
+
+# source files needed:
+gini_file = 'source/gapminder/gini.csv'
+neighbours_file = 'neighbours_list.json'
 
 
 def _f(df, **kwargs):
@@ -74,7 +78,7 @@ def get_nearest_known_shape(country, year, known_shapes):
 
 
 def shape_to_mountain_robin(shape, income):
-    bracket = etllib.bracket_number_from_income_robin(income, integer=False)
+    bracket = bracketlib.bracket_from_income(income, 0.04, integer=False)
     return shape.with_columns(
         pl.col('bracket') + bracket
     )
@@ -145,15 +149,15 @@ def process_step8(i,
 
 if __name__ == '__main__':
     income = step3.income
-    gini_file = '../../../ddf--gapminder--fasttrack/ddf--datapoints--gini_2100--by--country--time.csv'
-    gini = pl.read_csv(gini_file).with_columns(
-        pl.col('time').cast(pl.Int32)
+    gini = pl.read_csv(gini_file).select(
+        pl.col('geo').alias('country'),
+        pl.col('time').cast(pl.Int32).alias('year'),
+        pl.col('gini_2100').alias('gini')
     )
-    gini = gini.rename({'time': 'year', 'gini_2100': 'gini'})
     income_gini = gini.join(income, on=['country', 'year'], how='outer').drop_nulls()
 
     # load neighbours
-    fp = open('../source_bak/fixtures/neighbours_list.json', 'r')
+    fp = open(neighbours_file, 'r')
     jsonstring = fp.read()
     all_neighbours_json = json.loads(jsonstring)
 
@@ -207,4 +211,4 @@ if __name__ == '__main__':
     # print(len(todos))
     estimated = [run(x) for x in todos]
     estimated_df = pl.concat([x for x in estimated if x is not None])
-    pickle.dump(estimated_df, open('./estimated_mountains.pkl', 'wb'))
+    pickle.dump(estimated_df, open('estimated_mountains.pkl', 'wb'))

@@ -18,20 +18,19 @@ def configure(ctx):
     # ctx.find_program("ddf", var="DDF")
 
 
-# update source
+# update povcalnet source
 def update_source(ctx):
     """download source from povcalnet"""
-
     # limit the jobs, don't DDoS upstream
-    ctx.jobs = 4
+    if ctx.jobs > 2:
+        print('not using jobs > 2, setting jobs = 2')
+        ctx.jobs = 2
 
     for i in range(461):
         ctx(
             rule="${PYTHON} ${SRC} " + str(i),
             source="scripts/update_source.py",
-            target=ctx.path.find_or_declare(
-                "source/povcalnet/" + "{:04d}.csv".format(i))
-            )
+            target="source/povcalnet/" + "{:04d}.csv".format(i))
 
 
 class UpdateSource(BuildContext):
@@ -39,17 +38,143 @@ class UpdateSource(BuildContext):
     fun = "update_source"
 
 
+# update gapminder source
+def update_source_gapminder(ctx):
+    """download gapminder indicators"""
+    for f in [
+            'mean_income',
+            'gini',
+            'gdp',
+            'population',
+            'on_income_groups',
+            'wb_income_groups'
+    ]:
+        ctx(
+            rule="${PYTHON} ${SRC} " + f,
+            source="scripts/update_source_gapm.py",
+            target=f"source/gapminder/{f}.csv",
+            always=True
+        )
+
+
+class UpdateSourceGapminder(BuildContext):
+    cmd = "update_source_gapminder"
+    fun = "update_source_gapminder"
+
+
+# tidy povcalnet data
+def tidy_source(ctx):
+    """tidy downloaded povcalnet data"""
+    # TODO: add dependencies: downloaded csv files
+    # then we can run this when csv files changed
+    ctx(
+        rule="${PYTHON} ${SRC} ",
+        source="scripts/step1.py",
+        target="povcalnet_clean.pkl",
+        always=True
+    )
+
+
+class TidySource(BuildContext):
+    cmd = 'tidy_source'
+    fun = 'tidy_source'
+
+
 # smooth povcalnet shapes
-class SmoothPovcalnet(BuildContext):
-    cmd = "smooth_povcalnet"
-    fun = "smooth_povcalnet"
+class SmoothSource(BuildContext):
+    cmd = "smooth_source"
+    fun = "smooth_source"
 
 
-def smooth_povcalnet(ctx):
-    pass
+def smooth_source(ctx):
+    """create smooth shapes from povcalnet data"""
+    ctx(
+        rule="${PYTHON} ${SRC[0]} ",
+        source=["scripts/step2.py",
+                'povcalnet_clean.pkl'],
+        target=[
+            "povcalnet_smoothed.pkl",
+            'povcal_country_year.csv'
+        ],
+    )
 
-# - compute neighbours
-# - get
+
+# create mean central shapes
+class StandardizeShape(BuildContext):
+    cmd = "standardize_shape"
+    fun = "standardize_shape"
+
+
+def standardize_shape(ctx):
+    """make standardised shapes from smoothed povcalnet shapes"""
+    ctx(
+        rule="${PYTHON} ${SRC[0]} ",
+        source=["scripts/step3.py",
+                "scripts/bracketlib.py",
+                ctx.path.find_or_declare('povcalnet_smoothed.pkl')],
+        target='mean_central_shapes.pkl',
+    )
+
+
+# compute neighbours
+class ComputeNeighbours(BuildContext):
+    cmd = "compute_neighbours"
+    fun = "compute_neighbours"
+
+
+def compute_neighbours(ctx):
+    """compute neighbours for all country/year"""
+    ctx(
+        rule="${PYTHON} ${SRC[0]} ",
+        source=["scripts/compute_neighbours.py",
+                ctx.path.find_or_declare('source/gapminder/mean_income.csv'),
+                ctx.path.find_or_declare('source/gapminder/gini.csv'),
+                ctx.path.find_or_declare('povcal_country_year.csv')
+                ],
+        target='neighbours_list.json',
+    )
+
+
+# extimate all shapes
+class EstimateShapes(BuildContext):
+    cmd = 'estimate_shapes'
+    fun = 'estimate_shapes'
+
+
+def estimate_shapes(ctx):
+    """estimate historical and future shapes"""
+    ctx(
+        rule="${PYTHON} ${SRC[0]} ",
+        source=["scripts/step4.py",
+                ctx.path.find_or_declare('source/gapminder/gini.csv'),
+                ctx.path.find_or_declare('neighbours_list.json')
+                ],
+        target='estimated_mountains.pkl',
+    )
+
+
+# combine all shapes, get population number
+class PopByIncome(BuildContext):
+    cmd = 'pop_by_income'
+    fun = 'pop_by_income'
+
+
+def pop_by_income(ctx):
+    ctx(
+        rule="${PYTHON} ${SRC[0]} ",
+        source=["scripts/step5.py",
+                "estimated_mountains.pkl",
+                "povcalnet_smoothed.pkl",
+                'source/gapminder/population.csv'
+                # ctx.path.find_or_declare("estimated_mountains.pkl"),
+                # ctx.path.find_or_declare("povcalnet_smoothed.pkl"),
+                # ctx.path.find_or_declare('source/gapminder/population.csv'),
+                ],
+        target=['population_500plus.pkl', 'population_percentage_500plus.pkl'],
+    )
+
+
+#
 
 
 def build(bld):

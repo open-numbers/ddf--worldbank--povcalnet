@@ -25,6 +25,7 @@ import seaborn as sns
 
 import pickle
 import warnings
+import psutil
 from multiprocessing import get_context
 import smoothlib
 
@@ -275,6 +276,18 @@ def smooth_shapes(df):
     )
 
 
+# rename things
+def step5(res4: pl.DataFrame):
+    mapping = {'national': 'n', 'rural': 'r', 'urban': 'u'}
+
+    # MAYBE: change headcount -> population_percentage?
+    return res4.with_columns(
+        # xkx in povcalnet is kos in gapminder
+        pl.col('country').str.to_lowercase().str.replace("xkx", "kos"),
+        pl.col('reporting_level').map_dict(mapping)
+    )
+
+
 # %%
 if __name__ == '__main__':
     res0 = pickle.load(open("./povcalnet_clean.pkl", 'rb'))
@@ -285,7 +298,7 @@ if __name__ == '__main__':
     print(res3.filter(pl.col('headcount').is_null()))
 
     # have to use multiprocess here. set the pool size
-    poolsize = 4
+    poolsize = psutil.cpu_count(logical=False) - 1
 
     with warnings.catch_warnings(record=False) as w:
         with get_context("spawn").Pool(poolsize) as pool:
@@ -299,11 +312,18 @@ if __name__ == '__main__':
     res4 = res4.filter(pl.col('headcount') > 1e-12)
 
     # print(res4)
-    pickle.dump(res4, open('./povcalnet_smoothed.pkl', 'wb'))
-    # TODO: add some checking, procedure images.
+    res5 = step5(res4)
+    pickle.dump(res5, open('./povcalnet_smoothed.pkl', 'wb'))
+
+    # export all avaliable country/year
+    povcal_country_year = res5.select(['country', 'year']).unique()
+    povcal_country_year.write_csv('povcal_country_year.csv')
+
+    # TODO: add some more checking images
     plt.figure()
     plt.plot(_f(res0, country='USA', year=2016, reporting_level='national')
              .select('headcount').to_series().diff().drop_nulls(), alpha=.4)
     df = _f(res4, country='USA', year=2016, reporting_level='national')
     plt.plot(df['bracket'], df['headcount'])
     plt.savefig("compare_smoothed.jpg")
+    print('check compare_smoothed.jpg for how well the smoothing goes')
