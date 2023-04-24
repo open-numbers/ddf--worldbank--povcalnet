@@ -6,6 +6,8 @@ import numpy as np
 import constants
 import etllib
 
+# FIXME: cleanup the file
+
 # income_gini_df = pd.read_csv(
 #     '../wip/income_gini_for_known_shape_countries.csv').set_index(['country', 'year']).sort_index()
 # knows_shapes = pd.read_csv(
@@ -35,7 +37,7 @@ def get_neighbors(income, gini, known_income_gini, n=50):
     neis = list()
     ecs = set()
     res = get_distances(income, gini, known_income_gini).iloc[:n]
-    for i, v in res.iteritems():
+    for i, v in res.items():
         ecs.add(i[0])
         neis.append(i)
 

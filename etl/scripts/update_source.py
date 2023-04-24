@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+import sys
 import os
 import os.path as osp
 import glob
@@ -7,23 +10,17 @@ from ddf_utils.factory.common import download
 from multiprocessing import Pool
 from functools import partial
 
-# brackets data are downloaded from
-# https://docs.google.com/spreadsheets/d/1QQqbMj6yYclwB3Q9xLYVNUFaJskYoZEQKpzYHvlnuas/edit#gid=0
-# brackets_csv = '../source/fixtures/brackets.csv'
-# brackets_df = pd.read_csv(brackets_csv)
-# all_brackets = brackets_df['bracket_start'].to_list()
-# all_brackets.append(
-#     brackets_df['bracket_end'].iloc[-1])  # Append last value from bracket end
 
-source_dir = '../source/income_mountain'
-all_brackets = np.logspace(-7, 13, 201, endpoint=True, base=2)
-# url_tmpl = "http://iresearch.worldbank.org/PovcalNet/PovcalNetAPI.ashx?YearSelected=all&PovertyLine={}&Countries=all&display=C&format=csv"
+source_dir = 'source/povcalnet'
+all_brackets = np.logspace(-7, 13, 501, base=2, endpoint=True)
 url_tmpl = "https://api.worldbank.org/pip/v1/pip?country=all&year=all&povline={}&fill_gaps=true&group_by=none&welfare_type=all&reporting_level=all&format=csv"
-POOLSIZE = 5
+POOLSIZE = 4
 
 
 def process(i, resume=True):
     bracket = all_brackets[i]
+    if bracket > 2700:  # there is a limit in API
+        bracket = 2700
     url = url_tmpl.format(bracket)
     file_csv = osp.join(source_dir, "{:04d}.csv".format(i))
     print(file_csv)
@@ -37,11 +34,23 @@ def process(i, resume=True):
 
 
 if __name__ == "__main__":
-    # remove all old files first
-    for f in glob.glob('../source/income_mountain/*.csv'):
-        os.remove(f)
-    run = partial(process, resume=False)
-    with Pool(POOLSIZE) as p:
-        r = range(len(all_brackets))
-        p.map(run, r[::-1])
-    print("done.")
+    # create the folder
+    os.makedirs(source_dir, exist_ok=True)
+
+    # uncomment this to remove all old files first
+    # for f in glob.glob('source/povcalnet/*.csv'):
+    #     os.remove(f)
+    if len(sys.argv) > 1:
+        bracket = int(sys.argv[1])
+        if bracket > 460:
+            print("do not download bracket > 460")
+            sys.exit(127)
+        print(f'downloading {bracket}')
+        process(bracket, resume=False)
+
+    else:
+        brackets = all_brackets[all_brackets < 2705]  # 2705 is in group 461
+        run = partial(process, resume=False)
+        with Pool(POOLSIZE) as p:
+            r = range(len(brackets))
+            p.map(run, r[::-1])
