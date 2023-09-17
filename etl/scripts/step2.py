@@ -42,7 +42,7 @@ plt.rcParams['figure.dpi'] = 144
 
 # %%
 def _f(df, **kwargs):
-    return df.filter(pl.all([(pl.col(k) == v) for k, v in kwargs.items()]))
+    return df.filter(pl.all_horizontal([(pl.col(k) == v) for k, v in kwargs.items()]))
 
 
 def plot(df, diff=False):
@@ -79,7 +79,7 @@ def resample(df):
 
     return df.filter(
         pl.col('i').is_in(select_groups)
-    ).groupby('headcount').agg(
+    ).group_by('headcount').agg(
         pl.col('i').median(),
         pl.col('headcount').last().alias('headcount2')
     ).select(
@@ -114,8 +114,8 @@ def step1(res0: pl.DataFrame):
             pl.lit(reporting_level).alias('reporting_level')
         )
 
-    return res0.groupby(
-        ['country', 'year', 'reporting_level']).apply(group_func)
+    return res0.group_by(
+        ['country', 'year', 'reporting_level']).map_groups(group_func)
 
 
 # res1 = step1(res0)
@@ -198,9 +198,9 @@ def step3(res2):
             .over(['country', 'year', 'reporting_level'])
         ]).drop_nulls().with_columns(pl.col('i') - 1)
 
-    return res3_1.groupby(
+    return res3_1.group_by(
             ['country', 'year', 'reporting_level']
-        ).apply(fix_negative).select([
+        ).map_groups(fix_negative).select([
             pl.col(['country', 'year', 'reporting_level']),
             pl.col('i').alias('bracket'),
             pl.col('headcount_new').alias('headcount')
@@ -323,7 +323,7 @@ if __name__ == '__main__':
     plt.figure()
     plt.plot(_f(res0, country='USA', year=2016, reporting_level='national')
              .select('headcount').to_series().diff().drop_nulls(), alpha=.4)
-    df = _f(res4, country='USA', year=2016, reporting_level='national')
+    df = _f(res5, country='usa', year=2016, reporting_level='n')
     plt.plot(df['bracket'], df['headcount'])
     plt.savefig("compare_smoothed.jpg")
     print('check compare_smoothed.jpg for how well the smoothing goes')

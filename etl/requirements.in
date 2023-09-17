@@ -1,0 +1,8 @@
+pandas
+polars
+matplotlib
+seaborn
+scipy
+psutil
+pyarrow
+ddf_utils

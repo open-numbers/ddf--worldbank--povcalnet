@@ -35,7 +35,7 @@ pop_file = 'source/gapminder/population.csv'
 
 
 def _f(df, **kwargs):
-    return df.filter(pl.all([(pl.col(k) == v) for k, v in kwargs.items()]))
+    return df.filter(pl.all_horizontal([(pl.col(k) == v) for k, v in kwargs.items()]))
 
 
 def select_shape(df):
@@ -83,9 +83,9 @@ if __name__ == '__main__':
 
     # only keep one reporting level. They are mostly `national` but there are
     # some countries we will use urban.
-    povcalnet = povcalnet.groupby(['country', 'year']).apply(select_shape)
+    povcalnet = povcalnet.group_by(['country', 'year']).map_groups(select_shape)
     # resample estimated mountains to use integer brackets
-    est = estimated.groupby(['country', 'year']).apply(lambda x: resample_to_int(x, cut=False))
+    est = estimated.group_by(['country', 'year']).map_groups(lambda x: resample_to_int(x, cut=False))
     # check if something abnormal
     assert est.filter(pl.col('headcount') < 0).is_empty()
 
@@ -163,8 +163,3 @@ if __name__ == '__main__':
 # plt.plot(df2['bracket'], df2['population'])
 # ax.set_yscale('log')
 # plt.show()
-
-# NEXT: findout which output files are required
-# TODO: missing steps
-# 1. create the flattened datapoint
-# 2. create datapoint by regions
