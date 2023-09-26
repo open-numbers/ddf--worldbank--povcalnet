@@ -82,7 +82,7 @@ def tidy_source(ctx):
     ctx(
         rule="${PYTHON} ${SRC[0]} ",
         source=source_files,
-        target="povcalnet_clean.pkl"
+        target="povcalnet_clean.parquet"
     )
 
 
@@ -102,9 +102,9 @@ def smooth_source(ctx):
     ctx(
         rule="${PYTHON} ${SRC[0]} ",
         source=["scripts/step2.py",
-                'povcalnet_clean.pkl'],
+                'povcalnet_clean.parquet'],
         target=[
-            "povcalnet_smoothed.pkl",
+            "povcalnet_smoothed.parquet",
             'povcal_country_year.csv'
         ],
     )
@@ -122,8 +122,8 @@ def standardize_shape(ctx):
         rule="${PYTHON} ${SRC[0]} ",
         source=["scripts/step3.py",
                 "scripts/bracketlib.py",
-                ctx.path.find_or_declare('povcalnet_smoothed.pkl')],
-        target='mean_central_shapes.pkl',
+                ctx.path.find_or_declare('povcalnet_smoothed.parquet')],
+        target='mean_central_shapes.parquet',
     )
 
 
@@ -160,7 +160,7 @@ def estimate_shapes(ctx):
                 ctx.path.find_or_declare('source/gapminder/gini.csv'),
                 ctx.path.find_or_declare('neighbours_list.json')
                 ],
-        target='estimated_mountains.pkl',
+        target='estimated_mountains.parquet',
     )
 
 
@@ -174,14 +174,14 @@ def pop_by_income(ctx):
     ctx(
         rule="${PYTHON} ${SRC[0]} ",
         source=["scripts/step5.py",
-                "estimated_mountains.pkl",
-                "povcalnet_smoothed.pkl",
+                "estimated_mountains.parquet",
+                "povcalnet_smoothed.parquet",
                 'source/gapminder/population.csv'
                 # ctx.path.find_or_declare("estimated_mountains.pkl"),
                 # ctx.path.find_or_declare("povcalnet_smoothed.pkl"),
                 # ctx.path.find_or_declare('source/gapminder/population.csv'),
                 ],
-        target=['population_500plus.pkl', 'population_percentage_500plus.pkl'],
+        target=['population_500plus.parquet', 'population_percentage_500plus.parquet'],
     )
 
 

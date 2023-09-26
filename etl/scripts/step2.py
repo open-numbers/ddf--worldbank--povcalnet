@@ -290,7 +290,7 @@ def step5(res4: pl.DataFrame):
 
 # %%
 if __name__ == '__main__':
-    res0 = pickle.load(open("./povcalnet_clean.pkl", 'rb'))
+    res0 = pl.read_parquet('./povcalnet_clean.parquet')
     res1 = step1(res0)
     res2 = step2(res1)
     res3 = step3(res2)
@@ -313,7 +313,7 @@ if __name__ == '__main__':
 
     # print(res4)
     res5 = step5(res4)
-    pickle.dump(res5, open('./povcalnet_smoothed.pkl', 'wb'))
+    res5.write_parquet('./povcalnet_smoothed.parquet')
 
     # export all avaliable country/year
     povcal_country_year = res5.select(['country', 'year']).unique()

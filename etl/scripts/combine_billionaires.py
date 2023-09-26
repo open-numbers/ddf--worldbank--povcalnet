@@ -296,7 +296,7 @@ def make_checking_plots(povcalnet, billy_pop, all_shapes):
 
 if __name__ == '__main__':
     # load data
-    povcalnet = pickle.load(open('../build/population_500plus.pkl', 'rb'))
+    povcalnet = pl.read_parquet('../build/population_500plus.parquet')
 
     # FIXME: put billionaires data into source dir or download from url
     billy = pl.read_csv('../../../ddf--gapminder--forbes_billionaires/ddf--datapoints--daily_income--by--person--time.csv')
@@ -524,7 +524,7 @@ if __name__ == '__main__':
 
     all_shapes = all_shapes.sort(['country', 'year', 'bracket'])
 
-    pickle.dump(all_shapes, open('./bridged_shapes.pkl', 'wb'))
+    all_shapes.write_parquet('./bridged_shapes.parquet')
 
     make_checking_plots(povcalnet, billy_pop, all_shapes)
     print('Done!')

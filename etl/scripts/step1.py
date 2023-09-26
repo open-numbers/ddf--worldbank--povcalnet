@@ -86,7 +86,9 @@ dtypes = {'region_name': pl.Utf8,
 def load_file_preprocess(filename):
     df = pl.read_csv(filename,
                      columns=usecols,
-                     dtypes=dtypes)
+                     dtypes=dtypes,
+                     null_values=['NA'],
+                     )
     df = df.rename(
         {'country_code': 'country', 'reporting_year': 'year'}
     )
@@ -224,4 +226,4 @@ if __name__ == "__main__":
     assert res3.filter(pl.col('headcount') > 1).is_empty()
     assert res3.filter(pl.col('headcount') < 0).is_empty()
     # save result to pickle
-    pickle.dump(res3, open('./povcalnet_clean.pkl', 'wb'))
+    res3.write_parquet('./povcalnet_clean.parquet')
