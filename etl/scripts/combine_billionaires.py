@@ -18,20 +18,20 @@ Check the functions below for more details.
 """
 
 # %%
-import os
-import sys
+# import os
+# import sys
 
 import numpy as np
 import polars as pl
 import pandas as pd
 import pickle
-import json
-from multiprocessing import get_context
-from functools import partial
+# import json
+# from multiprocessing import get_context
+# from functools import partial
 
-import etllib
-import constants
-import step3
+# import etllib
+# import constants
+# import step3
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -50,7 +50,7 @@ brackets_delta_robin = 0.04
 
 
 def _f(df, **kwargs):
-    return df.filter(pl.all([(pl.col(k) == v) for k, v in kwargs.items()]))
+    return df.filter(pl.all_horizontal([(pl.col(k) == v) for k, v in kwargs.items()]))
 
 
 def plot(*args, **kwargs):
@@ -153,7 +153,7 @@ def calculate_bridge(left, right, scale=1000):
     )
     res = res.join(new_i, on='bracket', how='outer')
     res = res.with_columns(
-        np.exp(pl.col('population').map(interpolate))
+        np.exp(pl.col('population').map_batches(interpolate))
     )
     # calculate some parameters
     if bridge_end_y == 0:
@@ -187,7 +187,7 @@ def calculate_bridge(left, right, scale=1000):
     bridge_shape_all = bridge_shape_all.select(
         pl.col('bracket'),
         pl.coalesce(
-            ['population_bridge', 'population_right', 'population'], pl.lit(0)).alias('population')
+            pl.col(['population_bridge', 'population_right', 'population']), pl.lit(0)).alias('population')
     ).sort('bracket')
     return params, bridge_shape_all
 
@@ -245,19 +245,21 @@ def calculate_bridge_2(left_shape, params):
         return bridge_shape_all.sort('bracket')
 
 
+def plot_shape(df, **kwargs):
+    df_ = df.filter(pl.col('population') > 0)
+    plt.plot(df_['bracket'], df_['population'], **kwargs)
+
+
 def make_checking_plots(povcalnet, billy_pop, all_shapes):
-    def plot_shape(df, **kwargs):
-        df_ = df.filter(pl.col('population') > 0)
-        plt.plot(df_['bracket'], df_['population'], **kwargs)
 
     # 1. show a global chart
-    gleft = povcalnet.groupby(['year', 'bracket']).agg(
+    gleft = povcalnet.group_by(['year', 'bracket']).agg(
         pl.col('population').sum()
     )
-    gbridge = all_shapes.groupby(['year', 'bracket']).agg(
+    gbridge = all_shapes.group_by(['year', 'bracket']).agg(
         pl.col('population').sum()
     )
-    gright = billy_pop.groupby(['year', 'bracket']).agg(
+    gright = billy_pop.group_by(['year', 'bracket']).agg(
         pl.col('population').sum()
     )
 
@@ -294,7 +296,7 @@ def make_checking_plots(povcalnet, billy_pop, all_shapes):
 
 if __name__ == '__main__':
     # load data
-    povcalnet = pickle.load(open('./population_500plus.pkl', 'rb'))
+    povcalnet = pl.read_parquet('../build/population_500plus.parquet')
 
     # FIXME: put billionaires data into source dir or download from url
     billy = pl.read_csv('../../../ddf--gapminder--forbes_billionaires/ddf--datapoints--daily_income--by--person--time.csv')
@@ -352,12 +354,12 @@ if __name__ == '__main__':
 
     # convert name to geo, get total count
     billy_pop = billy_full.with_columns(
-        pl.col('person').apply(_get_geo).alias('country'),
+        pl.col('person').map_elements(_get_geo).alias('country'),
         (pl.col('daily_income')
-         .apply(bracket_number_from_income_robin)
+         .map_elements(bracket_number_from_income_robin)
          .cast(pl.Int32)
          .alias('bracket'))
-    ).groupby(['country', 'time', 'bracket']).agg(
+    ).group_by(['country', 'time', 'bracket']).agg(
         pl.col('daily_income').count().alias('population')
     ).sort(['country', 'time', 'bracket'])
     billy_pop.columns = ['country', 'year', 'bracket', 'population']
@@ -426,9 +428,9 @@ if __name__ == '__main__':
     # now calculate case 2
     # first we need to get the gini as parameter
     # NOTE: Here I am  still using pandas. maybe should change to polars too
-    # FIXME: put file in source dir or download url
-    gini = pd.read_csv('../../../ddf--gapminder--fasttrack/ddf--datapoints--gini_2100--by--country--time.csv')
-    gini = gini.set_index(['country', 'time'])['gini_2100']
+    # gini = pd.read_csv('../../../ddf--gapminder--fasttrack/ddf--datapoints--gini_2100--by--country--time.csv')
+    gini = pd.read_csv('../build/source/gapminder/gini.csv')
+    gini = gini.set_index(['geo', 'time'])['gini_2100']
 
     params_cache_df = pd.DataFrame.from_dict(params_cache).T
     params_cache_df['gini'] = gini.loc[params_cache_df.index]
@@ -518,11 +520,11 @@ if __name__ == '__main__':
         how='outer'
     ).select(
         pl.col(['country', 'year', 'bracket']),
-        pl.coalesce(["population_right", "population"], 0).alias('population'))
+        pl.coalesce(pl.col(["population_right", "population"]), pl.lit(0)).alias('population'))
 
     all_shapes = all_shapes.sort(['country', 'year', 'bracket'])
 
-    pickle.dump(all_shapes, open('./bridged_shapes.pkl', 'wb'))
+    all_shapes.write_parquet('./bridged_shapes.parquet')
 
     make_checking_plots(povcalnet, billy_pop, all_shapes)
     print('Done!')

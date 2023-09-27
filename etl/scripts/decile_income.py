@@ -23,7 +23,7 @@ plt.rcParams['figure.dpi'] = 144
 
 
 def _f(df, **kwargs):
-    return df.filter(pl.all([(pl.col(k) == v) for k, v in kwargs.items()]))
+    return df.filter(pl.all_horizontal([(pl.col(k) == v) for k, v in kwargs.items()]))
 
 # main
 
@@ -54,11 +54,99 @@ bend = bracket_to_income(np.arange(0, 1200))
 bmean = np.sqrt(bstart * bend)
 bmean = pl.Series(bmean)
 bmean
-bmean[1199]
+bmean[1192:].sum()
 
-# let's try 2022 first
-df22usa = _f(data, country='usa', year=2022).select(['bracket', 'population'])
-df22usa
+
+# get richest richest income
+# df = _f(data, country='chn', year=2025)
+# top_pop = (df.select('population').sum() / 1000).item()
+# top_pop
+
+def get_richest_income(ser,  # input: population count by bracket
+                       splitnum: int,
+                       kw: str,
+                       cut=False):
+    cumlpop = 0
+    cumlmon = 0
+    incomes = []
+    tp = ser['population'].sum()
+    tp1 = tp / splitnum
+    # print(tp1)
+
+    for rec in ser.to_dicts():
+        i, bp = rec['bracket'], rec['population']
+        if cut and i > cut:
+            break
+        # find the bracket where we have all but one brackets of population
+        target_pop = int((splitnum - 1) * tp1)
+        if cumlpop + bp < target_pop:
+            cumlpop = cumlpop + bp
+            cumlmon = cumlmon + (bmean[i] * bp)
+        else:
+            pop_this_decile = target_pop - cumlpop
+            pop_next_decile = bp - pop_this_decile
+            # print(
+            #     "cut at {}, left pop {}, right pop {}".format(i,
+            #                                                   cumlpop + pop_this_decile,
+            #                                                   tp - (cumlpop + pop_this_decile)))
+
+            money_this_decile = cumlmon + (bmean[i] * pop_this_decile)
+            incomes.append(money_this_decile / target_pop)
+
+            # now reset cumlpop and cumlmon for next decile
+            cumlmon = bmean[i] * pop_next_decile
+            cumlpop = pop_next_decile
+            target_pop = tp - (cumlpop + pop_this_decile)
+    # append the final group if it's not there
+    if len(incomes) != 2:
+        incomes.append(cumlmon / cumlpop)
+    res = {'bracket': kw, 'income': incomes[1]}
+    return pl.DataFrame(res)
+
+# get_richest_income(df, 100000, 't_0_001')
+data_part = data.partition_by(['country', 'year'], as_dict=True)
+
+
+def extract_richest(func, input_data):
+    res = []
+    for k, v in input_data.items():
+        country, year = k
+        res.append(func(v, country, year))
+    res = pl.concat(res)
+    return res
+
+
+def get_richest_1(ser, country, year, cut=False):
+    return get_richest_income(
+        ser.select(['bracket', 'population']), 1000, 't_0_001', cut
+    ).with_columns(
+        pl.lit(country).alias('country'),
+        pl.lit(year).alias('year')
+    )
+
+def get_richest_2(ser, country, year, cut=False):
+    return get_richest_income(
+        ser.select(['bracket', 'population']), 100000, 't_0_00001', cut
+    ).with_columns(
+        pl.lit(country).alias('country'),
+        pl.lit(year).alias('year')
+    )
+
+
+# df = _f(data, country='moz', year=2025)
+# get_richest_1(df, 'moz', 2025)
+
+rich1 = extract_richest(get_richest_1, data_part)
+rich2 = extract_richest(get_richest_2, data_part)
+
+rich1
+rich2
+
+rich_hhinc = pl.concat([rich1, rich2])
+
+rich_hhinc = rich_hhinc.select(['country', 'year', 'bracket', 'income'])
+rich_hhinc.write_csv('other/richest_hhinc.csv')
+
 
 
 def get_split_income(ser,  # input: population count by bracket
@@ -69,6 +157,7 @@ def get_split_income(ser,  # input: population count by bracket
     cumlmon = 0
     incomes = []
     tp1 = ser['population'].sum() / splitnum
+    # print(tp1)
 
     for rec in ser.to_dicts():
         i, bp = rec['bracket'], rec['population']
@@ -138,7 +227,7 @@ def get_centile_income(ser, country, year, cut=False):
 
 def get_quintile_income(ser, country, year, cut=False):
     return get_split_income(
-        ser.select(['bracket', 'population']), 5, 'qunitile', cut
+        ser.select(['bracket', 'population']), 5, 'quintile', cut
     ).with_columns(
         pl.lit(country).alias('country'),
         pl.lit(year).alias('year')
@@ -166,28 +255,59 @@ decile_income = extract_income_rank(get_decile_income, data_part)
 ventile_income = extract_income_rank(get_ventile_income, data_part)
 quintile_income = extract_income_rank(get_quintile_income, data_part)
 # _f(ventile_income, country='moz', year=2020)
-
+decile_income
 # centile only need for 2022
 data_part_22 = _f(data, year=2022).partition_by(['country', 'year'], as_dict=True)
 centile_income_22 = extract_income_rank(get_centile_income, data_part_22)
 # centile_income_22
 
+# centile for 1940-2023
+data_part_4023 = data.filter(
+    pl.col('year').is_in(range(1940, 2024))
+).partition_by(['country', 'year'], as_dict=True)
+
+centile_income_4023 = extract_income_rank(get_centile_income, data_part_4023)
+# centile_income_4023
+
+res4023 = centile_income_4023.pivot(values='income', index=['country', 'centile'], columns='year')
+res4023.write_csv('other/centile_mean_income_4023.csv')
+
+# centile for 2024-2100
+data_part_2400 = data.filter(
+    pl.col('year').is_in(range(2024, 2101))
+).partition_by(['country', 'year'], as_dict=True)
+
+centile_income_2400 = extract_income_rank(get_centile_income, data_part_2400)
+# centile_income_2400
+
+res2400 = centile_income_2400.pivot(values='income', index=['country', 'centile'], columns='year')
+res2400.write_csv('other/centile_mean_income_2400.csv')
+
+
+# export to file
+# os.makedirs('other/')
+decile_income.select(['country', 'year', 'decile', 'income']).write_csv('other/decile_mean_income.csv')
+ventile_income.select(['country', 'year', 'ventile', 'income']).write_csv('other/ventile_mean_income.csv')
+quintile_income.select(['country', 'year', 'quintile', 'income']).write_csv('other/quintile_mean_income.csv')
+centile_income_22.select(['country', 'year', 'centile', 'income']).write_csv('other/centile_mean_income_22.csv')
+
 
 # Compute the GDP based version.
-
-# FIXME: use latest mean income and GDP
-meaninc = pl.read_csv('../../../ddf--gapminder--fasttrack/ddf--datapoints--mhhinc--by--country--time.csv')
+meaninc = pl.read_csv('../build/source/gapminder/mean_income.csv')
 meaninc = meaninc.select(
-    pl.col('country'),
-    pl.col('time').alias('year'),
-    (pl.col('mhhinc') / 365.)
+    pl.col('geo').alias('country'),
+    pl.col('year'),
+    (pl.col('Mean income').alias('mhhinc'))
 )
-gdppc = pl.read_csv('../source_bak/fixtures/gdppc_latest.csv')
+meaninc
+
+gdppc = pl.read_csv('../build/source/gapminder/gdp.csv')
 gdppc = gdppc.select(
     pl.col('geo').alias('country'),
     pl.col('time').alias('year'),
     (pl.col('Income per person') / 365.).alias('gdppc')
 )
+gdppc
 
 mean_income = meaninc.join(gdppc, on=['country', 'year'], how='outer')  # there are some nulls
 mean_income = mean_income.drop_nulls()
@@ -224,9 +344,22 @@ decile_gdp = decile_income.join(ratio, on=['country', 'year'], how='inner').with
 centile_gdp_22 = centile_income_22.join(ratio, on=['country', 'year'], how='inner').with_columns(
     pl.col('income') * pl.col('ratio')
 ).select(pl.exclude('ratio'))
+
+rich_gdp = rich_hhinc.join(ratio, on=['country', 'year'], how='inner').with_columns(
+    pl.col('income') * pl.col('ratio')
+).select(pl.exclude('ratio'))
+
 # centile_gdp_22
 # quintile_gdp
+decile_gdp
 
+# export to file
+decile_gdp.select(['country', 'year', 'decile', 'income']).write_csv('other/decile_gdp.csv')
+ventile_gdp.select(['country', 'year', 'ventile', 'income']).write_csv('other/ventile_gdp.csv')
+quintile_gdp.select(['country', 'year', 'quintile', 'income']).write_csv('other/quintile_gdp.csv')
+centile_gdp_22.select(['country', 'year', 'centile', 'income']).write_csv('other/centile_gdp_22.csv')
+
+rich_gdp.write_csv('other/richest_gdp.csv')
 
 
 # Median income
@@ -294,8 +427,12 @@ median_gdppc
 median_gdppc.drop_nulls()  # no nulls here.
 
 
-# NEXT:
-# - save those into files
+# export to file
+median_income.write_csv('other/median_income.csv')
+median_gdppc.write_csv('other/median_gdp.csv')
+
+
+# TODO:
 # - sanity checking?
 
 

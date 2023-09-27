@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+"""A script to produce all varients of income mountain to csv file.
+"""
+
 import numpy as np
 import polars as pl
 import pickle
@@ -75,6 +78,33 @@ res = map(resample_country, datalist)
 
 res = pl.concat(res)
 
+res.select('bracket').max()
+
+res.write_csv('./country_shape_105.csv')
+
+res_gbl = res.groupby(['year', 'bracket'], maintain_order=True).agg(
+    pl.col('population').sum()
+)
+res_gbl = res_gbl.select(
+    pl.lit('world').alias('global'),
+    pl.all()
+)
+
+res_gbl
+
+res_gbl.write_csv('./world_shape_105.csv')
+
+res_pivot_gbl = res_gbl.pivot(values='population', index=['global', 'year'], columns='bracket', aggregate_function=None)
+
+out_gbl = res_pivot_gbl.select(
+    pl.col('global'),
+    pl.col('year').alias('time'),
+    pl.struct(pl.col(map(str, (range(0, 105))))).apply(join_str).alias('income_mountain_105bracket_shape_for_log')
+)
+
+out_gbl
+
+out_gbl.write_csv('ddf/income_mountain/ddf--datapoints--income_mountain_105bracket_shape_for_log--by--global--time.csv')
 
 res_pivot = res.pivot(values='population', index=['country', 'year'], columns='bracket', aggregate_function=None)
 
@@ -117,6 +147,8 @@ res_gbl = res_gbl.select(
     pl.col('population')
 )
 
+res_gbl
+
 dlist = res_gbl.partition_by(['global', 'time'])
 
 
@@ -150,14 +182,20 @@ res_gbl = pl.concat(res_gbl)
 
 res_gbl
 
+res_gbl.write_csv('./global_shapes_2021_2023.csv')
+
 res_gbl_p = res_gbl.pivot(values='population', index=['global', 'time'], columns='bracket', aggregate_function=None)
 
 res_gbl_p = res_gbl_p.fill_null(0)
 
+res_gbl_p
+
 out2 = res_gbl_p.select(
     pl.col('global'),
     pl.col('time'),
-    pl.struct(pl.col(map(str, (range(0, 105))))).apply(join_str).alias('income_mountain_1050bracket_shape_for_log')
+    pl.struct(pl.col(map(str, (range(0, 861))))).apply(join_str).alias('income_mountain_1050bracket_shape_for_log')
 )
+
+out2
 
 out2.write_csv('ddf/income_mountain/ddf--datapoints--income_mountain_1050bracket_shape_for_log--by--global--time.csv')

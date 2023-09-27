@@ -9,13 +9,6 @@ import gspread
 import gspread_pandas
 from gspread_pandas import Spread
 
-
-# TODO: get following data:
-# - [X] mean income
-# - [X] gdppc
-# - [X] gini
-# - [X] total pop
-# - [ ] WB income groups/GM income groups combined
 # TODO: check file correctness after download
 
 URLS = {

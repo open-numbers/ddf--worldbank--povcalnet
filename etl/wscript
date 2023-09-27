@@ -9,10 +9,19 @@ top = '.'
 out = './build'
 prefix = '../'
 
+MAX_POVCALNET_BRACKET = 461
+
+# TODO: add configure methods for install the venv and and requirements
+# def hello(ctx):
+#     """just a test"""
+#     out, err = ctx.cmd_and_log(["python", "-V"], output=Context.BOTH, quiet=Context.BOTH)
+#     print(out)
+
 
 def configure(ctx):
-    # TODO: move prefix checking to waf tools
-    if ctx.options.prefix == '/usr/local':  # default option. Assumed user didn't provide the prefix.
+    # TODO: add installation path (destdir)
+    if ctx.options.prefix == '/usr/local':  # if user didn't provide the prefix, /usr/local is the default.
+        # But we want the prefix variable to be the default.
         ctx.env.PREFIX = os.path.abspath(prefix)
     ctx.find_program("python", var="PYTHON")
     # ctx.find_program("ddf", var="DDF")
@@ -26,7 +35,7 @@ def update_source(ctx):
         print('not using jobs > 2, setting jobs = 2')
         ctx.jobs = 2
 
-    for i in range(461):
+    for i in range(MAX_POVCALNET_BRACKET):
         ctx(
             rule="${PYTHON} ${SRC} " + str(i),
             source="scripts/update_source.py",
@@ -65,13 +74,15 @@ class UpdateSourceGapminder(BuildContext):
 # tidy povcalnet data
 def tidy_source(ctx):
     """tidy downloaded povcalnet data"""
-    # TODO: add dependencies: downloaded csv files
-    # then we can run this when csv files changed
+    povcalnet_source_files = [
+        "source/povcalnet/" + "{:04d}.csv".format(i) for i in range(MAX_POVCALNET_BRACKET)
+    ]
+    source_files = ["scripts/step1.py"]
+    source_files.extend(povcalnet_source_files)
     ctx(
-        rule="${PYTHON} ${SRC} ",
-        source="scripts/step1.py",
-        target="povcalnet_clean.pkl",
-        always=True
+        rule="${PYTHON} ${SRC[0]} ",
+        source=source_files,
+        target="povcalnet_clean.parquet"
     )
 
 
@@ -91,9 +102,9 @@ def smooth_source(ctx):
     ctx(
         rule="${PYTHON} ${SRC[0]} ",
         source=["scripts/step2.py",
-                'povcalnet_clean.pkl'],
+                'povcalnet_clean.parquet'],
         target=[
-            "povcalnet_smoothed.pkl",
+            "povcalnet_smoothed.parquet",
             'povcal_country_year.csv'
         ],
     )
@@ -111,8 +122,8 @@ def standardize_shape(ctx):
         rule="${PYTHON} ${SRC[0]} ",
         source=["scripts/step3.py",
                 "scripts/bracketlib.py",
-                ctx.path.find_or_declare('povcalnet_smoothed.pkl')],
-        target='mean_central_shapes.pkl',
+                ctx.path.find_or_declare('povcalnet_smoothed.parquet')],
+        target='mean_central_shapes.parquet',
     )
 
 
@@ -149,7 +160,7 @@ def estimate_shapes(ctx):
                 ctx.path.find_or_declare('source/gapminder/gini.csv'),
                 ctx.path.find_or_declare('neighbours_list.json')
                 ],
-        target='estimated_mountains.pkl',
+        target='estimated_mountains.parquet',
     )
 
 
@@ -163,29 +174,24 @@ def pop_by_income(ctx):
     ctx(
         rule="${PYTHON} ${SRC[0]} ",
         source=["scripts/step5.py",
-                "estimated_mountains.pkl",
-                "povcalnet_smoothed.pkl",
+                "estimated_mountains.parquet",
+                "povcalnet_smoothed.parquet",
                 'source/gapminder/population.csv'
                 # ctx.path.find_or_declare("estimated_mountains.pkl"),
                 # ctx.path.find_or_declare("povcalnet_smoothed.pkl"),
                 # ctx.path.find_or_declare('source/gapminder/population.csv'),
                 ],
-        target=['population_500plus.pkl', 'population_percentage_500plus.pkl'],
+        target=['population_500plus.parquet', 'population_percentage_500plus.parquet'],
     )
-
-
-#
 
 
 def build(bld):
-    bld(
-        rule="${PYTHON} ${SRC}",
-        source="scripts/testetl.py",
-        target=bld.path.find_or_declare("brackets_tmp.csv")
-    )
-    # build_dir = bld.path.find_dir("build")
-    # bld.install_files("${PREFIX}/etl/source/povcalnet",
-    #                   build_dir.ant_glob("etl/source/povcalnet/*.csv")
-    #                   )
+    pass
 
-# next: looks good, now I should download all source files and create etl script.
+
+def buildall(ctx):
+    from waflib import Options
+    Options.commands = ['tidy_source', 'smooth_source',
+                        'standardize_shape', 'compute_neighbours',
+                        'estimate_shapes', 'pop_by_income'
+                        ]

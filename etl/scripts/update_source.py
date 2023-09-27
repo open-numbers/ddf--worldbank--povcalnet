@@ -9,11 +9,12 @@ import numpy as np
 from ddf_utils.factory.common import download
 from multiprocessing import Pool
 from functools import partial
+import polars as pl
 
 
 source_dir = 'source/povcalnet'
 all_brackets = np.logspace(-7, 13, 501, base=2, endpoint=True)
-url_tmpl = "https://api.worldbank.org/pip/v1/pip?country=all&year=all&povline={}&fill_gaps=true&group_by=none&welfare_type=all&reporting_level=all&format=csv"
+url_tmpl = "https://api.worldbank.org/pip/v1/pip?country=all&year=all&povline={}&fill_gaps=true&group_by=none&welfare_type=all&reporting_level=all&format=csv&ppp_version=2017"
 POOLSIZE = 4
 
 
@@ -28,8 +29,11 @@ def process(i, resume=True):
              file_csv,
              resume=resume,
              progress_bar=False,
-             backoff=5,
-             timeout=60)
+             backoff=10,
+             timeout=300)
+    # test if the csv is correct.
+    df = pl.read_csv(file_csv, infer_schema_length=0)
+    assert 'poverty_line' in df.columns, f"{file_csv}: malform csv"
     time.sleep(5)
 
 

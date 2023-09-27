@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+"""create income mountain datapoints for countries/regions.
+"""
+
 import os
 
 import numpy as np
@@ -10,7 +13,7 @@ import pickle
 import matplotlib.pyplot as plt
 
 
-data = pickle.load(open('./population_500plus.pkl', 'rb'))
+data = pickle.load(open('../build/population_500plus.pkl', 'rb'))
 
 
 bracket_range = pl.Series('bracket', range(500), dtype=pl.Int32).to_frame()
@@ -233,7 +236,6 @@ for k in [
 
     res_grp = concat_values(res_grp)
     res_grp.to_csv(f'ddf/income_mountain/ddf--datapoints--income_mountain_50bracket_shape_for_log--by--{k}--time.csv')
-
 
 
 # now also update the max heights for all groups!

@@ -35,7 +35,7 @@ pop_file = 'source/gapminder/population.csv'
 
 
 def _f(df, **kwargs):
-    return df.filter(pl.all([(pl.col(k) == v) for k, v in kwargs.items()]))
+    return df.filter(pl.all_horizontal([(pl.col(k) == v) for k, v in kwargs.items()]))
 
 
 def select_shape(df):
@@ -78,14 +78,14 @@ def resample_to_int(df, cut=True):
 
 if __name__ == '__main__':
     # load data
-    povcalnet = pickle.load(open('./povcalnet_smoothed.pkl', 'rb'))
-    estimated = pickle.load(open('./estimated_mountains.pkl', 'rb'))
+    povcalnet = pl.read_parquet('./povcalnet_smoothed.parquet')
+    estimated = pl.read_parquet('./estimated_mountains.parquet')
 
     # only keep one reporting level. They are mostly `national` but there are
     # some countries we will use urban.
-    povcalnet = povcalnet.groupby(['country', 'year']).apply(select_shape)
+    povcalnet = povcalnet.group_by(['country', 'year']).map_groups(select_shape)
     # resample estimated mountains to use integer brackets
-    est = estimated.groupby(['country', 'year']).apply(lambda x: resample_to_int(x, cut=False))
+    est = estimated.group_by(['country', 'year']).map_groups(lambda x: resample_to_int(x, cut=False))
     # check if something abnormal
     assert est.filter(pl.col('headcount') < 0).is_empty()
 
@@ -102,7 +102,7 @@ if __name__ == '__main__':
     povcal_and_est = pl.concat([est, povcalnet]).sort(['country', 'year', 'bracket'])
 
     # product 1: population percentage
-    pickle.dump(povcal_and_est, open('./population_percentage_500plus.pkl', 'wb'))
+    povcal_and_est.write_parquet('./population_percentage_500plus.parquet')
 
     # then load population data and create population numbers datapoint
     pop = pl.read_csv(pop_file)
@@ -149,7 +149,7 @@ if __name__ == '__main__':
     assert res.filter(pl.col('population').is_null()).is_empty()
 
     # product 2:
-    pickle.dump(res, open('./population_500plus.pkl', 'wb'))
+    res.write_parquet('./population_500plus.parquet')
 
 
 # # check global shapes
@@ -163,8 +163,3 @@ if __name__ == '__main__':
 # plt.plot(df2['bracket'], df2['population'])
 # ax.set_yscale('log')
 # plt.show()
-
-# NEXT: findout which output files are required
-# TODO: missing steps
-# 1. create the flattened datapoint
-# 2. create datapoint by regions

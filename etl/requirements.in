@@ -1,0 +1,10 @@
+pandas
+polars
+matplotlib
+seaborn
+scipy
+psutil
+pyarrow
+ddf_utils
+gspread
+gspread_pandas

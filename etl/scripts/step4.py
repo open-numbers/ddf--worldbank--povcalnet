@@ -43,7 +43,7 @@ neighbours_file = 'neighbours_list.json'
 
 
 def _f(df, **kwargs):
-    return df.filter(pl.all([(pl.col(k) == v) for k, v in kwargs.items()]))
+    return df.filter(pl.all_horizontal([(pl.col(k) == v) for k, v in kwargs.items()]))
 
 
 def select_shape(df):
@@ -63,7 +63,7 @@ def get_average_shape(known_shapes, neighbours_list):
         schema={'country': pl.Utf8, 'year': pl.Int32}
     )
     res = known_shapes.join(other, on=['country', 'year'], how='inner')
-    return res.groupby('bracket').agg(
+    return res.group_by('bracket').agg(
         pl.col('headcount').sum() / 50
     ).sort('bracket')
 
@@ -162,10 +162,10 @@ if __name__ == '__main__':
     all_neighbours_json = json.loads(jsonstring)
 
     # load shapes
-    res8 = pickle.load(open('./mean_central_shapes.pkl', 'rb'))
+    res8 = pl.read_parquet('./mean_central_shapes.parquet')
 
     # 1. only keep one reporting level
-    known_shapes = res8.groupby(['country', 'year']).apply(select_shape)
+    known_shapes = res8.group_by(['country', 'year']).map_groups(select_shape)
     known_shapes_lazy = known_shapes.lazy()
 
     # 2. there are 3 cases
@@ -211,4 +211,4 @@ if __name__ == '__main__':
     # print(len(todos))
     estimated = [run(x) for x in todos]
     estimated_df = pl.concat([x for x in estimated if x is not None])
-    pickle.dump(estimated_df, open('estimated_mountains.pkl', 'wb'))
+    estimated_df.write_parquet('./estimated_mountains.parquet')

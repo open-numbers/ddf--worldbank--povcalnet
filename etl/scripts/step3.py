@@ -34,7 +34,7 @@ income = pl.read_csv(income_file).select(
 
 # %%
 def _f(df, **kwargs):
-    return df.filter(pl.all([(pl.col(k) == v) for k, v in kwargs.items()]))
+    return df.filter(pl.all_horizontal([(pl.col(k) == v) for k, v in kwargs.items()]))
 
 
 def get_income(c, y):
@@ -66,15 +66,15 @@ def move_mean(df: pl.DataFrame):
 def step8(res7):
     print("below are country/year which existed in povcalnet but not gapminder income data:")
     # move the shapes to make the group with mean income to be group 0
-    return res7.groupby(['country', 'year', 'reporting_level']).apply(move_mean)
+    return res7.group_by(['country', 'year', 'reporting_level']).map_groups(move_mean)
 
 
 # %%
 if __name__ == '__main__':
-    res7 = pickle.load(open("./povcalnet_smoothed.pkl", 'rb'))
+    res7 = pl.read_parquet('./povcalnet_smoothed.parquet')
     res8 = step8(res7)
 
-    pickle.dump(res8, open('mean_central_shapes.pkl', 'wb'))
+    res8.write_parquet('mean_central_shapes.parquet')
 
     df = _f(res8, country='ago', year=1981, reporting_level='n')
     print('example shape:')
