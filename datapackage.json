@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2023-05-10T21:59:44.496657+00:00",
+    "created": "2023-09-27T14:54:26.572317+00:00",
     "version": "2.2.0",
     "resources": [
         {
@@ -1211,6 +1211,48 @@
                     "country",
                     "time",
                     "wb_level"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--poverty_rate--by--country--time",
+            "path": "poverty_rates/ddf--datapoints--poverty_rate--by--country--time.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "country"
+                    },
+                    {
+                        "name": "time"
+                    },
+                    {
+                        "name": "poverty_rate"
+                    }
+                ],
+                "primaryKey": [
+                    "country",
+                    "time"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--poverty_rate--by--global--time",
+            "path": "poverty_rates/ddf--datapoints--poverty_rate--by--global--time.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "global"
+                    },
+                    {
+                        "name": "time"
+                    },
+                    {
+                        "name": "poverty_rate"
+                    }
+                ],
+                "primaryKey": [
+                    "global",
+                    "time"
                 ]
             }
         }
@@ -2991,6 +3033,16 @@
             {
                 "primaryKey": [
                     "country",
+                    "time"
+                ],
+                "value": "poverty_rate",
+                "resources": [
+                    "ddf--datapoints--poverty_rate--by--country--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "country",
                     "time",
                     "wb_level"
                 ],
@@ -3013,12 +3065,33 @@
             {
                 "primaryKey": [
                     "geo",
+                    "time"
+                ],
+                "value": "poverty_rate",
+                "resources": [
+                    "ddf--datapoints--poverty_rate--by--country--time",
+                    "ddf--datapoints--poverty_rate--by--global--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
                     "time",
                     "wb_level"
                 ],
                 "value": "poverty_rate",
                 "resources": [
                     "ddf--datapoints--poverty_rate--by--country--time--wb_level"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "global",
+                    "time"
+                ],
+                "value": "poverty_rate",
+                "resources": [
+                    "ddf--datapoints--poverty_rate--by--global--time"
                 ]
             }
         ],
