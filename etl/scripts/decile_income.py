@@ -8,7 +8,6 @@ import sys
 
 import numpy as np
 import polars as pl
-import pickle
 
 import etllib
 
@@ -25,10 +24,9 @@ plt.rcParams['figure.dpi'] = 144
 def _f(df, **kwargs):
     return df.filter(pl.all_horizontal([(pl.col(k) == v) for k, v in kwargs.items()]))
 
-# main
 
 # import data
-data = pickle.load(open('./bridged_shapes.pkl', 'rb'))
+data = pl.read_parquet('./bridged_shapes.parquet')
 
 
 def bracket_to_income(b, bracket_delta=0.04):   # default: 500 brackets till 8192
@@ -103,6 +101,7 @@ def get_richest_income(ser,  # input: population count by bracket
     res = {'bracket': kw, 'income': incomes[1]}
     return pl.DataFrame(res)
 
+
 # get_richest_income(df, 100000, 't_0_001')
 data_part = data.partition_by(['country', 'year'], as_dict=True)
 
@@ -123,6 +122,7 @@ def get_richest_1(ser, country, year, cut=False):
         pl.lit(country).alias('country'),
         pl.lit(year).alias('year')
     )
+
 
 def get_richest_2(ser, country, year, cut=False):
     return get_richest_income(
@@ -146,7 +146,7 @@ rich_hhinc = pl.concat([rich1, rich2])
 
 rich_hhinc = rich_hhinc.select(['country', 'year', 'bracket', 'income'])
 rich_hhinc.write_csv('other/richest_hhinc.csv')
-
+rich_hhinc
 
 
 def get_split_income(ser,  # input: population count by bracket
@@ -261,6 +261,14 @@ data_part_22 = _f(data, year=2022).partition_by(['country', 'year'], as_dict=Tru
 centile_income_22 = extract_income_rank(get_centile_income, data_part_22)
 # centile_income_22
 
+# export to file
+# os.makedirs('other/')
+decile_income.select(['country', 'year', 'decile', 'income']).write_csv('other/decile_mean_income.csv')
+ventile_income.select(['country', 'year', 'ventile', 'income']).write_csv('other/ventile_mean_income.csv')
+quintile_income.select(['country', 'year', 'quintile', 'income']).write_csv('other/quintile_mean_income.csv')
+centile_income_22.select(['country', 'year', 'centile', 'income']).write_csv('other/centile_mean_income_22.csv')
+
+
 # centile for 1940-2023
 data_part_4023 = data.filter(
     pl.col('year').is_in(range(1940, 2024))
@@ -282,14 +290,6 @@ centile_income_2400 = extract_income_rank(get_centile_income, data_part_2400)
 
 res2400 = centile_income_2400.pivot(values='income', index=['country', 'centile'], columns='year')
 res2400.write_csv('other/centile_mean_income_2400.csv')
-
-
-# export to file
-# os.makedirs('other/')
-decile_income.select(['country', 'year', 'decile', 'income']).write_csv('other/decile_mean_income.csv')
-ventile_income.select(['country', 'year', 'ventile', 'income']).write_csv('other/ventile_mean_income.csv')
-quintile_income.select(['country', 'year', 'quintile', 'income']).write_csv('other/quintile_mean_income.csv')
-centile_income_22.select(['country', 'year', 'centile', 'income']).write_csv('other/centile_mean_income_22.csv')
 
 
 # Compute the GDP based version.
@@ -397,8 +397,8 @@ def get_median_income(df):
     return median
 
 
-df = _f(data_pct, country='afg', year=1800)
-get_median_income(df)
+# df = _f(data_pct, country='afg', year=1800)
+# get_median_income(df)
 
 
 # calculate for all country year
@@ -434,10 +434,8 @@ median_gdppc.write_csv('other/median_gdp.csv')
 
 # TODO:
 # - sanity checking?
+# plt.plot(df['bracket'], df['population'])
+# plt.show()
 
-
-plt.plot(df['bracket'], df['population'])
-plt.show()
-
-data_pct
-data
+# data_pct
+# data

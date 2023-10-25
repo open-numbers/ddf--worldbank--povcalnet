@@ -13,9 +13,11 @@ import seaborn as sns
 sns.set_style('whitegrid')
 sns.set_context('notebook')
 
+
 # FIXME: cleanup the code. exp the part using pandas
 def _f(df, **kwargs):
     return df.filter(pl.all_horizontal([(pl.col(k) == v) for k, v in kwargs.items()]))
+
 
 data = pl.read_parquet('./bridged_shapes.parquet')
 
@@ -24,6 +26,25 @@ data
 data['bracket'].max()  # 1048
 
 
+# shape in 1050 brackets as ddf datapoints
+df_23 = data.filter(
+    pl.col('year').is_in([2023])
+)
+
+df_23.write_csv('other/country_shape_2023.csv')
+
+gbl_21_23 = data.filter(
+    pl.col('year').is_in([2021, 2022, 2023])
+).group_by(['year', 'bracket']).agg(
+    pl.col('population').sum()
+)
+gbl_21_23 = gbl_21_23.with_columns(
+    pl.lit('world').alias('global')
+).select(['global', 'year', 'bracket', 'population']).sort(['year', 'bracket'])
+gbl_21_23.write_csv('other/global_shape_2021_2023.csv')
+
+
+# shape in 105 brackets
 datalist = data.partition_by(['country', 'year'])
 
 
@@ -60,6 +81,8 @@ res.select('bracket').max()  # 104
 
 res
 
+res.write_csv('')
+
 # see if we cut the shape at 50, what will it look like
 res.filter(
     (pl.col('bracket') > 50) & (pl.col('year') == 2020)
@@ -82,6 +105,7 @@ res.filter(
 
 # load povcalnet shape to compare
 # data2 = pl.read_parquet('../build/population_500plus.parquet')
+
 
 # need country shapes and global shapes for 105 brackets
 def join_str(d):

@@ -28,7 +28,9 @@ These files then can be used in other scripts to create datapoints we needed:
 1. run combine_billionaires.py to generate the bridged shapes with povcalnet and billionaires data (bridged_shapes.pkl)
 2. run entities.py to generate entities files
 3. run datapoints.py and datapoint_bridge.py to generate the datapoint files for income mountain
-4. run decile_income.py to create decile/centile income data
+4. run extreme_poverty.py to create extreme poverty rate/population indicators
+5. run decile_income.py to create decile/centile income data
+
 
 ## TODO items
 
