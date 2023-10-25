@@ -8,12 +8,10 @@ import os
 import numpy as np
 import polars as pl
 import pandas as pd
-import pickle
 
 import matplotlib.pyplot as plt
 
-
-data = pickle.load(open('../build/population_500plus.pkl', 'rb'))
+data = pl.read_parquet('../build/population_500plus.parquet')
 
 
 bracket_range = pl.Series('bracket', range(500), dtype=pl.Int32).to_frame()
@@ -190,7 +188,6 @@ res_ig3.at[('middle_income', 2050)]
 
 
 # others
-
 countries = pd.read_csv('../source/fixtures/ddf--open_numbers/ddf--entities--geo--country.csv')
 
 

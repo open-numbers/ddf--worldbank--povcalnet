@@ -49,4 +49,5 @@ def bracket_from_income(inc, bracket_step, integer=True):
 
     if integer:
         res = int(math.floor((loc + 7) / bracket_step))
+
     return res
