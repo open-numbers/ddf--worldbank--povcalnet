@@ -98,3 +98,20 @@ country_epov_rates = pl.from_records(country_epov)
 country_epov_rates
 
 country_epov_rates.write_csv('./ddf/poverty_rates/ddf--datapoints--poverty_rate--by--country--time.csv')
+
+# people in extreme poverty
+population = pl.read_csv('../build/source/gapminder/population.csv')
+population
+
+population = population.select(
+    pl.col('geo').alias('country'),
+    pl.col('time'),
+    pl.col('Population').alias('population')
+)
+
+pop_in_epov = country_epov_rates.join(population, on=['country', 'time'], how='left').select(
+    pl.col(['country', 'time']),
+    (pl.col('population') * pl.col('poverty_rate') / 100).cast(pl.Int64).alias('population_in_extreme_poverty')
+)
+
+pop_in_epov.write_csv('./ddf/poverty_rates/ddf--datapoints--population_in_extreme_poverty--by--country--time.csv')
