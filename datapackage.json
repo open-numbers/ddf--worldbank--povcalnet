@@ -632,6 +632,27 @@
             }
         },
         {
+            "name": "ddf--datapoints--poverty_line--by--country--time",
+            "path": "poverty_rates/ddf--datapoints--poverty_line--by--country--time.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "country"
+                    },
+                    {
+                        "name": "time"
+                    },
+                    {
+                        "name": "poverty_line"
+                    }
+                ],
+                "primaryKey": [
+                    "country",
+                    "time"
+                ]
+            }
+        },
+        {
             "name": "ddf--datapoints--income_mountain_1050bracket_shape_for_log--by--global--time",
             "path": "income_mountain/ddf--datapoints--income_mountain_1050bracket_shape_for_log--by--global--time.csv",
             "schema": {
@@ -2486,6 +2507,26 @@
             }
         ],
         "datapoints": [
+            {
+                "primaryKey": [
+                    "country",
+                    "time"
+                ],
+                "value": "poverty_line",
+                "resources": [
+                    "ddf--datapoints--poverty_line--by--country--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ],
+                "value": "poverty_line",
+                "resources": [
+                    "ddf--datapoints--poverty_line--by--country--time"
+                ]
+            },
             {
                 "primaryKey": [
                     "geo",
