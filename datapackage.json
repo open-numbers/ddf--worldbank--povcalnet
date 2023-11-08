@@ -8,7 +8,7 @@
     "author": "",
     "license": "",
     "created": "2023-10-25T08:09:36.943324+00:00",
-    "version": "2.3.0",
+    "version": "2.4.0",
     "resources": [
         {
             "name": "ddf--concepts",
@@ -629,6 +629,27 @@
                     }
                 ],
                 "primaryKey": "wb_level"
+            }
+        },
+        {
+            "name": "ddf--datapoints--poverty_line--by--country--time",
+            "path": "poverty_rates/ddf--datapoints--poverty_line--by--country--time.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "country"
+                    },
+                    {
+                        "name": "time"
+                    },
+                    {
+                        "name": "poverty_line"
+                    }
+                ],
+                "primaryKey": [
+                    "country",
+                    "time"
+                ]
             }
         },
         {
@@ -2486,6 +2507,26 @@
             }
         ],
         "datapoints": [
+            {
+                "primaryKey": [
+                    "country",
+                    "time"
+                ],
+                "value": "poverty_line",
+                "resources": [
+                    "ddf--datapoints--poverty_line--by--country--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ],
+                "value": "poverty_line",
+                "resources": [
+                    "ddf--datapoints--poverty_line--by--country--time"
+                ]
+            },
             {
                 "primaryKey": [
                     "geo",
