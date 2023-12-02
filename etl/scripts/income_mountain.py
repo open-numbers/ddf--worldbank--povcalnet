@@ -1,50 +1,32 @@
 """create ddf files for income mountain
 
-We will use the bridged version of income data to create it.
+We will use the bridged version of income data to create it:
+
+- The 105 bracket income mountain for global and country
+- The 50 bracket income mountain for global, country and other regions
 """
+
+# TODO: create a main function, make it more like a script
 
 import os
 import polars as pl
 import pandas as pd
 
-import matplotlib.pyplot as plt
-import seaborn as sns
 
-sns.set_style('whitegrid')
-sns.set_context('notebook')
-
-
-# FIXME: cleanup the code. exp the part using pandas
 def _f(df, **kwargs):
     return df.filter(pl.all_horizontal([(pl.col(k) == v) for k, v in kwargs.items()]))
 
 
 data = pl.read_parquet('./bridged_shapes.parquet')
+# data
 
-data
+# data['bracket'].max()  # 997
 
-data['bracket'].max()  # 1048
+# 1. resample the data and create shape in 105 brackets
+# if we resample the data by adding each 10 brackets, we will end up with 100 brackets.
+# we will use 105 brackets in total, to make sure all data
+# including future updates can fit in
 
-
-# shape in 1050 brackets as ddf datapoints
-df_23 = data.filter(
-    pl.col('year').is_in([2023])
-)
-
-df_23.write_csv('other/country_shape_2023.csv')
-
-gbl_21_23 = data.filter(
-    pl.col('year').is_in([2021, 2022, 2023])
-).group_by(['year', 'bracket']).agg(
-    pl.col('population').sum()
-)
-gbl_21_23 = gbl_21_23.with_columns(
-    pl.lit('world').alias('global')
-).select(['global', 'year', 'bracket', 'population']).sort(['year', 'bracket'])
-gbl_21_23.write_csv('other/global_shape_2021_2023.csv')
-
-
-# shape in 105 brackets
 datalist = data.partition_by(['country', 'year'])
 
 
@@ -60,9 +42,9 @@ def resample_country(df, rmax=None, scale=10):  # will it work if scale = 20?
         pl.col('population')
     )
     if rmax is None:
-        full_range = pl.Series('bracket', range(df_['bracket'].max() + 1), dtype=pl.Int32).to_frame()
+        full_range = pl.Series('bracket', range(df_['bracket'].max()), dtype=pl.Int32).to_frame()
     else:
-        full_range = pl.Series('bracket', range(rmax + 1), dtype=pl.Int32).to_frame()
+        full_range = pl.Series('bracket', range(rmax), dtype=pl.Int32).to_frame()
 
     return df_.join(
         full_range, on='bracket', how='outer'
@@ -73,45 +55,40 @@ def resample_country(df, rmax=None, scale=10):  # will it work if scale = 20?
     ).select(['country', 'year', 'bracket', 'population'])
 
 
-res = map(resample_country, datalist)
-
+# use 105 brackets (0 - 104)
+res = map(lambda x: resample_country(x, 105, 10), datalist)
 res = pl.concat(res)
 
-res.select('bracket').max()  # 104
-
-res
-
-res.write_csv('')
+# res.select('bracket').max()  # 104
+# res
+# res.write_csv('other/country_shape_105.csv')
 
 # see if we cut the shape at 50, what will it look like
-res.filter(
-    (pl.col('bracket') > 50) & (pl.col('year') == 2020)
-).select(
-    pl.col('population').sum()
-)
+# tot50plus = res.filter(
+#     (pl.col('bracket') >= 50) & (pl.col('year') == 2020)
+# ).select(
+#     pl.col('population').sum()
+# )
 
-tot = res.filter(
-    pl.col('year') == 2020
-).select(
-    pl.col('population').sum()
-).item()
-tot
+# tot = res.filter(
+#     pl.col('year') == 2020
+# ).select(
+#     pl.col('population').sum()
+# ).item()
 
-res.filter(
-    (pl.col('bracket') > 49) & (pl.col('year') == 2020)
-).select(
-    pl.col('population').sum()
-).item() / tot * 100
+# tot50plus  # 100 thousands
+# tot50plus / tot * 100
 
 # load povcalnet shape to compare
 # data2 = pl.read_parquet('../build/population_500plus.parquet')
 
 
-# need country shapes and global shapes for 105 brackets
+# create a function for creating shapes files in wide format
 def join_str(d):
     return ','.join(map(str, d.values()))
 
 
+# global shapes
 res_gbl = res.group_by(['year', 'bracket'], maintain_order=True).agg(
     pl.col('population').sum()
 )
@@ -120,16 +97,33 @@ res_gbl = res_gbl.select(
     pl.all()
 )
 res_gbl
+
+os.makedirs('ddf/income_mountain', exist_ok=True)
+
+# also create a global datapoint file with long format, for debugging.
+res_gbl.select(
+    pl.col('global'),
+    pl.col('year').alias('time'),
+    pl.col('bracket'),
+    pl.col('population').alias('income_mountain_105bracket_shape_for_log')
+).write_csv('ddf/income_mountain/ddf--datapoints--income_mountain_105brackets--by--global--time.csv')
+
+# plot 2022
+# res_gbl_22 = res_gbl.filter(
+#     (pl.col('year') == 2022) & (pl.col('bracket') > 40)
+# ).sort('bracket')
+# plt.plot(res_gbl_22['bracket'], res_gbl_22['population'])
+# plt.show()
+
 res_pivot_gbl = res_gbl.pivot(values='population', index=['global', 'year'], columns='bracket', aggregate_function=None)
 res_pivot_gbl = res_pivot_gbl.fill_null(0)
+res_pivot_gbl
 out_gbl = res_pivot_gbl.select(
     pl.col('global'),
     pl.col('year').alias('time'),
     pl.struct(pl.col(map(str, (range(0, 105))))).map_elements(join_str).alias('income_mountain_105bracket_shape_for_log')
 )
 out_gbl
-
-os.makedirs('ddf/income_mountain', exist_ok=True)
 
 out_gbl.write_csv('ddf/income_mountain/ddf--datapoints--income_mountain_105bracket_shape_for_log--by--global--time.csv')
 
@@ -148,8 +142,7 @@ out.write_csv('ddf/income_mountain/ddf--datapoints--income_mountain_105bracket_s
 res50 = res.filter(
     pl.col('bracket') < 50
 )
-
-res50
+# res50
 
 res50_pivot = res50.pivot(values='population', index=['country', 'year'], columns='bracket', aggregate_function=None)
 res50_pivot = res50_pivot.fill_null(0)
@@ -158,20 +151,23 @@ out50 = res50_pivot.select(
     pl.col('year').alias('time'),
     pl.struct(pl.col(map(str, (range(0, 50))))).map_elements(join_str).alias('income_mountain_50bracket_shape_for_log')
 )
-out50
+# out50
 out50.write_csv('ddf/income_mountain/ddf--datapoints--income_mountain_50bracket_shape_for_log--by--country--time.csv')
 
-# for 50 bracket data, we also need other regions
+# 2. for 50 bracket data, we also need other regions
+# below are taken from an older scripts where we still use pandas.
+# TODO: maybe update following to use polars.
 max_heights = dict()
-
 max_heights['country'] = res50.group_by('country').agg(pl.col('population').max())
 
-max_heights
+# max_heights
+
 
 def concat_values(ser):
     res = ser.astype(int).unstack().apply(lambda r: r.astype(str).str.cat(sep=','), axis=1)
     res.name = 'income_mountain_50bracket_shape_for_log'
     return res
+
 
 # income groups
 wb_groups = pd.read_csv('../build/source/gapminder/wb_income_groups.csv')
@@ -269,6 +265,8 @@ res_glob = df.groupby(by=['global', 'time', 'income_bracket_50'])['population'].
 max_heights['global'] = res_glob.groupby('global').max()
 res_glob = concat_values(res_glob)
 res_glob.to_csv('ddf/income_mountain/ddf--datapoints--income_mountain_50bracket_shape_for_log--by--global--time.csv')
+# res_glob.loc['world', '2022'].plot()
+# plt.show()
 
 # let's use a loop!
 
@@ -321,3 +319,5 @@ for k in ['country', 'income_groups',
     except KeyError:
         print(k, "has error")
         raise
+
+print("Done!")
