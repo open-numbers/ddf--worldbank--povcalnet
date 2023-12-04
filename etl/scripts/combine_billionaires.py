@@ -94,7 +94,7 @@ def calculate_bridge(left, right, scale=1000):
     # 1. the beginning of the bridge, which is in the right side of left shape, where
     #    the population number drops below a threshold (right maximum * scale)
     # 2. 2 points to define the slope of right shape.
-    # 2.1 x = first bracket of right shape, y = 1.2 * maximum y of right shape
+    # 2.1 x = first bracket of right shape, y = 1.1 * maximum y of right shape
     #     We believe that the poorest billionaires are under-reported
     #     so we add more people to this group
     # 2.2 x = the middle bracket of right shape, y = the mean of y values around the middle
@@ -102,7 +102,7 @@ def calculate_bridge(left, right, scale=1000):
     # see interpolate() method.
     #
     # left part
-    right_max = int(right['population'].max() * 1.2)
+    right_max = int(right['population'].max() * 1.0)
     thres = right_max * scale
     left_top = left[left['population'].arg_max()]
     left_top_x = left_top['bracket'].item()
@@ -263,7 +263,7 @@ def make_checking_plots(povcalnet, billy_pop, all_shapes):
         pl.col('population').sum()
     )
 
-    ts = [2022, 2023, 2100]
+    ts = [2022, 2023, 2060, 2100]
     for t in ts:
         left = _f(gleft, year=t).sort('bracket')
         right = _f(gright, year=t).sort('bracket')
@@ -272,12 +272,15 @@ def make_checking_plots(povcalnet, billy_pop, all_shapes):
         #     pl.col('population').fill_null(pl.lit(1))
         # )
         bridge = _f(gbridge, year=t).sort('bracket')
+        diff = (bridge['population'].sum() - left['population'].sum()) / left['population'].sum() * 100
+        print(f"{t}: population added {diff:.4f}%")
         plt.figure()
         _, ax = plt.subplots(1, 1)
         plot_shape(bridge[300:], label='bridged')
         plot_shape(left[300:], label='povcalnet')
         plot_shape(right, alpha=.4, label='billy')
         ax.set_yscale('log')
+        # ax.set_ylim((0, 1000))
         plt.title("global, " + str(t))
         plt.legend()
         plt.savefig(f"./bridge_{t}.png")
@@ -300,9 +303,14 @@ if __name__ == '__main__':
 
     # FIXME: put billionaires data into source dir or download from url
     billy = pl.read_csv('../../../ddf--gapminder--forbes_billionaires/ddf--datapoints--daily_income--by--person--time.csv')
+    billy_worth = pl.read_csv('../../../ddf--gapminder--forbes_billionaires/ddf--datapoints--worth--by--person--time.csv')
     billy = billy.with_columns(
         pl.col('time').cast(pl.Int32),
         pl.col('daily_income').cast(pl.Float64)
+    )
+    billy_worth = billy_worth.with_columns(
+        pl.col('time').cast(pl.Int32),
+        pl.col('worth').cast(pl.Float64)
     )
     billy_ent = pl.read_csv('../../../ddf--gapminder--forbes_billionaires/ddf--entities--person.csv', infer_schema_length=None)
     billy_ent = billy_ent.select(['person', 'countries']).drop_nulls()
@@ -310,15 +318,16 @@ if __name__ == '__main__':
     billy_country_map = dict([(d['person'], d['countries']) for d in billy_ent.to_dicts()])
     # billy_country_map['elon_musk'] => 'usa'
 
-    # calculate G, the growth rate
-    rich2022 = _f(billy, time=2022).sort(['daily_income'], descending=True)[:300]
-    rich2012 = _f(billy, time=2012).sort(['daily_income'], descending=True)[:300]
-    df_ann = pl.DataFrame({'2012': rich2012['daily_income'], '2022': rich2022['daily_income']})
+    # calculate G, the average growth rate of income, using average net worth growth.
+    rich2022 = _f(billy_worth, time=2022).sort(['worth'], descending=True)[:300]
+    rich2012 = _f(billy_worth, time=2012).sort(['worth'], descending=True)[:300]
+    df_ann = pl.DataFrame({'2012': rich2012['worth'], '2022': rich2022['worth']})
     df_ann = df_ann.with_columns(
         (np.log(pl.col('2022') / pl.col('2012')) / 10).alias('growth')
     )
+    df_ann
     G = df_ann['growth'].mean()
-    print("annual income growth rate: ", G)  # 0.07001615878649946
+    print("annual income growth rate: ", G)  # 0.05746843339165423
 
     # Question: what's the group for elon, 2022?
     # billy.with_columns(
@@ -526,5 +535,6 @@ if __name__ == '__main__':
 
     all_shapes.write_parquet('./bridged_shapes.parquet')
 
+    print('making some plots for checking...')
     make_checking_plots(povcalnet, billy_pop, all_shapes)
     print('Done!')

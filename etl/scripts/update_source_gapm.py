@@ -35,6 +35,10 @@ URLS = {
     'wb_income_groups': {
         'docid': '1X6NenlJpv4aP2ApFGVmtiUdMCnqOcimpVelW5KcNgg4',
         'sheet': 'data-for-countries-etc-by-year'
+    },
+    'national_poverty_lines': {
+        'docid': '1ip5eftTzJ3grJ-03fxqTyzr4nmDB9bPWjrIizBoy7Kg',
+        'sheet': 'data-for-countries-etc-by-year'
     }
 }
 

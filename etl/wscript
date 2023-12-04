@@ -56,7 +56,8 @@ def update_source_gapminder(ctx):
             'gdp',
             'population',
             'on_income_groups',
-            'wb_income_groups'
+            'wb_income_groups',
+            'national_poverty_lines'
     ]:
         ctx(
             rule="${PYTHON} ${SRC} " + f,
