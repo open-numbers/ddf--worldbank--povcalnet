@@ -104,9 +104,9 @@ os.makedirs('ddf/income_mountain', exist_ok=True)
 res_gbl.select(
     pl.col('global'),
     pl.col('year').alias('time'),
-    pl.col('bracket'),
+    pl.col('bracket').alias('income_bracket_105'),
     pl.col('population').alias('income_mountain_105bracket_shape_for_log')
-).write_csv('ddf/income_mountain/ddf--datapoints--income_mountain_105brackets--by--global--time.csv')
+).write_csv('ddf/income_mountain/ddf--datapoints--income_mountain_105brackets--by--global--time--income_bracket_105.csv')
 
 # plot 2022
 # res_gbl_22 = res_gbl.filter(

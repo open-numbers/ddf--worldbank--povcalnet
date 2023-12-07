@@ -558,6 +558,13 @@ export_to_xls_or_csv(epov_rate, "extreme_poverty_rate")
 epov_pop = pl.read_csv('../../poverty_rates/ddf--datapoints--population_in_extreme_poverty--by--country--time.csv')
 export_to_xls_or_csv(epov_pop, "people_in_extreme_poverty")
 
+epov_rate_gbl = pl.read_csv('../../poverty_rates/ddf--datapoints--poverty_rate--by--global--time.csv')
+export_to_xls_or_csv(epov_rate_gbl, "extreme_poverty_rate_global")
+
+epov_rate_level = pl.read_csv('../../poverty_rates/ddf--datapoints--poverty_rate--by--income_groups--time.csv')
+export_to_xls_or_csv(epov_rate_level, "extreme_poverty_rate_income_groups")
+
+
 # NOTE: if use rclone to upload to gdrive
 # use this command:
 # rclone sync --drive-import-formats "xlsx" IncomeMountainDeciles/ gdrive:/IncomeMountainDeciles/
