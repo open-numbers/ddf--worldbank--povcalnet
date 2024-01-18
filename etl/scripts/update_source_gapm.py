@@ -13,11 +13,11 @@ from gspread_pandas import Spread
 
 URLS = {
     'mean_income': {
-        'docid': '1FQTKYJY55ZvHdcBrUbH5wlBA__eVC6p33pW0Ddqrl6Y',
+        'docid': '1oyaSmlcX_sofdk4ZLTQA3MWIn5H9SBIouYpFVYxx5Yo',
         'sheet': 'data-for-countries-etc-by-year'
     },
     'gdp': {
-        'docid': '1QRBztI6iSaGt9VUG9FuVVRCkeNsAxiqOGJ3Sr_gwh54',
+        'docid': '1i5AEui3WZNZqh7MQ4AKkJuCz4rRxGR_pw_9gtbcBOqQ',
         'sheet': 'data-for-countries-etc-by-year'
     },
     'gini': {
@@ -29,11 +29,11 @@ URLS = {
         'sheet': 'data-for-countries-etc-by-year'
     },
     'on_income_groups': {
-        'docid': '1F4V12IJUAXFq3lgrtN92IWQrxmV4DnXlQAJhBItkyII',
+        'docid': '1nvB-nd3Kxo21Tljlug-47JHjNoq3AbY-EtRWbLhg158',
         'sheet': 'data-for-countries-etc-by-year'
     },
     'wb_income_groups': {
-        'docid': '1X6NenlJpv4aP2ApFGVmtiUdMCnqOcimpVelW5KcNgg4',
+        'docid': '1HulXQ3x0qFh5EPiTHcf_kpL-c8n65UVE_czBUHG-SuE',
         'sheet': 'data-for-countries-etc-by-year'
     },
     'national_poverty_lines': {

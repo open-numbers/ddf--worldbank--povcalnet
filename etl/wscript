@@ -47,6 +47,26 @@ class UpdateSource(BuildContext):
     fun = "update_source"
 
 
+# move predownloaded source into build folder.
+def update_source_predownloaded(ctx):
+    """download source from povcalnet"""
+    # limit the jobs, don't DDoS upstream
+    if ctx.jobs > 2:
+        print('not using jobs > 2, setting jobs = 2')
+        ctx.jobs = 2
+
+    for i in range(MAX_POVCALNET_BRACKET):
+        ctx(
+            rule="cp ${SRC} ${TGT}",
+            source="source/povcalnet_predownloaded/" + "{:04d}.csv".format(i),
+            target="source/povcalnet/" + "{:04d}.csv".format(i))
+
+
+class UpdateSourcePre(BuildContext):
+    cmd = "update_source_predownloaded"
+    fun = "update_source_predownloaded"
+
+
 # update gapminder source
 def update_source_gapminder(ctx):
     """download gapminder indicators"""
