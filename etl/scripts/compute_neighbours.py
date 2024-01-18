@@ -27,7 +27,7 @@ if __name__ == '__main__':
     gini = pd.read_csv(gini_file)
     known_shapes = pd.read_csv(known_shapes_file)
 
-    income = income.set_index(['geo', 'year'])[['Mean income']]
+    income = income.set_index(['geo', 'time'])[['Average daily income per capita']]
     income.index.names = ['country', 'year']
     income.columns = ['income']
 

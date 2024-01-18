@@ -27,8 +27,8 @@ plt.rcParams['figure.dpi'] = 144
 income_file = 'source/gapminder/mean_income.csv'
 income = pl.read_csv(income_file).select(
     pl.col('geo').alias('country'),
-    pl.col('year').cast(pl.Int32),
-    pl.col('Mean income').alias('income')
+    pl.col('time').cast(pl.Int32).alias('year'),
+    pl.col('Average daily income per capita').alias('income')
 )
 
 

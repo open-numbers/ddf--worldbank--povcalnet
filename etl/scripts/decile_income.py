@@ -296,8 +296,8 @@ res2400.write_csv('other/centile_mean_income_2400.csv')
 meaninc = pl.read_csv('../build/source/gapminder/mean_income.csv')
 meaninc = meaninc.select(
     pl.col('geo').alias('country'),
-    pl.col('year'),
-    (pl.col('Mean income').alias('mhhinc'))
+    pl.col('time').alias('year'),
+    (pl.col('Average daily income per capita').alias('mhhinc'))
 )
 meaninc
 
