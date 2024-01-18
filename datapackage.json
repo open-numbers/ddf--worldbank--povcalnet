@@ -7,7 +7,7 @@
     "description": "",
     "author": "",
     "license": "",
-    "created": "2023-12-07T02:41:52.871921+00:00",
+    "created": "2024-01-18T02:16:59.726662+00:00",
     "version": "2.5.0",
     "resources": [
         {
@@ -709,7 +709,7 @@
                         "name": "income_bracket_105"
                     },
                     {
-                        "name": "income_mountain_105bracket_shape_for_log"
+                        "name": "income_mountain_105brackets"
                     }
                 ],
                 "primaryKey": [
@@ -2586,17 +2586,6 @@
             {
                 "primaryKey": [
                     "geo",
-                    "income_bracket_105",
-                    "time"
-                ],
-                "value": "income_mountain_105bracket_shape_for_log",
-                "resources": [
-                    "ddf--datapoints--income_mountain_105brackets--by--global--time--income_bracket_105"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "geo",
                     "time"
                 ],
                 "value": "income_mountain_105bracket_shape_for_log",
@@ -2608,10 +2597,20 @@
             {
                 "primaryKey": [
                     "global",
-                    "income_bracket_105",
                     "time"
                 ],
                 "value": "income_mountain_105bracket_shape_for_log",
+                "resources": [
+                    "ddf--datapoints--income_mountain_105bracket_shape_for_log--by--global--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "income_bracket_105",
+                    "time"
+                ],
+                "value": "income_mountain_105brackets",
                 "resources": [
                     "ddf--datapoints--income_mountain_105brackets--by--global--time--income_bracket_105"
                 ]
@@ -2619,11 +2618,12 @@
             {
                 "primaryKey": [
                     "global",
+                    "income_bracket_105",
                     "time"
                 ],
-                "value": "income_mountain_105bracket_shape_for_log",
+                "value": "income_mountain_105brackets",
                 "resources": [
-                    "ddf--datapoints--income_mountain_105bracket_shape_for_log--by--global--time"
+                    "ddf--datapoints--income_mountain_105brackets--by--global--time--income_bracket_105"
                 ]
             },
             {
