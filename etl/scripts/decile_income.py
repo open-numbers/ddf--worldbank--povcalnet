@@ -321,7 +321,7 @@ ratio = mean_income.select(['country', 'year', 'ratio']).with_columns(
     pl.col('year').cast(pl.Int32)
 )
 
-ratio
+print(ratio.head())
 
 
 # moving the shape to centre on gdppc

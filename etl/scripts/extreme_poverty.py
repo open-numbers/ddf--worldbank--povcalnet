@@ -109,13 +109,14 @@ wb = wb_groups[['geo', 'time', "4 income groups (WB)"]].copy()
 wb.columns = ['geo', 'time', 'level']
 
 on_income = pd.read_csv('../build/source/gapminder/on_income_groups.csv')
-on_income = on_income[['geo', 'time', 'Income levels (GM)']].dropna()
+on_income = on_income[['geo', 'time', 'Income levels']].dropna()
 on_income.columns = ['geo', 'time', 'level']
 
 on_map = {'Level 1': 'l1',
           'Level 2': 'l2',
           'Level 3': 'l3',
           'Level 4': 'l4',
+          'Level 5': 'l4'
          }
 
 wb_map = {'Low income': 'l1',
