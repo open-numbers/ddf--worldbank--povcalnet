@@ -37,8 +37,8 @@ def update_source(ctx):
 
     for i in range(MAX_POVCALNET_BRACKET):
         ctx(
-            rule="${PYTHON} ${SRC} " + str(i),
-            source="scripts/update_source.py",
+            rule="${PYTHON} ${SRC[0]} " + str(i),
+            source=["scripts/update_source.py", "scripts/lib.py"],
             target="source/povcalnet/" + "{:04d}.csv".format(i))
 
 
