@@ -1,3 +1,8 @@
+""" functions to work on the entire shape
+
+they are used in neighbors calculation.
+"""
+
 import os
 import os.path as osp
 import pandas as pd

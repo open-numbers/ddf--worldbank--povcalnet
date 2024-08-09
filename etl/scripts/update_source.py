@@ -6,7 +6,7 @@ import os.path as osp
 import glob
 import time
 import numpy as np
-from ddf_utils.factory.common import download
+from lib import download
 from multiprocessing import Pool
 from functools import partial
 import polars as pl
@@ -25,12 +25,13 @@ def process(i, resume=True):
     url = url_tmpl.format(bracket)
     file_csv = osp.join(source_dir, "{:04d}.csv".format(i))
     print(file_csv)
-    download(url,
-             file_csv,
-             resume=resume,
-             progress_bar=False,
-             backoff=10,
-             timeout=300)
+    # download(url,
+    #          file_csv,
+    #          resume=resume,
+    #          progress_bar=False,
+    #          backoff=10,
+    #          timeout=300)
+    download(url, file_csv, num_retries=5)
     # test if the csv is correct.
     df = pl.read_csv(file_csv, infer_schema_length=0)
     assert 'poverty_line' in df.columns, f"{file_csv}: malform csv"

@@ -104,9 +104,9 @@ os.makedirs('ddf/income_mountain', exist_ok=True)
 res_gbl.select(
     pl.col('global'),
     pl.col('year').alias('time'),
-    pl.col('bracket'),
-    pl.col('population').alias('income_mountain_105bracket_shape_for_log')
-).write_csv('ddf/income_mountain/ddf--datapoints--income_mountain_105brackets--by--global--time.csv')
+    pl.col('bracket').alias('income_bracket_105'),
+    pl.col('population').alias('income_mountain_105brackets')
+).write_csv('ddf/income_mountain/ddf--datapoints--income_mountain_105brackets--by--global--time--income_bracket_105.csv')
 
 # plot 2022
 # res_gbl_22 = res_gbl.filter(
@@ -177,13 +177,14 @@ wb = wb_groups[['geo', 'time', "4 income groups (WB)"]].copy()
 wb.columns = ['geo', 'time', 'level']
 
 on_income = pd.read_csv('../build/source/gapminder/on_income_groups.csv')
-on_income = on_income[['geo', 'time', 'Income levels (GM)']].dropna()
+on_income = on_income[['geo', 'time', 'Income levels']].dropna()
 on_income.columns = ['geo', 'time', 'level']
 
 on_map = {'Level 1': 'l1',
           'Level 2': 'l2',
           'Level 3': 'l3',
           'Level 4': 'l4',
+          'Level 5': 'l4'  # FIXME: check if it's correct to map level 5 to high income
          }
 
 wb_map = {'Low income': 'l1',

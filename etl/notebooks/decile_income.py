@@ -68,16 +68,16 @@ def export_to_xls_or_csv(df: pl.DataFrame, fname: str):
 
 # 1. selected years for high freq income mountain
 
-# global shape 2021-2023
+# global shape 2021-2100
 global_shape = data.filter(
-    pl.col('year').is_in(range(2021, 2024))
+    pl.col('year').is_in(range(2021, 2101))
 ).group_by(['year', 'bracket']).agg(
     pl.col('population').sum()
 ).with_columns(
     pl.lit('world').alias('global')
 ).sort(('year', 'bracket'))
 global_shape
-export_to_xls_or_csv(global_shape, 'world_brackets_1050_pop_2021-2023')
+export_to_xls_or_csv(global_shape, 'world_brackets_1050_pop_2021-2100')
 
 # country shape 2023
 country_shape = data.filter(
@@ -411,8 +411,8 @@ export_to_xls_or_csv(res2400, "centile_mean_income_2400")
 meaninc = pl.read_csv('../build/source/gapminder/mean_income.csv')
 meaninc = meaninc.select(
     pl.col('geo').alias('country'),
-    pl.col('year'),
-    (pl.col('Mean income').alias('mhhinc'))
+    pl.col('time').alias('year'),
+    (pl.col('Average daily income per capita').alias('mhhinc'))
 )
 meaninc
 
@@ -558,9 +558,18 @@ export_to_xls_or_csv(epov_rate, "extreme_poverty_rate")
 epov_pop = pl.read_csv('../../poverty_rates/ddf--datapoints--population_in_extreme_poverty--by--country--time.csv')
 export_to_xls_or_csv(epov_pop, "people_in_extreme_poverty")
 
+epov_rate_gbl = pl.read_csv('../../poverty_rates/ddf--datapoints--poverty_rate--by--global--time.csv')
+export_to_xls_or_csv(epov_rate_gbl, "extreme_poverty_rate_global")
+
+epov_rate_level = pl.read_csv('../../poverty_rates/ddf--datapoints--poverty_rate--by--income_groups--time.csv')
+export_to_xls_or_csv(epov_rate_level, "extreme_poverty_rate_income_groups")
+
+
 # NOTE: if use rclone to upload to gdrive
-# use this command:
+# use this command to sync (make remote the sams as local):
 # rclone sync --drive-import-formats "xlsx" IncomeMountainDeciles/ gdrive:/IncomeMountainDeciles/
+# use this command to copy (just copy files to remote):
+# rclone copy --drive-import-formats "xlsx" IncomeMountainDeciles/export/ gdrive:/IncomeMountainDeciles/
 # only import xlsx to google spreadsheet. csv for large files and no need to import
 
 # TODO:
