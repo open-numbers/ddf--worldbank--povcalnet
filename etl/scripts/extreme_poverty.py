@@ -8,41 +8,29 @@ import bracketlib
 
 data = pl.read_parquet('./bridged_shapes.parquet')
 
-data
-
-
-# let's try global first
-data_gbl = data.group_by(['year', 'bracket']).agg(pl.col('population').sum())
-data_gbl
-
-data_gbl
 
 step = bracketlib.get_bracket_step(500)
+step
 
 # where is 2.15/day
+upper_bracket = bracketlib.bracket_from_income(2.15, step, integer=True)
+lower_bracket = upper_bracket - 1
 
+# use 10 base to avoid this number gets too big.
+# the result is just about the same as using base 2
 xloc = np.log10(2.15)
-xdf = pl.DataFrame({'bracket': [xloc]})
 
-# 2020
-data_gbl.filter(
-    pl.col('year') == 1981
-).sort('bracket').with_columns(
-    pl.col('population').cumsum() / pl.col('population').sum()
-).filter(
-    pl.col('bracket').is_in([201, 202])
-).with_columns(
-    pl.col('bracket').map_elements(lambda x: np.log10(bracketlib.income_from_bracket(x, step, integer=False)))
-)
+def get_epov_rates(df, xloc, lb, ub):
+    """Function to get poverty rates under a poverty line.
 
-
-# get all global items
-def get_epov_rates(df):
+    This function should be used per geo.
+    """
     df_ = df.sort('bracket').with_columns(
         pl.col('population').cumsum() / pl.col('population').sum()
     ).filter(
-        pl.col('bracket').is_in([201, 202])
+        pl.col('bracket').is_in([lb, ub])
     ).with_columns(
+        # note: the log base should be the same as how xloc calculated
         pl.col('bracket').map_elements(lambda x: np.log10(bracketlib.income_from_bracket(x, step, integer=False)))
     )
     x = df_['bracket'].to_numpy()
@@ -53,16 +41,27 @@ def get_epov_rates(df):
     return ynew[0] * 100
 
 
+# let's try global first
+data_gbl = data.group_by(['year', 'bracket']).agg(pl.col('population').sum())
+data_gbl
+
+data_gbl
+
 get_epov_rates(data_gbl.filter(
-    pl.col('year') == 1981
-))
+    pl.col('year') == 2020
+), lb=lower_bracket, ub=upper_bracket, xloc=xloc)
+
 
 global_epov = list()
 for y in data_gbl['year'].unique():
     _df = data_gbl.filter(
         pl.col('year') == y
     )
-    global_epov.append({'year': y, 'epov': get_epov_rates(_df)})
+    global_epov.append({'year': y,
+                        'epov': get_epov_rates(_df,
+                                               lb=lower_bracket,
+                                               ub=upper_bracket,
+                                               xloc=xloc)})
 
 
 gbl_epov_rates = pl.from_records(global_epov)
@@ -79,7 +78,7 @@ gbl_epov_rates
 gbl_epov_rates.write_csv('./ddf/poverty_rates/ddf--datapoints--poverty_rate--by--global--time.csv')
 
 
-# countries
+# countries - 2.15
 datalist = data.partition_by(['country', 'year'], as_dict=True)
 
 datalist[('afg', 1800)]
@@ -90,15 +89,66 @@ for k, _df in datalist.items():
     country_epov.append({
         'country': country,
         'time': y,
-        'poverty_rate': get_epov_rates(_df)
+        'poverty_rate': get_epov_rates(_df,
+                                       lb=lower_bracket,
+                                       ub=upper_bracket,
+                                       xloc=xloc)
     })
 
-
 country_epov_rates = pl.from_records(country_epov)
-
 country_epov_rates
-
 country_epov_rates.write_csv('./ddf/poverty_rates/ddf--datapoints--poverty_rate--by--country--time.csv')
+
+# countries - 3.65
+povline = 3.65
+upper_bracket = bracketlib.bracket_from_income(povline, step, integer=True)
+lower_bracket = upper_bracket - 1
+xloc = np.log10(povline)
+
+country_epov_365 = list()
+for k, _df in datalist.items():
+    country, y = k
+    country_epov_365.append({
+        'country': country,
+        'time': y,
+        'poverty_rate': get_epov_rates(_df,
+                                       lb=lower_bracket,
+                                       ub=upper_bracket,
+                                       xloc=xloc)
+    })
+
+country_epov_rates_365 = pl.from_records(country_epov_365)
+country_epov_rates_365
+country_epov_rates_365.write_csv('./ddf/poverty_rates/ddf--datapoints--poverty_rate_under_3_65--by--country--time.csv')
+
+# countries - 6.85
+povline = 6.85
+upper_bracket = bracketlib.bracket_from_income(povline, step, integer=True)
+lower_bracket = upper_bracket - 1
+xloc = np.log10(povline)
+
+country_epov_685 = list()
+for k, _df in datalist.items():
+    country, y = k
+    country_epov_685.append({
+        'country': country,
+        'time': y,
+        'poverty_rate': get_epov_rates(_df,
+                                       lb=lower_bracket,
+                                       ub=upper_bracket,
+                                       xloc=xloc)
+    })
+
+country_epov_rates_685 = pl.from_records(country_epov_685)
+country_epov_rates_685
+country_epov_rates_685.write_csv('./ddf/poverty_rates/ddf--datapoints--poverty_rate_under_6_85--by--country--time.csv')
+
+
+# reset to 2.15
+povline = 2.15
+upper_bracket = bracketlib.bracket_from_income(povline, step, integer=True)
+lower_bracket = upper_bracket - 1
+xloc = np.log10(povline)
 
 # income groups
 # 1. get historical income groups
@@ -155,7 +205,7 @@ for k, _df in data_income_level_list.items():
     level_epov.append({
         'level': level,
         'time': y,
-        'poverty_rate': get_epov_rates(_df)
+        'poverty_rate': get_epov_rates(_df, lb=lower_bracket, ub=upper_bracket, xloc=xloc)
     })
 
 level_epov_rates = pl.from_records(level_epov)

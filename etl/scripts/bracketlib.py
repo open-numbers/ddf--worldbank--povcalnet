@@ -23,7 +23,8 @@ def get_bracket_step(totalsize):
 def income_from_bracket(b, bracket_step, bound='upper', integer=True):
     """return the lower bound or upper bound income of a bracket.
 
-    NOTE: b can be an array because we use np.power here
+    NOTE:
+      - b can be an array because we use np.power here
     """
     if bound == 'upper':
         exponent = (-7) + (b+1) * bracket_step
@@ -37,8 +38,11 @@ def income_from_bracket(b, bracket_step, bound='upper', integer=True):
         return np.power(2, exponent)
 
 
-def bracket_from_income(inc, bracket_step, integer=True):
+def bracket_from_income(inc, bracket_step):
     """given a income (poverty line), return the bracket number it belongs to
+
+    which means this income level is in between the lower and upper bound
+    of that bracket.
     """
     loc = math.log2(inc)
     res = (loc + 7) / bracket_step
@@ -47,7 +51,7 @@ def bracket_from_income(inc, bracket_step, integer=True):
             return 0
         return 0.0
 
-    if integer:
-        res = int(math.floor((loc + 7) / bracket_step))
+    # if integer:  # we should always output integer
+    res = int(math.floor((loc + 7) / bracket_step))
 
     return res
