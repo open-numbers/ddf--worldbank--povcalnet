@@ -13,12 +13,13 @@ step = bracketlib.get_bracket_step(500)
 step
 
 # where is 2.15/day
-upper_bracket = bracketlib.bracket_from_income(2.15, step, integer=True)
+upper_bracket = bracketlib.bracket_from_income(2.15, step)
 lower_bracket = upper_bracket - 1
 
 # use 10 base to avoid this number gets too big.
 # the result is just about the same as using base 2
 xloc = np.log10(2.15)
+
 
 def get_epov_rates(df, xloc, lb, ub):
     """Function to get poverty rates under a poverty line.
@@ -26,12 +27,15 @@ def get_epov_rates(df, xloc, lb, ub):
     This function should be used per geo.
     """
     df_ = df.sort('bracket').with_columns(
-        pl.col('population').cumsum() / pl.col('population').sum()
+        pl.col('population').cum_sum() / pl.col('population').sum()
     ).filter(
         pl.col('bracket').is_in([lb, ub])
     ).with_columns(
         # note: the log base should be the same as how xloc calculated
-        pl.col('bracket').map_elements(lambda x: np.log10(bracketlib.income_from_bracket(x, step, integer=False)))
+        pl.col('bracket').map_elements(
+            lambda x: np.log10(bracketlib.income_from_bracket(x, step, integer=False)),
+            return_dtype=pl.Float64
+        )
     )
     x = df_['bracket'].to_numpy()
     y = df_['population'].to_numpy()
@@ -43,8 +47,6 @@ def get_epov_rates(df, xloc, lb, ub):
 
 # let's try global first
 data_gbl = data.group_by(['year', 'bracket']).agg(pl.col('population').sum())
-data_gbl
-
 data_gbl
 
 get_epov_rates(data_gbl.filter(
@@ -78,25 +80,31 @@ gbl_epov_rates
 gbl_epov_rates.write_csv('./ddf/poverty_rates/ddf--datapoints--poverty_rate--by--global--time.csv')
 
 
+# a function which will partition the data into groups and process all groups and return the result
+def get_epov_rates_for_groups(df, by):
+    datalist = df.partition_by(by, as_dict=True)
+    res = list()
+
+    for k, _df in datalist.items():
+        res_part = dict(zip(by, k))
+        res_part['poverty_rate'] = get_epov_rates(_df,
+                                                  lb=lower_bracket,
+                                                  ub=upper_bracket,
+                                                  xloc=xloc)
+        res.append(res_part)
+
+    return pl.from_records(res)
+
+
+data_gbl
+get_epov_rates_for_groups(data_gbl, ["year"]).sort("year")
+
+
 # countries - 2.15
-datalist = data.partition_by(['country', 'year'], as_dict=True)
-
-datalist[('afg', 1800)]
-
-country_epov = list()
-for k, _df in datalist.items():
-    country, y = k
-    country_epov.append({
-        'country': country,
-        'time': y,
-        'poverty_rate': get_epov_rates(_df,
-                                       lb=lower_bracket,
-                                       ub=upper_bracket,
-                                       xloc=xloc)
-    })
-
-country_epov_rates = pl.from_records(country_epov)
-country_epov_rates
+country_epov_rates = get_epov_rates_for_groups(data, ["country", "year"])
+country_epov_rates = country_epov_rates.with_columns(
+    pl.col("year").alias("time")
+)
 country_epov_rates.write_csv('./ddf/poverty_rates/ddf--datapoints--poverty_rate--by--country--time.csv')
 
 # countries - 3.65
