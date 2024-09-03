@@ -11,6 +11,7 @@ data = pl.read_parquet('./bridged_shapes.parquet')
 
 # dir to store indicators
 os.makedirs('./ddf/poverty_rates/', exist_ok=True)
+os.makedirs('./other', exist_ok=True)
 
 step = bracketlib.get_bracket_step(500)
 step
@@ -76,8 +77,8 @@ def get_epov_rates_for_groups(df, by, povline, rates=True):
 
     when rates=False, return total population count instead.
     """
-    lb = bracketlib.bracket_from_income(povline, step)
-    ub = upper_bracket - 1
+    ub = bracketlib.bracket_from_income(povline, step)
+    lb = ub - 1
     xloc = np.log10(povline)
 
     if povline == 2.15:
@@ -104,8 +105,10 @@ def get_epov_rates_for_groups(df, by, povline, rates=True):
 gbl_epov_rates = get_epov_rates_for_groups(data_gbl, ["year"], 2.15).sort("year")
 gbl_epov_rates = gbl_epov_rates.select(
     pl.lit('world').alias('global'),
-    pl.col('year').alias('time'),
+    pl.col("year").alias("time"),
+    pl.exclude("year")
 )
+gbl_epov_rates
 
 gbl_epov_rates.write_csv('./ddf/poverty_rates/ddf--datapoints--poverty_rate--by--global--time.csv')
 
@@ -237,7 +240,7 @@ def get_level_epov_rates(povline, use_3levels=False):
     return rates.select(
         pl.col('level').alias('income_group'),
         pl.col('year').alias('time'),
-        pl.col('poverty_rate').alias(name),
+        pl.col(name)
     )
 
 
