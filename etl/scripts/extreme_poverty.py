@@ -356,3 +356,15 @@ pop = pop_in_epov_2.join(pop_above_200, on=["country", "year"], how="full", coal
 pop
 
 pop.write_csv('./other/pop_2_200.csv')
+
+# aggregate for global
+pop_global = pop.group_by("year").agg(
+    pl.col("population_under_2").sum(),
+    pl.col("population_above_200").sum()
+).select(
+    pl.lit("world").alias("global"),
+    pl.col("*")
+).sort("year")
+pop_global
+
+pop_global.write_csv("./other/pop_2_200_global.csv")
