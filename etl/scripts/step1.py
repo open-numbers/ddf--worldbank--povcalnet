@@ -182,7 +182,7 @@ def step3(res2):
     # 1. find out which years are missing
     # 2. find the bracket where we hit the maxinum headcount
     # 3. calculate the hit point we should use for missing data
-    _missing_years = _missing.group_by(["country", "reporting_level"]).agg([
+    _missing_years = _missing.group_by("country", "reporting_level").agg([
         pl.col('year').min().alias('min_year'),
         pl.col('year').max().alias('max_year')
     ])
@@ -207,7 +207,7 @@ def step3(res2):
             raise NotImplementedError("min year > 1981")
 
     res3 = (
-        res2.group_by(['country', 'year', 'reporting_level'])
+        res2.group_by('country', 'year', 'reporting_level')
             .map_groups(lambda x: run_fill_df(x, fillna_til))
             .sort(['country', 'year', 'reporting_level', 'i']))
     return res3
