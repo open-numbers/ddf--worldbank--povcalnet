@@ -11,7 +11,6 @@ import sys
 
 import numpy as np
 import polars as pl
-import pickle
 
 import bracketlib
 
@@ -72,11 +71,15 @@ def step8(res7):
 # %%
 if __name__ == '__main__':
     res7 = pl.read_parquet('./povcalnet_smoothed.parquet')
+    # FIXME: make sure res7's year column is int
+    res7 = res7.with_columns(
+        pl.col('year').cast(pl.Int32)
+    )
     res8 = step8(res7)
 
     res8.write_parquet('mean_central_shapes.parquet')
 
-    df = _f(res8, country='syr', year=2011, reporting_level='n')
+    df = _f(res8, country='syr', year=2022, reporting_level='n')
     print('example shape:')
     print(df)
     plt.plot(df.select('bracket'), df.select('headcount'))

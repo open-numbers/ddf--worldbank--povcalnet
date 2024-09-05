@@ -12,7 +12,6 @@ import sys
 import numpy as np
 import polars as pl
 import pandas as pd
-import pickle
 import json
 from multiprocessing import get_context
 from functools import partial
@@ -63,7 +62,7 @@ def resample_to_int(df, cut=True):
     country = df['country'].unique()[0]
     year = df['year'].unique()[0]
 
-    res = df.join(newIndex, on='bracket', how='outer').sort('bracket')
+    res = df.join(newIndex, on='bracket', how='full', coalesce=True).sort('bracket')
     res = res.with_columns(
         pl.col('country').fill_null(country),
         pl.col('year').fill_null(year),
@@ -83,9 +82,13 @@ if __name__ == '__main__':
 
     # only keep one reporting level. They are mostly `national` but there are
     # some countries we will use urban.
-    povcalnet = povcalnet.group_by(['country', 'year']).map_groups(select_shape)
+    povcalnet = [select_shape(x) for x in povcalnet.partition_by(['country', 'year'])]
+    povcalnet = pl.concat(povcalnet)
     # resample estimated mountains to use integer brackets
-    est = estimated.group_by(['country', 'year']).map_groups(lambda x: resample_to_int(x, cut=False))
+    est = list()
+    for x in estimated.partition_by("country", "year"):
+        est.append(resample_to_int(x, cut=False))
+    est = pl.concat(est)
     # check if something abnormal
     assert est.filter(pl.col('headcount') < 0).is_empty()
 

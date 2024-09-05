@@ -24,7 +24,6 @@ Check the functions below for more details.
 import numpy as np
 import polars as pl
 import pandas as pd
-import pickle
 # import json
 # from multiprocessing import get_context
 # from functools import partial
@@ -132,7 +131,7 @@ def calculate_bridge(left, right, scale=1000):
         dtype=pl.Int32
     ).to_frame()
     bridge_end_y = right.join(
-        right_idx, on='bracket', how='outer'
+        right_idx, on='bracket', how='full', coalesce=True
     ).with_columns(
         pl.col('population').interpolate()
     ).filter(
@@ -151,7 +150,7 @@ def calculate_bridge(left, right, scale=1000):
     res = pl.concat([left1, right1, right2]).with_columns(
         np.log(pl.col('population'))
     )
-    res = res.join(new_i, on='bracket', how='outer')
+    res = res.join(new_i, on='bracket', how='full', coalesce=True)
     res = res.with_columns(
         np.exp(pl.col('population').map_batches(interpolate))
     )
@@ -176,19 +175,22 @@ def calculate_bridge(left, right, scale=1000):
     ).join(
         right.select(['bracket', 'population']),
         on='bracket',
-        how='outer',
-        suffix='_right'
+        how='full',
+        suffix='_right',
+        coalesce=True
     ).join(
         res,
         on='bracket',
-        how='outer',
-        suffix='_bridge'
+        how='full',
+        suffix='_bridge',
+        coalesce=True
     )
     bridge_shape_all = bridge_shape_all.select(
         pl.col('bracket'),
         pl.coalesce(
             pl.col(['population_bridge', 'population_right', 'population']), pl.lit(0)).alias('population')
     ).sort('bracket')
+    # print(bridge_shape_all)
     return params, bridge_shape_all
 
 
@@ -286,15 +288,14 @@ def make_checking_plots(povcalnet, billy_pop, all_shapes):
         plt.savefig(f"./bridge_{t}.png")
 
     # 2. show a chart for CASE2 countries
-    df1 = _f(povcalnet, country='moz', year=2019)
-    df2 = _f(all_shapes, country='moz', year=2019)
+    df1 = _f(povcalnet, country='vnm', year=2030)
+    df2 = _f(all_shapes, country='vnm', year=2030)
     plt.figure()
     plot_shape(df1[350:], label='povcalnet')
     plot_shape(df2[350:], label='bridge')
-    plt.title('moz, 2019')
+    plt.title('vnm, 2030')
     plt.legend()
-    plt.savefig('./bridge_moz_2019.png')
-
+    plt.savefig('./bridge_vnm_2030.png')
 
 
 if __name__ == '__main__':
@@ -363,10 +364,9 @@ if __name__ == '__main__':
 
     # convert name to geo, get total count
     billy_pop = billy_full.with_columns(
-        pl.col('person').map_elements(_get_geo).alias('country'),
+        pl.col('person').map_elements(_get_geo, return_dtype=pl.Utf8).alias('country'),
         (pl.col('daily_income')
-         .map_elements(bracket_number_from_income_robin)
-         .cast(pl.Int32)
+         .map_elements(bracket_number_from_income_robin, return_dtype=pl.Int32)
          .alias('bracket'))
     ).group_by(['country', 'time', 'bracket']).agg(
         pl.col('daily_income').count().alias('population')
@@ -526,7 +526,8 @@ if __name__ == '__main__':
     all_shapes = povcalnet.join(
         all_bridges,
         on=['country', 'year', 'bracket'],
-        how='outer'
+        how='full',
+        coalesce=True
     ).select(
         pl.col(['country', 'year', 'bracket']),
         pl.coalesce(pl.col(["population_right", "population"]), pl.lit(0)).alias('population'))
