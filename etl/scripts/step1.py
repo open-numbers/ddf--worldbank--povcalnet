@@ -225,5 +225,6 @@ if __name__ == "__main__":
     assert res3.shape == res2.shape
     assert res3.filter(pl.col('headcount') > 1).is_empty()
     assert res3.filter(pl.col('headcount') < 0).is_empty()
-    # save result to pickle
+    # save result to parquet
     res3.write_parquet('./povcalnet_clean.parquet')
+    print("please remember to update povcalnet_clean.parquet under etl/source/")
