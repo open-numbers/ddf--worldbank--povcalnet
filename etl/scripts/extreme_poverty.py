@@ -112,6 +112,33 @@ gbl_epov_rates
 
 gbl_epov_rates.write_csv('./ddf/poverty_rates/ddf--datapoints--poverty_rate--by--global--time.csv')
 
+# 3.65 
+gbl_epov_rates_365 = get_epov_rates_for_groups(data_gbl, ["year"], 3.65).sort("year")
+gbl_epov_rates_365 = gbl_epov_rates_365.select(
+    pl.lit('world').alias('global'),
+    pl.col("year").alias("time"),
+    pl.exclude("year")
+)
+
+# 6.85
+gbl_epov_rates_685 = get_epov_rates_for_groups(data_gbl, ["year"], 6.85).sort("year")
+gbl_epov_rates_685 = gbl_epov_rates_685.select(
+    pl.lit('world').alias('global'),
+    pl.col("year").alias("time"),
+    pl.exclude("year")
+)
+
+
+# create a merged version
+global_rates = gbl_epov_rates.join(
+    gbl_epov_rates_365, on=["global", "time"], how="full", coalesce=True
+).join(
+    gbl_epov_rates_685, on=["global", "time"], how="full", coalesce=True
+)
+global_rates
+global_rates.write_csv('./other/epov_by_global.csv')
+
+
 # countries - 2.15
 country_epov_rates = get_epov_rates_for_groups(data, ["country", "year"], 2.15)
 country_epov_rates = country_epov_rates.rename({"year": "time"})
