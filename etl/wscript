@@ -195,12 +195,9 @@ def pop_by_income(ctx):
     ctx(
         rule="${PYTHON} ${SRC[0]} ",
         source=["scripts/step5.py",
-                "estimated_mountains.parquet",
-                "povcalnet_smoothed.parquet",
-                'source/gapminder/population.csv'
-                # ctx.path.find_or_declare("estimated_mountains.pkl"),
-                # ctx.path.find_or_declare("povcalnet_smoothed.pkl"),
-                # ctx.path.find_or_declare('source/gapminder/population.csv'),
+                ctx.path.find_or_declare("estimated_mountains.parquet"),
+                ctx.path.find_or_declare("povcalnet_smoothed.parquet"),
+                ctx.path.find_or_declare('source/gapminder/population.csv'),
                 ],
         target=['population_500plus.parquet', 'population_percentage_500plus.parquet'],
     )

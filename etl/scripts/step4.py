@@ -18,7 +18,6 @@ import sys
 import numpy as np
 import polars as pl
 import pandas as pd
-import pickle
 import json
 from multiprocessing import get_context
 from functools import partial
@@ -103,11 +102,16 @@ def get_estimated_shape(country, year, income, known_shapes, neighbours_list):
     else:
         average_shape = get_average_shape(known_shapes, neighbours_list)
         mixed_shape = average_shape.join(
-            nearest_shape, on=['bracket'], how='outer', suffix='_povcalnet'
-        ).fill_null(0).select(
+            nearest_shape, on=['bracket'], how='full', suffix='_povcalnet', coalesce=True
+        ).select(
             pl.col('bracket'),
-            (pl.col('headcount') * was + pl.col('headcount_povcalnet') * wpov).alias('headcount')
+            (pl.col('headcount').fill_null(0) * was + pl.col('headcount_povcalnet').fill_null(0) * wpov).alias('headcount')
         )
+    # to_check = mixed_shape.filter(pl.col('headcount').is_null())
+    # if not to_check.is_empty():
+    #     print(to_check)
+    #     print(f"wpov: {wpov}, was: {was}")
+    #     raise ValueError(f"should not have duplicated bracket: {country}, {year}")
     return mixed_shape.sort('bracket')
 
 
@@ -154,7 +158,10 @@ if __name__ == '__main__':
         pl.col('time').cast(pl.Int32).alias('year'),
         pl.col('gini_2100').alias('gini')
     )
-    income_gini = gini.join(income, on=['country', 'year'], how='outer').drop_nulls()
+    income_gini = gini.join(income, 
+                            on=['country', 'year'], 
+                            how='full', 
+                            coalesce=True).drop_nulls()
 
     # load neighbours
     fp = open(neighbours_file, 'r')
@@ -165,7 +172,10 @@ if __name__ == '__main__':
     res8 = pl.read_parquet('./mean_central_shapes.parquet')
 
     # 1. only keep one reporting level
-    known_shapes = res8.group_by(['country', 'year']).map_groups(select_shape)
+    known_shapes = list()
+    for x in res8.partition_by(['country', 'year']):
+        known_shapes.append(select_shape(x))
+    known_shapes = pl.concat(known_shapes)
     known_shapes_lazy = known_shapes.lazy()
 
     # 2. there are 3 cases
@@ -203,6 +213,7 @@ if __name__ == '__main__':
 
     todos = income_gini.select(['country', 'year']).unique().to_numpy().tolist()
 
+    # test if the constants are collectly defined
     for country, year in todos:
         wpov, was = constants.all_weights[year]
 

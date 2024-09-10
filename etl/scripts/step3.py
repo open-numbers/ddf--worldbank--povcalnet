@@ -11,7 +11,6 @@ import sys
 
 import numpy as np
 import polars as pl
-import pickle
 
 import bracketlib
 
@@ -50,7 +49,7 @@ def move_mean(df: pl.DataFrame):
     inc = get_income(c, y)
     if inc:
         # bracket_from_income(8192, 0.04) -> should be 500
-        brack = bracketlib.bracket_from_income(inc, bracket_step=0.04, integer=True)
+        brack = bracketlib.bracket_from_income(inc, bracket_step=0.04)
         return df.with_columns([
             pl.col('bracket') - brack
         ])
@@ -66,17 +65,21 @@ def move_mean(df: pl.DataFrame):
 def step8(res7):
     print("below are country/year which existed in povcalnet but not gapminder income data:")
     # move the shapes to make the group with mean income to be group 0
-    return res7.group_by(['country', 'year', 'reporting_level']).map_groups(move_mean)
+    return res7.group_by('country', 'year', 'reporting_level').map_groups(move_mean)
 
 
 # %%
 if __name__ == '__main__':
     res7 = pl.read_parquet('./povcalnet_smoothed.parquet')
+    # FIXME: make sure res7's year column is int
+    res7 = res7.with_columns(
+        pl.col('year').cast(pl.Int32)
+    )
     res8 = step8(res7)
 
     res8.write_parquet('mean_central_shapes.parquet')
 
-    df = _f(res8, country='ago', year=1981, reporting_level='n')
+    df = _f(res8, country='syr', year=2022, reporting_level='n')
     print('example shape:')
     print(df)
     plt.plot(df.select('bracket'), df.select('headcount'))

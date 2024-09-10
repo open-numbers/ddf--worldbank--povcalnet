@@ -102,9 +102,9 @@ def step1(res0: pl.DataFrame):
         year = df['year'][0]
         reporting_level = df['reporting_level'][0]
 
-        df2 = resample(df).join(all_i, on='i', how='outer')
+        df2 = resample(df).join(all_i, on='i', how='full', coalesce=True)
         df3 = df2.with_columns(
-            pl.col('headcount').map(interpolate)
+            pl.col('headcount').map_batches(interpolate)
             .fill_nan(None)
             .forward_fill().backward_fill()
         )
@@ -115,7 +115,7 @@ def step1(res0: pl.DataFrame):
         )
 
     return res0.group_by(
-        ['country', 'year', 'reporting_level']).map_groups(group_func)
+        'country', 'year', 'reporting_level').map_groups(group_func)
 
 
 # res1 = step1(res0)
@@ -199,7 +199,7 @@ def step3(res2):
         ]).drop_nulls().with_columns(pl.col('i') - 1)
 
     return res3_1.group_by(
-            ['country', 'year', 'reporting_level']
+            'country', 'year', 'reporting_level'
         ).map_groups(fix_negative).select([
             pl.col(['country', 'year', 'reporting_level']),
             pl.col('i').alias('bracket'),
@@ -272,7 +272,7 @@ def func(x):
 
 def smooth_shapes(df):
     return df.with_columns(
-        pl.col('headcount').map(func)
+        pl.col('headcount').map_batches(func)
     )
 
 
@@ -284,7 +284,7 @@ def step5(res4: pl.DataFrame):
     return res4.with_columns(
         # xkx in povcalnet is kos in gapminder
         pl.col('country').str.to_lowercase().str.replace("xkx", "kos"),
-        pl.col('reporting_level').map_dict(mapping)
+        pl.col('reporting_level').replace_strict(mapping)
     )
 
 

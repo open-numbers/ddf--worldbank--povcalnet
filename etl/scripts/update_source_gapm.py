@@ -33,7 +33,7 @@ URLS = {
         'sheet': 'data-for-countries-etc-by-year'
     },
     'wb_income_groups': {
-        'docid': '1HulXQ3x0qFh5EPiTHcf_kpL-c8n65UVE_czBUHG-SuE',
+        'docid': '1jH-pAuHTzBXE-MAqnVnIARz14beqRlHpPU2OD6Qiz8M',
         'sheet': 'data-for-countries-etc-by-year'
     },
     'national_poverty_lines': {

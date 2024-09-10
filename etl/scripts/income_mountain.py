@@ -47,7 +47,7 @@ def resample_country(df, rmax=None, scale=10):  # will it work if scale = 20?
         full_range = pl.Series('bracket', range(rmax), dtype=pl.Int32).to_frame()
 
     return df_.join(
-        full_range, on='bracket', how='outer'
+        full_range, on='bracket', how='right'
     ).with_columns(
         pl.lit(country).alias('country'),
         pl.lit(year).alias('year'),
@@ -115,24 +115,25 @@ res_gbl.select(
 # plt.plot(res_gbl_22['bracket'], res_gbl_22['population'])
 # plt.show()
 
-res_pivot_gbl = res_gbl.pivot(values='population', index=['global', 'year'], columns='bracket', aggregate_function=None)
+res_pivot_gbl = res_gbl.pivot(values='population', index=['global', 'year'], on='bracket', aggregate_function=None)
 res_pivot_gbl = res_pivot_gbl.fill_null(0)
 res_pivot_gbl
 out_gbl = res_pivot_gbl.select(
     pl.col('global'),
     pl.col('year').alias('time'),
-    pl.struct(pl.col(map(str, (range(0, 105))))).map_elements(join_str).alias('income_mountain_105bracket_shape_for_log')
+    pl.struct(pl.col(map(str, (range(0, 105))))).map_elements(join_str, 
+                                                              return_dtype=pl.Utf8).alias('income_mountain_105bracket_shape_for_log')
 )
 out_gbl
 
 out_gbl.write_csv('ddf/income_mountain/ddf--datapoints--income_mountain_105bracket_shape_for_log--by--global--time.csv')
 
-res_pivot = res.pivot(values='population', index=['country', 'year'], columns='bracket', aggregate_function=None)
+res_pivot = res.pivot(values='population', index=['country', 'year'], on='bracket', aggregate_function=None)
 res_pivot = res_pivot.fill_null(0)
 out = res_pivot.select(
     pl.col('country'),
     pl.col('year').alias('time'),
-    pl.struct(pl.col(map(str, (range(0, 105))))).map_elements(join_str).alias('income_mountain_105bracket_shape_for_log')
+    pl.struct(pl.col(map(str, (range(0, 105))))).map_elements(join_str, return_dtype=pl.Utf8).alias('income_mountain_105bracket_shape_for_log')
 )
 out
 
@@ -144,12 +145,12 @@ res50 = res.filter(
 )
 # res50
 
-res50_pivot = res50.pivot(values='population', index=['country', 'year'], columns='bracket', aggregate_function=None)
+res50_pivot = res50.pivot(values='population', index=['country', 'year'], on='bracket', aggregate_function=None)
 res50_pivot = res50_pivot.fill_null(0)
 out50 = res50_pivot.select(
     pl.col('country'),
     pl.col('year').alias('time'),
-    pl.struct(pl.col(map(str, (range(0, 50))))).map_elements(join_str).alias('income_mountain_50bracket_shape_for_log')
+    pl.struct(pl.col(map(str, (range(0, 50))))).map_elements(join_str, return_dtype=pl.Utf8).alias('income_mountain_50bracket_shape_for_log')
 )
 # out50
 out50.write_csv('ddf/income_mountain/ddf--datapoints--income_mountain_50bracket_shape_for_log--by--country--time.csv')
@@ -311,12 +312,13 @@ for k in ['country', 'income_groups',
           'income_3groups', 'g77_and_oecd_countries', 'global', 'landlocked', 'main_religion_2008',
           'unhcr_region', 'unicef_region', 'un_sdg_ldc', 'un_sdg_region',
           'west_and_rest', 'world_4region', 'world_6region']:
-    fn = f'ddf/ddf--entities--geo--{k}.csv'
-    ent = pd.read_csv(fn, dtype=str).set_index(k)
+    fn_in = f'../build/source/datasets/ddf--open_numbers/ddf--entities--geo--{k}.csv'
+    fn_out = f'ddf/ddf--entities--geo--{k}.csv'
+    ent = pd.read_csv(fn_in, dtype=str).set_index(k)
     try:
         mh = max_heights[k]
         ent.loc[mh.index, 'income_mountain_50bracket_max_height_for_log'] = mh.astype(str)
-        ent.to_csv(fn)
+        ent.to_csv(fn_out)
     except KeyError:
         print(k, "has error")
         raise

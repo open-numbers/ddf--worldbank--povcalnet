@@ -31,7 +31,7 @@ ent.write_csv('ddf/ddf--entities--income_bracket_1050.csv')
 # resample to 105
 ent2 = ent.with_columns(
     (pl.col('income_bracket_1050') / 10).cast(pl.Int32).alias('income_bracket_105')
-).groupby(['income_bracket_105'], maintain_order=True).agg(
+).group_by(['income_bracket_105'], maintain_order=True).agg(
     pl.col('bracket_start').first(),
     pl.col('bracket_end').last()
 ).sort('income_bracket_105')
