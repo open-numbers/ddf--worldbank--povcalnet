@@ -1,53 +1,12 @@
-# encoding: utf-8
-
-"""Smoothing the CDF and get povcalnet shapes
-
-The povcalnet CDFs are noisy. We apply smoothing to CDF, and then also
-apply smoothing to the PDF generated from it. The PDFs are the income
-mountain shapes.
-"""
-
-# %%
-import os
-import sys
-
 import numpy as np
 import polars as pl
-
+from scipy import interpolate
+from scipy.optimize import minimize
+from scipy.signal import savgol_filter
 import matplotlib.pyplot as plt
-import seaborn as sns
-
-import warnings
-import psutil
-from multiprocessing import get_context
 from smoothlib import run_smooth
 
-from scipy import interpolate
-from scipy.signal import savgol_filter
-from scipy.optimize import minimize
 
-
-# %%
-# settings for display images
-sns.set_context('notebook')
-sns.set_style('whitegrid')
-plt.rcParams['figure.figsize'] = (7, 4)
-plt.rcParams['figure.dpi'] = 144
-
-
-# %%
-def _f(df, **kwargs):
-    return df.filter(pl.all_horizontal([(pl.col(k) == v) for k, v in kwargs.items()]))
-
-
-def plot(df, diff=False):
-    if diff:
-        plt.plot(df['i']-1, df['headcount'].diff())
-    else:
-        plt.plot(df['i'], df['headcount'])
-
-
-# functions for smoothing the CDF.
 def preprocess_data(x, y):
     # Record min and max values
     min_x, max_x = np.min(x), np.max(x)
@@ -108,6 +67,11 @@ def smooth_and_monotonize_cdf(x, y):
     window_length = adaptive_window_length(noise_level, n_points)
     polyorder = min(3, window_length - 1)  # Adjust polyorder if necessary
 
+    print(f"Preprocessed data points: {n_points}")
+    print(f"Estimated noise level: {noise_level:.4f}")
+    print(f"Adaptive window length: {window_length}")
+    print(f"Polynomial order: {polyorder}")
+
     # Step 1: Smooth the data using Savitzky-Golay filter
     y_smoothed = savgol_filter(y_processed, window_length, polyorder)
 
@@ -125,7 +89,55 @@ def smooth_and_monotonize_cdf(x, y):
     return f
 
 
-# function to smooth the PDF.
+# let's import the cleaned povcalnet data
+data = pl.read_parquet("../build/povcalnet_clean.parquet")
+data
+
+
+def _f(df, **kwargs):
+    return df.filter(pl.all_horizontal([(pl.col(k) == v) for k, v in kwargs.items()]))
+
+
+# example data
+# CHN,2000-2005 issue
+example = _f(data, country="SLE", year=1981, reporting_level="national")
+example
+
+xs = example['i']
+ys = example['headcount']
+
+xp, yp = preprocess_data(xs.to_numpy(), ys.to_numpy())
+
+# Create the smoothed and monotonic CDF
+smoothed_cdf = smooth_and_monotonize_cdf(xs.to_numpy(), ys.to_numpy())
+
+# Generate points for plotting
+x_plot = np.arange(0, 500)
+y_plot = smoothed_cdf(x_plot)
+
+# Plotting
+plt.figure(figsize=(10, 6))
+plt.scatter(xp, yp, label='Original Data', alpha=0.5)
+plt.plot(x_plot, y_plot, 'r-', label='Smoothed CDF')
+plt.xlabel('X')
+plt.ylabel('Cumulative Probability')
+plt.title('Smoothed Cumulative Distribution Function')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+
+# Generate points for plotting
+x_plot = xs
+y_plot = np.diff(smoothed_cdf(x_plot))
+plt.plot(x_plot[1:], y_plot, 'r-', label='Smoothed CDF')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# now we want to smooth the pdf
+
+
 def smooth_pdf(x, y, smoothness=1.0, max_iterations=100, constraint_interval=5):
     """
     Smooth the input PDF while preserving a single maximum at the midpoint of observed maxima,
@@ -134,7 +146,9 @@ def smooth_pdf(x, y, smoothness=1.0, max_iterations=100, constraint_interval=5):
     # Find all indices of the maximum value
     max_value = np.max(y)
     max_indices = np.where(y == max_value)[0]
+
     area = np.sum(y)
+    print(area)
 
     # Calculate the midpoint index of the maximum values
     mid_max_index = int(np.mean(max_indices))
@@ -149,7 +163,7 @@ def smooth_pdf(x, y, smoothness=1.0, max_iterations=100, constraint_interval=5):
 
     # Define constraints
     constraints = [
-        # Ensure the total area under the curve remains the same
+        # Ensure the total area under the curve remains 1
         {'type': 'eq', 'fun': lambda y_smooth: np.sum(y_smooth) - area},
         # Preserve the maximum value at the midpoint
         {'type': 'eq',
@@ -178,8 +192,50 @@ def smooth_pdf(x, y, smoothness=1.0, max_iterations=100, constraint_interval=5):
     return result.x
 
 
-# This function also smooth the shape, based on averaging on a dynamic window
-# but it will change the shape slightly so we only apply this after applying the function above.
+data.sample(1)
+len(data.partition_by(["country", "year", "reporting_level"]))
+
+example = _f(data, country="SLE", year=1981, reporting_level="national")
+xs = example['i']
+ys = example['headcount']
+smoothed_cdf = smooth_and_monotonize_cdf(xs.to_numpy(), ys.to_numpy())
+x_plot = xs
+y_plot = np.diff(smoothed_cdf(x_plot))
+
+# for _ in range(2):
+#     y_plot_ = run_smooth(y_plot, 20, 0)
+#     y_plot_ = y_plot_ / y_plot_.sum()
+
+smoothed_y = smooth_pdf(
+    x_plot[1:], y_plot, smoothness=50, max_iterations=5, constraint_interval=1)
+
+for _ in range(2):
+    s0 = np.sum(smoothed_y)
+    smoothed_y = run_smooth(smoothed_y, 20, 1)
+    s1 = np.sum(smoothed_y)
+    correction_factor = s0 / s1
+    smoothed_y = correction_factor * smoothed_y
+
+# for _ in range(2):
+#     smoothed_y = run_smooth(smoothed_y, 10, 0)
+#     smoothed_y = smoothed_y / smoothed_y.sum()
+
+plt.plot(xs[1:], np.diff(ys), 'r-', label='orig')
+# plt.plot(x_plot[1:], y_plot_, 'b-', label='Smoothed 1')
+plt.plot(x_plot[1:], smoothed_y, 'g-', label='Smoothed 2')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+
+def run_smooth_and_fix_area(y, a, b):
+    s0 = np.sum(y)
+    smoothed_y = run_smooth(y, 20, 1)
+    s1 = np.sum(smoothed_y)
+    correction_factor = s0 / s1
+    return correction_factor * smoothed_y
+
+    
 def func(x):
     """function to smooth a series"""
     # run smoothing, based on standard deviation
@@ -200,7 +256,9 @@ def func(x):
     s1 = np.sum(res)
     correction_factor = s0 / s1
     return correction_factor * res
+    
 
+# NEXT: let's do all shapes
 
 def create_smoothed_shape(df):
     xs = df['i']
@@ -216,7 +274,14 @@ def create_smoothed_shape(df):
     smoothed_y = smooth_pdf(
         shape_xs, shape_ys, smoothness=50, max_iterations=5, constraint_interval=5)
 
+    # print(np.std(smoothed_y))
     smoothed_y = func(smoothed_y)
+
+    # for _ in range(2):
+    #     smoothed_y = run_smooth_and_fix_area(smoothed_y, 30, 2)
+
+    # for _ in range(2):
+    #     smoothed_y = run_smooth_and_fix_area(smoothed_y, 20, 0)
 
     country = df['country'][0]
     year = df['year'][0]
@@ -227,50 +292,29 @@ def create_smoothed_shape(df):
         pl.lit(level).alias('reporting_level'),
         pl.col(['i', 'headcount'])
     )
-    
-
-# rename things
-def rename_things(res1: pl.DataFrame):
-    mapping = {'national': 'n', 'rural': 'r', 'urban': 'u'}
-
-    # MAYBE: change headcount -> population_percentage?
-    return res1.with_columns(
-        # xkx in povcalnet is kos in gapminder
-        pl.col('country').str.to_lowercase().str.replace("xkx", "kos"),
-        pl.col('reporting_level').replace_strict(mapping)
-    )
 
 
-# %%
-if __name__ == '__main__':
-    res0 = pl.read_parquet('./povcalnet_clean.parquet')
-    # have to use multiprocess here. set the pool size
-    poolsize = psutil.cpu_count(logical=False) - 1
+old_df = pl.read_parquet("../build/povcalnet_smoothed.parquet")
 
-    with warnings.catch_warnings(record=False) as w:
-        with get_context("spawn").Pool(poolsize) as pool:
-            todos = res0.partition_by(['country', 'year', 'reporting_level'])
-            print(len(todos))
-            res1_lst = pool.map(create_smoothed_shape, todos)
+example = _f(data, country="IND", year=2016, reporting_level="national")
+new_df = create_smoothed_shape(example)
 
-    res1 = pl.concat(res1_lst)
 
-    # don't keep those with very low headcount
-    # res1 = res1.filter(pl.col('headcount') > 1e-13)
+odf = _f(old_df, country="ind", year=2016, reporting_level="n")
 
-    # print(res4)
-    res = rename_things(res1)
-    res.write_parquet('./povcalnet_smoothed.parquet')
+xs = example['i']
+ys = example['headcount']
+plt.plot(xs[:-1], np.diff(ys), 'r-', label='orig', alpha=.3)
+plt.plot(odf['bracket'].to_numpy(), odf['headcount'].to_numpy(), label='old')
+plt.plot(new_df['i'].to_numpy(), new_df['headcount'].to_numpy(), label='new')
+plt.legend()
+plt.grid()
+plt.show()
 
-    # export all avaliable country/year
-    povcal_country_year = res.select(['country', 'year']).unique()
-    povcal_country_year.write_csv('povcal_country_year.csv')
+old_df['bracket'].unique()
 
-    # TODO: add some more checking images
-    plt.figure()
-    plt.plot(_f(res0, country='USA', year=2016, reporting_level='national')
-             .select('headcount').to_series().diff().drop_nulls(), alpha=.4)
-    df = _f(res, country='usa', year=2016, reporting_level='n')
-    plt.plot(df['bracket'], df['headcount'])
-    plt.savefig("compare_smoothed.jpg")
-    print('check compare_smoothed.jpg for how well the smoothing goes')
+data.filter(
+    pl.col('i') == 459,
+).filter(
+    pl.col('headcount').is_between(pl.col('headcount').min(), 0.9997)
+)

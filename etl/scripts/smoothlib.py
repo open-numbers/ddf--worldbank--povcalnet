@@ -68,6 +68,7 @@ def tricubic(x):
 def func(x, a, b):
     return a * x + b
 
+
 def estimate(sample, weights, xpos):
     x = list(range(len(sample)))
     y = sample
