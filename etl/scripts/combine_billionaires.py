@@ -58,7 +58,7 @@ def plot(*args, **kwargs):
         plt.plot(df['bracket'], df['population'])
     if kwargs.get('log', None):
         ax.set_yscale('log')
-    plt.show()
+    # plt.show()
 
 
 def bracket_number_from_income_robin(s, integer=True):
@@ -80,7 +80,8 @@ def interpolate(df, extrapolate=False):
     ser = df.to_pandas()
     ser_ = ser.dropna()
     name = ser.name
-    res = PchipInterpolator(ser_.index, ser_.values, extrapolate=extrapolate)(ser.index)
+    res = PchipInterpolator(ser_.index, ser_.values,
+                            extrapolate=extrapolate)(ser.index)
     return pl.Series(name, res)
 
 
@@ -158,7 +159,8 @@ def calculate_bridge(left, right, scale=1000):
     if bridge_end_y == 0:
         slope = - np.log(right_max) / (middle - right_start)
     else:
-        slope = (np.log(bridge_end_y) - np.log(right_max)) / (middle - right_start)
+        slope = (np.log(bridge_end_y) - np.log(right_max)) / \
+            (middle - right_start)
 
     params = {
         'slope': slope,
@@ -229,22 +231,19 @@ def calculate_bridge_2(left_shape, params):
 
     bridge_arr = np.array(bridge_vals)
     bridge_arr = np.round(np.exp(bridge_arr)).astype(np.int64)
-    brackets = (np.arange(len(bridge_arr)) + bridge_start_x).astype(np.int32)
+    brackets = np.arange(
+        bridge_start_x, len(bridge_arr) + bridge_start_x).astype(np.int32)
     bridge_shape = pl.DataFrame(
         {
             'bracket': brackets,
             'population': bridge_arr
         }
     )
-    # if our bridge is narrower than the orign povcalnet, then just use povecalnet
-    if bridge_shape['bracket'].max() < left_shape['bracket'].max():
-        return left_shape.select(['bracket', 'population']).clone()
-    else:
-        left_shape1 = left_shape.filter(
-            pl.col('bracket') < bridge_start_x
-        ).select(['bracket', 'population'])
-        bridge_shape_all = pl.concat([left_shape1, bridge_shape])
-        return bridge_shape_all.sort('bracket')
+    left_shape1 = left_shape.filter(
+        pl.col('bracket') < bridge_start_x
+    ).select(['bracket', 'population'])
+    bridge_shape_all = pl.concat([left_shape1, bridge_shape])
+    return bridge_shape_all.sort('bracket')
 
 
 def plot_shape(df, **kwargs):
@@ -265,7 +264,7 @@ def make_checking_plots(povcalnet, billy_pop, all_shapes):
         pl.col('population').sum()
     )
 
-    ts = [2022, 2023, 2060, 2100]
+    ts = [2010, 2022, 2023, 2060, 2100]
     for t in ts:
         left = _f(gleft, year=t).sort('bracket')
         right = _f(gright, year=t).sort('bracket')
@@ -274,7 +273,8 @@ def make_checking_plots(povcalnet, billy_pop, all_shapes):
         #     pl.col('population').fill_null(pl.lit(1))
         # )
         bridge = _f(gbridge, year=t).sort('bracket')
-        diff = (bridge['population'].sum() - left['population'].sum()) / left['population'].sum() * 100
+        diff = (bridge['population'].sum() -
+                left['population'].sum()) / left['population'].sum() * 100
         print(f"{t}: population added {diff:.4f}%")
         plt.figure()
         _, ax = plt.subplots(1, 1)
@@ -303,8 +303,10 @@ if __name__ == '__main__':
     povcalnet = pl.read_parquet('../build/population_500plus.parquet')
 
     # FIXME: put billionaires data into source dir or download from url
-    billy = pl.read_csv('../../../ddf--gapminder--forbes_billionaires/ddf--datapoints--daily_income--by--person--time.csv')
-    billy_worth = pl.read_csv('../../../ddf--gapminder--forbes_billionaires/ddf--datapoints--worth--by--person--time.csv')
+    billy = pl.read_csv(
+        '../../../ddf--gapminder--forbes_billionaires/ddf--datapoints--daily_income--by--person--time.csv')
+    billy_worth = pl.read_csv(
+        '../../../ddf--gapminder--forbes_billionaires/ddf--datapoints--worth--by--person--time.csv')
     billy = billy.with_columns(
         pl.col('time').cast(pl.Int32),
         pl.col('daily_income').cast(pl.Float64)
@@ -313,16 +315,21 @@ if __name__ == '__main__':
         pl.col('time').cast(pl.Int32),
         pl.col('worth').cast(pl.Float64)
     )
-    billy_ent = pl.read_csv('../../../ddf--gapminder--forbes_billionaires/ddf--entities--person.csv', infer_schema_length=None)
+    billy_ent = pl.read_csv(
+        '../../../ddf--gapminder--forbes_billionaires/ddf--entities--person.csv', infer_schema_length=None)
     billy_ent = billy_ent.select(['person', 'countries']).drop_nulls()
 
-    billy_country_map = dict([(d['person'], d['countries']) for d in billy_ent.to_dicts()])
+    billy_country_map = dict([(d['person'], d['countries'])
+                             for d in billy_ent.to_dicts()])
     # billy_country_map['elon_musk'] => 'usa'
 
     # calculate G, the average growth rate of income, using average net worth growth.
-    rich2022 = _f(billy_worth, time=2022).sort(['worth'], descending=True)[:300]
-    rich2012 = _f(billy_worth, time=2012).sort(['worth'], descending=True)[:300]
-    df_ann = pl.DataFrame({'2012': rich2012['worth'], '2022': rich2022['worth']})
+    rich2022 = _f(billy_worth, time=2022).sort(
+        ['worth'], descending=True)[:300]
+    rich2012 = _f(billy_worth, time=2012).sort(
+        ['worth'], descending=True)[:300]
+    df_ann = pl.DataFrame(
+        {'2012': rich2012['worth'], '2022': rich2022['worth']})
     df_ann = df_ann.with_columns(
         (np.log(pl.col('2022') / pl.col('2012')) / 10).alias('growth')
     )
@@ -364,7 +371,8 @@ if __name__ == '__main__':
 
     # convert name to geo, get total count
     billy_pop = billy_full.with_columns(
-        pl.col('person').map_elements(_get_geo, return_dtype=pl.Utf8).alias('country'),
+        pl.col('person').map_elements(
+            _get_geo, return_dtype=pl.Utf8).alias('country'),
         (pl.col('daily_income')
          .map_elements(bracket_number_from_income_robin, return_dtype=pl.Int32)
          .alias('bracket'))
@@ -394,6 +402,7 @@ if __name__ == '__main__':
     # calculate all bridged_shapes for case 1, then keep the params
     # to calculate case 2
     all_left = povcalnet.partition_by(['country', 'year'], as_dict=True)
+    # all_left = res.partition_by(['country', 'year'], as_dict=True)
     all_right = billy_pop.partition_by(['country', 'year'], as_dict=True)
 
     params_cache = dict()
@@ -418,7 +427,8 @@ if __name__ == '__main__':
 
             # scale = scale_dict[t]
             try:
-                params, bridge_shape = calculate_bridge(left_shape, right_shape)
+                params, bridge_shape = calculate_bridge(
+                    left_shape, right_shape)
                 params_cache[(geo, t)] = params
                 bridge_cache[(geo, t)] = bridge_shape.clone()
             except KeyboardInterrupt:
@@ -443,8 +453,10 @@ if __name__ == '__main__':
 
     params_cache_df = pd.DataFrame.from_dict(params_cache).T
     params_cache_df['gini'] = gini.loc[params_cache_df.index]
-    params_cache_df.columns = ['slope', 'bridge_left_y', 'mountain_top_y', 'gini']
-    params_cache_df['ptc_top'] = np.log(params_cache_df['bridge_left_y']) / np.log(params_cache_df['mountain_top_y'])
+    params_cache_df.columns = [
+        'slope', 'bridge_left_y', 'mountain_top_y', 'gini']
+    params_cache_df['ptc_top'] = np.log(
+        params_cache_df['bridge_left_y']) / np.log(params_cache_df['mountain_top_y'])
 
     # plt.scatter(params_cache_df.gini, params_cache_df.slope)
     # plt.show()
@@ -454,7 +466,8 @@ if __name__ == '__main__':
     # divide gini into 3 categories (high, low, middle) and calculate the average slope and average
     # starting point from the data.
     low_gini_params = params_cache_df[params_cache_df['gini'] < 33]
-    mid_gini_params = params_cache_df[params_cache_df['gini'].between(33, 50)] # note: inclusive = both
+    mid_gini_params = params_cache_df[params_cache_df['gini'].between(
+        33, 50)]  # note: inclusive = both
     high_gini_params = params_cache_df[params_cache_df['gini'] > 50]
 
     low_params = low_gini_params.agg({'slope': 'mean', 'ptc_top': 'mean'})
@@ -513,6 +526,8 @@ if __name__ == '__main__':
     # there are shapes for 1800-1980 which are not involved in bridge process
     # len(bridge_cache)
     # len(all_left)
+
+    # gather all shapes.
     all_bridges = pl.concat([
         df.with_columns(
             pl.lit(k[0]).alias('country'),
@@ -523,15 +538,11 @@ if __name__ == '__main__':
         ['country', 'year', 'bracket', 'population']
     ).sort(['country', 'year', 'bracket'])
 
-    all_shapes = povcalnet.join(
-        all_bridges,
-        on=['country', 'year', 'bracket'],
-        how='full',
-        coalesce=True
-    ).select(
-        pl.col(['country', 'year', 'bracket']),
-        pl.coalesce(pl.col(["population_right", "population"]), pl.lit(0)).alias('population'))
+    all_bridges_dict = all_bridges.partition_by(["country", "year"], as_dict=True)
+    povcalnet_dict = povcalnet.partition_by(["country", "year"], as_dict=True)
+    povcalnet_dict.update(all_bridges_dict)
 
+    all_shapes = pl.concat(povcalnet_dict.values())
     all_shapes = all_shapes.sort(['country', 'year', 'bracket'])
 
     all_shapes.write_parquet('./bridged_shapes.parquet')
@@ -539,3 +550,20 @@ if __name__ == '__main__':
     print('making some plots for checking...')
     make_checking_plots(povcalnet, billy_pop, all_shapes)
     print('Done!')
+
+    # others
+
+    # ('caf', 2060) in missing_country
+    # list(missing_country)[0]
+
+    # for k, r in all_shapes.partition_by(['country', 'year'], as_dict=True).items():
+    #     if k[1] in [2030, 2040, 2050, 2060]:
+    #         fn = '_'.join(map(str, k))
+    #         tp = r.filter(
+    #             pl.col('population') > 0
+    #         ).filter(
+    #             pl.col('bracket') > 300
+    #         )
+    #         plot(tp, log=True)
+    #         plt.savefig(f'images/{fn}.png')
+    #         plt.close()

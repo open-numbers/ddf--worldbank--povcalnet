@@ -228,6 +228,20 @@ plt.grid(True)
 plt.show()
 
 
+smoothed_y[0]
+ys[0]
+ys.sum()
+smoothed_y.sum()
+
+np.cumsum(smoothed_y)
+
+# calculate back the CDF from PDF.
+# now I see we must add back the missing values so that the sum becomes 1
+plt.plot(x_plot[:-1], ys[0] + np.cumsum(smoothed_y))
+plt.scatter([202.608], [0.6416])
+plt.show()
+
+
 def run_smooth_and_fix_area(y, a, b):
     s0 = np.sum(y)
     smoothed_y = run_smooth(y, 20, 1)
