@@ -9,15 +9,7 @@ calculate population_percentage and population by country/year/income_group
 import os
 import sys
 
-import numpy as np
 import polars as pl
-import pandas as pd
-import json
-from multiprocessing import get_context
-from functools import partial
-
-import constants
-import step3
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -30,7 +22,7 @@ plt.rcParams['figure.figsize'] = (7, 4)
 plt.rcParams['figure.dpi'] = 144
 
 
-pop_file = 'source/gapminder/population.csv'
+pop_file = './source/gapminder/population.csv'
 
 
 def _f(df, **kwargs):
@@ -105,7 +97,7 @@ if __name__ == '__main__':
     povcal_and_est = pl.concat([est, povcalnet]).sort(['country', 'year', 'bracket'])
 
     # product 1: population percentage
-    povcal_and_est.write_parquet('./population_percentage_500plus.parquet')
+    # povcal_and_est.write_parquet('../build/population_percentage_500plus.parquet')
 
     # then load population data and create population numbers datapoint
     pop = pl.read_csv(pop_file)
@@ -120,7 +112,7 @@ if __name__ == '__main__':
         (pl.col('headcount') * pl.col('population_total')).alias('population')
     ).select(
         pl.col(['country', 'year', 'bracket']),
-        pl.col('population').round(0).cast(pl.Int64)
+        pl.col('population').floor().cast(pl.Int64)
     )
     # check missing ones
     # KOS is expected to be missing
@@ -151,8 +143,37 @@ if __name__ == '__main__':
     # assert no null in data
     assert res.filter(pl.col('population').is_null()).is_empty()
 
+    # # for estimated shapes, we only keep a bracket when there are 
+    # # more than 80% of the countries have data for this bracket.
+    # bracket_year = res.filter(
+    #    pl.col('population') > 0 
+    # ).group_by('bracket', 'year').agg(
+    #     pl.col('country').count()
+    # ).filter(
+    #     pl.col('country') > int(189 * 0.5)
+    # )["bracket", "year"]
+    # print(bracket_year)
+
+    # res = res.join(bracket_year, on=['bracket', 'year'], how='inner')
+    # res
+
+    # print(_f(res, year=2023).filter(
+    #     pl.col('bracket') > 500
+    # )['bracket'].describe())
+
     # product 2:
     res.write_parquet('./population_500plus.parquet')
+
+    # _f(res, year=2030, country='chn')
+    # df = _f(res, year=2024)
+    # df
+    # df2 = df.group_by('bracket').agg(
+    #     pl.col('population').sum()
+    # ).sort('bracket')
+    # _, ax = plt.subplots(1, 1)
+    # plt.plot(df2['bracket'], df2['population'])
+    # ax.set_yscale('log')
+    # plt.show()
 
 
 # # check global shapes
