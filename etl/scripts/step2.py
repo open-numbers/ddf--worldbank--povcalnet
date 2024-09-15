@@ -238,14 +238,14 @@ def rename_things(res1: pl.DataFrame):
         # xkx in povcalnet is kos in gapminder
         pl.col('country').str.to_lowercase().str.replace("xkx", "kos"),
         pl.col('reporting_level').replace_strict(mapping)
-    )
+    ).rename({'i': 'bracket'})
 
 
 # %%
 if __name__ == '__main__':
     res0 = pl.read_parquet('./povcalnet_clean.parquet')
     # have to use multiprocess here. set the pool size
-    poolsize = psutil.cpu_count(logical=False) - 1
+    poolsize = psutil.cpu_count(logical=True) - 2
 
     with warnings.catch_warnings(record=False) as w:
         with get_context("spawn").Pool(poolsize) as pool:
@@ -256,7 +256,7 @@ if __name__ == '__main__':
     res1 = pl.concat(res1_lst)
 
     # don't keep those with very low headcount
-    # res1 = res1.filter(pl.col('headcount') > 1e-13)
+    res1 = res1.filter(pl.col('headcount') > 1e-13)
 
     # print(res4)
     res = rename_things(res1)

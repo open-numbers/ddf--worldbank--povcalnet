@@ -28,6 +28,8 @@ import step3
 
 import matplotlib.pyplot as plt
 import seaborn as sns
+import warnings
+
 
 # %%
 # settings for display images
@@ -220,6 +222,12 @@ if __name__ == '__main__':
     # # with get_context("spawn").Pool(2) as pool:
     # #     estimated = pool.map(run, todos[:8])
     # print(len(todos))
-    estimated = [run(x) for x in todos]
+    poolsize = 2
+
+    with warnings.catch_warnings(record=False) as w:
+        with get_context("spawn").Pool(poolsize) as pool:
+            estimated = pool.map(run, todos)
+
     estimated_df = pl.concat([x for x in estimated if x is not None])
+
     estimated_df.write_parquet('./estimated_mountains.parquet')
