@@ -63,7 +63,7 @@ def preprocess_data(x, y):
     # at the beginning, so if the minium of first
     # 200 points is higher than 0.001, we will just treat it
     # as invalid data, and remove them. Then we append 2 points to 
-    # the curve: x[0] = 0, and x[100] = y[200] / 2
+    # the curve: (0, 0) and (100, y[200] / 2)
 
     # Append or set min_x to min_y and max_x to max_y
     if x[0] != min_x:
