@@ -58,12 +58,15 @@ def preprocess_data(x, y):
     mask = (np.abs(diff) > 1e-4) & (diff > 0)
     x, y = x[mask], y[mask]
 
-    # TODO: fix the initial part of the CDF
-    # we believe that the headcount must be very small 
-    # at the beginning, so if the minium of first
-    # 200 points is higher than 0.001, we will just treat it
-    # as invalid data, and remove them. Then we append 2 points to 
-    # the curve: (0, 0) and (100, y[200] / 2)
+    # Fix the initial part of the CDF
+    # We believe that the headcount must be very small at the beginning
+    if np.min(y[:200]) > 0.001:
+        # Remove the first 200 points
+        x = x[200:]
+        y = y[200:]
+        # Append two new points: (0, 0) and (100, y[200] / 2)
+        x = np.insert(x, 0, [0, 100])
+        y = np.insert(y, 0, [0, y[0] / 2])
 
     # Append or set min_x to min_y and max_x to max_y
     if x[0] != min_x:
