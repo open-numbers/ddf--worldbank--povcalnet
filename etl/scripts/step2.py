@@ -65,8 +65,10 @@ def preprocess_data(x, y):
         x = x[200:]
         y = y[200:]
         # Append two new points: (0, 0) and (100, y[200] / 2)
-        x = np.insert(x, 0, [0, 100])
-        y = np.insert(y, 0, [0, y[0] / 2])
+        x = np.insert(x, 0, 0)
+        y = np.insert(y, 0, 0)
+        x = np.insert(x, 1, 100)
+        y = np.insert(y, 1, y[200] / 2)
 
     # Append or set min_x to min_y and max_x to max_y
     if x[0] != min_x:
