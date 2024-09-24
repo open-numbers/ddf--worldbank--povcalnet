@@ -126,10 +126,10 @@ def smooth_and_monotonize_cdf(x, y):
 
 
 # function to smooth the PDF.
-def smooth_pdf(x, y, smoothness=1.0, max_iterations=100, constraint_interval=5):
+def smooth_pdf(x, y, smoothness=1.0, max_iterations=100):
     """
-    Smooth the input PDF while preserving a single maximum at the midpoint of observed maxima,
-    and ensuring strict monotonicity before and after the maximum with reduced constraints.
+    Smooth the input PDF while preserving a single maximum at the midpoint of 
+    observed maxima
     """
     # Find all indices of the maximum value
     max_value = np.max(y)
@@ -157,19 +157,6 @@ def smooth_pdf(x, y, smoothness=1.0, max_iterations=100, constraint_interval=5):
 
         # Ensure all y values are non-negative
         {'type': 'ineq', 'fun': lambda y_smooth: y_smooth}]
-
-    # Add reduced number of monotonicity constraints
-    for i in range(0, mid_max_index, constraint_interval):
-        constraints.append(
-            {'type': 'ineq', 'fun': lambda y_smooth,
-             i=i: y_smooth[i+constraint_interval] - y_smooth[i] - 1e-10}
-        )
-
-    for i in range(mid_max_index, len(y) - constraint_interval, constraint_interval):
-        constraints.append(
-            {'type': 'ineq', 'fun': lambda y_smooth,
-             i=i: y_smooth[i] - y_smooth[i+constraint_interval] - 1e-10}
-        )
 
     # Minimize the objective function
     result = minimize(objective, y, method='SLSQP',
