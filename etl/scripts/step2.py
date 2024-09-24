@@ -201,7 +201,7 @@ def create_smoothed_shape(df):
     shape_ys = np.diff(smoothed_ys)
 
     smoothed_y = smooth_pdf(
-        shape_xs, shape_ys, smoothness=50, max_iterations=5, constraint_interval=5)
+        shape_xs, shape_ys, smoothness=50, max_iterations=5)
 
     smoothed_y = func(smoothed_y)
 
