@@ -322,9 +322,9 @@ if __name__ == '__main__':
 
     # FIXME: put billionaires data into source dir or download from url
     billy = pl.read_csv(
-        './build/billionaire/ddf--datapoints--daily_income--by--person--time.csv')
+        './source/billionaire/ddf--datapoints--daily_income--by--person--time.csv')
     billy_worth = pl.read_csv(
-        './build/billionaire/ddf--datapoints--worth--by--person--time.csv')
+        './source/billionaire/ddf--datapoints--worth--by--person--time.csv')
     billy = billy.with_columns(
         pl.col('time').cast(pl.Int32),
         pl.col('daily_income').cast(pl.Float64)
@@ -334,7 +334,7 @@ if __name__ == '__main__':
         pl.col('worth').cast(pl.Float64)
     )
     billy_ent = pl.read_csv(
-        './build/billionaire/ddf--entities--person.csv', infer_schema_length=None)
+        './source/billionaire/ddf--entities--person.csv', infer_schema_length=None)
     billy_ent = billy_ent.select(['person', 'countries']).drop_nulls()
 
     billy_country_map = dict([(d['person'], d['countries'])
