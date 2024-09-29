@@ -318,13 +318,13 @@ def make_checking_plots(povcalnet, billy_pop, all_shapes):
 
 if __name__ == '__main__':
     # load data
-    povcalnet = pl.read_parquet('../build/population_500plus.parquet')
+    povcalnet = pl.read_parquet('./population_500plus.parquet')
 
     # FIXME: put billionaires data into source dir or download from url
     billy = pl.read_csv(
-        '../../../ddf--gapminder--forbes_billionaires/ddf--datapoints--daily_income--by--person--time.csv')
+        './build/billionaire/ddf--datapoints--daily_income--by--person--time.csv')
     billy_worth = pl.read_csv(
-        '../../../ddf--gapminder--forbes_billionaires/ddf--datapoints--worth--by--person--time.csv')
+        './build/billionaire/ddf--datapoints--worth--by--person--time.csv')
     billy = billy.with_columns(
         pl.col('time').cast(pl.Int32),
         pl.col('daily_income').cast(pl.Float64)
@@ -334,7 +334,7 @@ if __name__ == '__main__':
         pl.col('worth').cast(pl.Float64)
     )
     billy_ent = pl.read_csv(
-        '../../../ddf--gapminder--forbes_billionaires/ddf--entities--person.csv', infer_schema_length=None)
+        './build/billionaire/ddf--entities--person.csv', infer_schema_length=None)
     billy_ent = billy_ent.select(['person', 'countries']).drop_nulls()
 
     billy_country_map = dict([(d['person'], d['countries'])
@@ -470,7 +470,7 @@ if __name__ == '__main__':
     # first we need to get the gini as parameter
     # NOTE: Here I am  still using pandas. maybe should change to polars too
     # gini = pd.read_csv('../../../ddf--gapminder--fasttrack/ddf--datapoints--gini_2100--by--country--time.csv')
-    gini = pd.read_csv('../build/source/gapminder/gini.csv')
+    gini = pd.read_csv('./source/gapminder/gini.csv')
     gini = gini.set_index(['geo', 'time'])['gini_2100']
 
     params_cache_df = pd.DataFrame.from_dict(params_cache).T
