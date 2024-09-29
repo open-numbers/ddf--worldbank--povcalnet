@@ -126,7 +126,7 @@ def smooth_and_monotonize_cdf(x, y):
 
 
 # function to smooth the PDF.
-def smooth_pdf(x, y, smoothness=1.0, max_iterations=100):
+def smooth_pdf(x, y, smoothness=1.0, max_iterations=100, epsilon=1e-10):
     """
     Smooth the input PDF while preserving a single maximum at the midpoint of 
     observed maxima
@@ -157,6 +157,13 @@ def smooth_pdf(x, y, smoothness=1.0, max_iterations=100):
 
         # Ensure all y values are non-negative
         {'type': 'ineq', 'fun': lambda y_smooth: y_smooth}]
+
+    # here we assume it will be increasing until we hit the global maxia
+    # and ensure that the different on population will be greater than 1 between brackets.
+    for i in range(0, mid_max_index):
+        constraints.append(
+            {'type': 'ineq', 'fun': lambda y_smooth, i=i: y_smooth[i+1] - y_smooth[i] - epsilon}
+    )
 
     # Minimize the objective function
     result = minimize(objective, y, method='SLSQP',
@@ -189,9 +196,17 @@ def func(x):
     return correction_factor * res
 
 
-def create_smoothed_shape(df):
+def calculate_epsilon(p):
+    if p <= 0:
+        raise ValueError("Population must be a positive number")
+    return max(1 / p, 2.2e-16)  # Using machine epsilon as a lower bound
+
+
+def create_smoothed_shape(df: pl.DataFrame):
     xs = df['i']
     ys = df['headcount']
+    eps = calculate_epsilon(df['reporting_pop'].unique().item())
+
     smoothed_cdf = smooth_and_monotonize_cdf(xs.to_numpy(), ys.to_numpy())
 
     xs_ = np.arange(0, 501, 1)
@@ -201,7 +216,7 @@ def create_smoothed_shape(df):
     shape_ys = np.diff(smoothed_ys)
 
     smoothed_y = smooth_pdf(
-        shape_xs, shape_ys, smoothness=50, max_iterations=5)
+        shape_xs, shape_ys, smoothness=50, max_iterations=5, epsilon=eps)
 
     smoothed_y = func(smoothed_y)
 
@@ -255,9 +270,9 @@ if __name__ == '__main__':
 
     # TODO: add some more checking images
     plt.figure()
-    plt.plot(_f(res0, country='USA', year=2016, reporting_level='national')
+    plt.plot(_f(res0, country='IND', year=2020, reporting_level='national')
              .select('headcount').to_series().diff().drop_nulls(), alpha=.4)
-    df = _f(res, country='usa', year=2016, reporting_level='n')
+    df = _f(res, country='ind', year=2020, reporting_level='n')
     plt.plot(df['bracket'], df['headcount'])
     plt.savefig("compare_smoothed.jpg")
     print('check compare_smoothed.jpg for how well the smoothing goes')
