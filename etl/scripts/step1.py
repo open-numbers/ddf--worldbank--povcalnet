@@ -126,7 +126,8 @@ def step2(res1):
     for i, df in res1.items():
         df_new = df.with_columns([pl.lit(i).alias("i")])
         df_new = df_new.select([
-            pl.col(['country', 'year', 'reporting_level', 'i', 'headcount'])
+            pl.col(['country', 'year', 'reporting_level', 'i']),
+            (pl.col('reporting_pop') * pl.col('headcount')).alias('headcount')
         ])
         res.append(df_new)
     return pl.concat(res)
