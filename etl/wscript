@@ -66,6 +66,29 @@ class UpdateSourcePre(BuildContext):
     cmd = "update_source_predownloaded"
     fun = "update_source_predownloaded"
 
+    
+# move predownloaded source into build folder.
+def update_source_billionaire(ctx):
+    """download source from povcalnet"""
+    if ctx.jobs > 2:
+        print('not using jobs > 2, setting jobs = 2')
+        ctx.jobs = 2
+
+    for i in [
+        'ddf--datapoints--daily_income--by--person--time.csv',
+        'ddf--datapoints--worth--by--person--time.csv',
+        'ddf--entities--person.csv'
+    ]:
+        ctx(
+            rule="cp ${SRC} ${TGT}",
+            source="source/fixtures/ddf--gapminder--billionaires/" + i,
+            target="source/billionaire/" + i)
+
+
+class UpdateSourceBilly(BuildContext):
+    cmd = "update_source_billionaire"
+    fun = "update_source_billionaire"
+
 
 # update gapminder source
 def update_source_gapminder(ctx):
@@ -199,7 +222,26 @@ def pop_by_income(ctx):
                 ctx.path.find_or_declare("povcalnet_smoothed.parquet"),
                 ctx.path.find_or_declare('source/gapminder/population.csv'),
                 ],
-        target=['population_500plus.parquet', 'population_percentage_500plus.parquet'],
+        target=['population_500plus.parquet'],
+    )
+
+
+# combine all shapes, get population number
+class BridgeBillionaireShapes(BuildContext):
+    cmd = 'bridge_billionaire_shapes'
+    fun = 'bridge_billionaire_shapes'
+
+
+def bridge_billionaire_shapes(ctx):
+    ctx(
+        rule="${PYTHON} ${SRC[0]} ",
+        source=["scripts/step6.py",
+                ctx.path.find_or_declare("population_500plus.parquet"),
+                ctx.path.find_or_declare('source/billionaire/ddf--datapoints--daily_income--by--person--time.csv'),
+                ctx.path.find_or_declare('source/billionaire/ddf--datapoints--worth--by--person--time.csv'),
+                ctx.path.find_or_declare('source/billionaire/ddf--entities--person.csv')
+                ],
+        target=['bridged_shapes.parquet'],
     )
 
 
@@ -211,5 +253,6 @@ def buildall(ctx):
     from waflib import Options
     Options.commands = ['tidy_source', 'smooth_source',
                         'standardize_shape', 'compute_neighbours',
-                        'estimate_shapes', 'pop_by_income'
+                        'estimate_shapes', 'pop_by_income', 
+                        'bridge_billionaire_shapes'
                         ]

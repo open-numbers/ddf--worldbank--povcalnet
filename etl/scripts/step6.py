@@ -58,7 +58,7 @@ def plot(*args, **kwargs):
         plt.plot(df['bracket'], df['population'])
     if kwargs.get('log', None):
         ax.set_yscale('log')
-    # plt.show()
+    plt.show()
 
 
 def bracket_number_from_income_robin(s, integer=True):
@@ -193,7 +193,7 @@ def calculate_bridge(left, right, scale=1000):
             pl.col(['population_bridge', 'population_right', 'population']), pl.lit(0)).alias('population')
     ).sort('bracket')
     # print(bridge_shape_all)
-    return params, bridge_shape_all
+    return params, fix_total_pop(left, bridge_shape_all)
 
 
 def calculate_bridge_2(left_shape, params):
@@ -243,7 +243,25 @@ def calculate_bridge_2(left_shape, params):
         pl.col('bracket') < bridge_start_x
     ).select(['bracket', 'population'])
     bridge_shape_all = pl.concat([left_shape1, bridge_shape])
-    return bridge_shape_all.sort('bracket')
+    return fix_total_pop(left_shape, 
+                         bridge_shape_all.sort('bracket'))
+
+
+def fix_total_pop(left, res):
+    """make sure the `res` shape has the (almost) same total pop of left shape."""
+    left_pop = left['population'].sum()
+    res_pop = res['population'].sum()
+    pop_diff = res_pop - left_pop
+    left_diff = left.with_columns(
+        (pl.col('population') / pl.col('population').sum() * pop_diff).cast(pl.Int64)
+    )
+    res_ = res.join(left_diff, on='bracket', how='left').select(
+        pl.col('bracket'),
+        (pl.col('population') - pl.col('population_right')
+            .fill_null(0)).alias("population") 
+    )
+
+    return res_
 
 
 def plot_shape(df, **kwargs):
@@ -391,11 +409,15 @@ if __name__ == '__main__':
     # plt.show()
 
     # try the bridge method
-    # geo, t = 'ind', 2020
+    # geo, t = 'can', 2020
     # left = _f(povcalnet, country=geo, year=t)
+    # left
     # right = _f(billy_pop, country=geo, year=t)
+    # right
     # params, res = calculate_bridge(left, right, 1000)
     # plot(left, right, res, log=True)
+    # res['population'].sum()
+    # left['population'].sum()
     # params
     # right
 
