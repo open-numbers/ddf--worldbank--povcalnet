@@ -2,6 +2,7 @@ import polars as pl
 import numpy as np
 from scipy.signal import savgol_filter
 import matplotlib.pyplot as plt
+from functools import partial
 
 
 def variable_savgol_filter(y, window_func, polyorder=2):
@@ -30,7 +31,7 @@ def variable_savgol_filter(y, window_func, polyorder=2):
     # Apply filter for each point with custom window
     for i in range(n_points):
         # Get window size for this position
-        window = int(window_func(y[i]))
+        window = int(window_func(i))
         if window % 2 == 0:
             window += 1  # Ensure odd window size
 
@@ -47,7 +48,9 @@ def variable_savgol_filter(y, window_func, polyorder=2):
         segment = y[start_idx:end_idx]
 
         if len(segment) >= polyorder + 1:
-            filtered_value = savgol_filter(segment, len(segment), polyorder, mode='nearest')
+            filtered_value = savgol_filter(
+                segment, len(segment), polyorder, mode="nearest"
+            )
             y_filtered[i] = filtered_value[len(segment) // 2]
         else:
             y_filtered[i] = y[i]  # Use original value if window too small
@@ -92,103 +95,118 @@ plt.show()
 data = pl.read_parquet("../build/povcalnet_clean.parquet")
 data
 
+data.filter(
+    (pl.col('i') <= 200) & (pl.col('headcount') != 0)
+)
+
 
 def _f(df, **kwargs):
     return df.filter(pl.all_horizontal([(pl.col(k) == v) for k, v in kwargs.items()]))
 
 
-df = _f(data, country='AGO', year=2000, reporting_level='national')
-df['headcount'].diff().arg_max()
-df[226]
+df = _f(data, 
+        country="TUR", 
+        year=2008, 
+        reporting_level="national")
+df["headcount"].diff().arg_max()
+df[299]
 
 
-def window_func(pos):
+def window_func(pos, max_window, dense_left, dense_right, total_x=461):
     """
-    Create exponential window size variation:
-    - x in [0, 0.3]: exponential decay from 100 to 3
-    - x in [0.3, 0.7]: constant at 3
-    - x in [0.7, 1.0]: exponential growth from 3 to 100
-    
-    Parameters:
-    -----------
-    pos : float
-        Position in signal (0 to 1)
-        
-    Returns:
-    --------
-    int
-        Window size (odd integer)
     """
-    # Constants
-    max_window = 100
-    min_window = 11
-    
-    if pos < 0.3:  # Exponential decay region
+    min_window = int((dense_right - dense_left) / 5)
+    if min_window < 3:
+        min_window = 3
+
+    if pos < dense_left:  # Exponential decay region
         # Calculate decay constant
         # We want: max_window * exp(-k * 0.3) = min_window
         # Therefore: k = -ln(min_window/max_window) / 0.3
-        k = -np.log(min_window/max_window) / 0.3
+        k = -np.log(min_window / max_window) / dense_left
         window = max_window * np.exp(-k * pos)
-        
-    elif pos > 0.7:  # Exponential growth region
+
+    elif pos > dense_right:  # Exponential growth region
         # Similar calculation but for growth from 0.7 to 1.0
-        k = np.log(max_window/min_window) / 0.3
-        window = min_window * np.exp(k * (pos - 0.7))
-        
+        right_remaining = total_x - dense_right
+        k = np.log(max_window / min_window) / right_remaining
+        window = min_window * np.exp(k * (pos - dense_right))
+
     else:  # Constant region
         window = min_window
-    
+
     # Ensure window size is odd
     window = int(round(window))
+    if window > max_window:
+        window = max_window
     if window % 2 == 0:
         window += 1
-        
+
     return window
 
 
-poss = np.linspace(0, 1, 1000)
-ws = np.array([window_func(x) for x in poss])
+poss = np.arange(0, 500, 1)
+ws = np.array([window_func(x, 100, 238, 328) for x in poss])
 
 plt.plot(poss, ws)
 plt.show()
 
 
-y_ = variable_savgol_filter(df['headcount'], window_func, polyorder=3)
+# function to detect the shape parameters for noisy shapes
+def fwhw(y):
+    dif = y.max() - y.min()
+    hm = dif / 2
+    nearest = (np.abs(y - hm)).argmin()
+    middle = y.argmax()
+    width = np.abs(middle - nearest) * 2
+    print(nearest, middle, width)
+    if middle > nearest:
+        return nearest, nearest + width
+    else:
+        return nearest - width, nearest
+
+
+xlocs = fwhw(np.diff(df['headcount']))
+xlocs
+
+xlocs[1] - xlocs[0]
+
+plt.plot(df['headcount'].diff())
+plt.vlines(xlocs, 0, df['headcount'].diff().max(), linestyles='dashed')
+plt.show()
+
+
+
+left, right = fwhw(np.diff(df['headcount']))
+left, right
+
+wf = partial(window_func, max_window=150, dense_left=left, dense_right=right)
+
+y_ = variable_savgol_filter(df["headcount"], wf, polyorder=3)
 y_ = np.maximum.accumulate(y_)
 y_ = np.clip(y_, 0, 1)
 
-for i in range(3):
-    y_ = variable_savgol_filter(y_, window_func, polyorder=3)
+for i in range(20):
+    y_ = variable_savgol_filter(y_, wf, polyorder=3)
     y_ = np.maximum.accumulate(y_)
     y_ = np.clip(y_, 0, 1)
 
 
-plt.plot(df['i'], df['headcount'])
-plt.plot(df['i'], y_)
+plt.plot(df["i"], df["headcount"])
+plt.plot(df["i"], y_)
 plt.show()
 
-d = df['headcount'] - y_
+d = df["headcount"] - y_
 plt.plot(d)
-plt.vlines(200, d.min(), d.max(), color='blue', linestyles='dashed', alpha=.5)
+plt.vlines(200, d.min(), d.max(), color="blue", linestyles="dashed", alpha=0.5)
 plt.show()
 
-plt.plot(np.diff(df['headcount']))
+plt.plot(np.diff(df["headcount"]))
 plt.plot(np.diff(y_))
 plt.show()
 
 d[200]
 
 
-# NEXT: try to use adaptive method to findout the correct window size
-def mle_normal_parameters(observations):
-    pass
-
-
-mle_normal_parameters(np.diff(y_))
-
-df.select(
-    pl.col('i'),
-    pl.col('headcount').diff()
-).write_csv('~/Downloads/test.csv')
-
-
+# NEXT: let's check more examples?
+# I think it's already good enough!
