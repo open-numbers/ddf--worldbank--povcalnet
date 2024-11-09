@@ -20,259 +20,211 @@ import seaborn as sns
 import warnings
 import psutil
 from multiprocessing import get_context
-from smoothlib import run_smooth
 
-from scipy import interpolate
 from scipy.signal import savgol_filter
-from scipy.optimize import minimize
+from functools import partial
 
 
 # %%
 # settings for display images
-sns.set_context('notebook')
-sns.set_style('whitegrid')
-plt.rcParams['figure.figsize'] = (7, 4)
-plt.rcParams['figure.dpi'] = 144
+sns.set_context("notebook")
+sns.set_style("whitegrid")
+plt.rcParams["figure.figsize"] = (7, 4)
+plt.rcParams["figure.dpi"] = 144
 
 
-# %%
+# helper to filter a polars dataframe
 def _f(df, **kwargs):
     return df.filter(pl.all_horizontal([(pl.col(k) == v) for k, v in kwargs.items()]))
 
 
-def plot(df, diff=False):
-    if diff:
-        plt.plot(df['i']-1, df['headcount'].diff())
+#
+def variable_savgol_filter(y, window_func, polyorder=2):
+    """
+    Apply Savitzky-Golay filter with variable window size.
+
+    Parameters:
+    -----------
+    y : array-like
+        Input signal to be filtered
+    window_func : callable
+        Function that takes index position (0 to 1) and returns window size
+        Should return odd integers
+    polyorder : int
+        Order of polynomial to fit
+
+    Returns:
+    --------
+    numpy.ndarray
+        Filtered signal
+    """
+    y = np.array(y)
+    n_points = len(y)
+    y_filtered = np.zeros(n_points)
+
+    # Apply filter for each point with custom window
+    for i in range(n_points):
+        # Get window size for this position
+        window = int(window_func(i))
+        if window % 2 == 0:
+            window += 1  # Ensure odd window size
+
+        # Handle edge cases where window would extend beyond signal
+        half_window = window // 2
+        if i < half_window:
+            window = 2 * i + 1
+        elif i >= n_points - half_window:
+            window = 2 * (n_points - i - 1) + 1
+
+        # Apply Savitzky-Golay filter with computed window
+        start_idx = max(0, i - window // 2)
+        end_idx = min(n_points, i + window // 2 + 1)
+        segment = y[start_idx:end_idx]
+
+        if len(segment) >= polyorder + 1:
+            filtered_value = savgol_filter(
+                segment, len(segment), polyorder, mode="nearest"
+            )
+            y_filtered[i] = filtered_value[len(segment) // 2]
+        else:
+            y_filtered[i] = y[i]  # Use original value if window too small
+
+    return y_filtered
+
+
+def fwhw(y):
+    """
+    Calculate the full width at half maximum.
+
+    see https://en.wikipedia.org/wiki/Full_width_at_half_maximum
+
+    We use the width for determining the windows size at a position.
+    """
+    dif = y.max() - y.min()
+    hm = dif / 2
+    nearest = (np.abs(y - hm)).argmin()
+    middle = y.argmax()
+    width = np.abs(middle - nearest) * 2
+    # print(nearest, middle, width)
+    if middle > nearest:
+        return nearest, nearest + width
     else:
-        plt.plot(df['i'], df['headcount'])
+        return nearest - width, nearest
 
 
-# functions for smoothing the CDF.
-def preprocess_data(x, y):
-    # Record min and max values
-    min_x, max_x = np.min(x), np.max(x)
-    min_y, max_y = np.min(y), np.max(y)
+def window_func(pos, max_window, hw_left, hw_right, total_x=461):
+    """
+    Calculate the window size based on the full width position
+    """
+    min_window = int((hw_right - hw_left) / 5)
+    if min_window < 3:
+        min_window = 3
 
-    # Remove consecutive points with the same value
-    diff = np.diff(y, prepend=0)
-    mask = (np.abs(diff) > 1e-4) & (diff > 0)
-    x, y = x[mask], y[mask]
+    if pos < hw_left:  # Exponential decay region
+        # Calculate decay constant
+        # We want: max_window * exp(-k * 0.3) = min_window
+        # Therefore: k = -ln(min_window/max_window) / 0.3
+        k = -np.log(min_window / max_window) / hw_left
+        window = max_window * np.exp(-k * pos)
 
-    # Append or set min_x to min_y and max_x to max_y
-    if x[0] != min_x:
-        x = np.insert(x, 0, min_x)
-        y = np.insert(y, 0, min_y)
-    else:
-        y[0] = min_y
+    elif pos > hw_right:  # Exponential growth region
+        # Similar calculation but for growth from 0.7 to 1.0
+        right_remaining = total_x - hw_right
+        k = np.log(max_window / min_window) / right_remaining
+        window = min_window * np.exp(k * (pos - hw_right))
 
-    if x[-1] != max_x:
-        x = np.append(x, max_x)
-        y = np.append(y, max_y)
-    else:
-        y[-1] = max_y
+    else:  # Constant region
+        window = min_window
 
-    # also extend right side
-    x = np.append(x, 500)
-    y = np.append(y, 1)
-
-    return x, y
-
-
-def estimate_noise_level(y):
-    # Estimate noise using the difference between adjacent points
-    diff = np.diff(y)
-    noise_level = np.std(diff)
-    return noise_level
-
-
-def adaptive_window_length(noise_level, n_points):
-    # Adjust window length based on noise level and number of points
-    # Start with 10% of data points, minimum 3
-    base_window = max(int(n_points * 0.1), 3)
-    noise_factor = int(noise_level * 2000)  # Scale noise to usable range
-
-    window = base_window + noise_factor
-    # Ensure window is smaller than data
-    window = min(window, (n_points - 1) // 2)
-    window = window if window % 2 == 1 else window + 1  # Ensure odd number
+    # Ensure window size is odd
+    window = int(round(window))
+    if window > max_window:
+        window = max_window
+    if window % 2 == 0:
+        window += 1
 
     return window
 
 
-def smooth_and_monotonize_cdf(x, y):
-    # Preprocess the data
-    x_processed, y_processed = preprocess_data(x, y)
+def create_smooth_pdf_shape_(noisy_cdf, max_window=150, polyorder=3, smooth_epochs=20):
+    left, right = fwhw(np.diff(noisy_cdf))
+    wf = partial(window_func, max_window=max_window, hw_left=left, hw_right=right)
 
-    noise_level = estimate_noise_level(y_processed)
-    n_points = len(x_processed)
-    window_length = adaptive_window_length(noise_level, n_points)
-    polyorder = min(3, window_length - 1)  # Adjust polyorder if necessary
+    y = noisy_cdf
+    for i in range(smooth_epochs):
+        y = variable_savgol_filter(y, wf, polyorder=polyorder)
+        y = np.maximum.accumulate(y)
+        y = np.clip(y, 0, 1)
 
-    # Step 1: Smooth the data using Savitzky-Golay filter
-    y_smoothed = savgol_filter(y_processed, window_length, polyorder)
-
-    # Step 2: Ensure monotonicity
-    y_monotone = np.maximum.accumulate(y_smoothed)
-
-    # Step 3: Clip values to [0, 1] range
-    y_monotone = np.clip(y_monotone, 0, 1)
-
-    # Step 3: Create a monotonic interpolation
-    # f = interpolate.PchipInterpolator(x_processed, y_monotone)
-    f = interpolate.interp1d(
-        x_processed, y_monotone, kind='linear', bounds_error=False, fill_value=(0, 1))
-
-    return f
+    return np.diff(y)
 
 
-# function to smooth the PDF.
-def smooth_pdf(x, y, smoothness=1.0, max_iterations=100, epsilon=1e-10):
-    """
-    Smooth the input PDF while preserving a single maximum at the midpoint of 
-    observed maxima
-    """
-    # Find all indices of the maximum value
-    max_value = np.max(y)
-    max_indices = np.where(y == max_value)[0]
-    area = np.sum(y)
+def create_smooth_pdf_shape(df: pl.DataFrame):
+    country = df["country"].unique().item()
+    year = df["year"].unique().item()
+    reporting_level = df["reporting_level"].unique().item()
 
-    # Calculate the midpoint index of the maximum values
-    mid_max_index = int(np.mean(max_indices))
-
-    # Define the objective function to minimize
-    def objective(y_smooth):
-        # Smoothness term
-        smoothness_term = np.mean(np.diff(y_smooth, 2)**2)
-        # Fit term
-        fit_term = np.mean((y - y_smooth)**2)
-        return smoothness * smoothness_term + fit_term
-
-    # Define constraints
-    constraints = [
-        # Ensure the total area under the curve remains the same
-        {'type': 'eq', 'fun': lambda y_smooth: np.sum(y_smooth) - area},
-        # Preserve the maximum value at the midpoint
-        {'type': 'eq',
-            'fun': lambda y_smooth: y_smooth[mid_max_index] - max_value},
-
-        # Ensure all y values are non-negative
-        {'type': 'ineq', 'fun': lambda y_smooth: y_smooth}]
-
-    # here we assume it will be increasing until we hit the global maxia
-    # and ensure that the different on population will be greater than 1 between brackets.
-    for i in range(0, mid_max_index):
-        constraints.append(
-            {'type': 'ineq', 'fun': lambda y_smooth, i=i: y_smooth[i+1] - y_smooth[i] - epsilon}
+    return df.select(
+        pl.lit(country).alias("country"),
+        pl.lit(year).alias("year"),
+        pl.lit(reporting_level).alias("reporting_level"),
+        pl.arange(0, 460).alias("bracket"),
+        pl.col("headcount").map_batches(create_smooth_pdf_shape_),
     )
 
-    # Minimize the objective function
-    result = minimize(objective, y, method='SLSQP',
-                      constraints=constraints, options={'maxiter': max_iterations})
 
-    return result.x
+def plot(df, diff=False):
+    if diff:
+        plt.plot(df["i"] - 1, df["headcount"].diff())
+    else:
+        plt.plot(df["i"], df["headcount"])
 
-
-# This function also smooth the shape, based on averaging on a dynamic window
-# but it will change the shape slightly so we only apply this after applying the function above.
-def func(x):
-    """function to smooth a series"""
-    # run smoothing, based on standard deviation
-    std = x.std()
-    s0 = np.sum(x)
-    if std < 0.004:
-        res = run_smooth(x, 30, 7)
-        res = run_smooth(res, 30, 3)
-    elif std <= 0.0045 and std > 0.004:
-        res = run_smooth(x, 30, 5)
-        res = run_smooth(res, 30, 2)
-    elif std <= 0.0049 and std > 0.0045:
-        res = run_smooth(x, 30, 3)
-        res = run_smooth(res, 20, 2)
-    elif std > 0.0049:
-        res = run_smooth(x, 30, 2)
-        res = run_smooth(res, 20, 1)
-    s1 = np.sum(res)
-    correction_factor = s0 / s1
-    return correction_factor * res
-
-
-def calculate_epsilon(p):
-    if p <= 0:
-        raise ValueError("Population must be a positive number")
-    return max(1 / p, 2.2e-16)  # Using machine epsilon as a lower bound
-
-
-def create_smoothed_shape(df: pl.DataFrame):
-    xs = df['i']
-    ys = df['headcount']
-    eps = calculate_epsilon(df['reporting_pop'].unique().item())
-
-    smoothed_cdf = smooth_and_monotonize_cdf(xs.to_numpy(), ys.to_numpy())
-
-    xs_ = np.arange(0, 501, 1)
-    smoothed_ys = smoothed_cdf(xs_)
-
-    shape_xs = xs_[:-1]  # 0 - 500
-    shape_ys = np.diff(smoothed_ys)
-
-    smoothed_y = smooth_pdf(
-        shape_xs, shape_ys, smoothness=50, max_iterations=5, epsilon=eps)
-
-    smoothed_y = func(smoothed_y)
-
-    country = df['country'][0]
-    year = df['year'][0]
-    level = df['reporting_level'][0]    
-    return pl.DataFrame({'i': shape_xs, 'headcount': smoothed_y}).select(
-        pl.lit(country).alias('country'),
-        pl.lit(year).alias('year'),
-        pl.lit(level).alias('reporting_level'),
-        pl.col(['i', 'headcount'])
-    )
-    
 
 # rename things
 def rename_things(res1: pl.DataFrame):
-    mapping = {'national': 'n', 'rural': 'r', 'urban': 'u'}
+    mapping = {"national": "n", "rural": "r", "urban": "u"}
 
     # MAYBE: change headcount -> population_percentage?
     return res1.with_columns(
         # xkx in povcalnet is kos in gapminder
-        pl.col('country').str.to_lowercase().str.replace("xkx", "kos"),
-        pl.col('reporting_level').replace_strict(mapping)
-    ).rename({'i': 'bracket'})
+        pl.col("country").str.to_lowercase().str.replace("xkx", "kos"),
+        pl.col("reporting_level").replace_strict(mapping),
+    )
 
 
 # %%
-if __name__ == '__main__':
-    res0 = pl.read_parquet('./povcalnet_clean.parquet')
+if __name__ == "__main__":
+    res0 = pl.read_parquet("./povcalnet_clean.parquet")
     # have to use multiprocess here. set the pool size
     poolsize = psutil.cpu_count(logical=True) - 2
 
     with warnings.catch_warnings(record=False) as w:
         with get_context("spawn").Pool(poolsize) as pool:
-            todos = res0.partition_by(['country', 'year', 'reporting_level'])
+            todos = res0.partition_by(["country", "year", "reporting_level"])
             print(len(todos))
-            res1_lst = pool.map(create_smoothed_shape, todos)
+            res1_lst = pool.map(create_smooth_pdf_shape, todos)
 
     res1 = pl.concat(res1_lst)
 
-    # don't keep those with very low headcount
-    res1 = res1.filter(pl.col('headcount') > 1e-13)
-
     # print(res4)
     res = rename_things(res1)
-    res.write_parquet('./povcalnet_smoothed.parquet')
+    res.write_parquet("./povcalnet_smoothed.parquet")
 
     # export all avaliable country/year
-    povcal_country_year = res.select(['country', 'year']).unique()
-    povcal_country_year.write_csv('povcal_country_year.csv')
+    povcal_country_year = res.select(["country", "year"]).unique()
+    povcal_country_year.write_csv("povcal_country_year.csv")
 
     # TODO: add some more checking images
     plt.figure()
-    plt.plot(_f(res0, country='IND', year=2020, reporting_level='national')
-             .select('headcount').to_series().diff().drop_nulls(), alpha=.4)
-    df = _f(res, country='ind', year=2020, reporting_level='n')
-    plt.plot(df['bracket'], df['headcount'])
+    plt.plot(
+        _f(res0, country="IND", year=2020, reporting_level="national")
+        .select("headcount")
+        .to_series()
+        .diff()
+        .drop_nulls(),
+        alpha=0.4,
+    )
+    df = _f(res, country="ind", year=2020, reporting_level="n")
+    plt.plot(df["bracket"], df["headcount"])
     plt.savefig("compare_smoothed.jpg")
-    print('check compare_smoothed.jpg for how well the smoothing goes')
+    print("check compare_smoothed.jpg for how well the smoothing goes")
