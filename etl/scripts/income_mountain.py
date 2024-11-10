@@ -259,7 +259,7 @@ res_ig3 = concat_values(res_ig3)
 res_ig3.to_csv('ddf/income_mountain/ddf--datapoints--income_mountain_50bracket_shape_for_log--by--income_3groups--time.csv')
 
 # others
-countries = pd.read_csv('../build/source/datasets/ddf--open_numbers/ddf--entities--geo--country.csv')
+countries = pd.read_csv('../source/fixtures/ddf--open_numbers/ddf--entities--geo--country.csv')
 
 # global
 df['global'] = 'world'
@@ -312,7 +312,7 @@ for k in ['country', 'income_groups',
           'income_3groups', 'g77_and_oecd_countries', 'global', 'landlocked', 'main_religion_2008',
           'unhcr_region', 'unicef_region', 'un_sdg_ldc', 'un_sdg_region',
           'west_and_rest', 'world_4region', 'world_6region']:
-    fn_in = f'../build/source/datasets/ddf--open_numbers/ddf--entities--geo--{k}.csv'
+    fn_in = f'../source/fixtures/ddf--open_numbers/ddf--entities--geo--{k}.csv'
     fn_out = f'ddf/ddf--entities--geo--{k}.csv'
     ent = pd.read_csv(fn_in, dtype=str).set_index(k)
     try:
