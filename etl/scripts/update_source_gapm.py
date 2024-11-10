@@ -13,11 +13,11 @@ from gspread_pandas import Spread
 
 URLS = {
     'mean_income': {
-        'docid': '1oyaSmlcX_sofdk4ZLTQA3MWIn5H9SBIouYpFVYxx5Yo',
+        'docid': '1rjhSqcr4Kl43C4koTtYHPJZ02y3RUMBJ6cARqbWL0zc',
         'sheet': 'data-for-countries-etc-by-year'
     },
     'gdp': {
-        'docid': '1i5AEui3WZNZqh7MQ4AKkJuCz4rRxGR_pw_9gtbcBOqQ',
+        'docid': '1KcsWpIxQXYER9Ydoo1WWzBzCVEGNtC_vV88gaPw-3w0',
         'sheet': 'data-for-countries-etc-by-year'
     },
     'gini': {
