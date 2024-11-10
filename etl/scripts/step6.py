@@ -220,7 +220,7 @@ def calculate_bridge_2(left_shape, params):
     bridge_first_val = np.log(left_shape.filter(
         pl.col('bracket') == bridge_start_x
     )['population'].item())
-    bridge_vals = [bridge_first_val]
+    bridge_vals = list()
     slope = params['slope']
 
     for i in range(1000):
@@ -305,7 +305,17 @@ def make_checking_plots(povcalnet, billy_pop, all_shapes):
         plt.legend()
         plt.savefig(f"./bridge_{t}.png")
 
-    # 2. show a chart for CASE2 countries
+    # 2. show a chart for CASE1 countries
+    df1 = _f(povcalnet, country='usa', year=2025)
+    df2 = _f(all_shapes, country='usa', year=2025)
+    plt.figure()
+    plot_shape(df1[410:], label='povcalnet')
+    plot_shape(df2[410:], label='bridge')
+    plt.title('usa, 2025')
+    plt.legend()
+    plt.savefig('./bridge_usa_2025.png')
+
+    # 3. show a chart for CASE2 countries
     df1 = _f(povcalnet, country='vnm', year=2030)
     df2 = _f(all_shapes, country='vnm', year=2030)
     plt.figure()
