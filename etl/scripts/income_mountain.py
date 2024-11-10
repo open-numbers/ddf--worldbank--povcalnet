@@ -17,7 +17,7 @@ def _f(df, **kwargs):
     return df.filter(pl.all_horizontal([(pl.col(k) == v) for k, v in kwargs.items()]))
 
 
-data = pl.read_parquet('./bridged_shapes.parquet')
+data = pl.read_parquet('../build/bridged_shapes.parquet')
 # data
 
 # data['bracket'].max()  # 997
