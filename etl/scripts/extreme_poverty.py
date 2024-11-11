@@ -7,7 +7,7 @@ import pandas as pd
 import bracketlib
 from functools import lru_cache
 
-data = pl.read_parquet('./bridged_shapes.parquet')
+data = pl.read_parquet('../build/bridged_shapes.parquet')
 total_pop = pl.read_csv('../build/source/gapminder/population.csv')
 total_pop = total_pop.select(
     pl.col('geo').alias('country'),
