@@ -92,7 +92,24 @@ def variable_savgol_filter(y, window_func, polyorder=2):
     return y_filtered
 
 
-def fwhw(y):
+def find_fwhm_range(cdf_values, lower=0.3, upper=0.7):
+    # Find indices where CDF is between lower and upper bounds
+    mask = (cdf_values >= lower) & (cdf_values <= upper)
+    indices = np.where(mask)[0]
+
+    # Get the corresponding CDF values
+    values_in_range = cdf_values[mask]
+
+    return indices, values_in_range
+
+
+def remove_tails(y, a, b):
+    y[:a] = 0
+    y[b:] = 0
+    return y
+
+
+def fwhm(y, a, b):
     """
     Calculate the full width at half maximum.
 
@@ -100,25 +117,55 @@ def fwhw(y):
 
     We use the width for determining the windows size at a position.
     """
-    dif = y.max() - y.min()
-    hm = dif / 2
-    nearest = (np.abs(y - hm)).argmin()
+    # we assume that the top of the shapes must be near the middle of the shape
+    # not in the tails. So we just reset the tails to 0 to calculate fwhw
+    y = remove_tails(y, a, b)
+    # Calculate half maximum
+    peak_height = y.max() - y.min()
+    half_max = y.min() + peak_height / 2
+
+    # Find peak position
     middle = y.argmax()
-    width = np.abs(middle - nearest) * 2
-    # print(nearest, middle, width)
-    if middle > nearest:
-        return nearest, nearest + width
-    else:
-        return nearest - width, nearest
+
+    # Function to check if 10 consecutive points are below half max
+    def check_consecutive_points(start_idx, direction=1):
+        consecutive_count = 0
+        idx = start_idx
+
+        while 0 <= idx < len(y):
+            if y[idx] < half_max:
+                consecutive_count += 1
+                if consecutive_count >= 10:
+                    # Return the first point where it went below half max
+                    return idx - (4 if direction > 0 else 0)
+            else:
+                consecutive_count = 0
+            idx += direction
+
+        return None
+
+    # Search for left boundary (moving backwards from peak)
+    left_boundary = check_consecutive_points(middle, direction=-1)
+
+    # Search for right boundary (moving forwards from peak)
+    right_boundary = check_consecutive_points(middle, direction=1)
+
+    # Handle edge cases where boundaries aren't found
+    if left_boundary is None:
+        left_boundary = 0
+    if right_boundary is None:
+        right_boundary = len(y) - 1
+    # width = right_boundary - left_boundary
+    return left_boundary, right_boundary
 
 
-def window_func(pos, max_window, hw_left, hw_right, total_x=461):
+def window_func(pos, max_window, hw_left, hw_right, total_x=461, min_window=3):
     """
-    Calculate the window size based on the full width position
     """
-    min_window = int((hw_right - hw_left) / 5)
-    if min_window < 3:
-        min_window = 3
+    # the min window based on data
+    min_window_ = int((hw_right - hw_left) / 5)
+    if min_window_ > min_window:
+        min_window = min_window_
 
     if pos < hw_left:  # Exponential decay region
         # Calculate decay constant
@@ -146,31 +193,64 @@ def window_func(pos, max_window, hw_left, hw_right, total_x=461):
     return window
 
 
-def create_smooth_pdf_shape_(noisy_cdf, max_window=150, polyorder=3, smooth_epochs=20):
-    left, right = fwhw(np.diff(noisy_cdf))
-    wf = partial(window_func, max_window=max_window, hw_left=left, hw_right=right)
+# fix the beginning. we assume that in the beginning the shape will be monotonly increasing
+def fix_head(y, a):
+    y[:a] = np.sort(y[:a])
+    return y
+
+
+def create_smooth_pdf_shape_(noisy_cdf):
+    idxs, _ = find_fwhm_range(noisy_cdf)
+    a = idxs[0]
+    b = idxs[-1]
+
+    left, right = fwhm(np.diff(noisy_cdf), a, b)
+
+    # first use polyorder = 1 to reduce noise
+    wf = partial(window_func, max_window=40, hw_left=left, hw_right=right)
 
     y = noisy_cdf
-    for i in range(smooth_epochs):
-        y = variable_savgol_filter(y, wf, polyorder=polyorder)
-        y = np.maximum.accumulate(y)
+    for i in range(2):
+        y = variable_savgol_filter(y, wf, polyorder=1)
         y = np.clip(y, 0, 1)
 
-    return np.diff(y)
+    # then, use polyorder = 2 to smooth the shape
+    wf = partial(window_func, max_window=80, hw_left=left, hw_right=right,
+                 min_window=7)
+
+    for i in range(10):
+        y = variable_savgol_filter(y, wf, polyorder=2)
+        y = np.clip(y, 0, 1)
+
+    # ensure the monotone
+    y = np.maximum.accumulate(y)
+
+    pdf = np.diff(y)
+
+    if np.max(pdf[:a]) > np.max(pdf[a:]):
+        # the shape is strange because there is another peak in very poor side.
+        return False, pdf
+    else:
+        return True, fix_head(pdf, a)
 
 
 def create_smooth_pdf_shape(df: pl.DataFrame):
     country = df["country"].unique().item()
     year = df["year"].unique().item()
     reporting_level = df["reporting_level"].unique().item()
+    cdf = df['headcount'].to_numpy()
 
-    return df.select(
-        pl.lit(country).alias("country"),
-        pl.lit(year).alias("year"),
-        pl.lit(reporting_level).alias("reporting_level"),
-        pl.arange(0, 460).alias("bracket"),
-        pl.col("headcount").map_batches(create_smooth_pdf_shape_),
-    )
+    good_shape, pdf = create_smooth_pdf_shape_(cdf)
+    if not good_shape:
+        print(f"bad shape detected: {country}, {year}, {reporting_level}")
+
+    return pl.DataFrame({
+                            "country": country,
+                            'year': year,
+                            'reporting_level': reporting_level,
+                            'bracket': np.arange(0, 460),
+                            'headcount': pdf
+                        })
 
 
 def plot(df, diff=False):
@@ -215,16 +295,23 @@ if __name__ == "__main__":
     povcal_country_year.write_csv("povcal_country_year.csv")
 
     # TODO: add some more checking images
-    plt.figure()
-    plt.plot(
-        _f(res0, country="IND", year=2020, reporting_level="national")
-        .select("headcount")
-        .to_series()
-        .diff()
-        .drop_nulls(),
-        alpha=0.4,
-    )
-    df = _f(res, country="ind", year=2020, reporting_level="n")
-    plt.plot(df["bracket"], df["headcount"])
-    plt.savefig("compare_smoothed.jpg")
-    print("check compare_smoothed.jpg for how well the smoothing goes")
+    for country, year, reporting_level in [
+        ('IND', 2020, 'national'),
+        ('SWE', 2024, 'national'),
+        ('CHN', 1983, 'national'),
+        ('PAN', 1992, 'national'),
+        ('USA', 2002, 'national')
+    ]:
+        plt.figure()
+        plt.plot(
+            _f(res0, country=country, year=year, reporting_level=reporting_level)
+            .select("headcount")
+            .to_series()
+            .diff()
+            .drop_nulls(),
+            alpha=0.4,
+        )
+        df = _f(res, country=country.lower(), year=year, reporting_level=reporting_level[0])
+        plt.plot(df["bracket"], df["headcount"])
+        plt.savefig(f"compare_smoothed_{country.lower()}.jpg")
+    print("check compare_smoothed_*.jpg for how well the smoothing goes")

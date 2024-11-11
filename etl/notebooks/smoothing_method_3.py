@@ -104,20 +104,24 @@ def _f(df, **kwargs):
     return df.filter(pl.all_horizontal([(pl.col(k) == v) for k, v in kwargs.items()]))
 
 
-df = _f(data, 
-        country="TUR", 
-        year=2008, 
+df = _f(data,
+        country="PAN",
+        year=1992,
         reporting_level="national")
 df["headcount"].diff().arg_max()
 df[299]
 
+plt.plot(df['headcount'])
+plt.show()
 
-def window_func(pos, max_window, dense_left, dense_right, total_x=461):
+
+def window_func(pos, max_window, dense_left, dense_right, total_x=461, min_window=3):
     """
     """
-    min_window = int((dense_right - dense_left) / 5)
-    if min_window < 3:
-        min_window = 3
+    # the min window based on data
+    min_window_ = int((dense_right - dense_left) / 5)
+    if min_window_ > min_window:
+        min_window = min_window_
 
     if pos < dense_left:  # Exponential decay region
         # Calculate decay constant
@@ -146,27 +150,80 @@ def window_func(pos, max_window, dense_left, dense_right, total_x=461):
 
 
 poss = np.arange(0, 500, 1)
-ws = np.array([window_func(x, 100, 238, 328) for x in poss])
+ws = np.array([window_func(x, 200, 206, 214) for x in poss])
 
 plt.plot(poss, ws)
 plt.show()
 
 
+# we assume that the top of the shapes must be near the middle of the shape
+# not in the tails. So we just reset the tails to 0 to calculate fwhw
+def remove_tails(y, a, b):
+    y[:a] = 0
+    y[b:] = 0
+    return y
+
+
+def find_fwhm_range(cdf_values, lower=0.3, upper=0.7):
+    # Find indices where CDF is between lower and upper bounds
+    mask = (cdf_values >= lower) & (cdf_values <= upper)
+    indices = np.where(mask)[0]
+
+    # Get the corresponding CDF values
+    values_in_range = cdf_values[mask]
+
+    return indices, values_in_range
+
+
+idxs, _ = find_fwhm_range(df['headcount'].to_numpy())
+a = idxs[0]
+b = idxs[-1]
+
+
 # function to detect the shape parameters for noisy shapes
-def fwhw(y):
-    dif = y.max() - y.min()
-    hm = dif / 2
-    nearest = (np.abs(y - hm)).argmin()
+def fwhm(y, a, b):
+    y = remove_tails(y, a, b)
+    # Calculate half maximum
+    peak_height = y.max() - y.min()
+    half_max = y.min() + peak_height / 2
+
+    # Find peak position
     middle = y.argmax()
-    width = np.abs(middle - nearest) * 2
-    print(nearest, middle, width)
-    if middle > nearest:
-        return nearest, nearest + width
-    else:
-        return nearest - width, nearest
+
+    # Function to check if 10 consecutive points are below half max
+    def check_consecutive_points(start_idx, direction=1):
+        consecutive_count = 0
+        idx = start_idx
+
+        while 0 <= idx < len(y):
+            if y[idx] < half_max:
+                consecutive_count += 1
+                if consecutive_count >= 10:
+                    # Return the first point where it went below half max
+                    return idx - (4 if direction > 0 else 0)
+            else:
+                consecutive_count = 0
+            idx += direction
+
+        return None
+
+    # Search for left boundary (moving backwards from peak)
+    left_boundary = check_consecutive_points(middle, direction=-1)
+
+    # Search for right boundary (moving forwards from peak)
+    right_boundary = check_consecutive_points(middle, direction=1)
+
+    # Handle edge cases where boundaries aren't found
+    if left_boundary is None:
+        left_boundary = 0
+    if right_boundary is None:
+        right_boundary = len(y) - 1
+    # width = right_boundary - left_boundary
+    return left_boundary, right_boundary
 
 
-xlocs = fwhw(np.diff(df['headcount']))
+input_shape = np.diff(df['headcount'])
+xlocs = fwhm(input_shape, a, b)
 xlocs
 
 xlocs[1] - xlocs[0]
@@ -176,18 +233,17 @@ plt.vlines(xlocs, 0, df['headcount'].diff().max(), linestyles='dashed')
 plt.show()
 
 
-
-left, right = fwhw(np.diff(df['headcount']))
+left, right = fwhm(np.diff(df['headcount']), a, b)
 left, right
 
-wf = partial(window_func, max_window=150, dense_left=left, dense_right=right)
+wf = partial(window_func, max_window=80, dense_left=left, dense_right=right)
 
-y_ = variable_savgol_filter(df["headcount"], wf, polyorder=3)
+y_ = variable_savgol_filter(df["headcount"], wf, polyorder=1)
 y_ = np.maximum.accumulate(y_)
 y_ = np.clip(y_, 0, 1)
 
 for i in range(20):
-    y_ = variable_savgol_filter(y_, wf, polyorder=3)
+    y_ = variable_savgol_filter(y_, wf, polyorder=1)
     y_ = np.maximum.accumulate(y_)
     y_ = np.clip(y_, 0, 1)
 
@@ -196,17 +252,78 @@ plt.plot(df["i"], df["headcount"])
 plt.plot(df["i"], y_)
 plt.show()
 
+
+# fix the beginning. we assume that in the beginning the shape will be monotonly increasing
+def fix_head(y, a):
+    y[:a] = np.sort(y[:a])
+    return y
+
+
 d = df["headcount"] - y_
 plt.plot(d)
 plt.vlines(200, d.min(), d.max(), color="blue", linestyles="dashed", alpha=0.5)
 plt.show()
 
 plt.plot(np.diff(df["headcount"]))
-plt.plot(np.diff(y_))
+plt.plot(fix_head(np.diff(y_), a))
+# plt.plot(np.diff(y_))
 plt.show()
 
 d[200]
 
+r = fix_head(np.diff(y_), a)
+r.sum()
 
-# NEXT: let's check more examples?
-# I think it's already good enough!
+
+def create_smooth_pdf_shape_(noisy_cdf):
+    idxs, _ = find_fwhm_range(noisy_cdf)
+    a = idxs[0]
+    b = idxs[-1]
+
+    left, right = fwhm(np.diff(noisy_cdf), a, b)
+
+    # first use polyorder = 1 to reduce noise
+    wf = partial(window_func, max_window=40, dense_left=left, dense_right=right)
+
+    y = noisy_cdf
+    for i in range(2):
+        y = variable_savgol_filter(y, wf, polyorder=1)
+        y = np.clip(y, 0, 1)
+
+    # then, use polyorder = 2 to smooth the shape
+    wf = partial(window_func, max_window=80, dense_left=left, dense_right=right,
+                 min_window=7)
+
+    for i in range(10):
+        y = variable_savgol_filter(y, wf, polyorder=2)
+        y = np.clip(y, 0, 1)
+
+    # ensure the monotone
+    y = np.maximum.accumulate(y)
+
+    return y
+
+
+# more examples
+df = _f(data,
+        country="CHN",
+        year=1983,
+        reporting_level="national")
+df["headcount"].diff().arg_max()
+
+y_ = create_smooth_pdf_shape_(df['headcount'].to_numpy())
+
+ttt = np.diff(y_)
+np.max(ttt[:a]) > np.max(ttt[a:])
+
+plt.plot(np.diff(df["headcount"]))
+# plt.plot(fix_head(np.diff(y_), a))
+plt.plot(np.diff(y_))
+plt.show()
+
+plt.plot(df["i"], df["headcount"])
+plt.plot(df["i"], y_)
+plt.show()
+
+# the above procedure should be optimal for smoothing in most cases.
+# FIXME: SWZ - 1983 is a special case, see if we need to handle it or report to WB.
