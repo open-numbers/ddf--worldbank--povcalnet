@@ -210,13 +210,13 @@ def create_smooth_pdf_shape_(noisy_cdf):
     wf = partial(window_func, max_window=40, hw_left=left, hw_right=right)
 
     y = noisy_cdf
-    for i in range(2):
+    for i in range(1):
         y = variable_savgol_filter(y, wf, polyorder=1)
         y = np.clip(y, 0, 1)
 
     # then, use polyorder = 2 to smooth the shape
-    wf = partial(window_func, max_window=80, hw_left=left, hw_right=right,
-                 min_window=7)
+    wf = partial(window_func, max_window=150, hw_left=left, hw_right=right,
+                 min_window=5)
 
     for i in range(10):
         y = variable_savgol_filter(y, wf, polyorder=2)
