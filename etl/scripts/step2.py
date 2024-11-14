@@ -61,10 +61,10 @@ def generate_weights(values):
     - Non-zero values get weights proportional to their difference from the maximum value
     - Values to the left of the maximum get 4x of weights because the noise usually happend on the left.
     - All weights sum to 1
-    
+
     Parameters:
     values (array-like): 1D array of non-negative numbers
-    
+
     Returns:
     numpy.ndarray: Array of weights that sum to 1
     """
@@ -72,39 +72,39 @@ def generate_weights(values):
     values = np.array(values)
     if np.any(values < 0):
         raise ValueError("All values must be non-negative")
-    
+
     # Create mask for non-zero values
     non_zero_mask = values > 0
-    
+
     # Initialize weights array with zeros
     weights = np.zeros_like(values, dtype=float)
-    
+
     if np.any(non_zero_mask):
         # Get maximum value and its position
         max_value = np.max(values)
         max_position = np.argmax(values)
-        
+
         # Calculate differences from max for non-zero values
         differences = max_value - values
-        
+
         # Create position bias multiplier (2 for left side, 1 for right side)
         position_multiplier = np.ones_like(values)
         position_multiplier[:max_position] = 2  # more weights for left side
-        
+
         # Apply position multiplier to differences
         weighted_differences = differences * position_multiplier
-        
+
         # For non-zero values, use the weighted differences
         valid_mask = non_zero_mask
         valid_differences = weighted_differences[valid_mask]
-        
+
         # If all differences are 0 (all values are equal), use equal weights
         if np.all(valid_differences == 0):
             weights[valid_mask] = 1 / np.sum(valid_mask)
         else:
             # Normalize the differences to get weights
             weights[valid_mask] = valid_differences / np.sum(valid_differences)
-    
+
     return weights
 
 
@@ -279,9 +279,9 @@ def create_smooth_pdf_shape_(noisy_cdf):
     )
     clean_cdf = pdf_.select(
         pl.lit(0).append(pl.col('literal')).cum_sum().alias('headcount')
-    ).with_row_index('i')
+    )['headcount'].to_numpy()
 
-    idxs, _ = find_fwhm_range(clean_cdf['headcount'].to_numpy())
+    idxs, _ = find_fwhm_range(clean_cdf)
     a = idxs[0]
     b = idxs[-1]
 
@@ -320,9 +320,9 @@ def create_smooth_pdf_shape(df: pl.DataFrame):
     country = df["country"].unique().item()
     year = df["year"].unique().item()
     reporting_level = df["reporting_level"].unique().item()
-    cdf = df['headcount'].to_numpy()
+    # cdf = df['headcount'].to_numpy()
 
-    good_shape, pdf = create_smooth_pdf_shape_(cdf)
+    good_shape, pdf = create_smooth_pdf_shape_(df)
     if not good_shape:
         print(f"bad shape detected: {country}, {year}, {reporting_level}")
 
