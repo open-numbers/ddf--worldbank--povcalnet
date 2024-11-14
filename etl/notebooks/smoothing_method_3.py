@@ -96,7 +96,7 @@ data = pl.read_parquet("../build/povcalnet_clean.parquet")
 data
 
 data.filter(
-    (pl.col('i') <= 200) & (pl.col('headcount') != 0)
+    pl.col('i') <= 200, pl.col('headcount') != 0
 )
 
 
