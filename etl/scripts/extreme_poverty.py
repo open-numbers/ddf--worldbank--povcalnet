@@ -48,13 +48,17 @@ def get_epov_rates(df, xloc, lb, ub, rates=True):
     This function should be used per geo.
     Parameter rates=False means return total population instead of rates.
     """
-    total_pop_actual = df['population_total'][0]
+    # total_pop_actual = df['population_total'][0]
     total_pop_data = df['population'].sum()
-    initial_val = (total_pop_actual - total_pop_data) / total_pop_actual
-    if initial_val < 0:
-        initial_val = 0
+    # try:
+    #     assert abs(total_pop_actual - total_pop_data) < 10
+    # except:
+    #     print(df.head())
+    #     print(f"actual: {total_pop_actual}, data: {total_pop_data}")
+    #     raise
+
     df_ = df.sort('bracket').with_columns(
-        (initial_val + (pl.col('population').cum_sum() / total_pop_actual)).alias("poverty_pop")
+        (pl.col('population').cum_sum() / total_pop_data).alias("poverty_pop")
     ).filter(
         pl.col('bracket').is_in([lb, ub])
     ).with_columns(
@@ -66,7 +70,7 @@ def get_epov_rates(df, xloc, lb, ub, rates=True):
     )
     if not rates:
         df_ = df_.with_columns(
-            (pl.col('poverty_pop') * total_pop_actual).floor().cast(pl.Int64)
+            (pl.col('poverty_pop') * total_pop_data).floor().cast(pl.Int64)
         )
     if df_.is_empty():
         if rates:

@@ -85,7 +85,7 @@ def interpolate(df, extrapolate=False):
     return pl.Series(name, res)
 
 
-def calculate_bridge(left, right, scale=1000):
+def calculate_bridge(left, right, scale=2000):
     """input left shape and right shape, calculate the bridged shape
 
     also return some stats of the bridge, useful for calculate CASE2 shapes.
@@ -213,9 +213,13 @@ def calculate_bridge_2(left_shape, params):
     if thres < 10:
         return None
 
-    bridge_start_x = left_shape_.filter(
-        pl.col('population') <= thres
-    )['bracket'][0]  # should I check indexerror here?
+    try:
+        bridge_start_x = left_shape_.filter(
+            pl.col('population') <= thres,
+            pl.col('population') > 0
+        )['bracket'][0]  # should I check indexerror here?
+    except IndexError:
+        return None
 
     bridge_first_val = np.log(left_shape.filter(
         pl.col('bracket') == bridge_start_x
