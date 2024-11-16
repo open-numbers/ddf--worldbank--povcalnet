@@ -137,7 +137,7 @@ def create_pdf_and_remove_outliners(df: pl.DataFrame, p: int):
 
 
 df
-pdf = create_pdf_and_remove_outliners(df, 4)
+pdf = create_pdf_and_remove_outliners(df, 3.3)
 pdf
 
 # because we want to also keep the peak position,
@@ -304,7 +304,7 @@ def fwhm(y, a, b):
     y = remove_tails(y, a, b)
     # Calculate half maximum
     peak_height = y.max() - y.min()
-    half_max = y.min() + peak_height / 2
+    half_max = y.min() + peak_height * (1/2)
 
     # Find peak position
     middle = y.argmax()
@@ -317,9 +317,9 @@ def fwhm(y, a, b):
         while 0 <= idx < len(y):
             if y[idx] < half_max:
                 consecutive_count += 1
-                if consecutive_count >= 10:
+                if consecutive_count >= 20:
                     # Return the first point where it went below half max
-                    return idx - (4 if direction > 0 else 0)
+                    return idx - (20 if direction > 0 else -20)
             else:
                 consecutive_count = 0
             idx += direction
@@ -354,12 +354,22 @@ def create_smooth_pdf_shape_(noisy_cdf):
 
     left, right = fwhm(np.diff(noisy_cdf), a, b)
 
+    print(right - left)
+
+    if right - left > 40:  # the shape is really wide
+        # print('using min window = 5')
+        min_window_step1 = 5
+        epochs_1 = 10
+    else:
+        min_window_step1 = 3
+        epochs_1 = 10
+
     # first try to reduce noise
-    wf = partial(window_func, max_window=40, dense_left=left, dense_right=right, 
-                 min_window=1)
+    wf = partial(window_func, max_window=40, dense_left=left, dense_right=right,
+                 min_window=min_window_step1)
 
     y = noisy_cdf
-    for i in range(2):
+    for i in range(epochs_1):
         y = variable_savgol_filter(y, wf, polyorder=1)
         y = np.clip(y, 0, 1)
 
@@ -367,24 +377,24 @@ def create_smooth_pdf_shape_(noisy_cdf):
     wf = partial(window_func, max_window=150, dense_left=left, dense_right=right,
                  min_window=7)
 
-    for i in range(5):
+    for i in range(10):
         y = variable_savgol_filter(y, wf, polyorder=2)
         y = np.clip(y, 0, 1)
 
     # ensure the monotone
     y = np.maximum.accumulate(y)
 
-    return a, y
+    return left, right, y
 
 
 data.sample(1)
 
 df = _f(data,
-        country="TJK",
-        year=2015,
+        country="BRA",
+        year=1990,
         reporting_level="national")
 # for a normal distubrition, 3.29 sigma captures 99.9% points.
-pdf = create_pdf_and_remove_outliners(df, 3.3)
+pdf = create_pdf_and_remove_outliners(df, 3.29)
 pdf_ = pdf.select(
     (1 - pl.col('headcount').sum()) *
     pl.col('headcount').map_batches(generate_weights) + pl.col('headcount')
@@ -393,7 +403,7 @@ cdf_clean = pdf_.select(
     pl.lit(0).append(pl.col('literal')).cum_sum().alias('headcount')
 ).with_row_index('i')
 
-a, y_ = create_smooth_pdf_shape_(cdf_clean['headcount'].to_numpy())
+a, _, y_ = create_smooth_pdf_shape_(cdf_clean['headcount'].to_numpy())
 
 
 plt.plot(np.diff(df["headcount"]))

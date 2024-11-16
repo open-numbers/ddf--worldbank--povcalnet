@@ -193,7 +193,7 @@ def fwhm(y, a, b):
     # Find peak position
     middle = y.argmax()
 
-    # Function to check if 10 consecutive points are below half max
+    # Function to check if 20 consecutive points are below half max
     def check_consecutive_points(start_idx, direction=1):
         consecutive_count = 0
         idx = start_idx
@@ -201,9 +201,9 @@ def fwhm(y, a, b):
         while 0 <= idx < len(y):
             if y[idx] < half_max:
                 consecutive_count += 1
-                if consecutive_count >= 10:
+                if consecutive_count >= 20:
                     # Return the first point where it went below half max
-                    return idx - (4 if direction > 0 else 0)
+                    return idx - (20 if direction > 0 else -20)
             else:
                 consecutive_count = 0
             idx += direction
@@ -284,17 +284,23 @@ def create_smooth_pdf_shape_(noisy_cdf):
     left, right = fwhm(np.diff(clean_cdf), a, b)
 
     # first, use polyorder = 1 and smaller window to reduce noise
-    wf = partial(window_func, max_window=40, hw_left=left, hw_right=right, 
-                 min_window=1)
+    if right - left > 40:  # the shape is really wide
+        min_window_step1 = 5
+        epochs_1 = 10
+    else:
+        min_window_step1 = 3
+        epochs_1 = 10
+    wf = partial(window_func, max_window=40, hw_left=left, hw_right=right,
+                 min_window=min_window_step1)
 
     y = clean_cdf
-    for i in range(2):
+    for i in range(epochs_1):
         y = variable_savgol_filter(y, wf, polyorder=1)
         y = np.clip(y, 0, 1)
 
     # then, use polyorder = 2 and bigger window to smooth the shape
     wf = partial(window_func, max_window=150, hw_left=left, hw_right=right,
-                 min_window=5)
+                 min_window=7)
 
     for i in range(10):
         y = variable_savgol_filter(y, wf, polyorder=2)
@@ -305,11 +311,11 @@ def create_smooth_pdf_shape_(noisy_cdf):
 
     pdf = np.diff(y)
 
-    if np.max(pdf[:a]) > np.max(pdf[a:]):
-        # the shape is strange because there is another peak in very poor side.
+    if np.max(pdf[:left]) > np.max(pdf[left:]):
+        # the shape is strange because there is another peak in poor side.
         return False, pdf
     else:
-        return True, fix_head(pdf, a)
+        return True, fix_head(pdf, left)
 
 
 def create_smooth_pdf_shape(df: pl.DataFrame):
