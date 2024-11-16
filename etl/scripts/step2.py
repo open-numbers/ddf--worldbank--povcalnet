@@ -81,18 +81,14 @@ def generate_weights(values):
 
     if np.any(non_zero_mask):
         # Get maximum value and its position
-        max_value = np.max(values)
         max_position = np.argmax(values)
-
-        # Calculate differences from max for non-zero values
-        differences = max_value - values
 
         # Create position bias multiplier (2 for left side, 1 for right side)
         position_multiplier = np.ones_like(values)
-        position_multiplier[:max_position] = 2  # more weights for left side
+        position_multiplier[:max_position] = 1.2  # more weights for left side
 
         # Apply position multiplier to differences
-        weighted_differences = differences * position_multiplier
+        weighted_differences = values * position_multiplier
 
         # For non-zero values, use the weighted differences
         valid_mask = non_zero_mask

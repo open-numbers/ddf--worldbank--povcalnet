@@ -159,10 +159,10 @@ def generate_weights(values):
     - Non-zero values get weights proportional to their difference from the maximum value
     - Values to the left of the maximum get 4x of weights because the noise usually happend on the left.
     - All weights sum to 1
-    
+
     Parameters:
     values (array-like): 1D array of non-negative numbers
-    
+
     Returns:
     numpy.ndarray: Array of weights that sum to 1
     """
@@ -170,39 +170,35 @@ def generate_weights(values):
     values = np.array(values)
     if np.any(values < 0):
         raise ValueError("All values must be non-negative")
-    
+
     # Create mask for non-zero values
     non_zero_mask = values > 0
-    
+
     # Initialize weights array with zeros
     weights = np.zeros_like(values, dtype=float)
-    
+
     if np.any(non_zero_mask):
         # Get maximum value and its position
-        max_value = np.max(values)
         max_position = np.argmax(values)
-        
-        # Calculate differences from max for non-zero values
-        differences = max_value - values
-        
+
         # Create position bias multiplier (2 for left side, 1 for right side)
         position_multiplier = np.ones_like(values)
-        position_multiplier[:max_position] = 2  # more weights for left side
-        
+        position_multiplier[:max_position] = 1.2  # more weights for left side
+
         # Apply position multiplier to differences
-        weighted_differences = differences * position_multiplier
-        
+        weighted_differences = values * position_multiplier
+
         # For non-zero values, use the weighted differences
         valid_mask = non_zero_mask
         valid_differences = weighted_differences[valid_mask]
-        
+
         # If all differences are 0 (all values are equal), use equal weights
         if np.all(valid_differences == 0):
             weights[valid_mask] = 1 / np.sum(valid_mask)
         else:
             # Normalize the differences to get weights
             weights[valid_mask] = valid_differences / np.sum(valid_differences)
-    
+
     return weights
 
 
@@ -234,11 +230,11 @@ plt.show()
 
 # test more examples
 df = _f(data,
-        country="NOR",
+        country="PAN",
         year=1996,
         reporting_level="national")
 
-pdf = create_pdf_and_remove_outliners(df, 4)
+pdf = create_pdf_and_remove_outliners(df, 3.29)
 pdf_ = pdf.select(
     (1 - pl.col('headcount').sum()) * pl.col('headcount').map_batches(generate_weights) + pl.col('headcount')
 )
@@ -371,7 +367,7 @@ def create_smooth_pdf_shape_(noisy_cdf):
     wf = partial(window_func, max_window=150, dense_left=left, dense_right=right,
                  min_window=7)
 
-    for i in range(10):
+    for i in range(5):
         y = variable_savgol_filter(y, wf, polyorder=2)
         y = np.clip(y, 0, 1)
 
@@ -381,13 +377,17 @@ def create_smooth_pdf_shape_(noisy_cdf):
     return a, y
 
 
+data.sample(1)
+
 df = _f(data,
-        country="IND",
-        year=2022,
+        country="TJK",
+        year=2015,
         reporting_level="national")
-pdf = create_pdf_and_remove_outliners(df, 3.3)  # for a normal distubrition, 3.29 sigma captures 99.9% points.
+# for a normal distubrition, 3.29 sigma captures 99.9% points.
+pdf = create_pdf_and_remove_outliners(df, 3.3)
 pdf_ = pdf.select(
-    (1 - pl.col('headcount').sum()) * pl.col('headcount').map_batches(generate_weights) + pl.col('headcount')
+    (1 - pl.col('headcount').sum()) *
+    pl.col('headcount').map_batches(generate_weights) + pl.col('headcount')
 )
 cdf_clean = pdf_.select(
     pl.lit(0).append(pl.col('literal')).cum_sum().alias('headcount')
@@ -410,5 +410,3 @@ d = y_ - df["headcount"]
 plt.plot(d)
 plt.vlines(200, d.min(), d.max(), color="blue", linestyles="dashed", alpha=0.5)
 plt.show()
-
-
