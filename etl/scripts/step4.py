@@ -58,15 +58,22 @@ def select_shape(df):
             return res
 
 
+def normalize_shape(shape):
+    return shape.with_columns(
+        pl.col('headcount') / pl.col('headcount').sum()
+    )
+
+
 def get_average_shape(known_shapes, neighbours_list):
     other = pl.DataFrame(
         [{'country': x[0], 'year': x[1]} for x in neighbours_list],
         schema={'country': pl.Utf8, 'year': pl.Int32}
     )
     res = known_shapes.join(other, on=['country', 'year'], how='inner')
-    return res.group_by('bracket').agg(
+    res = res.group_by('bracket').agg(
         pl.col('headcount').sum() / 50
     ).sort('bracket')
+    return normalize_shape(res)
 
 
 def get_nearest_known_shape(country, year, known_shapes):
@@ -114,7 +121,7 @@ def get_estimated_shape(country, year, income, known_shapes, neighbours_list):
     #     print(to_check)
     #     print(f"wpov: {wpov}, was: {was}")
     #     raise ValueError(f"should not have duplicated bracket: {country}, {year}")
-    return mixed_shape.sort('bracket')
+    return normalize_shape(mixed_shape.sort('bracket'))
 
 
 def process_step8(i,
@@ -160,9 +167,9 @@ if __name__ == '__main__':
         pl.col('time').cast(pl.Int32).alias('year'),
         pl.col('gini_2100').alias('gini')
     )
-    income_gini = gini.join(income, 
-                            on=['country', 'year'], 
-                            how='full', 
+    income_gini = gini.join(income,
+                            on=['country', 'year'],
+                            how='full',
                             coalesce=True).drop_nulls()
 
     # load neighbours
