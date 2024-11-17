@@ -85,7 +85,7 @@ def get_epov_rates(df, xloc, lb, ub, rates=True):
         if rates:
             return ynew[0] * 100
         else:
-            return int(ynew[0] * 100)
+            return int(ynew[0])
 
 
 # let's try global first
@@ -184,6 +184,12 @@ country_epov_rates.filter(
 )
 
 country_epov_rates.write_csv('./ddf/poverty_rates/ddf--datapoints--extereme_poverty_rate--by--country--time.csv')
+
+# I also need the population in extreme poverty
+country_epov_pop = get_epov_rates_for_groups(data, ["country", "year"], 2.15, rates=False)
+country_epov_pop = country_epov_pop.rename({"year": "time"})
+
+country_epov_pop.write_csv('./ddf/poverty_rates/ddf--datapoints--population_in_extreme_poverty--by--country--time.csv')
 
 # countries - 3.65
 country_epov_rates_365 = get_epov_rates_for_groups(data, ["country", "year"], 3.65)
