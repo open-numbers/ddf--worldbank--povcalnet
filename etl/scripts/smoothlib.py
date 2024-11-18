@@ -62,18 +62,20 @@ def tricubic(x):
         return y
     for idx, xv in enumerate(x):
         y[idx] = np.power(1.0 - np.power(np.abs(x[idx] - xmin), 3), 3)
-    return y
+    return y / y.sum()
 
 
 def func(x, a, b):
     return a * x + b
 
+
 def estimate(sample, weights, xpos):
-    x = list(range(len(sample)))
-    y = sample
-    popt, pcov = curve_fit(func, x, y, p0=[1/1000, 1/1000], sigma=weights)
-    # print(popt)
-    return popt[0] * xpos + popt[1]
+    return np.sum(sample * weights)
+    # x = list(range(len(sample)))
+    # y = sample
+    # popt, pcov = curve_fit(func, x, y, p0=[1/1000, 1/1000], sigma=weights)
+    # # print(popt)
+    # return popt[0] * xpos + popt[1]
 
 
 def run_smooth(arr: np.array, maximum=10, minimum=1):

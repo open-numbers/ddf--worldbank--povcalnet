@@ -7,7 +7,18 @@ import pandas as pd
 import bracketlib
 from functools import lru_cache
 
-data = pl.read_parquet('./bridged_shapes.parquet')
+data = pl.read_parquet('../build/bridged_shapes.parquet')
+total_pop = pl.read_csv('../build/source/gapminder/population.csv')
+total_pop = total_pop.select(
+    pl.col('geo').alias('country'),
+    pl.col('time').alias('year').cast(pl.Int32),
+    pl.col('Population').alias('population')
+)
+gbl_total_pop = total_pop.group_by('year').agg(
+    pl.col('population').sum()
+)
+gbl_total_pop
+data = data.join(total_pop, on=['country', 'year'], how='left', suffix='_total')
 
 # dir to store indicators
 os.makedirs('./ddf/poverty_rates/', exist_ok=True)
@@ -37,10 +48,17 @@ def get_epov_rates(df, xloc, lb, ub, rates=True):
     This function should be used per geo.
     Parameter rates=False means return total population instead of rates.
     """
+    # total_pop_actual = df['population_total'][0]
+    total_pop_data = df['population'].sum()
+    # try:
+    #     assert abs(total_pop_actual - total_pop_data) < 10
+    # except:
+    #     print(df.head())
+    #     print(f"actual: {total_pop_actual}, data: {total_pop_data}")
+    #     raise
+
     df_ = df.sort('bracket').with_columns(
-        pl.when(rates)
-          .then(pl.col('population').cum_sum() / pl.col('population').sum())
-          .otherwise(pl.col('population').cum_sum().floor())
+        (pl.col('population').cum_sum() / total_pop_data).alias("poverty_pop")
     ).filter(
         pl.col('bracket').is_in([lb, ub])
     ).with_columns(
@@ -50,23 +68,34 @@ def get_epov_rates(df, xloc, lb, ub, rates=True):
             return_dtype=pl.Float64
         )
     )
-    x = df_['bracket'].to_numpy()
-    y = df_['population'].to_numpy()
-
-    xnew = np.array([xloc])
-    ynew = np.interp(xnew, x, y)
-    if rates:
-        return ynew[0] * 100
+    if not rates:
+        df_ = df_.with_columns(
+            (pl.col('poverty_pop') * total_pop_data).floor().cast(pl.Int64)
+        )
+    if df_.is_empty():
+        if rates:
+            return 0.0
+        return 0
     else:
-        return int(ynew[0] * 100)
+        x = df_['bracket'].to_numpy()
+        y = df_['poverty_pop'].to_numpy()
+
+        xnew = np.array([xloc])
+        ynew = np.interp(xnew, x, y)
+        if rates:
+            return ynew[0] * 100
+        else:
+            return int(ynew[0])
 
 
 # let's try global first
 data_gbl = data.group_by(['year', 'bracket']).agg(pl.col('population').sum())
 data_gbl
+data_gbl = data_gbl.join(gbl_total_pop, on='year', how='left', suffix='_total')
+data_gbl.sort('year', 'bracket')
 
 get_epov_rates(data_gbl.filter(
-    pl.col('year') == 2020
+    pl.col('year') == 2021
 ), lb=lower_bracket, ub=upper_bracket, xloc=xloc, rates=True)
 
 
@@ -140,11 +169,27 @@ global_rates.write_csv('./other/epov_by_global.csv')
 
 
 # countries - 2.15
+
 country_epov_rates = get_epov_rates_for_groups(data, ["country", "year"], 2.15)
 country_epov_rates = country_epov_rates.rename({"year": "time"})
 country_epov_rates
 
+country_epov_rates.filter(
+    (pl.col('country') == 'sle') & (pl.col('time') == 1981)
+)
+# => 64.22, correct!
+
+country_epov_rates.filter(
+    (pl.col('country') == 'nru') & (pl.col('time') == 2009)
+)
+
 country_epov_rates.write_csv('./ddf/poverty_rates/ddf--datapoints--extereme_poverty_rate--by--country--time.csv')
+
+# I also need the population in extreme poverty
+country_epov_pop = get_epov_rates_for_groups(data, ["country", "year"], 2.15, rates=False)
+country_epov_pop = country_epov_pop.rename({"year": "time"})
+
+country_epov_pop.write_csv('./ddf/poverty_rates/ddf--datapoints--population_in_extreme_poverty--by--country--time.csv')
 
 # countries - 3.65
 country_epov_rates_365 = get_epov_rates_for_groups(data, ["country", "year"], 3.65)
