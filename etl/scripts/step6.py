@@ -85,8 +85,8 @@ def interpolate(df, extrapolate=False):
     return pl.Series(name, res)
 
 
-def calculate_bridge(left, right, scale=2000):
-    """input left shape and right shape, calculate the bridged shape
+def calculate_bridge(left, right, scale=1500):
+    """for CASE1: input left shape and right shape, calculate the bridged shape
 
     also return some stats of the bridge, useful for calculate CASE2 shapes.
     """
@@ -247,7 +247,7 @@ def calculate_bridge_2(left_shape, params):
         pl.col('bracket') < bridge_start_x
     ).select(['bracket', 'population'])
     bridge_shape_all = pl.concat([left_shape1, bridge_shape])
-    return fix_total_pop(left_shape, 
+    return fix_total_pop(left_shape,
                          bridge_shape_all.sort('bracket'))
 
 
@@ -262,7 +262,7 @@ def fix_total_pop(left, res):
     res_ = res.join(left_diff, on='bracket', how='left').select(
         pl.col('bracket'),
         (pl.col('population') - pl.col('population_right')
-            .fill_null(0)).alias("population") 
+            .fill_null(0)).alias("population")
     )
 
     return res_
@@ -286,7 +286,7 @@ def make_checking_plots(povcalnet, billy_pop, all_shapes):
         pl.col('population').sum()
     )
 
-    ts = [2010, 2022, 2023, 2060, 2100]
+    ts = [2010, 2022, 2023, 2025, 2026, 2030, 2060, 2100]
     for t in ts:
         left = _f(gleft, year=t).sort('bracket')
         right = _f(gright, year=t).sort('bracket')
@@ -366,7 +366,7 @@ if __name__ == '__main__':
         (np.log(pl.col('2022') / pl.col('2012')) / 10).alias('growth')
     )
     df_ann
-    G = df_ann['growth'].mean()
+    G = df_ann.select('growth').mean().item()
     print("annual income growth rate: ", G)  # 0.05746843339165423
 
     # Question: what's the group for elon, 2022?
