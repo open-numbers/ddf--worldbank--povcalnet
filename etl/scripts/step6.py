@@ -286,7 +286,7 @@ def make_checking_plots(povcalnet, billy_pop, all_shapes):
         pl.col('population').sum()
     )
 
-    ts = [2010, 2023, 2025, 2030, 2060, 2100]
+    ts = [2010, 2022, 2023, 2025, 2026, 2030, 2060, 2100]
     for t in ts:
         left = _f(gleft, year=t).sort('bracket')
         right = _f(gright, year=t).sort('bracket')
