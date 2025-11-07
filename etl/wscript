@@ -5,9 +5,9 @@ import os
 from waflib import Context
 from waflib.Build import BuildContext
 
-top = '.'
-out = './build'
-prefix = '../'
+top = "."
+out = "./build"
+prefix = "../"
 
 MAX_POVCALNET_BRACKET = 461
 
@@ -20,7 +20,9 @@ MAX_POVCALNET_BRACKET = 461
 
 def configure(ctx):
     # TODO: add installation path (destdir)
-    if ctx.options.prefix == '/usr/local':  # if user didn't provide the prefix, /usr/local is the default.
+    if (
+        ctx.options.prefix == "/usr/local"
+    ):  # if user didn't provide the prefix, /usr/local is the default.
         # But we want the prefix variable to be the default.
         ctx.env.PREFIX = os.path.abspath(prefix)
     ctx.find_program("python", var="PYTHON")
@@ -32,14 +34,15 @@ def update_source(ctx):
     """download source from povcalnet"""
     # limit the jobs, don't DDoS upstream
     if ctx.jobs > 2:
-        print('not using jobs > 2, setting jobs = 2')
+        print("not using jobs > 2, setting jobs = 2")
         ctx.jobs = 2
 
     for i in range(MAX_POVCALNET_BRACKET):
         ctx(
             rule="${PYTHON} ${SRC[0]} " + str(i),
             source=["scripts/update_source.py", "scripts/lib.py"],
-            target="source/povcalnet/" + "{:04d}.csv".format(i))
+            target="source/povcalnet/" + "{:04d}.csv".format(i),
+        )
 
 
 class UpdateSource(BuildContext):
@@ -52,37 +55,39 @@ def update_source_predownloaded(ctx):
     """download source from povcalnet"""
     # limit the jobs, don't DDoS upstream
     if ctx.jobs > 2:
-        print('not using jobs > 2, setting jobs = 2')
+        print("not using jobs > 2, setting jobs = 2")
         ctx.jobs = 2
 
     for i in range(MAX_POVCALNET_BRACKET):
         ctx(
             rule="cp ${SRC} ${TGT}",
             source="source/povcalnet_predownloaded/" + "{:04d}.csv".format(i),
-            target="source/povcalnet/" + "{:04d}.csv".format(i))
+            target="source/povcalnet/" + "{:04d}.csv".format(i),
+        )
 
 
 class UpdateSourcePre(BuildContext):
     cmd = "update_source_predownloaded"
     fun = "update_source_predownloaded"
 
-    
+
 # move predownloaded source into build folder.
 def update_source_billionaire(ctx):
     """download source from povcalnet"""
     if ctx.jobs > 2:
-        print('not using jobs > 2, setting jobs = 2')
+        print("not using jobs > 2, setting jobs = 2")
         ctx.jobs = 2
 
     for i in [
-        'ddf--datapoints--daily_income--by--person--time.csv',
-        'ddf--datapoints--worth--by--person--time.csv',
-        'ddf--entities--person.csv'
+        "ddf--datapoints--daily_income--by--person--time.csv",
+        "ddf--datapoints--worth--by--person--time.csv",
+        "ddf--entities--person.csv",
     ]:
         ctx(
             rule="cp ${SRC} ${TGT}",
             source="source/fixtures/ddf--gapminder--billionaires/" + i,
-            target="source/billionaire/" + i)
+            target="source/billionaire/" + i,
+        )
 
 
 class UpdateSourceBilly(BuildContext):
@@ -90,23 +95,43 @@ class UpdateSourceBilly(BuildContext):
     fun = "update_source_billionaire"
 
 
+# move predownloaded source into build folder.
+def update_source_open_numbers(ctx):
+    """download source from povcalnet"""
+    if ctx.jobs > 2:
+        print("not using jobs > 2, setting jobs = 2")
+        ctx.jobs = 2
+
+    for i in ["ddf--synonyms--geo.csv"]:
+        ctx(
+            rule="cp ${SRC} ${TGT}",
+            source="source/fixtures/ddf--open_numbers/" + i,
+            target="source/open_numbers/" + i,
+        )
+
+
+class UpdateSourceOpenNumbers(BuildContext):
+    cmd = "update_source_open_numbers"
+    fun = "update_source_open_numbers"
+
+
 # update gapminder source
 def update_source_gapminder(ctx):
     """download gapminder indicators"""
     for f in [
-            'mean_income',
-            'gini',
-            'gdp',
-            'population',
-            'on_income_groups',
-            'wb_income_groups',
-            'national_poverty_lines'
+        "mean_income",
+        "gini",
+        "gdp",
+        "population",
+        "on_income_groups",
+        "wb_income_groups",
+        "national_poverty_lines",
     ]:
         ctx(
             rule="${PYTHON} ${SRC} " + f,
             source="scripts/update_source_gapm.py",
             target=f"source/gapminder/{f}.csv",
-            always=True
+            always=True,
         )
 
 
@@ -121,18 +146,14 @@ def tidy_source(ctx):
     povcalnet_source_files = [
         "source/povcalnet/" + "{:04d}.csv".format(i) for i in range(MAX_POVCALNET_BRACKET)
     ]
-    source_files = ["scripts/step1.py"]
+    source_files = ["scripts/step1.py", "source/open_numbers/ddf--synonyms--geo.csv"]
     source_files.extend(povcalnet_source_files)
-    ctx(
-        rule="${PYTHON} ${SRC[0]} ",
-        source=source_files,
-        target="povcalnet_clean.parquet"
-    )
+    ctx(rule="${PYTHON} ${SRC[0]} ", source=source_files, target="povcalnet_clean.parquet")
 
 
 class TidySource(BuildContext):
-    cmd = 'tidy_source'
-    fun = 'tidy_source'
+    cmd = "tidy_source"
+    fun = "tidy_source"
 
 
 # smooth povcalnet shapes
@@ -145,12 +166,8 @@ def smooth_source(ctx):
     """create smooth shapes from povcalnet data"""
     ctx(
         rule="${PYTHON} ${SRC[0]} ",
-        source=["scripts/step2.py",
-                'povcalnet_clean.parquet'],
-        target=[
-            "povcalnet_smoothed.parquet",
-            'povcal_country_year.csv'
-        ],
+        source=["scripts/step2.py", "povcalnet_clean.parquet"],
+        target=["povcalnet_smoothed.parquet", "povcal_country_year.csv"],
     )
 
 
@@ -164,10 +181,12 @@ def standardize_shape(ctx):
     """make standardised shapes from smoothed povcalnet shapes"""
     ctx(
         rule="${PYTHON} ${SRC[0]} ",
-        source=["scripts/step3.py",
-                "scripts/bracketlib.py",
-                ctx.path.find_or_declare('povcalnet_smoothed.parquet')],
-        target='mean_central_shapes.parquet',
+        source=[
+            "scripts/step3.py",
+            "scripts/bracketlib.py",
+            ctx.path.find_or_declare("povcalnet_smoothed.parquet"),
+        ],
+        target="mean_central_shapes.parquet",
     )
 
 
@@ -181,67 +200,75 @@ def compute_neighbours(ctx):
     """compute neighbours for all country/year"""
     ctx(
         rule="${PYTHON} ${SRC[0]} ",
-        source=["scripts/compute_neighbours.py",
-                ctx.path.find_or_declare('source/gapminder/mean_income.csv'),
-                ctx.path.find_or_declare('source/gapminder/gini.csv'),
-                ctx.path.find_or_declare('povcal_country_year.csv')
-                ],
-        target='neighbours_list.json',
+        source=[
+            "scripts/compute_neighbours.py",
+            ctx.path.find_or_declare("source/gapminder/mean_income.csv"),
+            ctx.path.find_or_declare("source/gapminder/gini.csv"),
+            ctx.path.find_or_declare("povcal_country_year.csv"),
+        ],
+        target="neighbours_list.json",
     )
 
 
 # extimate all shapes
 class EstimateShapes(BuildContext):
-    cmd = 'estimate_shapes'
-    fun = 'estimate_shapes'
+    cmd = "estimate_shapes"
+    fun = "estimate_shapes"
 
 
 def estimate_shapes(ctx):
     """estimate historical and future shapes"""
     ctx(
         rule="${PYTHON} ${SRC[0]} ",
-        source=["scripts/step4.py",
-                ctx.path.find_or_declare('source/gapminder/gini.csv'),
-                ctx.path.find_or_declare('neighbours_list.json')
-                ],
-        target='estimated_mountains.parquet',
+        source=[
+            "scripts/step4.py",
+            ctx.path.find_or_declare("source/gapminder/gini.csv"),
+            ctx.path.find_or_declare("neighbours_list.json"),
+        ],
+        target="estimated_mountains.parquet",
     )
 
 
 # combine all shapes, get population number
 class PopByIncome(BuildContext):
-    cmd = 'pop_by_income'
-    fun = 'pop_by_income'
+    cmd = "pop_by_income"
+    fun = "pop_by_income"
 
 
 def pop_by_income(ctx):
     ctx(
         rule="${PYTHON} ${SRC[0]} ",
-        source=["scripts/step5.py",
-                ctx.path.find_or_declare("estimated_mountains.parquet"),
-                ctx.path.find_or_declare("povcalnet_smoothed.parquet"),
-                ctx.path.find_or_declare('source/gapminder/population.csv'),
-                ],
-        target=['population_500plus.parquet'],
+        source=[
+            "scripts/step5.py",
+            ctx.path.find_or_declare("estimated_mountains.parquet"),
+            ctx.path.find_or_declare("povcalnet_smoothed.parquet"),
+            ctx.path.find_or_declare("source/gapminder/population.csv"),
+        ],
+        target=["population_500plus.parquet"],
     )
 
 
 # combine all shapes, get population number
 class BridgeBillionaireShapes(BuildContext):
-    cmd = 'bridge_billionaire_shapes'
-    fun = 'bridge_billionaire_shapes'
+    cmd = "bridge_billionaire_shapes"
+    fun = "bridge_billionaire_shapes"
 
 
 def bridge_billionaire_shapes(ctx):
     ctx(
         rule="${PYTHON} ${SRC[0]} ",
-        source=["scripts/step6.py",
-                ctx.path.find_or_declare("population_500plus.parquet"),
-                ctx.path.find_or_declare('source/billionaire/ddf--datapoints--daily_income--by--person--time.csv'),
-                ctx.path.find_or_declare('source/billionaire/ddf--datapoints--worth--by--person--time.csv'),
-                ctx.path.find_or_declare('source/billionaire/ddf--entities--person.csv')
-                ],
-        target=['bridged_shapes.parquet'],
+        source=[
+            "scripts/step6.py",
+            ctx.path.find_or_declare("population_500plus.parquet"),
+            ctx.path.find_or_declare(
+                "source/billionaire/ddf--datapoints--daily_income--by--person--time.csv"
+            ),
+            ctx.path.find_or_declare(
+                "source/billionaire/ddf--datapoints--worth--by--person--time.csv"
+            ),
+            ctx.path.find_or_declare("source/billionaire/ddf--entities--person.csv"),
+        ],
+        target=["bridged_shapes.parquet"],
     )
 
 
@@ -251,8 +278,13 @@ def build(bld):
 
 def buildall(ctx):
     from waflib import Options
-    Options.commands = ['tidy_source', 'smooth_source',
-                        'standardize_shape', 'compute_neighbours',
-                        'estimate_shapes', 'pop_by_income', 
-                        'bridge_billionaire_shapes'
-                        ]
+
+    Options.commands = [
+        "tidy_source",
+        "smooth_source",
+        "standardize_shape",
+        "compute_neighbours",
+        "estimate_shapes",
+        "pop_by_income",
+        "bridge_billionaire_shapes",
+    ]
