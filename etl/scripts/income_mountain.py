@@ -193,7 +193,6 @@ on_income = pd.read_csv("../build/source/gapminder/on_income_groups.csv")
 on_income = on_income[["geo", "time", "Income levels"]].dropna()
 on_income.columns = ["geo", "time", "level"]
 
-# FIXME: check if it's correct to map level 5, etc to high income
 on_map = {
     "Level 1": "l1",
     "Level 2": "l2",
@@ -217,7 +216,13 @@ wb["level"] = wb["level"].map(lambda x: wb_map[x])
 
 wb = wb.set_index(["geo", "time"])
 on = on.set_index(["geo", "time"])
-on.update(wb)
+
+# outer join
+on = on.merge(wb, how="outer", on=["geo", "time"], suffixes=["_on", "_wb"])
+on["level"] = on["level_on"].fillna(on["level_wb"])
+on = on[["level"]]
+
+on
 
 income_groups = on.copy()
 income_3groups = income_groups.copy()
