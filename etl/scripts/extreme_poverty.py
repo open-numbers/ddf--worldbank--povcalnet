@@ -133,14 +133,14 @@ gbl_epov_rates
 
 gbl_epov_rates.write_csv("./ddf/poverty_rates/ddf--datapoints--poverty_rate--by--global--time.csv")
 
-# 3.65
-gbl_epov_rates_365 = get_epov_rates_for_groups(data_gbl, ["year"], 3.65).sort("year")
+# 4.20
+gbl_epov_rates_365 = get_epov_rates_for_groups(data_gbl, ["year"], 4.20).sort("year")
 gbl_epov_rates_365 = gbl_epov_rates_365.select(
     pl.lit("world").alias("global"), pl.col("year").alias("time"), pl.exclude("year")
 )
 
-# 6.85
-gbl_epov_rates_685 = get_epov_rates_for_groups(data_gbl, ["year"], 6.85).sort("year")
+# 8.30
+gbl_epov_rates_685 = get_epov_rates_for_groups(data_gbl, ["year"], 8.30).sort("year")
 gbl_epov_rates_685 = gbl_epov_rates_685.select(
     pl.lit("world").alias("global"), pl.col("year").alias("time"), pl.exclude("year")
 )
@@ -177,22 +177,22 @@ country_epov_pop.write_csv(
     "./ddf/poverty_rates/ddf--datapoints--population_in_extreme_poverty--by--country--time.csv"
 )
 
-# countries - 3.65
-country_epov_rates_365 = get_epov_rates_for_groups(data, ["country", "year"], 3.65)
+# countries - 4.20
+country_epov_rates_365 = get_epov_rates_for_groups(data, ["country", "year"], 4.20)
 country_epov_rates_365 = country_epov_rates_365.rename({"year": "time"})
 country_epov_rates_365
 
 country_epov_rates_365.write_csv(
-    "./ddf/poverty_rates/ddf--datapoints--poverty_rate_under_3_65--by--country--time.csv"
+    "./ddf/poverty_rates/ddf--datapoints--poverty_rate_under_4_20--by--country--time.csv"
 )
 
-# countries - 6.85
-country_epov_rates_685 = get_epov_rates_for_groups(data, ["country", "year"], 6.85)
+# countries - 8.30
+country_epov_rates_685 = get_epov_rates_for_groups(data, ["country", "year"], 8.30)
 country_epov_rates_685 = country_epov_rates_685.rename({"year": "time"})
 country_epov_rates_685
 
 country_epov_rates_685.write_csv(
-    "./ddf/poverty_rates/ddf--datapoints--poverty_rate_under_6_85--by--country--time.csv"
+    "./ddf/poverty_rates/ddf--datapoints--poverty_rate_under_8_30--by--country--time.csv"
 )
 
 # create a merged version
@@ -334,26 +334,26 @@ level_epov_215_3lvl.write_csv(
 )
 
 
-# 3.65
-level_epov_365 = get_level_epov_rates(3.65)
+# 4.20
+level_epov_365 = get_level_epov_rates(4.20)
 level_epov_365.write_csv(
-    "./ddf/poverty_rates/ddf--datapoints--poverty_rate_365--by--income_groups--time.csv"
+    "./ddf/poverty_rates/ddf--datapoints--poverty_rate_420--by--income_groups--time.csv"
 )
 
-level_epov_365_3lvl = get_level_epov_rates(3.65, use_3levels=True)
+level_epov_365_3lvl = get_level_epov_rates(4.20, use_3levels=True)
 level_epov_365_3lvl.write_csv(
-    "./ddf/poverty_rates/ddf--datapoints--poverty_rate_365--by--income_3groups--time.csv"
+    "./ddf/poverty_rates/ddf--datapoints--poverty_rate_420--by--income_3groups--time.csv"
 )
 
-# 6.85
-level_epov_685 = get_level_epov_rates(6.85)
+# 8.30
+level_epov_685 = get_level_epov_rates(8.30)
 level_epov_685.write_csv(
-    "./ddf/poverty_rates/ddf--datapoints--poverty_rate_685--by--income_groups--time.csv"
+    "./ddf/poverty_rates/ddf--datapoints--poverty_rate_830--by--income_groups--time.csv"
 )
 
-level_epov_685_3lvl = get_level_epov_rates(6.85, use_3levels=True)
+level_epov_685_3lvl = get_level_epov_rates(8.30, use_3levels=True)
 level_epov_685_3lvl.write_csv(
-    "./ddf/poverty_rates/ddf--datapoints--poverty_rate_685--by--income_3groups--time.csv"
+    "./ddf/poverty_rates/ddf--datapoints--poverty_rate_830--by--income_3groups--time.csv"
 )
 
 # create a merged version
@@ -391,10 +391,10 @@ region_epov = get_epov_rates_for_groups(data_world_4region, ["world_4region", "y
 region_epov
 # region_epov.write_csv('./ddf/poverty_rates/ddf--datapoints--poverty_rate--by--world_4region--year.csv')
 
-region_epov_365 = get_epov_rates_for_groups(data_world_4region, ["world_4region", "year"], 3.65)
+region_epov_365 = get_epov_rates_for_groups(data_world_4region, ["world_4region", "year"], 4.20)
 region_epov_365
 
-region_epov_685 = get_epov_rates_for_groups(data_world_4region, ["world_4region", "year"], 6.85)
+region_epov_685 = get_epov_rates_for_groups(data_world_4region, ["world_4region", "year"], 8.30)
 region_epov_685
 
 # merge
