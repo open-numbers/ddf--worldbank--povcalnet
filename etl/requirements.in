@@ -1,4 +1,5 @@
 pandas
+pandas-stubs
 polars
 matplotlib
 seaborn

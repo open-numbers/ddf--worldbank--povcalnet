@@ -12,9 +12,9 @@ from functools import partial
 import polars as pl
 
 
-source_dir = 'source/povcalnet'
+source_dir = "source/povcalnet"
 all_brackets = np.logspace(-7, 13, 501, base=2, endpoint=True)
-url_tmpl = "https://api.worldbank.org/pip/v1/pip?country=all&year=all&povline={}&fill_gaps=true&group_by=none&welfare_type=all&reporting_level=all&format=csv&ppp_version=2017"
+url_tmpl = "https://api.worldbank.org/pip/v1/pip?country=all&year=all&povline={}&fill_gaps=true&group_by=none&welfare_type=all&reporting_level=all&format=csv&ppp_version=2021"
 POOLSIZE = 4
 
 
@@ -34,7 +34,7 @@ def process(i, resume=True):
     download(url, file_csv, num_retries=5)
     # test if the csv is correct.
     df = pl.read_csv(file_csv, infer_schema_length=0)
-    assert 'poverty_line' in df.columns, f"{file_csv}: malform csv"
+    assert "poverty_line" in df.columns, f"{file_csv}: malform csv"
     time.sleep(5)
 
 
@@ -50,7 +50,7 @@ if __name__ == "__main__":
         if bracket > 460:
             print("do not download bracket > 460")
             sys.exit(127)
-        print(f'downloading {bracket}')
+        print(f"downloading {bracket}")
         process(bracket, resume=False)
 
     else:

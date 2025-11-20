@@ -40,18 +40,18 @@ def _f(df, **kwargs):
 
 def create_pdf_and_remove_outliners(df: pl.DataFrame, p: int):
     pdf = df.select(
-        pl.col('i').shift(1),
-        pl.col('headcount').diff(),
+        pl.col("i").shift(1),
+        pl.col("headcount").diff(),
     ).drop_nulls()
     pdf = pdf.to_pandas()
-    pdf['mean'] = pdf['headcount'].rolling(3, min_periods=1, center=True).mean()
-    m = pdf['headcount'] - pdf['mean']
+    pdf["mean"] = pdf["headcount"].rolling(3, min_periods=1, center=True).mean()
+    m = pdf["headcount"] - pdf["mean"]
     mask = m > p * m.std()
 
     # set the masked to null
-    pdf.loc[mask, 'headcount'] = None
-    pdf['headcount'] = pdf['headcount'].interpolate('linear', limit_direction='both')
-    return pl.DataFrame(pdf[['i', 'headcount']])
+    pdf.loc[mask, "headcount"] = None
+    pdf["headcount"] = pdf["headcount"].interpolate("linear", limit_direction="both")
+    return pl.DataFrame(pdf[["i", "headcount"]])
 
 
 def generate_weights(values):
@@ -148,9 +148,7 @@ def variable_savgol_filter(y, window_func, polyorder=2):
         segment = y[start_idx:end_idx]
 
         if len(segment) >= polyorder + 1:
-            filtered_value = savgol_filter(
-                segment, len(segment), polyorder, mode="nearest"
-            )
+            filtered_value = savgol_filter(segment, len(segment), polyorder, mode="nearest")
             y_filtered[i] = filtered_value[len(segment) // 2]
         else:
             y_filtered[i] = y[i]  # Use original value if window too small
@@ -226,8 +224,7 @@ def fwhm(y, a, b):
 
 
 def window_func(pos, max_window, hw_left, hw_right, total_x=461, min_window=3):
-    """
-    """
+    """ """
     # the min window based on data
     min_window_ = int((hw_right - hw_left) / 5)
     if min_window_ > min_window:
@@ -269,13 +266,12 @@ def create_smooth_pdf_shape_(noisy_cdf):
     # for a normal distubrition, 3.29 sigma captures 99.9% points.
     pdf = create_pdf_and_remove_outliners(noisy_cdf, 3.3)
     pdf_ = pdf.select(
-        (1 - pl.col('headcount').sum()) *
-        pl.col('headcount').map_batches(
-            generate_weights) + pl.col('headcount')
+        (1 - pl.col("headcount").sum()) * pl.col("headcount").map_batches(generate_weights)
+        + pl.col("headcount")
     )
-    clean_cdf = pdf_.select(
-        pl.lit(0).append(pl.col('literal')).cum_sum().alias('headcount')
-    )['headcount'].to_numpy()
+    clean_cdf = pdf_.select(pl.lit(0).append(pl.col("literal")).cum_sum().alias("headcount"))[
+        "headcount"
+    ].to_numpy()
 
     idxs, _ = find_fwhm_range(clean_cdf)
     a = idxs[0]
@@ -290,8 +286,9 @@ def create_smooth_pdf_shape_(noisy_cdf):
     else:
         min_window_step1 = 3
         epochs_1 = 10
-    wf = partial(window_func, max_window=40, hw_left=left, hw_right=right,
-                 min_window=min_window_step1)
+    wf = partial(
+        window_func, max_window=40, hw_left=left, hw_right=right, min_window=min_window_step1
+    )
 
     y = clean_cdf
     for i in range(epochs_1):
@@ -299,8 +296,7 @@ def create_smooth_pdf_shape_(noisy_cdf):
         y = np.clip(y, 0, 1)
 
     # then, use polyorder = 2 and bigger window to smooth the shape
-    wf = partial(window_func, max_window=150, hw_left=left, hw_right=right,
-                 min_window=7)
+    wf = partial(window_func, max_window=150, hw_left=left, hw_right=right, min_window=7)
 
     for i in range(10):
         y = variable_savgol_filter(y, wf, polyorder=2)
@@ -328,13 +324,15 @@ def create_smooth_pdf_shape(df: pl.DataFrame):
     if not good_shape:
         print(f"bad shape detected: {country}, {year}, {reporting_level}")
 
-    return pl.DataFrame({
-                            "country": country,
-                            'year': year,
-                            'reporting_level': reporting_level,
-                            'bracket': np.arange(0, 460),
-                            'headcount': pdf
-                        })
+    return pl.DataFrame(
+        {
+            "country": country,
+            "year": year,
+            "reporting_level": reporting_level,
+            "bracket": np.arange(0, 460),
+            "headcount": pdf,
+        }
+    )
 
 
 def plot(df, diff=False):
@@ -350,8 +348,6 @@ def rename_things(res1: pl.DataFrame):
 
     # MAYBE: change headcount -> population_percentage?
     return res1.with_columns(
-        # xkx in povcalnet is kos in gapminder
-        pl.col("country").str.to_lowercase().str.replace("xkx", "kos"),
         pl.col("reporting_level").replace_strict(mapping),
     )
 
@@ -380,11 +376,11 @@ if __name__ == "__main__":
 
     # TODO: add some more checking images
     for country, year, reporting_level in [
-        ('IND', 2020, 'national'),
-        ('SWE', 2024, 'national'),
-        ('CHN', 1983, 'national'),
-        ('PAN', 1992, 'national'),
-        ('USA', 2002, 'national')
+        ("ind", 2020, "national"),
+        ("swe", 2024, "national"),
+        ("chn", 1983, "national"),
+        ("pan", 1992, "national"),
+        ("usa", 2002, "national"),
     ]:
         plt.figure()
         plt.plot(
