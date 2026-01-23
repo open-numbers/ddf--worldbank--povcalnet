@@ -7,7 +7,7 @@
     "language": {
         "id": "en"
     },
-    "created": "2025-11-13T00:58:16.592Z",
+    "created": "2026-01-23T01:41:07.147Z",
     "version": "2.6.0",
     "resources": [
         {
@@ -1102,8 +1102,8 @@
             }
         },
         {
-            "name": "ddf--datapoints--population_in_extreme_poverty--by--country--time",
-            "path": "poverty_rates/ddf--datapoints--population_in_extreme_poverty--by--country--time.csv",
+            "name": "ddf--datapoints--population_under_3--by--country--time",
+            "path": "poverty_rates/ddf--datapoints--population_under_3--by--country--time.csv",
             "schema": {
                 "fields": [
                     {
@@ -1113,7 +1113,7 @@
                         "name": "time"
                     },
                     {
-                        "name": "population_in_extreme_poverty"
+                        "name": "population_under_3"
                     }
                 ],
                 "primaryKey": [
@@ -1123,50 +1123,8 @@
             }
         },
         {
-            "name": "ddf--datapoints--poverty_line--by--country--time",
-            "path": "poverty_rates/ddf--datapoints--poverty_line--by--country--time.csv",
-            "schema": {
-                "fields": [
-                    {
-                        "name": "country"
-                    },
-                    {
-                        "name": "time"
-                    },
-                    {
-                        "name": "poverty_line"
-                    }
-                ],
-                "primaryKey": [
-                    "country",
-                    "time"
-                ]
-            }
-        },
-        {
-            "name": "ddf--datapoints--poverty_rate--by--country--time",
-            "path": "poverty_rates/ddf--datapoints--poverty_rate--by--country--time.csv",
-            "schema": {
-                "fields": [
-                    {
-                        "name": "country"
-                    },
-                    {
-                        "name": "time"
-                    },
-                    {
-                        "name": "poverty_rate"
-                    }
-                ],
-                "primaryKey": [
-                    "country",
-                    "time"
-                ]
-            }
-        },
-        {
-            "name": "ddf--datapoints--poverty_rate--by--global--time",
-            "path": "poverty_rates/ddf--datapoints--poverty_rate--by--global--time.csv",
+            "name": "ddf--datapoints--poverty_rate_above_48--by--global--time",
+            "path": "poverty_rates/ddf--datapoints--poverty_rate_above_48--by--global--time.csv",
             "schema": {
                 "fields": [
                     {
@@ -1176,7 +1134,7 @@
                         "name": "time"
                     },
                     {
-                        "name": "poverty_rate"
+                        "name": "poverty_rate_above_48"
                     }
                 ],
                 "primaryKey": [
@@ -1186,22 +1144,64 @@
             }
         },
         {
-            "name": "ddf--datapoints--poverty_rate--by--income_groups--time",
-            "path": "poverty_rates/ddf--datapoints--poverty_rate--by--income_groups--time.csv",
+            "name": "ddf--datapoints--poverty_rate_under_12--by--global--time",
+            "path": "poverty_rates/ddf--datapoints--poverty_rate_under_12--by--global--time.csv",
             "schema": {
                 "fields": [
                     {
-                        "name": "income_groups"
+                        "name": "global"
                     },
                     {
                         "name": "time"
                     },
                     {
-                        "name": "poverty_rate"
+                        "name": "poverty_rate_under_12"
                     }
                 ],
                 "primaryKey": [
-                    "income_groups",
+                    "global",
+                    "time"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--poverty_rate_under_3--by--global--time",
+            "path": "poverty_rates/ddf--datapoints--poverty_rate_under_3--by--global--time.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "global"
+                    },
+                    {
+                        "name": "time"
+                    },
+                    {
+                        "name": "poverty_rate_under_3"
+                    }
+                ],
+                "primaryKey": [
+                    "global",
+                    "time"
+                ]
+            }
+        },
+        {
+            "name": "ddf--datapoints--poverty_rate_under_48--by--global--time",
+            "path": "poverty_rates/ddf--datapoints--poverty_rate_under_48--by--global--time.csv",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "global"
+                    },
+                    {
+                        "name": "time"
+                    },
+                    {
+                        "name": "poverty_rate_under_48"
+                    }
+                ],
+                "primaryKey": [
+                    "global",
                     "time"
                 ]
             }
@@ -2644,29 +2644,9 @@
                     "country",
                     "time"
                 ],
-                "value": "population_in_extreme_poverty",
+                "value": "population_under_3",
                 "resources": [
-                    "ddf--datapoints--population_in_extreme_poverty--by--country--time"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "country",
-                    "time"
-                ],
-                "value": "poverty_line",
-                "resources": [
-                    "ddf--datapoints--poverty_line--by--country--time"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "country",
-                    "time"
-                ],
-                "value": "poverty_rate",
-                "resources": [
-                    "ddf--datapoints--poverty_rate--by--country--time"
+                    "ddf--datapoints--population_under_3--by--country--time"
                 ]
             },
             {
@@ -2759,9 +2739,9 @@
                     "geo",
                     "time"
                 ],
-                "value": "population_in_extreme_poverty",
+                "value": "population_under_3",
                 "resources": [
-                    "ddf--datapoints--population_in_extreme_poverty--by--country--time"
+                    "ddf--datapoints--population_under_3--by--country--time"
                 ]
             },
             {
@@ -2769,9 +2749,9 @@
                     "geo",
                     "time"
                 ],
-                "value": "poverty_line",
+                "value": "poverty_rate_above_48",
                 "resources": [
-                    "ddf--datapoints--poverty_line--by--country--time"
+                    "ddf--datapoints--poverty_rate_above_48--by--global--time"
                 ]
             },
             {
@@ -2779,11 +2759,29 @@
                     "geo",
                     "time"
                 ],
-                "value": "poverty_rate",
+                "value": "poverty_rate_under_12",
                 "resources": [
-                    "ddf--datapoints--poverty_rate--by--income_groups--time",
-                    "ddf--datapoints--poverty_rate--by--global--time",
-                    "ddf--datapoints--poverty_rate--by--country--time"
+                    "ddf--datapoints--poverty_rate_under_12--by--global--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ],
+                "value": "poverty_rate_under_3",
+                "resources": [
+                    "ddf--datapoints--poverty_rate_under_3--by--global--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "geo",
+                    "time"
+                ],
+                "value": "poverty_rate_under_48",
+                "resources": [
+                    "ddf--datapoints--poverty_rate_under_48--by--global--time"
                 ]
             },
             {
@@ -2832,9 +2830,39 @@
                     "global",
                     "time"
                 ],
-                "value": "poverty_rate",
+                "value": "poverty_rate_above_48",
                 "resources": [
-                    "ddf--datapoints--poverty_rate--by--global--time"
+                    "ddf--datapoints--poverty_rate_above_48--by--global--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "global",
+                    "time"
+                ],
+                "value": "poverty_rate_under_12",
+                "resources": [
+                    "ddf--datapoints--poverty_rate_under_12--by--global--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "global",
+                    "time"
+                ],
+                "value": "poverty_rate_under_3",
+                "resources": [
+                    "ddf--datapoints--poverty_rate_under_3--by--global--time"
+                ]
+            },
+            {
+                "primaryKey": [
+                    "global",
+                    "time"
+                ],
+                "value": "poverty_rate_under_48",
+                "resources": [
+                    "ddf--datapoints--poverty_rate_under_48--by--global--time"
                 ]
             },
             {
@@ -2850,16 +2878,6 @@
             },
             {
                 "primaryKey": [
-                    "income_3groups",
-                    "time"
-                ],
-                "value": "poverty_rate",
-                "resources": [
-                    "ddf--datapoints--poverty_rate--by--income_groups--time"
-                ]
-            },
-            {
-                "primaryKey": [
                     "income_groups",
                     "time"
                 ],
@@ -2867,16 +2885,6 @@
                 "resources": [
                     "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--income_groups--time",
                     "ddf--datapoints--income_mountain_50bracket_shape_for_log--by--income_3groups--time"
-                ]
-            },
-            {
-                "primaryKey": [
-                    "income_groups",
-                    "time"
-                ],
-                "value": "poverty_rate",
-                "resources": [
-                    "ddf--datapoints--poverty_rate--by--income_groups--time"
                 ]
             },
             {
