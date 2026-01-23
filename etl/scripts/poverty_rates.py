@@ -290,7 +290,9 @@ def main():
         ("global", ["global", "year"], 12, True, False),
         ("global", ["global", "year"], 48, True, False),
         ("global", ["global", "year"], 48, True, True),  # above 48
-        # # Global - population counts
+        # Country - population counts
+        ("country", ["country", "year"], 3, False, False),
+        # # More Global - population counts (commented)
         # ('global', ['global', 'year'], 3, False, False),
         # ('global', ['global', 'year'], 2, False, False),
         # ('global', ['global', 'year'], 200, False, True),
